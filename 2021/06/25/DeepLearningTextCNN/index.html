@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="深度学习算法背景人工智能发展历史随着算力提高以及深度学习的应用，近几年算法发展很快 应用场景 计算机视觉 用于车牌识别和面部识别等的应用。 信息检索 用于诸如搜索引擎的应用 - 包括文本搜索和图像搜索。 市场营销 针对自动电子邮件营销和目标群体识别等的应用。 医疗诊断 诸如癌症识别和异常检测等的应用。 自然语言处理 如情绪分析和照片标记标题归类等的应用。    机器学习和深度学习关系与区别关系深度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepLearningTextCNN">
+<meta property="og:url" content="https://www.gawain.site/2021/06/25/DeepLearningTextCNN/index.html">
+<meta property="og:site_name" content="谭凯元的随笔">
+<meta property="og:description" content="深度学习算法背景人工智能发展历史随着算力提高以及深度学习的应用，近几年算法发展很快 应用场景 计算机视觉 用于车牌识别和面部识别等的应用。 信息检索 用于诸如搜索引擎的应用 - 包括文本搜索和图像搜索。 市场营销 针对自动电子邮件营销和目标群体识别等的应用。 医疗诊断 诸如癌症识别和异常检测等的应用。 自然语言处理 如情绪分析和照片标记标题归类等的应用。    机器学习和深度学习关系与区别关系深度">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210625145012667.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210625160149731.gif">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210625151005390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210625174913227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-06-25T04:09:14.093Z">
+<meta property="article:modified_time" content="2021-06-30T01:40:18.218Z">
+<meta property="article:author" content="谭凯元">
+<meta property="article:tag" content="Share">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210625145012667.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.gawain.site/2021/06/25/DeepLearningTextCNN/"/>
+
+
+
+
+
+  <title>DeepLearningTextCNN | 谭凯元的随笔</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谭凯元的随笔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Gawain的个人生活与技术分享</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resume">
+          <a href="/Resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            个人简介
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-gallery">
+          <a href="/gallery/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-camera"></i> <br />
+            
+            相册
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.gawain.site/2021/06/25/DeepLearningTextCNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="谭凯元">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谭凯元的随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">DeepLearningTextCNN</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-25T12:09:14+08:00">
+                2021-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="深度学习算法背景"><a href="#深度学习算法背景" class="headerlink" title="深度学习算法背景"></a>深度学习算法背景</h1><h2 id="人工智能发展历史"><a href="#人工智能发展历史" class="headerlink" title="人工智能发展历史"></a>人工智能发展历史</h2><p><img src="https://img-blog.csdnimg.cn/20210625145012667.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="人工智能的发展历史"><br>随着算力提高以及深度学习的应用，近几年算法发展很快</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
+<li><strong>计算机视觉</strong> 用于车牌识别和面部识别等的应用。<ul>
+<li><strong>信息检索</strong> 用于诸如搜索引擎的应用 - 包括文本搜索和图像搜索。</li>
+<li><strong>市场营销</strong> 针对自动电子邮件营销和目标群体识别等的应用。</li>
+<li><strong>医疗诊断</strong> 诸如癌症识别和异常检测等的应用。</li>
+<li><strong>自然语言处理</strong> 如情绪分析和照片标记标题归类等的应用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="机器学习和深度学习关系与区别"><a href="#机器学习和深度学习关系与区别" class="headerlink" title="机器学习和深度学习关系与区别"></a>机器学习和深度学习关系与区别</h2><h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><p>深度学习定义：深度学习是一种特殊的机器学习，通过学习将世界使用嵌套的概念层次来表示并实现巨大的功能和灵活性，其中每个概念都定义为与简单概念相关联，而更为抽象的表示则以较不抽象的方式来计算。</p>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>深度学习对比常规的的机器学习来说，它需要训练的数据更多，而且参数可以自动调节，机器学习通常cpu也能训练，但是深度学习需要显卡训练</p>
+<h1 id="TextCNN算法原理"><a href="#TextCNN算法原理" class="headerlink" title="TextCNN算法原理"></a>TextCNN算法原理</h1><p>若有兴趣可以看这篇文章：<a href="http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/" target="_blank" rel="noopener"><em>Understanding Convolutional Neural Networks for NLP</em></a></p>
+<p>Yoon Kim于2014年发表论文<a href="https://arxiv.org/pdf/1408.5882.pdf" target="_blank" rel="noopener"><em>Convolutional Neural Networks for Sentence Classification</em></a>将CNN第一次引入NLP（自然语言处理）的应用，此前CNN几乎都是应用于图像识别领域。</p>
+<h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><p>CNN全称 Convolutional Neural Networks ，卷积神经网络，正如他的名字他的灵感来源是人的神经结构，最先由科学家杨立昆(Yann Lee Cun)提出，</p>
+<p>何谓卷积，就是利用一种数学方法提取信息的特征。对于图片用矩阵可以很好描述像素点的分布特征，<br><img src="https://img-blog.csdnimg.cn/20210625160149731.gif" alt="在这里插入图片描述"><br>动图理解卷积运算的过程，</p>
+<h2 id="TextCNN结构"><a href="#TextCNN结构" class="headerlink" title="TextCNN结构"></a>TextCNN结构</h2><p><img src="https://img-blog.csdnimg.cn/20210625151005390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="嵌入层-embedding-layer"><a href="#嵌入层-embedding-layer" class="headerlink" title="嵌入层(embedding layer)"></a>嵌入层(embedding layer)</h3><p><strong>TextCNN</strong>使用预先训练好的词向量作embedding layer。对于数据集里的所有词，因为每个词都可以表征成一个向量，因此我们可以得到一个嵌入矩阵MM, MM里的每一行都是词向量。这个MM可以是静态(static)的，也就是固定不变。可以是非静态(non-static)的，也就是可以根据反向传播更新。<br>多种模型：Convolutional Neural Networks for Sentence Classification文章中给出了几种模型，其实这里基本都是针对Embedding layer做的变化。<strong>CNN-rand、CNN-static、CNN-non-static、CNN-multichannel</strong><br>具体介绍及实验结果可见原论文，以上是学术定义</p>
+<p>我个人理解是：<br>文字无法被直接被计算机识别，需要编码，将其映射为2维的矩阵</p>
+<h3 id="卷积池化层-convolution-and-pooling"><a href="#卷积池化层-convolution-and-pooling" class="headerlink" title="卷积池化层(convolution and pooling)"></a>卷积池化层(convolution and pooling)</h3><h4 id="卷积-convolution"><a href="#卷积-convolution" class="headerlink" title="卷积(convolution)"></a>卷积(convolution)</h4><p>输入一个句子，首先对这个句子进行切词，假设有s个单词。对每个词，跟句嵌入矩阵M, 可以得到词向量。假设词向量一共有d维。那么对于这个句子，便可以得到s行d列的矩阵AϵRs×d.<br>我们可以把矩阵A看成是一幅图像，使用卷积神经网络去提取特征。由于句子中相邻的单词关联性总是很高的，因此可以使用一维卷积，即文本卷积与图像卷积的不同之处在于只在文本序列的一个方向（垂直）做卷积，卷积核的宽度固定为词向量的维度d。高度是超参数，可以设置。 对句子单词每个可能的窗口做卷积操作得到特征图(feature map) c = [c_1, c_2, …, c_s-h+1]。</p>
+<p>现在假设有一个卷积核，是宽度为d，高度为h的矩阵w，那么w有h∗d个参数需要被更新。对于一个句子，经过嵌入层之后可以得到矩阵AϵRs×d。 A[i:j]表示A的第i行到第j行, 那么卷积操作可以用公式表示：o<del>i</del> = w · A[i : i + h − 1] , i = 1 . . . s − h + 1<br>叠加上偏置b,在使用激活函数f激活, 得到所需的特征。公式如下：c<del>i</del> = f(o<del>i</del> + b). </p>
+<p>对一个卷积核，可以得到特征cϵRs−h+1, 总共s−h+1个特征。我们可以使用更多高h不同的卷积核，得到更丰富的特征表达。</p>
+<p>Note: </p>
+<ol>
+<li><p>TextCNN网络包括很多不同窗口大小的卷积核，常用的filter size ∈ {3,4,5}，每个filter的feature maps=100。这里的特征图就是不同的k元语法。如上图中分别有两个不同的二、三和四元语法。<br>如果设置padding=’same’即使用宽卷积，则每个feature maps for each region size都是seq_len<em>1，所有的feature map可以拼接成seq_len</em>(num_filters*num_filter_size)的矩阵，回到输入类似维度，这样就可以使用多层cnn了。</p>
+</li>
+<li><p>通道（Channels）：图像中可以利用 (R, G, B) 作为不同channel。而文本的输入的channel通常是不同方式的embedding方式（比如 word2vec或Glove），实践中也有利用静态词向量和fine-tunning词向量作为不同channel的做法；channel也可以一个是词序列，另一个channel是对应的词性序列。接下来就可以通过加和或者拼接进行结合。</p>
+</li>
+</ol>
+<h3 id="池化-pooling"><a href="#池化-pooling" class="headerlink" title="池化(pooling)"></a>池化(pooling)</h3><p>不同尺寸的卷积核得到的特征(feature map)大小也是不一样的，因此我们对每个feature map使用池化函数，使它们的维度相同。</p>
+<h5 id="Max-Pooling"><a href="#Max-Pooling" class="headerlink" title="Max Pooling"></a>Max Pooling</h5><p>最常用的就是1-max pooling，提取出feature map照片那个的最大值，通过选择每个feature map的最大值，可捕获其最重要的特征。这样每一个卷积核得到特征就是一个值，对所有卷积核使用1-max pooling，再级联起来，可以得到最终的特征向量，这个特征向量再输入softmax layer做分类。这个地方可以使用drop out防止过拟合。</p>
+<h5 id="Average-Pooling"><a href="#Average-Pooling" class="headerlink" title="Average Pooling"></a>Average Pooling</h5><p>average pooling即取每个维度的均值而不是最大值。理解是对句子中的连续词袋(CBOW)而不是词进行卷积得到的表示（lz：每个filter都是对cbow来的）。<br>其他池化方式K-Max Pooling、动态k-max pooling可见论文<a href="https://www.cnblogs.com/szxspark/p/10262681.html" target="_blank" rel="noopener">《Event Extraction via Dynamic Multi-Pooling Convolutional Neural Network》</a>[2]</p>
+<h3 id="简单模型结构的示例分析"><a href="#简单模型结构的示例分析" class="headerlink" title="简单模型结构的示例分析"></a>简单模型结构的示例分析</h3><p>分析<a href="http://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1510.03820.pdf">《A Sensitivity Analysis …》</a>[2]模型示意图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210625174913227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>word embedding的维度是5，对于句子 i like this movie very much，转换成矩阵AϵR7×5；<br>有6个卷积核，尺寸为(2×5), (3×5), (4×5)，每种尺寸各2个，A分别与以上卷积核进行卷积操作（这里的Stride Size相当于等于高度h）；</p>
+<p>再用激活函数激活，每个卷积核得到了特征向量(feature maps)；<br>使用1-max pooling提取出每个feature map的最大值；</p>
+<p>然后在级联得到最终的特征表达；<br>将特征输入至softmax layer进行分类, 在这层可以进行正则化操作( l2-regulariation)。</p>
+<h2 id="实验参数分析"><a href="#实验参数分析" class="headerlink" title="实验参数分析"></a>实验参数分析</h2><p>TextCNN模型中，超参数主要有词向量，Region Size的大小，Feature Map的数量，激活函数的选择，Pooling的方法，正则化的影响。《A Sensitivity Analysis…》论文前面几章对实验内容和结果进行了详细介绍，在9个数据集上基于Kim Y的模型做了大量的调参实验，得出AUC进行比较，根据的实验对比：</p>
+<p>1）<strong>初始化词向量</strong>：一般不直接使用One-hot。除了随机初始化Embedding layer的外，使用预训练的word2vec、 GloVe初始化的效果都更加好（具体哪个更好依赖于任务本身）。非静态的比静态的效果好一些。</p>
+<p>2）<strong>卷积核的尺寸filter_sizes</strong>：影响较大，通常过滤器的大小范围在1-10之间，一般取为3-5，对于句子较长的文本（100+），则应选择大一些。为了找到最优的过滤器大小(Filter Region Size)，可以使用线性搜索的方法。对不同尺寸ws的窗口进行结合会对结果产生影响。当把与最优ws相近的ws结合时会提升效果，但是如果将距离最优ws较远的ws相结合时会损害分类性能。刚开始，我们可以只用一个filter，调节Region Size来比对各自的效果，来看看那种size有最好的表现，然后在这个范围在调节不同Region的匹配。</p>
+<p>3）<strong>卷积核的数量num_filters（对每个巻积核尺寸来说）</strong>：有较大的影响，一般取100<del>600（需要兼顾模型的训练效率） ，同时一般使用Dropout（0</del>0.5）。最好不要超过600，超过600可能会导致过拟合。可设为100-200。</p>
+<p>4）<strong>激活函数</strong>：可以尽量多尝试激活函数，实验发现ReLU和tanh两种激活函数表现较佳。</p>
+<p>5）<strong>池化选择</strong>：1-max pooling（1-max pooling的方式已经足够好了，相比于其他的pooling方式而言）。</p>
+<p>6）<strong>Dropout和正则化</strong>：Dropout rate / dropout_keep_prob：dropout一般设为0.5。随着feature map数量增加，性能减少时，可以考虑增大正则化的力度，如尝试大于0.5的Dropout。</p>
+<p>   正则化的作用微乎其微，正则项对最终模型性能的影响很小。l2正则化效益很小，所以这里建议设置一个比较大的L2 norm constrain，相比而言，dropout在神经网络中有着广泛的使用和很好的效果。</p>
+<p>7）为了检验模型的性能水平，多次反复的交叉验证是必要的，这可以确保模型的高性能并不是偶然。</p>
+<p>8） <strong>随机性影响</strong>：由于模型训练过程中的随机性因素，如随机初始化的权重参数，mini-batch，随机梯度下降优化算法等，造成模型在数据集上的结果有一定的浮动，如准确率(accuracy)能达到1.5%的浮动，而AUC则有3.4%的浮动。</p>
+<p>其它的训练参数：batch_size：64；num_epochs：10；每checkpoint_every：100轮便保存模型；仅保存最近num_checkpoints：5次模型</p>
+<h1 id="实现文本分类的过程"><a href="#实现文本分类的过程" class="headerlink" title="实现文本分类的过程"></a>实现文本分类的过程</h1><h2 id="Text-Classification-with-CNN"><a href="#Text-Classification-with-CNN" class="headerlink" title="Text Classification with CNN"></a>Text Classification with CNN</h2><p>使用卷积神经网络进行中文文本分类</p>
+<h2 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h2><ul>
+<li>Python 3.6.8</li>
+<li>TensorFlow 1.8.0</li>
+<li>numpy</li>
+<li>scikit-learn</li>
+<li>scipy<h2 id="硬件环境"><a href="#硬件环境" class="headerlink" title="硬件环境"></a>硬件环境</h2></li>
+<li>CPU:Ryzen 2500U(2.0GHZ)</li>
+<li>Menmory: 16G</li>
+<li><strong>注</strong>：轻薄本不适合训练深度学习，该环境运行10+小时，同时内存必须大于8G，不然会爆内存<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2></li>
+</ul>
+<p>本训练集由predict_check_data表的17万条产品名称和对应分类组成。</p>
+<h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><p><code>data_prepare.py</code>运行该程序，即可根据数据表，生成指定的训练，测试，验证集。</p>
+<p><code>data/cnews_loader.py</code>为数据的预处理文件。</p>
+<ul>
+<li><code>read_file()</code>: 读取文件数据;</li>
+<li><code>build_vocab()</code>: 构建词汇表，使用字符级的表示，这一函数会将词汇表存储下来，避免每一次重复处理;</li>
+<li><code>read_vocab()</code>: 读取上一步存储的词汇表，转换为<code>{词：id}</code>表示;</li>
+<li><code>read_category()</code>: 将分类目录固定，转换为<code>{类别: id}</code>表示;</li>
+<li><code>to_words()</code>: 将一条由id表示的数据重新转换为文字;</li>
+<li><code>process_file()</code>: 将数据集从文字转换为固定长度的id序列表示;</li>
+<li><code>batch_iter()</code>: 为神经网络的训练准备经过shuffle的批次的数据。</li>
+</ul>
+<p>经过数据预处理，数据的格式如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Data</th>
+<th align="left">Shape</th>
+<th align="left">Data</th>
+<th align="left">Shape</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">x_train</td>
+<td align="left">[50000, 600]</td>
+<td align="left">y_train</td>
+<td align="left">[50000, 10]</td>
+</tr>
+<tr>
+<td align="left">x_val</td>
+<td align="left">[5000, 600]</td>
+<td align="left">y_val</td>
+<td align="left">[5000, 10]</td>
+</tr>
+<tr>
+<td align="left">x_test</td>
+<td align="left">[10000, 600]</td>
+<td align="left">y_test</td>
+<td align="left">[10000, 10]</td>
+</tr>
+</tbody></table>
+<h2 id="CNN卷积神经网络"><a href="#CNN卷积神经网络" class="headerlink" title="CNN卷积神经网络"></a>CNN卷积神经网络</h2><h3 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h3><p>CNN可配置的参数如下所示，在<code>cnn_model.py</code>中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TCNNConfig</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""CNN配置参数"""</span></span><br><span class="line"></span><br><span class="line">    embedding_dim = <span class="number">128</span>  <span class="comment"># 词向量维度</span></span><br><span class="line">    seq_length = <span class="number">300</span>  <span class="comment"># 序列长度</span></span><br><span class="line">    <span class="comment"># num_classes = 668  # 类别数</span></span><br><span class="line">    num_filters = <span class="number">1024</span>  <span class="comment"># 卷积核数目</span></span><br><span class="line">    kernel_size = <span class="number">3</span>  <span class="comment"># 卷积核尺寸</span></span><br><span class="line">    vocab_size = <span class="number">8000</span>  <span class="comment"># 词汇表大小</span></span><br><span class="line"></span><br><span class="line">    hidden_dim = <span class="number">256</span>  <span class="comment"># 全连接层神经元</span></span><br><span class="line"></span><br><span class="line">    dropout_keep_prob = <span class="number">0.55</span>  <span class="comment"># dropout保留比例</span></span><br><span class="line">    learning_rate = <span class="number">1e-3</span>  <span class="comment"># 学习率</span></span><br><span class="line"></span><br><span class="line">    batch_size = <span class="number">64</span>  <span class="comment"># 每批训练大小</span></span><br><span class="line">    num_epochs = <span class="number">20</span>  <span class="comment"># 总迭代轮次</span></span><br><span class="line"></span><br><span class="line">    print_per_batch = <span class="number">100</span>  <span class="comment"># 每多少轮输出一次结果</span></span><br><span class="line">    save_per_batch = <span class="number">10</span>  <span class="comment"># 每多少轮存入tensorboard</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="CNN模型"><a href="#CNN模型" class="headerlink" title="CNN模型"></a>CNN模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextCNN</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""文本分类，CNN模型"""</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, config)</span>:</span></span><br><span class="line">        self.config = config</span><br><span class="line">        <span class="comment"># 三个待输入的数据</span></span><br><span class="line">        self.input_x = tf.placeholder(tf.int32, [<span class="literal">None</span>, self.config.seq_length], name=<span class="string">'input_x'</span>)</span><br><span class="line">        self.input_y = tf.placeholder(tf.float32, [<span class="literal">None</span>, self.config.num_classes], name=<span class="string">'input_y'</span>)</span><br><span class="line">        self.keep_prob = tf.placeholder(tf.float32, name=<span class="string">'keep_prob'</span>)</span><br><span class="line"></span><br><span class="line">        self.cnn()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cnn</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""CNN模型"""</span></span><br><span class="line">        <span class="comment"># 词向量映射</span></span><br><span class="line">        <span class="keyword">with</span> tf.device(<span class="string">'/cpu:0'</span>):</span><br><span class="line">            embedding = tf.get_variable(<span class="string">'embedding'</span>, [self.config.vocab_size, self.config.embedding_dim])</span><br><span class="line">            embedding_inputs = tf.nn.embedding_lookup(embedding, self.input_x)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">"cnn"</span>):</span><br><span class="line">            <span class="comment"># CNN layer 3*3</span></span><br><span class="line">            conv_1 = tf.layers.conv1d(embedding_inputs, self.config.num_filters, self.config.kernel_size, name=<span class="string">'conv_1'</span>)</span><br><span class="line">            <span class="comment"># global max pooling layer</span></span><br><span class="line">            gmp_1 = tf.reduce_max(conv_1, reduction_indices=[<span class="number">1</span>], name=<span class="string">'gmp_1'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">"score"</span>):</span><br><span class="line">            <span class="comment"># 全连接层，后面接dropout以及relu激活</span></span><br><span class="line">            fc_1 = tf.layers.dense(gmp_1, self.config.hidden_dim, name=<span class="string">'fc_1'</span>)</span><br><span class="line">            fc_1 = tf.contrib.layers.dropout(fc_1, self.keep_prob)</span><br><span class="line">            fc_1 = tf.nn.relu(fc_1)</span><br><span class="line">            <span class="comment"># 分类器</span></span><br><span class="line">            self.logits = tf.layers.dense(fc_1, self.config.num_classes, name=<span class="string">'fc_2'</span>)</span><br><span class="line">            self.y_pred_cls = tf.argmax(tf.nn.softmax(self.logits), <span class="number">1</span>)  <span class="comment"># 预测类别</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">"optimize"</span>):</span><br><span class="line">            <span class="comment"># 损失函数，交叉熵</span></span><br><span class="line">            cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=self.logits, labels=self.input_y)</span><br><span class="line">            self.loss = tf.reduce_mean(cross_entropy)</span><br><span class="line">            <span class="comment"># 优化器</span></span><br><span class="line">            self.optim = tf.train.AdamOptimizer(learning_rate=self.config.learning_rate).minimize(self.loss)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.name_scope(<span class="string">"accuracy"</span>):</span><br><span class="line">            <span class="comment"># 准确率</span></span><br><span class="line">            correct_pred = tf.equal(tf.argmax(self.input_y, <span class="number">1</span>), self.y_pred_cls)</span><br><span class="line">            self.acc = tf.reduce_mean(tf.cast(correct_pred, tf.float32))</span><br></pre></td></tr></table></figure>
+<h3 id="训练与验证"><a href="#训练与验证" class="headerlink" title="训练与验证"></a>训练与验证</h3><p>运行 <code>python run_cnn.py train</code>，可以开始训练。</p>
+<blockquote>
+<p>若之前进行过训练，请把tensorboard/textcnn删除，避免TensorBoard多次训练结果重叠。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">Configuring CNN model...</span><br><span class="line">Configuring TensorBoard and Saver...</span><br><span class="line">Loading training and validation data...</span><br><span class="line">Time usage: 0:00:14</span><br><span class="line">Training and evaluating...</span><br><span class="line">Epoch: 1</span><br><span class="line">Iter:      0, Train Loss:    8.9, Train Acc:   0.00%, Val Loss:    8.9, Val Acc:   0.00%, Time: 0:00:15</span><br><span class="line">Iter:    100, Train Loss:    7.1, Train Acc:   3.12%, Val Loss:    7.3, Val Acc:   1.75%, Time: 0:00:22 *</span><br><span class="line">Iter:    200, Train Loss:    6.7, Train Acc:   9.38%, Val Loss:    6.9, Val Acc:   7.68%, Time: 0:00:29 *</span><br><span class="line">Iter:    300, Train Loss:    5.8, Train Acc:  20.31%, Val Loss:    6.4, Val Acc:  15.43%, Time: 0:00:35 *</span><br><span class="line">Iter:    400, Train Loss:    5.8, Train Acc:  18.75%, Val Loss:    5.8, Val Acc:  23.33%, Time: 0:00:42 *</span><br><span class="line">Iter:    500, Train Loss:    5.4, Train Acc:  29.69%, Val Loss:    5.3, Val Acc:  30.68%, Time: 0:00:49 *</span><br><span class="line">Iter:    600, Train Loss:    4.1, Train Acc:  40.62%, Val Loss:    5.0, Val Acc:  37.10%, Time: 0:00:56 *</span><br><span class="line">Iter:    700, Train Loss:    4.3, Train Acc:  40.62%, Val Loss:    4.7, Val Acc:  39.64%, Time: 0:01:03 *</span><br><span class="line">Iter:    800, Train Loss:    4.1, Train Acc:  48.44%, Val Loss:    4.5, Val Acc:  43.47%, Time: 0:01:10 *</span><br><span class="line">Iter:    900, Train Loss:    4.2, Train Acc:  37.50%, Val Loss:    4.3, Val Acc:  45.70%, Time: 0:01:17 *</span><br><span class="line">Iter:   1000, Train Loss:    3.0, Train Acc:  56.25%, Val Loss:    4.1, Val Acc:  48.36%, Time: 0:01:23 *</span><br><span class="line">Iter:   1100, Train Loss:    4.3, Train Acc:  50.00%, Val Loss:    4.0, Val Acc:  50.28%, Time: 0:01:30 *</span><br><span class="line">Iter:   1200, Train Loss:    3.5, Train Acc:  53.12%, Val Loss:    3.9, Val Acc:  51.55%, Time: 0:01:37 *</span><br><span class="line">Iter:   1300, Train Loss:    4.2, Train Acc:  50.00%, Val Loss:    3.8, Val Acc:  52.80%, Time: 0:01:44 *</span><br><span class="line">Iter:   1400, Train Loss:    2.6, Train Acc:  59.38%, Val Loss:    3.6, Val Acc:  54.80%, Time: 0:01:51 *</span><br><span class="line">Iter:   1500, Train Loss:    4.0, Train Acc:  51.56%, Val Loss:    3.5, Val Acc:  55.76%, Time: 0:01:58 *</span><br><span class="line">Iter:   1600, Train Loss:    4.1, Train Acc:  46.88%, Val Loss:    3.5, Val Acc:  56.52%, Time: 0:02:05 *</span><br><span class="line">Iter:   1700, Train Loss:    3.0, Train Acc:  59.38%, Val Loss:    3.4, Val Acc:  57.38%, Time: 0:02:12 *</span><br><span class="line">Iter:   1800, Train Loss:    2.9, Train Acc:  60.94%, Val Loss:    3.3, Val Acc:  58.31%, Time: 0:02:19 *</span><br><span class="line">Iter:   1900, Train Loss:    3.8, Train Acc:  50.00%, Val Loss:    3.2, Val Acc:  58.58%, Time: 0:02:26 *</span><br><span class="line">Iter:   2000, Train Loss:    3.9, Train Acc:  54.69%, Val Loss:    3.2, Val Acc:  59.42%, Time: 0:02:33 *</span><br><span class="line">.</span><br><span class="line">.#训练迭代10次后</span><br><span class="line">. </span><br><span class="line">Epoch: 11</span><br><span class="line">Iter:  20800, Train Loss:  0.013, Train Acc: 100.00%, Val Loss:   0.44, Val Acc:  92.10%, Time: 0:24:38 *</span><br><span class="line">Iter:  20900, Train Loss:  0.012, Train Acc: 100.00%, Val Loss:   0.44, Val Acc:  92.15%, Time: 0:24:45 *</span><br><span class="line">Iter:  21000, Train Loss:  0.025, Train Acc:  98.44%, Val Loss:   0.47, Val Acc:  91.75%, Time: 0:24:51</span><br><span class="line">Iter:  21100, Train Loss:  0.026, Train Acc: 100.00%, Val Loss:   0.43, Val Acc:  92.22%, Time: 0:24:58 *</span><br><span class="line">Iter:  21200, Train Loss:  0.094, Train Acc:  98.44%, Val Loss:   0.46, Val Acc:  91.80%, Time: 0:25:05</span><br><span class="line">Iter:  21300, Train Loss:   0.17, Train Acc:  98.44%, Val Loss:   0.45, Val Acc:  92.25%, Time: 0:25:12 *</span><br><span class="line">Iter:  21400, Train Loss:  0.094, Train Acc:  96.88%, Val Loss:   0.46, Val Acc:  92.18%, Time: 0:25:18</span><br><span class="line">Iter:  21500, Train Loss:  0.029, Train Acc:  98.44%, Val Loss:   0.45, Val Acc:  91.92%, Time: 0:25:25</span><br><span class="line">Iter:  21600, Train Loss:   0.11, Train Acc:  98.44%, Val Loss:   0.44, Val Acc:  92.10%, Time: 0:25:31</span><br><span class="line">Iter:  21700, Train Loss:  0.099, Train Acc:  98.44%, Val Loss:   0.46, Val Acc:  91.93%, Time: 0:25:38</span><br><span class="line">Iter:  21800, Train Loss:  0.069, Train Acc:  98.44%, Val Loss:   0.46, Val Acc:  91.68%, Time: 0:25:45</span><br><span class="line">Iter:  21900, Train Loss:  0.097, Train Acc:  96.88%, Val Loss:   0.46, Val Acc:  91.90%, Time: 0:25:51</span><br><span class="line">Iter:  22000, Train Loss:  0.024, Train Acc:  98.44%, Val Loss:   0.45, Val Acc:  92.13%, Time: 0:25:58</span><br><span class="line">Iter:  22100, Train Loss:   0.01, Train Acc: 100.00%, Val Loss:   0.43, Val Acc:  92.14%, Time: 0:26:05</span><br><span class="line">Iter:  22200, Train Loss:   0.11, Train Acc:  98.44%, Val Loss:   0.43, Val Acc:  92.25%, Time: 0:26:11</span><br><span class="line">Iter:  22300, Train Loss:  0.011, Train Acc: 100.00%, Val Loss:   0.43, Val Acc:  92.21%, Time: 0:26:18</span><br><span class="line">No optimization for a long time, auto-stopping...</span><br></pre></td></tr></table></figure>
+
+
+<p>在验证集上的最佳效果为92.25%.</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>运行 <code>python run_cnn.py test</code> 在测试集上进行测试。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Configuring CNN model...</span><br><span class="line">Loading test data...</span><br><span class="line">Testing...</span><br><span class="line">Test Loss:   0.46, Test Acc:  91.85%</span><br></pre></td></tr></table></figure>
+<p>在测试集上的准确率达到了91.85%。</p>
+<h3 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h3><p>运行 <code>python run_cnn.py predict</code> 在预测集上进行预测。</p>
+<p>预测集命名为<code>name2category.predict.txt</code>,放入data中的name2category文件夹，每行一个产品名称。</p>
+<p>输出在目录文件夹，名称为<code>predicted_data.txt</code></p>
+<h3 id="功能调用"><a href="#功能调用" class="headerlink" title="功能调用"></a>功能调用</h3><p>调用方法为:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> run_cnn <span class="keyword">import</span> name2subcategory</span><br><span class="line"></span><br><span class="line">name_list = [<span class="string">'乔思伯 JONSBO CR-201RGB版本RGBCPU散热器（黑色/多平台/4热管/温控/12CM风扇/支持AURARGB/附硅脂）'</span>] </span><br><span class="line">a = name2subcategory()</span><br><span class="line">category = a.namelyst_predict(name_list)</span><br></pre></td></tr></table></figure>
+
+<p>输入一个含有多个产品名称的列表，返回一个各名称子类的列表。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/" rel="next" title="重装系统">
+                <i class="fa fa-chevron-left"></i> 重装系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/images/avatar.jpg"
+                alt="谭凯元" />
+            
+              <p class="site-author-name" itemprop="name">谭凯元</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Gawain12" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tankaiyuan33@gmail.com@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/GawainTky" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#深度学习算法背景"><span class="nav-number">1.</span> <span class="nav-text">深度学习算法背景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#人工智能发展历史"><span class="nav-number">1.1.</span> <span class="nav-text">人工智能发展历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习和深度学习关系与区别"><span class="nav-number">1.3.</span> <span class="nav-text">机器学习和深度学习关系与区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关系"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区别"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">区别</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TextCNN算法原理"><span class="nav-number">2.</span> <span class="nav-text">TextCNN算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN"><span class="nav-number">2.1.</span> <span class="nav-text">CNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TextCNN结构"><span class="nav-number">2.2.</span> <span class="nav-text">TextCNN结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌入层-embedding-layer"><span class="nav-number">2.2.1.</span> <span class="nav-text">嵌入层(embedding layer)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积池化层-convolution-and-pooling"><span class="nav-number">2.2.2.</span> <span class="nav-text">卷积池化层(convolution and pooling)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#卷积-convolution"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">卷积(convolution)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化-pooling"><span class="nav-number">2.2.3.</span> <span class="nav-text">池化(pooling)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Max-Pooling"><span class="nav-number">2.2.3.0.1.</span> <span class="nav-text">Max Pooling</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Average-Pooling"><span class="nav-number">2.2.3.0.2.</span> <span class="nav-text">Average Pooling</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单模型结构的示例分析"><span class="nav-number">2.2.4.</span> <span class="nav-text">简单模型结构的示例分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验参数分析"><span class="nav-number">2.3.</span> <span class="nav-text">实验参数分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现文本分类的过程"><span class="nav-number">3.</span> <span class="nav-text">实现文本分类的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Text-Classification-with-CNN"><span class="nav-number">3.1.</span> <span class="nav-text">Text Classification with CNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件环境"><span class="nav-number">3.2.</span> <span class="nav-text">软件环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件环境"><span class="nav-number">3.3.</span> <span class="nav-text">硬件环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据集"><span class="nav-number">3.4.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理"><span class="nav-number">3.5.</span> <span class="nav-text">预处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN卷积神经网络"><span class="nav-number">3.6.</span> <span class="nav-text">CNN卷积神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置项"><span class="nav-number">3.6.1.</span> <span class="nav-text">配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CNN模型"><span class="nav-number">3.6.2.</span> <span class="nav-text">CNN模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练与验证"><span class="nav-number">3.6.3.</span> <span class="nav-text">训练与验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">3.6.4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测"><span class="nav-number">3.6.5.</span> <span class="nav-text">预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能调用"><span class="nav-number">3.6.6.</span> <span class="nav-text">功能调用</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谭凯元</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

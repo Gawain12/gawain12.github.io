@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="WIN10迁移C盘和崩溃还原系统总结这几天为了清理C盘一直动系统的文件，导致经常重启，其中主要还是迁移C盘Users数据到其他非系统盘操作不当导致开机系统加载不了用户信息，下面具体记录这两方面。  迁移资料的关键还是利用硬链接将物理地址位于其他盘的Users用户信息映射到C盘的逻辑名上。下面只简单记录一下命令。  最关键的还是利用系统的保命文件———Backup.wim重刷系统一个通过Dism++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重装系统">
+<meta property="og:url" content="https://www.gawain.site/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="谭凯元的随笔">
+<meta property="og:description" content="WIN10迁移C盘和崩溃还原系统总结这几天为了清理C盘一直动系统的文件，导致经常重启，其中主要还是迁移C盘Users数据到其他非系统盘操作不当导致开机系统加载不了用户信息，下面具体记录这两方面。  迁移资料的关键还是利用硬链接将物理地址位于其他盘的Users用户信息映射到C盘的逻辑名上。下面只简单记录一下命令。  最关键的还是利用系统的保命文件———Backup.wim重刷系统一个通过Dism++">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191022130842551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191022142147367.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191022142851436.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-03-06T17:29:04.000Z">
+<meta property="article:modified_time" content="2020-03-06T17:29:33.926Z">
+<meta property="article:author" content="谭凯元">
+<meta property="article:tag" content="Share">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191022130842551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.gawain.site/2020/03/07/重装系统/"/>
+
+
+
+
+
+  <title>重装系统 | 谭凯元的随笔</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谭凯元的随笔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Gawain的个人生活与技术分享</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resume">
+          <a href="/Resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            个人简介
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-gallery">
+          <a href="/gallery/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-camera"></i> <br />
+            
+            相册
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.gawain.site/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="谭凯元">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谭凯元的随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">重装系统</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-07T01:29:04+08:00">
+                2020-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="WIN10迁移C盘和崩溃还原系统总结"><a href="#WIN10迁移C盘和崩溃还原系统总结" class="headerlink" title="WIN10迁移C盘和崩溃还原系统总结"></a>WIN10迁移C盘和崩溃还原系统总结</h1><p>这几天为了清理C盘一直动系统的文件，导致经常重启，其中主要还是迁移C盘Users数据到其他非系统盘操作不当导致开机系统加载不了用户信息，下面具体记录这两方面。</p>
+<ol>
+<li><p>迁移资料的关键还是利用硬链接将物理地址位于其他盘的Users用户信息映射到C盘的逻辑名上。下面只简单记录一下命令。</p>
+</li>
+<li><p><strong>最关键的还是利用系统的保命文件———Backup.wim重刷系统</strong><br>一个通过Dism++文件创建的镜像文件，尽量将此文件放于非系统盘，有此文件基本可以不用借助任何外部工具无限重刷回原系统。</p>
+</li>
+</ol>
+<p>上面两者都需要通过高级重启进入一个纯命令行的Dos界面，在此可以几乎不受权限限制对文件<strong>删除复制</strong>等操作<br><strong>进入 <em>系统设置 -&gt; 升级&amp;安全 -&gt; 恢复 -&gt; 高级重启 -&gt; 立刻重启</em> 来重启电脑到恢复模式；</strong><br><img src="https://img-blog.csdnimg.cn/20191022130842551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>后面就是选择 <strong><em>疑难解答-&gt;高级-&gt;命令提示符</em></strong>（现在不便具体演示，网上有很多相关教程）</p>
+<p><strong>注意</strong>：在Dos环境下盘符名称可能和平时不一样(我的OS就变成F盘了)，首先就是平时被隐藏的X盘，其他最好先通过 <strong>diskpart</strong>命令进入管理磁盘工具，通过<strong>list volume</strong>查看所有盘符信息，<strong>exit</strong>退出。同时利用<strong>cd 对应硬盘</strong> 进入后再用<strong>dir</strong>命令确认文件是否正确。</p>
+<h2 id="C盘Users迁移其他盘"><a href="#C盘Users迁移其他盘" class="headerlink" title="C盘Users迁移其他盘"></a>C盘Users迁移其他盘</h2><p>有几种方法可用，原则就是要先保证在非现用户使用环境下进行，为了避免各种权限要求，我是直接开机进入Dos命令行：</p>
+<ol>
+<li>将Users复制与其他盘.<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">复制C:\Users下的所有文件到D:\Users </span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数说明：此命令为Windows的“强制文件拷贝”命令。</span></span><br><span class="line"><span class="comment">//      /E 表示拷贝文件时包含子目录（包括空目录）</span></span><br><span class="line"><span class="comment">//      /COPYALL 表示拷贝所有文件信息</span></span><br><span class="line"><span class="comment">//      /XJ 表示不包括Junction points（默认是包括的）</span></span><br><span class="line"><span class="comment">//      /XD "F:\Users\Administrator" 表示不包括指定的目录,此处指定目录为："F:\Users\Administrator"</span></span><br><span class="line">robocopy <span class="string">"F:\Users"</span> <span class="string">"D:\Users"</span> /E /COPYALL /XJ /XD <span class="string">"F:\Users\Administrator"</span></span><br></pre></td></tr></table></figure></li>
+<li>删除用户文件<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数说明：此命令删除指定目录。</span></span><br><span class="line"><span class="comment">//      /S 删除指定目录及其中的所有文件,用于删除目录树。</span></span><br><span class="line"><span class="comment">//      /Q 安静模式,删除时不询问。 </span></span><br><span class="line"><span class="built_in">rmdir</span>  <span class="string">"F:\Users"</span> /S /Q</span><br></pre></td></tr></table></figure></li>
+<li>硬链接将C盘新Users链接到所备份的文件<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参数说明：此命令创建符号连接。</span></span><br><span class="line"><span class="comment">//      /J 连接类型为目录连接</span></span><br><span class="line">mklink  /J <span class="string">"F:\Users"</span> <span class="string">"D:\Users"</span></span><br></pre></td></tr></table></figure>
+期间可能复制一部分文件不成功，我看不太重要就强制继续，删除可能不干净，也可采用ren 命令将Users文件夹重命名，保证和硬链接不冲突即可，后面再处理，不用自己创建新的Users，mklink会自动生成，自己要创建可用<strong>md</strong>命令。<h2 id="备份以及还原系统"><a href="#备份以及还原系统" class="headerlink" title="备份以及还原系统"></a>备份以及还原系统</h2><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4>有几种方式，我用的dism++ 备份，也可采用命令行.</li>
+<li>命令行：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//初始备份（例如：把 C 分区的系统备份到 D 分区的 1文件夹中，备份文件名为Backup.wim）：</span></span><br><span class="line">    Dism /Capture-Image /ImageFile:D:\<span class="number">1</span>\Backup.wim /CaptureDir:C:\ /Name:Backup<span class="number">-1</span> /Description:<span class="number">0000</span><span class="number">-00</span><span class="number">-00</span></span><br><span class="line"><span class="comment">// 命令解释：</span></span><br><span class="line"><span class="comment">//    /Capture-Image - 指定捕获映像。</span></span><br><span class="line"><span class="comment">//    /ImageFile: - 指定映像文件路径。                </span></span><br><span class="line"><span class="comment">//    /CaptureDir: - 指定捕获目录。</span></span><br><span class="line"><span class="comment">//    /Name: - 指定名称。此项不能省略。</span></span><br><span class="line"><span class="comment">//    /Description: - 指定描述。描述是为了说明这次备份的具体情况，我们这里用了时间。此项可省略。</span></span><br></pre></td></tr></table></figure></li>
+<li>利用软件dism++ </li>
+</ol>
+<p><strong>选择恢复-&gt;系统备份</strong><br><img src="https://img-blog.csdnimg.cn/20191022142147367.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择保存的硬盘并输入保存的名字：<br><img src="https://img-blog.csdnimg.cn/20191022142851436.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>等待完成即可。<br><strong>注</strong>：最好备份前清理C盘，保证电脑最好状态，这也是个人用电脑的好习惯。</p>
+<h2 id="系统还原"><a href="#系统还原" class="headerlink" title="系统还原"></a>系统还原</h2><p>具体参考以下<br> <a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-update/%E7%94%A8-dism/a3ea0d10-036c-41ff-8bb9-350c2bda525b" target="_blank" rel="noopener">用 DISM 命令备份与还原 Windows 系统</a>.<br>关键指令：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//系统还原（例如：把 D:\Backup.wim 中备份还原到 C分区）：</span></span><br><span class="line">    Dism /Apply-Image /ImageFile:D:\Backup.wim/Index:<span class="number">1</span> /ApplyDir:C:\</span><br><span class="line"> <span class="comment">//   命令解释：</span></span><br><span class="line"> <span class="comment">//   /Apply-Image - 指定应用映像。</span></span><br><span class="line"> <span class="comment">//   /ApplyDir: - 指定应用目录。</span></span><br><span class="line"> <span class="comment">//  /Index: - 指定索引。此项不能省略。</span></span><br></pre></td></tr></table></figure>
+<p><strong>因 Dism 安装 WIM 映像不会像 Ghost 那样格式化磁盘，个人就遇上第一次成功还原后，后面还原遇上无法访问的 错误5，所以先格式化系统盘是最稳妥的。</strong><br>格式化指令：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">format C:/q</span><br><span class="line"><span class="comment">//    /Q  执行快速格式化。</span></span><br></pre></td></tr></table></figure>
+<p>格式化需谨慎，尽量多<strong>dir</strong>命令查看确认分区是否正确，毕竟系统格式化了马上就还原，资料格式化就啥也没了。</p>
+<p>格式化完成再按上述命令完成还原，几乎不会有问题，一般等待十几分钟，完成后就可以关闭命令窗口重启电脑，过会就会看见熟悉输入密码页面了。</p>
+<p>到此一个完整还原周期完成，平时尽量养成将数据置于非系统盘之下的习惯，这样除了减小C盘容量压力，也可使重装系统带来的影响最小，某种程度保证自己电脑使用稳定性。</p>
+<p> 第一次文档记录，为以后系统崩溃提供解决办法，也是向大家分享折腾了两天的错误经验，虽然都是可以google到的方法，但收集信息排错需要时间精力。<strong>格式化C区-&gt;dos还原系统</strong>是个人使用最快捷方便的恢复操作，<br>若有错误或纰漏多多指正，还有，小白谨慎使用以上方法，我不能保证错误操作对系统不会造成损失。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/07/hello-world/" rel="next" title="Gawain's Blog">
+                <i class="fa fa-chevron-left"></i> Gawain's Blog
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/06/25/DeepLearningTextCNN/" rel="prev" title="DeepLearningTextCNN">
+                DeepLearningTextCNN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/images/avatar.jpg"
+                alt="谭凯元" />
+            
+              <p class="site-author-name" itemprop="name">谭凯元</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Gawain12" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tankaiyuan33@gmail.com@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/GawainTky" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WIN10迁移C盘和崩溃还原系统总结"><span class="nav-number">1.</span> <span class="nav-text">WIN10迁移C盘和崩溃还原系统总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C盘Users迁移其他盘"><span class="nav-number">1.1.</span> <span class="nav-text">C盘Users迁移其他盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份以及还原系统"><span class="nav-number">1.2.</span> <span class="nav-text">备份以及还原系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前提"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">前提</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统还原"><span class="nav-number">1.3.</span> <span class="nav-text">系统还原</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谭凯元</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
