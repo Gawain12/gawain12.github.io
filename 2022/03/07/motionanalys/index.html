@@ -1,0 +1,1818 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Gawain">
+  <meta name="keywords" content="Share">
+  
+    <meta name="description" content="一、背景文本处理是许多ML应用程序中最常见的任务之一。以下是此类应用的一些示例  语言翻译：将句子从一种语言翻译成另一种语言 情绪分析：从文本语料库中确定对任何主题或产品等的情绪是积极的、消极的还是中性的 垃圾邮件过滤：检测未经请求和不需要的电子邮件&#x2F;消息。  这些应用程序处理大量文本以执行分类或翻译，并且涉及大量后端工作。将文本转换为算法可以消化的内容是一个复杂的过程。在本文中，我们将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习-文本处理之电影评论多分类情感分析">
+<meta property="og:url" content="https://www.gawaint.me/2022/03/07/motionanalys/index.html">
+<meta property="og:site_name" content="Gawain&#39;s notes">
+<meta property="og:description" content="一、背景文本处理是许多ML应用程序中最常见的任务之一。以下是此类应用的一些示例  语言翻译：将句子从一种语言翻译成另一种语言 情绪分析：从文本语料库中确定对任何主题或产品等的情绪是积极的、消极的还是中性的 垃圾邮件过滤：检测未经请求和不需要的电子邮件&#x2F;消息。  这些应用程序处理大量文本以执行分类或翻译，并且涉及大量后端工作。将文本转换为算法可以消化的内容是一个复杂的过程。在本文中，我们将">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ptpimg.me/4ix0bu.png">
+<meta property="og:image" content="https://ptpimg.me/i136y0.png">
+<meta property="og:image" content="https://ptpimg.me/0nux0t.png">
+<meta property="og:image" content="https://ptpimg.me/1blyr8.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/72e054ceb9fb8ebddc1a279dcefa8606.png">
+<meta property="og:image" content="https://ptpimg.me/wm153z.png">
+<meta property="og:image" content="https://ptpimg.me/mqvx0x.png">
+<meta property="og:image" content="https://ptpimg.me/yw0h81.png">
+<meta property="og:image" content="https://ptpimg.me/e5x807.png">
+<meta property="article:published_time" content="2022-03-06T17:29:04.000Z">
+<meta property="article:modified_time" content="2024-07-27T12:39:04.535Z">
+<meta property="article:author" content="Gawain">
+<meta property="article:tag" content="Share">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ptpimg.me/4ix0bu.png">
+  
+  
+  
+  <title>机器学习-文本处理之电影评论多分类情感分析 - Gawain&#39;s notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"www.gawaint.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"FeJdeqy6cDDAySGfsLP8g1bl-MdYXbMMI","app_key":"Hj6SxzGjyvHq8tHLJTqtcyHZ","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="机器学习-文本处理之电影评论多分类情感分析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-07 01:29" pubdate>
+          2022年3月7日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          48 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">机器学习-文本处理之电影评论多分类情感分析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h1><p>文本处理是许多ML应用程序中最常见的任务之一。以下是此类应用的一些示例</p>
+<ul>
+<li>语言翻译：将句子从一种语言翻译成另一种语言</li>
+<li>情绪分析：从文本语料库中确定对任何主题或产品等的情绪是积极的、消极的还是中性的</li>
+<li>垃圾邮件过滤：检测未经请求和不需要的电子邮件&#x2F;消息。</li>
+</ul>
+<p>这些应用程序处理大量文本以执行分类或翻译，并且涉及大量后端工作。将文本转换为算法可以消化的内容是一个复杂的过程。在本文中，我们将讨论文本处理中涉及的步骤。</p>
+<h1 id="二、数据预处理"><a href="#二、数据预处理" class="headerlink" title="二、数据预处理"></a>二、数据预处理</h1><ul>
+<li>分词——将句子转化为词语</li>
+<li>去除多余的标点符号</li>
+<li>去除停用词——高频出现的“的、了”之类的词，他们对语义分析没帮助</li>
+<li>词干提取——通过删除不必要的字符（通常是后缀），将单词缩减为词根。</li>
+<li>词形还原——通过确定词性并利用语言的详细数据库来消除屈折变化的另一种方法。</li>
+</ul>
+<p>我们可以使用python进行许多文本预处理操作。</p>
+<p>NLTK（Natural Language Toolkit），自然语言处理工具包，在NLP（自然语言处理）领域中，最常使用的一个Python库。自带语料库，词性分类库。自带分类，分词功能。 </p>
+<p><strong>分词（Tokenize）</strong>：word_tokenize生成一个词的列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> nltk<br>sentence=<span class="hljs-string">&quot;I Love China !&quot;</span><br>tokens=nltk.word_tokenize(sentence)<br>tokens<br></code></pre></td></tr></table></figure>
+<p>[‘I’, ‘Love’, ‘China’, ‘!’]<br><strong>中文分词–jieba</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> jieba<br><span class="hljs-meta">&gt;&gt;&gt; </span>seg_list=jieba.cut(<span class="hljs-string">&quot;我正在学习机器学习&quot;</span>,cut_all=<span class="hljs-literal">True</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;全模式：&quot;</span>,<span class="hljs-string">&quot;/&quot;</span>.join(seg_list))<br>全模式： 我/正在/学习/学习机/机器/学习<br><span class="hljs-meta">&gt;&gt;&gt; </span>seg_list=jieba.cut(<span class="hljs-string">&quot;我正在学习机器学习&quot;</span>,cut_all=<span class="hljs-literal">False</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;精确模式：&quot;</span>,<span class="hljs-string">&quot;/&quot;</span>.join(seg_list))<br>精确模式： 我/正在/学习/机器/学习<br></code></pre></td></tr></table></figure>
+
+<h1 id="三、特征提取"><a href="#三、特征提取" class="headerlink" title="三、特征提取"></a>三、特征提取</h1><p>在文本处理中，文本中的单词表示离散的、分类的特征。我们如何以算法可以使用的方式对这些数据进行编码？从文本数据到实值向量的映射称为特征提取。用数字表示文本的最简单的技术之一是<strong>Bag of Words</strong>。</p>
+<h2 id="Bag-of-Words"><a href="#Bag-of-Words" class="headerlink" title="Bag of Words"></a>Bag of Words</h2><p>我们在文本语料库中列出一些独特的单词，称为词汇表。然后我们可以将每个句子或文档表示为一个向量，每个单词表示为1表示现在，0表示不在词汇表中。另一种表示法是计算每个单词在文档中出现的次数。最流行的方法是使用术语频率逆文档频率（<strong>TF-IDF</strong>）技术。</p>
+<ul>
+<li><strong>Term Frequency (TF)</strong>&#x3D;（术语t出现在•文档中的次数）&#x2F;（文档中的术语数量）</li>
+<li><strong>Inverse Document Frequency (IDF)</strong>&#x3D;log(N&#x2F;n)，其中，N是文档数量，n是术语t出现在文档中的数量。稀有词的IDF较高，而频繁词的IDF可能较低。因此具有突出显示不同单词的效果。</li>
+<li>我们计算一个项的<strong>TF-IDF</strong>值为&#x3D;TF*IDF</li>
+</ul>
+<p><img src="https://ptpimg.me/4ix0bu.png" srcset="/img/loading.gif" lazyload></p>
+<pre><code class="hljs">TF(&#39;beautiful&#39;,Document1) = 2/10, IDF(&#39;beautiful&#39;)=log(2/2) = 0
+TF(‘day’,Document1) = 5/10,  IDF(‘day’)=log(2/1) = 0.30
+TF-IDF(‘beautiful’, Document1) = (2/10)*0 = 0
+TF-IDF(‘day’, Document1) = (5/10)*0.30 = 0.15
+</code></pre>
+<p>正如您在Document1中看到的，TF-IDF方法严重惩罚了“beautiful”一词，但对“day”赋予了更大的权重。这是由于IDF部分，它为不同的单词赋予了更多的权重。换句话说，从整个语料库的上下文来看，“day”是Document1的一个重要词。Python scikit学习库为文本数据挖掘提供了有效的工具，并提供了计算给定文本语料库的文本词汇表TF-IDF的函数。</p>
+<p>使用BOW的一个主要缺点是它放弃了词序，从而忽略了上下文，进而忽略了文档中单词的含义。对于自然语言处理（NLP），保持单词的上下文是至关重要的。为了解决这个问题，我们使用另一种称为单词嵌入的方法。</p>
+<h2 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h2><p>它是文本的一种表示形式，其中具有相同含义的单词具有相似的表示形式。换句话说，它表示坐标系中的单词，在坐标系中，基于关系语料库的相关单词被放在更近的位置。</p>
+<h4 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h4><p>Word2vec将大量文本作为输入，并生成一个向量空间，每个唯一的单词在该空间中分配一个对应的向量。词向量定位在向量空间中，使得在语料库中共享公共上下文的词在该空间中彼此非常接近。Word2Vec非常擅长捕捉意义，并在诸如计算a到b的类比问题以及c到？的类比问题等任务中演示它？。例如，男人对女人就像叔叔对女人一样？（a）使用基于余弦距离的简单矢量偏移方法。例如，这里有三个单词对的向量偏移量来说明性别关系：<br><img src="https://ptpimg.me/i136y0.png" srcset="/img/loading.gif" lazyload alt="性别关系的向量偏移量"></p>
+<p>这种向量组合也让我们回答“国王-男人+女人&#x3D;？”提问并得出结果“女王”！当你认为所有这些知识仅仅来自于在上下文中查看大量单词，而没有提供关于它们的语义的其他信息时，所有这些都是非常值得注意的。</p>
+<h4 id="Glove"><a href="#Glove" class="headerlink" title="Glove"></a>Glove</h4><p>单词表示的全局向量（GloVe）算法是word2vec方法的扩展，用于有效学习单词向量。glove使用整个文本语料库中的统计信息构建一个显式的单词上下文或单词共现矩阵。结果是一个学习模型，可能会导致更好的单词嵌入。</p>
+<p><img src="https://ptpimg.me/0nux0t.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<pre><code class="hljs">Target words: ice, steam
+Probe words: solid, gas, water, fashion
+</code></pre>
+<p>让P(k | w)是单词k出现在单词W的上下文中的概率W.考虑一个与ice有密切关系的词，而不是与steam有关的词，例如solid。P(solid | ice)相对较高，P(solid | steam)相对较低。因此，P(solid | ice)&#x2F; P(solid | steam)的比率将很大。如果我们用一个词，比如气体，它与steam有关，但与ice无关，那么P(gas | ice) &#x2F; P(gas | steam) 的比值就会变小。对于一个既与ice有关又与water有关的词，例如water，我们预计其比率接近1。</p>
+<p>单词嵌入将每个单词编码成一个向量，该向量捕获文本语料库中单词之间的某种关系和相似性。这意味着即使是大小写、拼写、标点符号等单词的变体也会自动学习。反过来，这意味着可能不再需要上述一些文本清理步骤。</p>
+<h1 id="四、电影评论情感分析实例"><a href="#四、电影评论情感分析实例" class="headerlink" title="四、电影评论情感分析实例"></a>四、电影评论情感分析实例</h1><p>根据问题空间和可用数据的不同，有多种方法为各种基于文本的应用程序构建ML模型。<br>用于垃圾邮件过滤的经典ML方法，如“朴素贝叶斯”或“支持向量机”，已被广泛使用。深度学习技术对于自然语言处理问题（如情感分析和语言翻译）有更好的效果。深度学习模型的训练速度非常慢，并且可以看出，对于简单的文本分类问题，经典的ML方法也能以更快的训练时间给出类似的结果。<br>让我们使用目前讨论的技术在Kaggle提供的烂番茄电影评论数据集上构建一个情感分析器。</p>
+<h2 id="电影评论情感分析"><a href="#电影评论情感分析" class="headerlink" title="电影评论情感分析"></a>电影评论情感分析</h2><p><img src="https://ptpimg.me/1blyr8.png" srcset="/img/loading.gif" lazyload></p>
+<p>对于电影评论情绪分析，我们将使用Kaggle提供的烂番茄电影评论数据集。在这里，我们根据电影评论的情绪，以五个值为尺度给短语贴上标签：消极的，有些消极的，中性的，有些积极的，积极的。数据集由选项卡分隔的文件组成，其中包含来自数据集的短语ID。每个短语都有一个短语。每个句子都有一个句子ID。重复的短语（如短&#x2F;常用词）仅在数据中包含一次。情绪标签包括：</p>
+<ul>
+<li>0 - <em>negative</em></li>
+<li>1 - <em>somewhat negative</em></li>
+<li>2 - <em>neutral</em></li>
+<li>3 - <em>somewhat positive</em></li>
+<li>4 - <em>positive</em></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns<br>%matplotlib inline<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="1-初始化数据"><a href="#1-初始化数据" class="headerlink" title="1. 初始化数据"></a><a id='1'>1. 初始化数据</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">df_train = pd.read_csv(<span class="hljs-string">&quot;/Users/gawaintan/workSpace/movie-review-sentiment-analysis-kernels-only/train.tsv&quot;</span>, sep=<span class="hljs-string">&#x27;\t&#x27;</span>)<br>df_train.head()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PhraseId</th>
+      <th>SentenceId</th>
+      <th>Phrase</th>
+      <th>Sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>A series</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>A</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1</td>
+      <td>series</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">df_test = pd.read_csv(<span class="hljs-string">&quot;/Users/gawaintan/workSpace/movie-review-sentiment-analysis-kernels-only/test.tsv&quot;</span>, sep=<span class="hljs-string">&#x27;\t&#x27;</span>)<br>df_test.head()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PhraseId</th>
+      <th>SentenceId</th>
+      <th>Phrase</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>156061</td>
+      <td>8545</td>
+      <td>An intermittently pleasing but mostly routine ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>156062</td>
+      <td>8545</td>
+      <td>An intermittently pleasing but mostly routine ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>156063</td>
+      <td>8545</td>
+      <td>An</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>156064</td>
+      <td>8545</td>
+      <td>intermittently pleasing but mostly routine effort</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>156065</td>
+      <td>8545</td>
+      <td>intermittently pleasing but mostly routine</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="1-1-每个情绪类别中的评论分布"><a href="#1-1-每个情绪类别中的评论分布" class="headerlink" title="1.1 每个情绪类别中的评论分布"></a><a id='1.1'>1.1 每个情绪类别中的评论分布</a></h2><p>在这里，训练数据集包含了电影评论中占主导地位的中性短语，然后是有些积极的，然后是有些消极的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">df_train.Sentiment.value_counts()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">2    79582
+3    32927
+1    27273
+4     9206
+0     7072
+Name: Sentiment, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">df_train.info()<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 156060 entries, 0 to 156059
+Data columns (total 4 columns):
+ #   Column      Non-Null Count   Dtype 
+---  ------      --------------   ----- 
+ 0   PhraseId    156060 non-null  int64 
+ 1   SentenceId  156060 non-null  int64 
+ 2   Phrase      156060 non-null  object
+ 3   Sentiment   156060 non-null  int64 
+dtypes: int64(3), object(1)
+memory usage: 4.8+ MB
+</code></pre>
+<h2 id="1-2-删除不重要的列"><a href="#1-2-删除不重要的列" class="headerlink" title="1.2 删除不重要的列"></a><a id='1.2'>1.2 删除不重要的列</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">df_train_1 = df_train.drop([<span class="hljs-string">&#x27;PhraseId&#x27;</span>,<span class="hljs-string">&#x27;SentenceId&#x27;</span>],axis=<span class="hljs-number">1</span>)<br>df_train_1.head()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Phrase</th>
+      <th>Sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A series</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>series</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>Let’s check the phrase length of each of the movie reviews.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">df_train_1[<span class="hljs-string">&#x27;phrase_len&#x27;</span>] = [<span class="hljs-built_in">len</span>(t) <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> df_train_1.Phrase]<br>df_train_1.head(<span class="hljs-number">4</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Phrase</th>
+      <th>Sentiment</th>
+      <th>phrase_len</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>1</td>
+      <td>188</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>2</td>
+      <td>77</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A series</td>
+      <td>2</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="1-3-各情感类别下评论时长的总体分布"><a href="#1-3-各情感类别下评论时长的总体分布" class="headerlink" title="1.3 各情感类别下评论时长的总体分布"></a><a id='1.3'>1.3 各情感类别下评论时长的总体分布</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">fig,ax = plt.subplots(figsize=(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>))<br>plt.boxplot(df_train_1.phrase_len)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/72e054ceb9fb8ebddc1a279dcefa8606.png" srcset="/img/loading.gif" lazyload></p>
+<p>从上面的箱线图中，有些评论的长度超过 100 个字符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">df_train_1[df_train_1.phrase_len &gt; <span class="hljs-number">100</span>].head()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Phrase</th>
+      <th>Sentiment</th>
+      <th>phrase_len</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>1</td>
+      <td>188</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>is also good for the gander , some of which oc...</td>
+      <td>2</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>is also good for the gander , some of which oc...</td>
+      <td>2</td>
+      <td>108</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>A positively thrilling combination of ethnogra...</td>
+      <td>3</td>
+      <td>152</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>A positively thrilling combination of ethnogra...</td>
+      <td>4</td>
+      <td>150</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">df_train_1[df_train_1.phrase_len &gt; <span class="hljs-number">100</span>].loc[<span class="hljs-number">0</span>].Phrase<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">&#39;A series of escapades demonstrating the adage that what is good for the goose is also good for the gander , some of which occasionally amuses but none of which amounts to much of a story .&#39;
+</code></pre>
+<h2 id="1-4-创建负面和正面电影评论的词云"><a href="#1-4-创建负面和正面电影评论的词云" class="headerlink" title="1.4 创建负面和正面电影评论的词云"></a><a id='1.4'>1.4 创建负面和正面电影评论的词云</a></h2><h3 id="Word-Cloud"><a href="#Word-Cloud" class="headerlink" title="Word Cloud"></a>Word Cloud</h3><p>wordcloud 是文本文件集合中常用词的图形表示。这张图片中每个词的高度是该词在整个文本中出现频率的指标。在进行文本分析时，此类图表非常有用。</p>
+<h2 id="1-4-1-筛选出正面和负面的影评"><a href="#1-4-1-筛选出正面和负面的影评" class="headerlink" title="1.4.1 筛选出正面和负面的影评"></a><a id='1.4.1'>1.4.1 筛选出正面和负面的影评</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">neg_phrases = df_train_1[df_train_1.Sentiment == <span class="hljs-number">0</span>]<br>neg_words = []<br><span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> neg_phrases.Phrase:<br>    neg_words.append(t)<br>neg_words[:<span class="hljs-number">4</span>]<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">[&#39;would have a hard time sitting through this one&#39;,
+ &#39;have a hard time sitting through this one&#39;,
+ &#39;Aggressive self-glorification and a manipulative whitewash&#39;,
+ &#39;self-glorification and a manipulative whitewash&#39;]
+</code></pre>
+<p>**pandas.Series.str.cat ** : 使用给定的分隔符连接系列&#x2F;索引中的字符串。这里我们给一个空格作为分隔符，因此，它将连接每个索引中由空格分隔的所有字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">neg_text = pd.Series(neg_words).<span class="hljs-built_in">str</span>.cat(sep=<span class="hljs-string">&#x27; &#x27;</span>)<br>neg_text[:<span class="hljs-number">100</span>]<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">&#39;would have a hard time sitting through this one have a hard time sitting through this one Aggressive&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> neg_phrases.Phrase[:<span class="hljs-number">300</span>]:<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;good&#x27;</span> <span class="hljs-keyword">in</span> t:<br>        <span class="hljs-built_in">print</span>(t)<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">&#39;s not a particularly good film
+covers huge , heavy topics in a bland , surfacey way that does n&#39;t offer any insight into why , for instance , good things happen to bad people .
+huge , heavy topics in a bland , surfacey way that does n&#39;t offer any insight into why , for instance , good things happen to bad people
+a bland , surfacey way that does n&#39;t offer any insight into why , for instance , good things happen to bad people
+</code></pre>
+<p>所以，我们可以很清楚地看到，即使文本包含“好”这样的词，也是一种负面情绪，因为它表明这部电影不是一部好电影。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">pos_phrases = df_train_1[df_train_1.Sentiment == <span class="hljs-number">4</span>] <span class="hljs-comment">## 4 is positive sentiment</span><br>pos_string = []<br><span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> pos_phrases.Phrase:<br>    pos_string.append(t)<br>pos_text = pd.Series(pos_string).<span class="hljs-built_in">str</span>.cat(sep=<span class="hljs-string">&#x27; &#x27;</span>)<br>pos_text[:<span class="hljs-number">100</span>]<br>    <br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">&#39;This quiet , introspective and entertaining independent is worth seeking . quiet , introspective and&#39;
+</code></pre>
+<h2 id="1-4-2-负面分类影评的词云"><a href="#1-4-2-负面分类影评的词云" class="headerlink" title="1.4.2 负面分类影评的词云"></a><a id='1.4.2'>1.4.2 负面分类影评的词云</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> wordcloud <span class="hljs-keyword">import</span> WordCloud<br>wordcloud = WordCloud(width=<span class="hljs-number">1600</span>, height=<span class="hljs-number">800</span>, max_font_size=<span class="hljs-number">200</span>).generate(neg_text)<br>plt.figure(figsize=(<span class="hljs-number">12</span>,<span class="hljs-number">10</span>))<br>plt.imshow(wordcloud, interpolation=<span class="hljs-string">&#x27;bilinear&#x27;</span>)<br>plt.axis(<span class="hljs-string">&quot;off&quot;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://ptpimg.me/wm153z.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>一些大的词可以解释得相当中性，例如“film”、“moive”等。我们可以看到一些较小的词在负面电影评论中是有意义的，例如“bad movie”、“dull” 、“boring”等。</p>
+<p>然而，在对这部电影的负面分类情绪中，也有一些像“好”这样的词。让我们更深入地了解这些单词&#x2F;文本：</p>
+<h2 id="1-4-3-正分类影评的词云"><a href="#1-4-3-正分类影评的词云" class="headerlink" title="1.4.3 正分类影评的词云"></a><a id='1.4.3'>1.4.3 正分类影评的词云</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">wordcloud = WordCloud(width=<span class="hljs-number">1600</span>, height=<span class="hljs-number">800</span>, max_font_size=<span class="hljs-number">200</span>).generate(pos_text)<br>plt.figure(figsize=(<span class="hljs-number">12</span>,<span class="hljs-number">10</span>))<br>plt.imshow(wordcloud, interpolation=<span class="hljs-string">&#x27;bilinear&#x27;</span>)<br>plt.axis(<span class="hljs-string">&#x27;off&#x27;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://ptpimg.me/mqvx0x.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>我再次看到一些大尺寸的中性词，“movie”，“film”，但像“good”，“nest”，“fascinating”这样的正面词也很突出。</p>
+<h2 id="1-5-所有5个情感类别的总词频"><a href="#1-5-所有5个情感类别的总词频" class="headerlink" title="1.5 所有5个情感类别的总词频"></a><a id='1.5'>1.5 所有5个情感类别的总词频</a></h2><p>我们需要 Term Frequency 数据来查看电影评论中使用了哪些词以及使用了多少次。让我们继续使用 CountVectorizer 来计算词频：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_extraction.text <span class="hljs-keyword">import</span> CountVectorizer<br>cvector = CountVectorizer(min_df = <span class="hljs-number">0.0</span>, max_df = <span class="hljs-number">1.0</span>, ngram_range=(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>))<br>cvector.fit(df_train_1.Phrase)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">CountVectorizer(min_df=0.0, ngram_range=(1, 2))
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">len</span>(cvector.get_feature_names())<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">94644
+</code></pre>
+<p>看起来 count vectorizer 已经从语料库中提取了 94644 个单词。可以使用以下代码块获取每个类的词频。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python">All_matrix=[]<br>All_words=[]<br>All_labels=[<span class="hljs-string">&#x27;negative&#x27;</span>,<span class="hljs-string">&#x27;some-negative&#x27;</span>,<span class="hljs-string">&#x27;neutral&#x27;</span>,<span class="hljs-string">&#x27;some-positive&#x27;</span>,<span class="hljs-string">&#x27;positive&#x27;</span>]<br>neg_matrix = cvector.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">0</span>].Phrase)<br>term_freq_df= pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>([(word, neg_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvector.vocabulary_.items()], key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;negative&#x27;</span>])<br>term_freq_df=term_freq_df.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">5</span>):<br>    All_matrix.append(cvector.transform(df_train_1[df_train_1.Sentiment == i].Phrase))<br>    All_words.append(All_matrix[i-<span class="hljs-number">1</span>].<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>))<br>    aa=pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>([(word,All_words[i-<span class="hljs-number">1</span>][<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvector.vocabulary_.items()], key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,All_labels[i]])<br>    <br>    term_freq_df=term_freq_df.join(aa.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>),how=<span class="hljs-string">&#x27;left&#x27;</span>,lsuffix=<span class="hljs-string">&#x27;_A&#x27;</span>)<br><br>    <br><br>term_freq_df[<span class="hljs-string">&#x27;total&#x27;</span>] = term_freq_df[<span class="hljs-string">&#x27;negative&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;some-negative&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;neutral&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;some-positive&#x27;</span>] +  term_freq_df[<span class="hljs-string">&#x27;positive&#x27;</span>] <br>term_freq_df.sort_values(by=<span class="hljs-string">&#x27;total&#x27;</span>, ascending=<span class="hljs-literal">False</span>).head(<span class="hljs-number">10</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>negative</th>
+      <th>some-negative</th>
+      <th>neutral</th>
+      <th>some-positive</th>
+      <th>positive</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <th>Terms</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>the</th>
+      <td>3462</td>
+      <td>10885</td>
+      <td>20619</td>
+      <td>12459</td>
+      <td>4208</td>
+      <td>51633</td>
+    </tr>
+    <tr>
+      <th>of</th>
+      <td>2277</td>
+      <td>6660</td>
+      <td>12287</td>
+      <td>8405</td>
+      <td>3073</td>
+      <td>32702</td>
+    </tr>
+    <tr>
+      <th>and</th>
+      <td>2549</td>
+      <td>6204</td>
+      <td>10241</td>
+      <td>9180</td>
+      <td>4003</td>
+      <td>32177</td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td>1916</td>
+      <td>5571</td>
+      <td>8295</td>
+      <td>5411</td>
+      <td>1568</td>
+      <td>22761</td>
+    </tr>
+    <tr>
+      <th>in</th>
+      <td>1038</td>
+      <td>2965</td>
+      <td>5562</td>
+      <td>3365</td>
+      <td>1067</td>
+      <td>13997</td>
+    </tr>
+    <tr>
+      <th>is</th>
+      <td>1372</td>
+      <td>3362</td>
+      <td>3703</td>
+      <td>3489</td>
+      <td>1550</td>
+      <td>13476</td>
+    </tr>
+    <tr>
+      <th>that</th>
+      <td>1139</td>
+      <td>2982</td>
+      <td>3677</td>
+      <td>3280</td>
+      <td>1260</td>
+      <td>12338</td>
+    </tr>
+    <tr>
+      <th>it</th>
+      <td>1086</td>
+      <td>3067</td>
+      <td>3791</td>
+      <td>2927</td>
+      <td>863</td>
+      <td>11734</td>
+    </tr>
+    <tr>
+      <th>as</th>
+      <td>757</td>
+      <td>2184</td>
+      <td>2941</td>
+      <td>2037</td>
+      <td>732</td>
+      <td>8651</td>
+    </tr>
+    <tr>
+      <th>with</th>
+      <td>452</td>
+      <td>1533</td>
+      <td>2471</td>
+      <td>2365</td>
+      <td>929</td>
+      <td>7750</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>我们可以清楚地看到，像“the”、“in”、“it”等词的频率要高得多，它们对影评的情绪没有任何意义。另一方面，诸如“悲观可笑”之类的词它们在文档中的出现频率非常低，但似乎与电影的情绪有很大关系。</p>
+<h2 id="1-6-电影评论分词展示"><a href="#1-6-电影评论分词展示" class="headerlink" title="1.6 电影评论分词展示"></a><a id='1.6'>1.6 电影评论分词展示</a></h2><p>Next, let’s explore about how different the tokens in two different classes(positive, negative).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_extraction.text <span class="hljs-keyword">import</span> CountVectorizer<br>cvec = CountVectorizer(stop_words=<span class="hljs-string">&#x27;english&#x27;</span>,max_features=<span class="hljs-number">10000</span>)<br>cvec.fit(df_train_1.Phrase)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">CountVectorizer(max_features=10000, stop_words=&#39;english&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python">neg_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">0</span>].Phrase)<br>som_neg_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">1</span>].Phrase)<br>neu_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">2</span>].Phrase)<br>som_pos_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">3</span>].Phrase)<br>pos_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">4</span>].Phrase)<br><br>neg_words = neg_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>neg_words_freq = [(word, neg_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>neg_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(neg_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;negative&#x27;</span>])<br><br>neg_tf_df = neg_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br><br>som_neg_words = som_neg_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>som_neg_words_freq = [(word, som_neg_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>som_neg_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(som_neg_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;some-negative&#x27;</span>])<br>som_neg_tf_df = som_neg_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br>neu_words = neu_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>neu_words_freq = [(word, neu_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>neu_words_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(neu_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;neutral&#x27;</span>])<br>neu_words_tf_df = neu_words_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br>som_pos_words = som_pos_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>som_pos_words_freq = [(word, som_pos_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>som_pos_words_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(som_pos_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;some-positive&#x27;</span>])<br>som_pos_words_tf_df = som_pos_words_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br>pos_words = pos_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>pos_words_freq = [(word, pos_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>pos_words_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(pos_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;positive&#x27;</span>])<br>pos_words_tf_df = pos_words_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br>term_freq_df = pd.concat([neg_tf_df,som_neg_tf_df,neu_words_tf_df,som_pos_words_tf_df,pos_words_tf_df],axis=<span class="hljs-number">1</span>)<br><br>term_freq_df[<span class="hljs-string">&#x27;total&#x27;</span>] = term_freq_df[<span class="hljs-string">&#x27;negative&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;some-negative&#x27;</span>] \<br>                                 + term_freq_df[<span class="hljs-string">&#x27;neutral&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;some-positive&#x27;</span>] \<br>                                 +  term_freq_df[<span class="hljs-string">&#x27;positive&#x27;</span>] <br>        <br>term_freq_df.sort_values(by=<span class="hljs-string">&#x27;total&#x27;</span>, ascending=<span class="hljs-literal">False</span>).head(<span class="hljs-number">15</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>negative</th>
+      <th>some-negative</th>
+      <th>neutral</th>
+      <th>some-positive</th>
+      <th>positive</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <th>Terms</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>film</th>
+      <td>480</td>
+      <td>1281</td>
+      <td>2175</td>
+      <td>1848</td>
+      <td>949</td>
+      <td>6733</td>
+    </tr>
+    <tr>
+      <th>movie</th>
+      <td>793</td>
+      <td>1463</td>
+      <td>2054</td>
+      <td>1344</td>
+      <td>587</td>
+      <td>6241</td>
+    </tr>
+    <tr>
+      <th>like</th>
+      <td>332</td>
+      <td>942</td>
+      <td>1167</td>
+      <td>599</td>
+      <td>150</td>
+      <td>3190</td>
+    </tr>
+    <tr>
+      <th>story</th>
+      <td>153</td>
+      <td>532</td>
+      <td>954</td>
+      <td>664</td>
+      <td>236</td>
+      <td>2539</td>
+    </tr>
+    <tr>
+      <th>rrb</th>
+      <td>131</td>
+      <td>498</td>
+      <td>1112</td>
+      <td>551</td>
+      <td>146</td>
+      <td>2438</td>
+    </tr>
+    <tr>
+      <th>good</th>
+      <td>100</td>
+      <td>334</td>
+      <td>519</td>
+      <td>974</td>
+      <td>334</td>
+      <td>2261</td>
+    </tr>
+    <tr>
+      <th>lrb</th>
+      <td>119</td>
+      <td>452</td>
+      <td>878</td>
+      <td>512</td>
+      <td>137</td>
+      <td>2098</td>
+    </tr>
+    <tr>
+      <th>time</th>
+      <td>153</td>
+      <td>420</td>
+      <td>752</td>
+      <td>464</td>
+      <td>130</td>
+      <td>1919</td>
+    </tr>
+    <tr>
+      <th>characters</th>
+      <td>167</td>
+      <td>455</td>
+      <td>614</td>
+      <td>497</td>
+      <td>149</td>
+      <td>1882</td>
+    </tr>
+    <tr>
+      <th>comedy</th>
+      <td>174</td>
+      <td>341</td>
+      <td>578</td>
+      <td>475</td>
+      <td>245</td>
+      <td>1813</td>
+    </tr>
+    <tr>
+      <th>just</th>
+      <td>216</td>
+      <td>598</td>
+      <td>550</td>
+      <td>282</td>
+      <td>82</td>
+      <td>1728</td>
+    </tr>
+    <tr>
+      <th>life</th>
+      <td>77</td>
+      <td>200</td>
+      <td>729</td>
+      <td>544</td>
+      <td>168</td>
+      <td>1718</td>
+    </tr>
+    <tr>
+      <th>does</th>
+      <td>135</td>
+      <td>566</td>
+      <td>519</td>
+      <td>375</td>
+      <td>79</td>
+      <td>1674</td>
+    </tr>
+    <tr>
+      <th>little</th>
+      <td>109</td>
+      <td>492</td>
+      <td>580</td>
+      <td>339</td>
+      <td>85</td>
+      <td>1605</td>
+    </tr>
+    <tr>
+      <th>funny</th>
+      <td>73</td>
+      <td>257</td>
+      <td>267</td>
+      <td>639</td>
+      <td>347</td>
+      <td>1583</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="1-6-1-负面影评中最常用的50个词"><a href="#1-6-1-负面影评中最常用的50个词" class="headerlink" title="1.6.1 负面影评中最常用的50个词"></a><a id='1.6.1'>1.6.1 负面影评中最常用的50个词</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">y_pos = np.arange(<span class="hljs-number">50</span>)<br>plt.figure(figsize=(<span class="hljs-number">12</span>,<span class="hljs-number">10</span>))<br>plt.bar(y_pos, term_freq_df.sort_values(by=<span class="hljs-string">&#x27;negative&#x27;</span>, ascending=<span class="hljs-literal">False</span>)[<span class="hljs-string">&#x27;negative&#x27;</span>][:<span class="hljs-number">50</span>], align=<span class="hljs-string">&#x27;center&#x27;</span>, alpha=<span class="hljs-number">0.5</span>)<br>plt.xticks(y_pos, term_freq_df.sort_values(by=<span class="hljs-string">&#x27;negative&#x27;</span>, ascending=<span class="hljs-literal">False</span>)[<span class="hljs-string">&#x27;negative&#x27;</span>][:<span class="hljs-number">50</span>].index,rotation=<span class="hljs-string">&#x27;vertical&#x27;</span>)<br>plt.ylabel(<span class="hljs-string">&#x27;Frequency&#x27;</span>)<br>plt.xlabel(<span class="hljs-string">&#x27;Top 50 negative tokens&#x27;</span>)<br>plt.title(<span class="hljs-string">&#x27;Top 50 tokens in negative movie reviews&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">Text(0.5, 1.0, &#39;Top 50 tokens in negative movie reviews&#39;)
+</code></pre>
+<p><img src="https://ptpimg.me/yw0h81.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>我们可以看到一些负面词，如“坏”、“最差”、“沉闷”是一些高频词。但是，存在有像“电影”、“电影”、“分钟”这样的中性词支配频率图。</p>
+<p>我们再看一下条形图上的前 50 个正面标记</p>
+<h2 id="1-6-2-正面影评中最常用的50个词"><a href="#1-6-2-正面影评中最常用的50个词" class="headerlink" title="1.6.2 正面影评中最常用的50个词"></a><a id='1.6.2'>1.6.2 正面影评中最常用的50个词</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">y_pos = np.arange(<span class="hljs-number">50</span>)<br>plt.figure(figsize=(<span class="hljs-number">12</span>,<span class="hljs-number">10</span>))<br>plt.bar(y_pos, term_freq_df.sort_values(by=<span class="hljs-string">&#x27;positive&#x27;</span>, ascending=<span class="hljs-literal">False</span>)[<span class="hljs-string">&#x27;positive&#x27;</span>][:<span class="hljs-number">50</span>], align=<span class="hljs-string">&#x27;center&#x27;</span>, alpha=<span class="hljs-number">0.5</span>)<br>plt.xticks(y_pos, term_freq_df.sort_values(by=<span class="hljs-string">&#x27;positive&#x27;</span>, ascending=<span class="hljs-literal">False</span>)[<span class="hljs-string">&#x27;positive&#x27;</span>][:<span class="hljs-number">50</span>].index,rotation=<span class="hljs-string">&#x27;vertical&#x27;</span>)<br>plt.ylabel(<span class="hljs-string">&#x27;Frequency&#x27;</span>)<br>plt.xlabel(<span class="hljs-string">&#x27;Top 50 positive tokens&#x27;</span>)<br>plt.title(<span class="hljs-string">&#x27;Top 50 tokens in positive movie reviews&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">Text(0.5, 1.0, &#39;Top 50 tokens in positive movie reviews&#39;)
+</code></pre>
+<p><img src="https://ptpimg.me/e5x807.png" srcset="/img/loading.gif" lazyload alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-HLxcm1VK-1640793547488)(sentiment-analysis-countvectorizer-tf-idf_files/sentiment-analysis-countvectorizer-tf-idf_51_1.png)]"></p>
+<p>Once again, there are some neutral words like “film”, “movie”, are quite high up in the rank.</p>
+<h2 id="2-传统的监督机器学习模型"><a href="#2-传统的监督机器学习模型" class="headerlink" title="2. 传统的监督机器学习模型"></a><a id='2'>2. 传统的监督机器学习模型</a></h2><h2 id="2-1-特征工程"><a href="#2-1-特征工程" class="headerlink" title="2.1 特征工程"></a><a id='2.1'>2.1 特征工程</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">phrase = np.array(df_train_1[<span class="hljs-string">&#x27;Pﬁhrase&#x27;</span>])<br>sentiments = np.array(df_train_1[<span class="hljs-string">&#x27;Sentiment&#x27;</span>])<br><span class="hljs-comment"># build train and test datasets</span><br><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split    <br>phrase_train, phrase_test, sentiments_train, sentiments_test = train_test_split(phrase, sentiments, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">4</span>)<br></code></pre></td></tr></table></figure>
+
+<p>Next, we will try to see how different are the tokens in 4 different classes(positive,some positive,neutral, some negative, negative). </p>
+<h2 id="2-2-CountVectorizer-TF-IDF-的实现"><a href="#2-2-CountVectorizer-TF-IDF-的实现" class="headerlink" title="2.2 CountVectorizer &amp; TF-IDF 的实现"></a><a id='2.2'>2.2 CountVectorizer &amp; TF-IDF 的实现</h2><h2 id="2-2-1-CountVectorizer"><a href="#2-2-1-CountVectorizer" class="headerlink" title="2.2.1 CountVectorizer"></a><a id='2.2.1'>2.2.1 CountVectorizer</a></h2><p>众所周知，所有机器学习算法都擅长数字；我们必须在不丢失大量信息的情况下将文本数据提取或转换为数字。进行这种转换的一种方法是词袋 (BOW)，它为每个词提供一个数字，但效率非常低。因此，一种方法是通过CountVectorizer：它计算文档中的单词数，即将文本文档集合转换为文档中每个单词出现次数的矩阵。 </p>
+<p>例如：如果我们有如下 3 个文本文档的集合，那么 CountVectorizer 会将其转换为文档中每个单词出现的单独计数，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">cv1 = CountVectorizer()<br>x_traincv = cv1.fit_transform([<span class="hljs-string">&quot;Hi How are you How are you doing&quot;</span>,<span class="hljs-string">&quot;Hi what&#x27;s up&quot;</span>,<span class="hljs-string">&quot;Wow that&#x27;s awesome&quot;</span>])<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">x_traincv_df = pd.DataFrame(x_traincv.toarray(),columns=<span class="hljs-built_in">list</span>(cv1.get_feature_names()))<br>x_traincv_df<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">/Users/gawaintan/miniforge3/lib/python3.9/site-packages/sklearn/utils/deprecation.py:87: FutureWarning: Function get_feature_names is deprecated; get_feature_names is deprecated in 1.0 and will be removed in 1.2. Please use get_feature_names_out instead.
+  warnings.warn(msg, category=FutureWarning)
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>are</th>
+      <th>awesome</th>
+      <th>doing</th>
+      <th>hi</th>
+      <th>how</th>
+      <th>that</th>
+      <th>up</th>
+      <th>what</th>
+      <th>wow</th>
+      <th>you</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>现在，在 CountVectorizer 的情况下，我们只是在计算文档中的单词数量，很多时候，“are”、“you”、“hi”等单词的数量非常大，这将支配我们的机器学习算法的结果。</p>
+<h2 id="2-2-2-TF-IDF-与-CountVectorizer-有何不同？"><a href="#2-2-2-TF-IDF-与-CountVectorizer-有何不同？" class="headerlink" title="2.2.2 TF-IDF 与 CountVectorizer 有何不同？"></a><a id='2.2.2'>2.2.2 TF-IDF 与 CountVectorizer 有何不同？</a></h2><p>因此，TF-IDF（代表Term-Frequency-Inverse-Document Frequency）降低了几乎所有文档中出现的常见词的权重，并更加重视出现在文档子集中的词。TF-IDF 的工作原理是通过分配较低的权重来惩罚这些常用词，同时重视特定文档中的一些稀有词。</p>
+<h2 id="2-2-3-CountVectorizer参数设置"><a href="#2-2-3-CountVectorizer参数设置" class="headerlink" title="2.2.3 CountVectorizer参数设置"></a><a id='2.2.3'>2.2.3 CountVectorizer参数设置</a></h2><p>对于 CountVectorizer 这一次，停用词不会有太大帮助，因为相同的高频词，例如“the”、“to”，在两个类中的出现频率相同。如果这些停用词支配两个类，我将无法获得有意义的结果。因此，我决定删除停用词，并且还将使用 countvectorizer 将 max_features 限制为 10,000。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_extraction.text <span class="hljs-keyword">import</span> CountVectorizer, TfidfVectorizer<br><br><span class="hljs-comment">## Build Bag-Of-Words on train phrases</span><br>cv = CountVectorizer(stop_words=<span class="hljs-string">&#x27;english&#x27;</span>,max_features=<span class="hljs-number">10000</span>)<br>cv_train_features = cv.fit_transform(phrase_train)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># build TFIDF features on train reviews</span><br>tv = TfidfVectorizer(min_df=<span class="hljs-number">0.0</span>, max_df=<span class="hljs-number">1.0</span>, ngram_range=(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>),<br>                     sublinear_tf=<span class="hljs-literal">True</span>)<br>tv_train_features = tv.fit_transform(phrase_train)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># transform test reviews into features</span><br>cv_test_features = cv.transform(phrase_test)<br>tv_test_features = tv.transform(phrase_test)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;BOW model:&gt; Train features shape:&#x27;</span>, cv_train_features.shape, <span class="hljs-string">&#x27; Test features shape:&#x27;</span>, cv_test_features.shape)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;TFIDF model:&gt; Train features shape:&#x27;</span>, tv_train_features.shape, <span class="hljs-string">&#x27; Test features shape:&#x27;</span>, tv_test_features.shape)<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">BOW model:&gt; Train features shape: (124848, 10000)  Test features shape: (31212, 10000)
+TFIDF model:&gt; Train features shape: (124848, 93697)  Test features shape: (31212, 93697)
+</code></pre>
+<h2 id="2-3-模型训练、预测和性能评估"><a href="#2-3-模型训练、预测和性能评估" class="headerlink" title="2.3 模型训练、预测和性能评估"></a><a id='2.3'>2.3 模型训练、预测和性能评估</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">####Evaluation metrics</span><br><br><br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> LabelEncoder<br><span class="hljs-keyword">from</span> sklearn.base <span class="hljs-keyword">import</span> clone<br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> label_binarize<br><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> interp<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> roc_curve, auc <br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_metrics</span>(<span class="hljs-params">true_labels, predicted_labels</span>):<br>    <br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Accuracy:&#x27;</span>, np.<span class="hljs-built_in">round</span>(<br>                        metrics.accuracy_score(true_labels, <br>                                               predicted_labels),<br>                        <span class="hljs-number">4</span>))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Precision:&#x27;</span>, np.<span class="hljs-built_in">round</span>(<br>                        metrics.precision_score(true_labels, <br>                                               predicted_labels,<br>                                               average=<span class="hljs-string">&#x27;weighted&#x27;</span>),<br>                        <span class="hljs-number">4</span>))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Recall:&#x27;</span>, np.<span class="hljs-built_in">round</span>(<br>                        metrics.recall_score(true_labels, <br>                                               predicted_labels,<br>                                               average=<span class="hljs-string">&#x27;weighted&#x27;</span>),<br>                        <span class="hljs-number">4</span>))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;F1 Score:&#x27;</span>, np.<span class="hljs-built_in">round</span>(<br>                        metrics.f1_score(true_labels, <br>                                               predicted_labels,<br>                                               average=<span class="hljs-string">&#x27;weighted&#x27;</span>),<br>                        <span class="hljs-number">4</span>))<br>                        <br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">train_predict_model</span>(<span class="hljs-params">classifier, </span><br><span class="hljs-params">                        train_features, train_labels, </span><br><span class="hljs-params">                        test_features, test_labels</span>):<br>    <span class="hljs-comment"># build model    </span><br>    classifier.fit(train_features, train_labels)<br>    <span class="hljs-comment"># predict using model</span><br>    predictions = classifier.predict(test_features) <br>    <span class="hljs-keyword">return</span> predictions    <br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">display_confusion_matrix</span>(<span class="hljs-params">true_labels, predicted_labels, classes=[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]</span>):<br>    <br>    total_classes = <span class="hljs-built_in">len</span>(classes)<br>    level_labels = [total_classes*[<span class="hljs-number">0</span>], <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(total_classes))]<br><br>    cm = metrics.confusion_matrix(y_true=true_labels, y_pred=predicted_labels, <br>                                  labels=classes)<br>    cm_frame = pd.DataFrame(data=cm, <br>                            columns=pd.MultiIndex(levels=[[<span class="hljs-string">&#x27;Predicted:&#x27;</span>], classes], <br>                                                  codes=level_labels), <br>                            index=pd.MultiIndex(levels=[[<span class="hljs-string">&#x27;Actual:&#x27;</span>], classes], <br>                                                codes=level_labels)) <br>    <span class="hljs-built_in">print</span>(cm_frame) <br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">display_classification_report</span>(<span class="hljs-params">true_labels, predicted_labels, classes=[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]</span>):<br><br>    report = metrics.classification_report(y_true=true_labels, <br>                                           y_pred=predicted_labels, <br>                                           labels=classes) <br>    <span class="hljs-built_in">print</span>(report)<br>    <br>    <br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">display_model_performance_metrics</span>(<span class="hljs-params">true_labels, predicted_labels, classes=[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Model Performance metrics:&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;-&#x27;</span>*<span class="hljs-number">30</span>)<br>    get_metrics(true_labels=true_labels, predicted_labels=predicted_labels)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\nModel Classification report:&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;-&#x27;</span>*<span class="hljs-number">30</span>)<br>    display_classification_report(true_labels=true_labels, predicted_labels=predicted_labels, <br>                                  classes=classes)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\nPrediction Confusion Matrix:&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;-&#x27;</span>*<span class="hljs-number">30</span>)<br>    display_confusion_matrix(true_labels=true_labels, predicted_labels=predicted_labels, <br>                             classes=classes)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_model_decision_surface</span>(<span class="hljs-params">clf, train_features, train_labels,</span><br><span class="hljs-params">                                plot_step=<span class="hljs-number">0.02</span>, cmap=plt.cm.RdYlBu,</span><br><span class="hljs-params">                                markers=<span class="hljs-literal">None</span>, alphas=<span class="hljs-literal">None</span>, colors=<span class="hljs-literal">None</span></span>):<br>    <br>    <span class="hljs-keyword">if</span> train_features.shape[<span class="hljs-number">1</span>] != <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;X_train should have exactly 2 columnns!&quot;</span>)<br>    <br>    x_min, x_max = train_features[:, <span class="hljs-number">0</span>].<span class="hljs-built_in">min</span>() - plot_step, train_features[:, <span class="hljs-number">0</span>].<span class="hljs-built_in">max</span>() + plot_step<br>    y_min, y_max = train_features[:, <span class="hljs-number">1</span>].<span class="hljs-built_in">min</span>() - plot_step, train_features[:, <span class="hljs-number">1</span>].<span class="hljs-built_in">max</span>() + plot_step<br>    xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),<br>                         np.arange(y_min, y_max, plot_step))<br><br>    clf_est = clone(clf)<br>    clf_est.fit(train_features,train_labels)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(clf_est, <span class="hljs-string">&#x27;predict_proba&#x27;</span>):<br>        Z = clf_est.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:,<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">else</span>:<br>        Z = clf_est.predict(np.c_[xx.ravel(), yy.ravel()])    <br>    Z = Z.reshape(xx.shape)<br>    cs = plt.contourf(xx, yy, Z, cmap=cmap)<br>    <br>    le = LabelEncoder()<br>    y_enc = le.fit_transform(train_labels)<br>    n_classes = <span class="hljs-built_in">len</span>(le.classes_)<br>    plot_colors = <span class="hljs-string">&#x27;&#x27;</span>.join(colors) <span class="hljs-keyword">if</span> colors <span class="hljs-keyword">else</span> [<span class="hljs-literal">None</span>] * n_classes<br>    label_names = le.classes_<br>    markers = markers <span class="hljs-keyword">if</span> markers <span class="hljs-keyword">else</span> [<span class="hljs-literal">None</span>] * n_classes<br>    alphas = alphas <span class="hljs-keyword">if</span> alphas <span class="hljs-keyword">else</span> [<span class="hljs-literal">None</span>] * n_classes<br>    <span class="hljs-keyword">for</span> i, color <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(<span class="hljs-built_in">range</span>(n_classes), plot_colors):<br>        idx = np.where(y_enc == i)<br>        plt.scatter(train_features[idx, <span class="hljs-number">0</span>], train_features[idx, <span class="hljs-number">1</span>], c=color,<br>                    label=label_names[i], cmap=cmap, edgecolors=<span class="hljs-string">&#x27;black&#x27;</span>, <br>                    marker=markers[i], alpha=alphas[i])<br>    plt.legend()<br>    plt.show()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_model_roc_curve</span>(<span class="hljs-params">clf, features, true_labels, label_encoder=<span class="hljs-literal">None</span>, class_names=<span class="hljs-literal">None</span></span>):<br>    <br>    <span class="hljs-comment">## Compute ROC curve and ROC area for each class</span><br>    fpr = <span class="hljs-built_in">dict</span>()<br>    tpr = <span class="hljs-built_in">dict</span>()<br>    roc_auc = <span class="hljs-built_in">dict</span>()<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;classes_&#x27;</span>):<br>        class_labels = clf.classes_<br>    <span class="hljs-keyword">elif</span> label_encoder:<br>        class_labels = label_encoder.classes_<br>    <span class="hljs-keyword">elif</span> class_names:<br>        class_labels = class_names<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Unable to derive prediction classes, please specify class_names!&#x27;</span>)<br>    n_classes = <span class="hljs-built_in">len</span>(class_labels)<br>    y_test = label_binarize(true_labels, classes=class_labels)<br>    <span class="hljs-keyword">if</span> n_classes == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;predict_proba&#x27;</span>):<br>            prob = clf.predict_proba(features)<br>            y_score = prob[:, prob.shape[<span class="hljs-number">1</span>]-<span class="hljs-number">1</span>] <br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;decision_function&#x27;</span>):<br>            prob = clf.decision_function(features)<br>            y_score = prob[:, prob.shape[<span class="hljs-number">1</span>]-<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> AttributeError(<span class="hljs-string">&quot;Estimator doesn&#x27;t have a probability or confidence scoring system!&quot;</span>)<br>        <br>        fpr, tpr, _ = roc_curve(y_test, y_score)      <br>        roc_auc = auc(fpr, tpr)<br>        plt.plot(fpr, tpr, label=<span class="hljs-string">&#x27;ROC curve (area = &#123;0:0.2f&#125;)&#x27;</span><br>                                 <span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-built_in">format</span>(roc_auc),<br>                 linewidth=<span class="hljs-number">2.5</span>)<br>        <br>    <span class="hljs-keyword">elif</span> n_classes &gt; <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;predict_proba&#x27;</span>):<br>            y_score = clf.predict_proba(features)<br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;decision_function&#x27;</span>):<br>            y_score = clf.decision_function(features)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> AttributeError(<span class="hljs-string">&quot;Estimator doesn&#x27;t have a probability or confidence scoring system!&quot;</span>)<br><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n_classes):<br>            fpr[i], tpr[i], _ = roc_curve(y_test[:, i], y_score[:, i])<br>            roc_auc[i] = auc(fpr[i], tpr[i])<br><br>        <span class="hljs-comment">## Compute micro-average ROC curve and ROC area</span><br>        fpr[<span class="hljs-string">&quot;micro&quot;</span>], tpr[<span class="hljs-string">&quot;micro&quot;</span>], _ = roc_curve(y_test.ravel(), y_score.ravel())<br>        roc_auc[<span class="hljs-string">&quot;micro&quot;</span>] = auc(fpr[<span class="hljs-string">&quot;micro&quot;</span>], tpr[<span class="hljs-string">&quot;micro&quot;</span>])<br><br>        <span class="hljs-comment">## Compute macro-average ROC curve and ROC area</span><br>        <span class="hljs-comment"># First aggregate all false positive rates</span><br>        all_fpr = np.unique(np.concatenate([fpr[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n_classes)]))<br>        <span class="hljs-comment"># Then interpolate all ROC curves at this points</span><br>        mean_tpr = np.zeros_like(all_fpr)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n_classes):<br>            mean_tpr += interp(all_fpr, fpr[i], tpr[i])<br>        <span class="hljs-comment"># Finally average it and compute AUC</span><br>        mean_tpr /= n_classes<br>        fpr[<span class="hljs-string">&quot;macro&quot;</span>] = all_fpr<br>        tpr[<span class="hljs-string">&quot;macro&quot;</span>] = mean_tpr<br>        roc_auc[<span class="hljs-string">&quot;macro&quot;</span>] = auc(fpr[<span class="hljs-string">&quot;macro&quot;</span>], tpr[<span class="hljs-string">&quot;macro&quot;</span>])<br><br>        <span class="hljs-comment">## Plot ROC curves</span><br>        plt.figure(figsize=(<span class="hljs-number">6</span>, <span class="hljs-number">4</span>))<br>        plt.plot(fpr[<span class="hljs-string">&quot;micro&quot;</span>], tpr[<span class="hljs-string">&quot;micro&quot;</span>],<br>                 label=<span class="hljs-string">&#x27;micro-average ROC curve (area = &#123;0:0.2f&#125;)&#x27;</span><br>                       <span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-built_in">format</span>(roc_auc[<span class="hljs-string">&quot;micro&quot;</span>]), linewidth=<span class="hljs-number">3</span>)<br><br>        plt.plot(fpr[<span class="hljs-string">&quot;macro&quot;</span>], tpr[<span class="hljs-string">&quot;macro&quot;</span>],<br>                 label=<span class="hljs-string">&#x27;macro-average ROC curve (area = &#123;0:0.2f&#125;)&#x27;</span><br>                       <span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-built_in">format</span>(roc_auc[<span class="hljs-string">&quot;macro&quot;</span>]), linewidth=<span class="hljs-number">3</span>)<br><br>        <span class="hljs-keyword">for</span> i, label <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(class_labels):<br>            plt.plot(fpr[i], tpr[i], label=<span class="hljs-string">&#x27;ROC curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)&#x27;</span><br>                                           <span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-built_in">format</span>(label, roc_auc[i]), <br>                     linewidth=<span class="hljs-number">2</span>, linestyle=<span class="hljs-string">&#x27;:&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Number of classes should be atleast 2 or more&#x27;</span>)<br>        <br>    plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], <span class="hljs-string">&#x27;k--&#x27;</span>)<br>    plt.xlim([<span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>])<br>    plt.ylim([<span class="hljs-number">0.0</span>, <span class="hljs-number">1.05</span>])<br>    plt.xlabel(<span class="hljs-string">&#x27;False Positive Rate&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;True Positive Rate&#x27;</span>)<br>    plt.title(<span class="hljs-string">&#x27;Receiver Operating Characteristic (ROC) Curve&#x27;</span>)<br>    plt.legend(loc=<span class="hljs-string">&quot;lower right&quot;</span>)<br>    plt.show()<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> SGDClassifier, LogisticRegression<br><br>lr = LogisticRegression(penalty=<span class="hljs-string">&#x27;l2&#x27;</span>, max_iter=<span class="hljs-number">100</span>, C=<span class="hljs-number">1</span>)<br>sgd = SGDClassifier(loss=<span class="hljs-string">&#x27;hinge&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-3-1-CountVectorizer-上的逻辑回归模型"><a href="#2-3-1-CountVectorizer-上的逻辑回归模型" class="headerlink" title="2.3.1 CountVectorizer 上的逻辑回归模型"></a><a id='2.3.1'>2.3.1 CountVectorizer 上的逻辑回归模型</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Logistic Regression model on BOW features</span><br>lr_bow_predictions = train_predict_model(classifier=lr, <br>                                             train_features=cv_train_features, train_labels=sentiments_train,<br>                                             test_features=cv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=lr_bow_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br>                                    <br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.6369
+Precision: 0.6177
+Recall: 0.6369
+F1 Score: 0.6132
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.55      0.28      0.37      1426
+           1       0.53      0.36      0.43      5428
+           2       0.68      0.87      0.77     15995
+           3       0.57      0.45      0.50      6603
+           4       0.56      0.34      0.42      1760
+
+    accuracy                           0.64     31212
+   macro avg       0.58      0.46      0.50     31212
+weighted avg       0.62      0.64      0.61     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                        
+                   0     1      2     3    4
+Actual: 0        393   626    349    53    5
+        1        251  1967   2936   255   19
+        2         57   862  13982  1031   63
+        3         15   236   3023  2941  388
+        4          1    23    253   888  595
+</code></pre>
+<h2 id="2-3-2-基于-TF-IDF-特征的逻辑回归模型"><a href="#2-3-2-基于-TF-IDF-特征的逻辑回归模型" class="headerlink" title="2.3.2 基于 TF-IDF 特征的逻辑回归模型"></a><a id='2.3.2'>2.3.2 基于 TF-IDF 特征的逻辑回归模型</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Logistic Regression model on TF-IDF features</span><br>lr_tfidf_predictions = train_predict_model(classifier=lr, <br>                                               train_features=tv_train_features, train_labels=sentiments_train,<br>                                               test_features=tv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=lr_tfidf_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.6455
+Precision: 0.6314
+Recall: 0.6455
+F1 Score: 0.6189
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.60      0.22      0.32      1426
+           1       0.56      0.38      0.45      5428
+           2       0.67      0.89      0.77     15995
+           3       0.60      0.47      0.53      6603
+           4       0.60      0.29      0.39      1760
+
+    accuracy                           0.65     31212
+   macro avg       0.61      0.45      0.49     31212
+weighted avg       0.63      0.65      0.62     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                        
+                   0     1      2     3    4
+Actual: 0        312   681    408    22    3
+        1        177  2051   3066   125    9
+        2         29   793  14193   944   36
+        3          2   109   3115  3088  289
+        4          0     9    281   966  504
+</code></pre>
+<h2 id="2-3-3-基于Countvectorizer的SGD模型"><a href="#2-3-3-基于Countvectorizer的SGD模型" class="headerlink" title="2.3.3 基于Countvectorizer的SGD模型"></a><a id='2.3.3'>2.3.3 基于Countvectorizer的SGD模型</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># SGD model on Countvectorizer</span><br>sgd_bow_predictions = train_predict_model(classifier=sgd, <br>                                             train_features=cv_train_features, train_labels=sentiments_train,<br>                                             test_features=cv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=sgd_bow_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.5988
+Precision: 0.5776
+Recall: 0.5988
+F1 Score: 0.5455
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.52      0.23      0.32      1426
+           1       0.54      0.19      0.28      5428
+           2       0.62      0.93      0.74     15995
+           3       0.54      0.30      0.38      6603
+           4       0.52      0.29      0.37      1760
+
+    accuracy                           0.60     31212
+   macro avg       0.55      0.39      0.42     31212
+weighted avg       0.58      0.60      0.55     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                        
+                   0     1      2     3    4
+Actual: 0        332   392    646    49    7
+        1        234  1025   3909   230   30
+        2         56   371  14874   637   57
+        3         18   106   4156  1956  367
+        4          4    15    502   735  504
+</code></pre>
+<h2 id="2-3-4-基于TF-IDF的SGD模型"><a href="#2-3-4-基于TF-IDF的SGD模型" class="headerlink" title="2.3.4 基于TF-IDF的SGD模型"></a><a id='2.3.4'>2.3.4 基于TF-IDF的SGD模型</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># SGD model on TF-IDF</span><br>sgd_tfidf_predictions = train_predict_model(classifier=sgd, <br>                                                train_features=tv_train_features, train_labels=sentiments_train,<br>                                                test_features=tv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=sgd_tfidf_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.5594
+Precision: 0.5543
+Recall: 0.5594
+F1 Score: 0.4666
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.60      0.11      0.18      1426
+           1       0.52      0.09      0.16      5428
+           2       0.56      0.97      0.71     15995
+           3       0.55      0.16      0.25      6603
+           4       0.59      0.15      0.24      1760
+
+    accuracy                           0.56     31212
+   macro avg       0.56      0.30      0.31     31212
+weighted avg       0.55      0.56      0.47     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                       
+                   0    1      2     3    4
+Actual: 0        152  241   1020    13    0
+        1         83  512   4759    67    7
+        2         17  193  15447   315   23
+        3          2   38   5328  1085  150
+        4          0    2    993   502  263
+</code></pre>
+<h2 id="2-3-5-基于TF-IDF的随机森林模型"><a href="#2-3-5-基于TF-IDF的随机森林模型" class="headerlink" title="2.3.5 基于TF-IDF的随机森林模型"></a><a id='2.3.5'>2.3.5 基于TF-IDF的随机森林模型</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.ensemble <span class="hljs-keyword">import</span> RandomForestClassifier<br>rfc = RandomForestClassifier(n_jobs=-<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># RandomForest model on TF-IDF</span><br>rfc_tfidf_predictions = train_predict_model(classifier=rfc, <br>                                                train_features=tv_train_features, train_labels=sentiments_train,<br>                                                test_features=tv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=rfc_tfidf_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.6423
+Precision: 0.6267
+Recall: 0.6423
+F1 Score: 0.6274
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.47      0.36      0.41      1426
+           1       0.56      0.42      0.48      5428
+           2       0.70      0.84      0.76     15995
+           3       0.58      0.46      0.51      6603
+           4       0.50      0.40      0.45      1760
+
+    accuracy                           0.64     31212
+   macro avg       0.56      0.50      0.52     31212
+weighted avg       0.63      0.64      0.63     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                        
+                   0     1      2     3    4
+Actual: 0        520   605    283    17    1
+        1        465  2281   2539   133   10
+        2        101  1094  13479  1258   63
+        3          8   115   2793  3057  630
+        4          2     6    217   825  710
+</code></pre>
+<p><strong>基于TF-IDF的逻辑回归模型优于其他机器学习算法</strong>. </p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>机器学习-文本处理之电影评论多分类情感分析</div>
+      <div>https://www.gawaint.me/2022/03/07/motionanalys/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Gawain</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/26/hello-world/" title="Gawain&#39;s Blog">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Gawain&#39;s Blog</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/07/DeepLearningTextCNN/" title="DeepLearningTextCNN">
+                        <span class="hidden-mobile">DeepLearningTextCNN</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Gawain12/comment-utterances');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量
+        <span id="leancloud-site-pv"></span>
+        次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

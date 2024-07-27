@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Gawain&#39;s Blog</title>
+    <url>/2024/07/26/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>DeepLearningTextCNN</title>
     <url>/2021/03/07/DeepLearningTextCNN/</url>
-    <content><![CDATA[<h1 id="深度学习算法背景"><a href="#深度学习算法背景" class="headerlink" title="深度学习算法背景"></a>深度学习算法背景</h1><h2 id="人工智能发展历史"><a href="#人工智能发展历史" class="headerlink" title="人工智能发展历史"></a>人工智能发展历史</h2><p><img src="https://img-blog.csdnimg.cn/20210625145012667.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="人工智能的发展历史"><br>随着算力提高以及深度学习的应用，近几年算法发展很快</p>
+    <content><![CDATA[<h1 id="深度学习算法背景"><a href="#深度学习算法背景" class="headerlink" title="深度学习算法背景"></a>深度学习算法背景</h1><h2 id="人工智能发展历史"><a href="#人工智能发展历史" class="headerlink" title="人工智能发展历史"></a>人工智能发展历史</h2><p><img src="https://ptpimg.me/r97b26.jpg" alt="人工智能的发展历史"><br>随着算力提高以及深度学习的应用，近几年算法发展很快</p>
 <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
 <li><strong>计算机视觉</strong> 用于车牌识别和面部识别等的应用。</li>
 <li><strong>信息检索</strong> 用于诸如搜索引擎的应用 - 包括文本搜索和图像搜索。</li>
@@ -16,8 +34,8 @@
 <h1 id="TextCNN算法原理"><a href="#TextCNN算法原理" class="headerlink" title="TextCNN算法原理"></a>TextCNN算法原理</h1><p>若有兴趣可以看这篇文章：<a href="http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/"><em>Understanding Convolutional Neural Networks for NLP</em></a></p>
 <p>Yoon Kim于2014年发表论文<a href="https://arxiv.org/pdf/1408.5882.pdf"><em>Convolutional Neural Networks for Sentence Classification</em></a>将CNN第一次引入NLP（自然语言处理）的应用，此前CNN几乎都是应用于图像识别领域。</p>
 <h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><p>CNN全称 Convolutional Neural Networks ，卷积神经网络，正如他的名字他的灵感来源是人的神经结构，最先由科学家杨立昆(Yann Lee Cun)提出，</p>
-<p>何谓卷积，就是利用一种数学方法提取信息的特征。对于图片用矩阵可以很好描述像素点的分布特征，<br><img src="https://img-blog.csdnimg.cn/20210625160149731.gif" alt="在这里插入图片描述"><br>动图理解卷积运算的过程，</p>
-<h2 id="TextCNN结构"><a href="#TextCNN结构" class="headerlink" title="TextCNN结构"></a>TextCNN结构</h2><p><img src="https://img-blog.csdnimg.cn/20210625151005390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>何谓卷积，就是利用一种数学方法提取信息的特征。对于图片用矩阵可以很好描述像素点的分布特征，<br><img src="https://ptpimg.me/739919.gif" alt="在这里插入图片描述"><br>动图理解卷积运算的过程，</p>
+<h2 id="TextCNN结构"><a href="#TextCNN结构" class="headerlink" title="TextCNN结构"></a>TextCNN结构</h2><p><img src="https://ptpimg.me/533622.png" alt="在这里插入图片描述"></p>
 <h3 id="嵌入层-embedding-layer"><a href="#嵌入层-embedding-layer" class="headerlink" title="嵌入层(embedding layer)"></a>嵌入层(embedding layer)</h3><p><strong>TextCNN</strong>使用预先训练好的词向量作embedding layer。对于数据集里的所有词，因为每个词都可以表征成一个向量，因此我们可以得到一个嵌入矩阵MM, MM里的每一行都是词向量。这个MM可以是静态(static)的，也就是固定不变。可以是非静态(non-static)的，也就是可以根据反向传播更新。<br>多种模型：Convolutional Neural Networks for Sentence Classification文章中给出了几种模型，其实这里基本都是针对Embedding layer做的变化。<strong>CNN-rand、CNN-static、CNN-non-static、CNN-multichannel</strong><br>具体介绍及实验结果可见原论文，以上是学术定义</p>
 <p>我个人理解是：<br>文字无法被直接被计算机识别，需要编码，将其映射为2维的矩阵</p>
 <h3 id="卷积池化层-convolution-and-pooling"><a href="#卷积池化层-convolution-and-pooling" class="headerlink" title="卷积池化层(convolution and pooling)"></a>卷积池化层(convolution and pooling)</h3><h4 id="卷积-convolution"><a href="#卷积-convolution" class="headerlink" title="卷积(convolution)"></a>卷积(convolution)</h4><p>输入一个句子，首先对这个句子进行切词，假设有s个单词。对每个词，跟句嵌入矩阵M, 可以得到词向量。假设词向量一共有d维。那么对于这个句子，便可以得到s行d列的矩阵AϵRs×d.<br>我们可以把矩阵A看成是一幅图像，使用卷积神经网络去提取特征。由于句子中相邻的单词关联性总是很高的，因此可以使用一维卷积，即文本卷积与图像卷积的不同之处在于只在文本序列的一个方向（垂直）做卷积，卷积核的宽度固定为词向量的维度d。高度是超参数，可以设置。 对句子单词每个可能的窗口做卷积操作得到特征图(feature map) c &#x3D; [c_1, c_2, …, c_s-h+1]。</p>
@@ -34,7 +52,7 @@
 <h5 id="Max-Pooling"><a href="#Max-Pooling" class="headerlink" title="Max Pooling"></a>Max Pooling</h5><p>最常用的就是1-max pooling，提取出feature map照片那个的最大值，通过选择每个feature map的最大值，可捕获其最重要的特征。这样每一个卷积核得到特征就是一个值，对所有卷积核使用1-max pooling，再级联起来，可以得到最终的特征向量，这个特征向量再输入softmax layer做分类。这个地方可以使用drop out防止过拟合。</p>
 <h5 id="Average-Pooling"><a href="#Average-Pooling" class="headerlink" title="Average Pooling"></a>Average Pooling</h5><p>average pooling即取每个维度的均值而不是最大值。理解是对句子中的连续词袋(CBOW)而不是词进行卷积得到的表示（lz：每个filter都是对cbow来的）。<br>其他池化方式K-Max Pooling、动态k-max pooling可见论文<a href="https://www.cnblogs.com/szxspark/p/10262681.html">《Event Extraction via Dynamic Multi-Pooling Convolutional Neural Network》</a>[2]</p>
 <h3 id="简单模型结构的示例分析"><a href="#简单模型结构的示例分析" class="headerlink" title="简单模型结构的示例分析"></a>简单模型结构的示例分析</h3><p>分析<a href="http://link.zhihu.com/?target=https://arxiv.org/pdf/1510.03820.pdf">《A Sensitivity Analysis …》</a>[2]模型示意图：</p>
-<p><img src="https://img-blog.csdnimg.cn/20210625174913227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://ptpimg.me/q61c16.png" alt="在这里插入图片描述"></p>
 <p>word embedding的维度是5，对于句子 i like this movie very much，转换成矩阵AϵR7×5；<br>有6个卷积核，尺寸为(2×5), (3×5), (4×5)，每种尺寸各2个，A分别与以上卷积核进行卷积操作（这里的Stride Size相当于等于高度h）；</p>
 <p>再用激活函数激活，每个卷积核得到了特征向量(feature maps)；<br>使用1-max pooling提取出每个feature map的最大值；</p>
 <p>然后在级联得到最终的特征表达；<br>将特征输入至softmax layer进行分类, 在这层可以进行正则化操作( l2-regulariation)。</p>
@@ -128,8 +146,136 @@
 ]]></content>
   </entry>
   <entry>
+    <title>2021基于Debian的All in One（NAS+软路由）配置教程</title>
+    <url>/2020/03/07/localnas/</url>
+    <content><![CDATA[<p> @<a href="%E5%9F%BA%E4%BA%8EDebian10%E7%9A%84NAS%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">TOC</a></p>
+<h1 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><ul>
+<li>作为影迷，有一定的观影需求，同时也有兼职剪辑。考虑苹果新M1的macbook air的剪辑配置，唯一缺陷就是容量太小又不可拓展，所以搭配nas作为存储延伸。</li>
+<li>为何选择Debian，因为作为计算机专业，折腾的过程也是学习的过程，linux可以有更多功能选择，不需要装虚拟机就能All in One <del>(boom)</del> ，可以做服务器，我写了一个网站可以挂在上面让大家访问。也可以做软路由，安装***等转发流量就可以全局。</li>
+<li>该教程主要为提供思路，记录一些配置过程使用的命令，也作为自己备忘录，具体详细过程无法一一描述，若有建议或者疑问，欢迎大家一起讨论</li>
+</ul>
+<h2 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h2><ul>
+<li>挂载硬盘作为nas存储视频等文件</li>
+<li>部署网站供大家访问</li>
+<li>作为软路由转发流量</li>
+</ul>
+<h1 id="系统配置简介"><a href="#系统配置简介" class="headerlink" title="系统配置简介"></a>系统配置简介</h1><ol>
+<li>梅捷N3150L主板</li>
+<li>CPU是N3150（4核6W支持AES 稍弱于J1900但可硬解4k）</li>
+<li>4G内存1600HZ</li>
+<li>8+14T机械硬盘</li>
+<li>U盘16G作为系统盘</li>
+<li>TP-link WiFi6的路由器进行DDNS和端口转发</li>
+</ol>
+<h1 id="Debian10的镜像下载与安装"><a href="#Debian10的镜像下载与安装" class="headerlink" title="Debian10的镜像下载与安装"></a>Debian10的镜像下载与安装</h1><ol>
+<li>镜像链接:<a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.9.0-amd64-netinst.iso">Debian原网站镜像</a></li>
+<li>U盘工具:Ventory</li>
+<li>用另一个U盘作为系统盘（可节约一个SATA接口</li>
+</ol>
+<h1 id="系统配置准备"><a href="#系统配置准备" class="headerlink" title="系统配置准备"></a>系统配置准备</h1><h2 id="oh-my-zsh安装"><a href="#oh-my-zsh安装" class="headerlink" title="oh my zsh安装"></a>oh my zsh安装</h2><p>装机第一件事就是要看得舒服</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt-get install zsh#安装zsh作为shell<br>chsh -s /bin/zsh#激活环境<br><br>sh -c &quot;$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">个性化配置</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">可以记住历史目录，不需要一直<span class="hljs-built_in">cd</span> 如果卡住可能是需要认证rsa.pub的公钥 ssh-kengen生成一下，添加到github的设置-&gt;SSH and GPG keys</span><br>git clone https://github.com/joelthelion/autojump<br>cd autojump<br>./install.py<br><br>git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions#自动补全命令<br><br>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting#语法高亮<br><br>vim ~/.zshrc 把插件加到文件中<br></code></pre></td></tr></table></figure>
+<p>vim ~&#x2F;.zshrc配置文件的plugins 加上autojump zsh-syntax-highlighting zsh-autosuggestions生效，最后再source ~&#x2F;.zshrc重新编译zsh，此时autojump已经生效。其他同理</p>
+<h2 id="ssh远程访问"><a href="#ssh远程访问" class="headerlink" title="ssh远程访问"></a>ssh远程访问</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">cd /etc/ssh<br>nano sshd_config<br>//添加一行 PermitRootLogin yes<br>//ctrl x保存退出<br></code></pre></td></tr></table></figure>
+
+<p>将#PasswordAuthentication no的注释去掉，并且将NO修改为YES<br>完成上述更改后，请重新启动SSH服务器：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">/etc/init.d/ssh restart 或者service ssh start<br></code></pre></td></tr></table></figure>
+<p>添加开机自启动 </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">update-rc.d ssh enable<br></code></pre></td></tr></table></figure>
+<h2 id="免明文登陆"><a href="#免明文登陆" class="headerlink" title="免明文登陆"></a>免明文登陆</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ssh-keygen -t rsa<br>ssh-copy-id -i ~/.ssh/id_rsa root@ipp<br></code></pre></td></tr></table></figure>
+<h2 id="开机自动登录root"><a href="#开机自动登录root" class="headerlink" title="开机自动登录root"></a>开机自动登录root</h2><ol>
+<li>进入root用户，编辑文件&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;getty@.service<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">nano /lib/systemd/system/getty@.service<br>//ctrl x保存<br></code></pre></td></tr></table></figure></li>
+<li>设置字段ExecStart</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ExecStart=-/sbin/agetty --autologin root --noclear %I $TERM//添加或修改这行数据<br><br>//ctrl x保存<br></code></pre></td></tr></table></figure>
+
+<h2 id="白嫖cloudflare的服务穿透内网，前提是需要域名"><a href="#白嫖cloudflare的服务穿透内网，前提是需要域名" class="headerlink" title="白嫖cloudflare的服务穿透内网，前提是需要域名"></a>白嫖cloudflare的服务穿透内网，前提是需要域名</h2><p><a href="https://bra.live/setup-home-server-with-cloudflare-tunnel/">参考链接</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">curl -L &#x27;https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64&#x27; -o /usr/bin/cloudflared<br>chmod +x /usr/bin/cloudflared<br><br>cloudflared tunnel login<br><span class="hljs-meta prompt_">#</span><span class="language-bash">然后会让打开浏览器登陆验证</span><br>A browser window should have opened at the following URL:<br><br>https://dash.cloudflare.com/arg***<br><span class="hljs-meta prompt_">#</span><span class="language-bash">注意：授权一次只能选择一个网站。如果存在多个不同域名的网站，请授权完成后不要关闭网页，点击第二个、第三个要授权的域名，进行多次授权。</span><br><br><br>cloudflared tunnel create &lt;隧道名字&gt;#比如 webserver-1<br><span class="hljs-meta prompt_">#</span><span class="language-bash">然后有uuid要记下</span><br>Tunnel credentials written to /root/.cloudflared/12345-123-123-123-12345.json. cloudflared chose this file based on where your origin certificate was found. Keep this file secret. To revoke these credentials, delete the tunnel.<br><br>Created tunnel webserver-1 with id 12345-123-123-123-12345<br><br>......<br></code></pre></td></tr></table></figure>
+<h2 id="rclone使用"><a href="#rclone使用" class="headerlink" title="rclone使用"></a>rclone使用</h2><p>rclone不仅可以挂载网盘还能挂FTP、sftp等等，当作同步的工具也很不错，这里介绍下sftp的挂载</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">一键安装最新的版本，自带的比较老</span><br><br>sudo -v ; curl https://rclone.org/install.sh | sudo bash<br><br>ssh-keygen -q -t rsa -b 4096 -C &quot;rclone key&quot; -N &quot;&quot; -f ~/.ssh/rclone<br>cd ~/.ssh/<br>cat rclone* &gt; rclone-merged <br><span class="hljs-meta prompt_">#</span><span class="language-bash">配置除了地址账号密码这些一切都默认，除了下面这个</span><br><span class="hljs-meta prompt_">key_file&gt; </span><span class="language-bash">~/.ssh/rclone-merged</span><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt install fuse3<br><br>rclone mount -vv alist: /alist --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --umask 000 --vfs-cache-mode writes  --daemon<br></code></pre></td></tr></table></figure>
+
+<h2 id="Tailscale"><a href="#Tailscale" class="headerlink" title="Tailscale"></a>Tailscale</h2><ul>
+<li>需要客户端，不是很方便<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">curl -fsSL https://tailscale.com/install.sh | sh<br>tailscale up<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="图形化界面卸载"><a href="#图形化界面卸载" class="headerlink" title="图形化界面卸载"></a>图形化界面卸载</h2><p>图形化界面比较占内存，而我多数时候SSH也用不上，所以将其卸载</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt autoremove gdm3<br>apt autoremove --purge gnome*<br><br>//reboot重启<br></code></pre></td></tr></table></figure>
+
+<h2 id="网路配置"><a href="#网路配置" class="headerlink" title="网路配置"></a>网路配置</h2><ol>
+<li>向运营商申请外网IP，一般打电话就行(现在可能不容易了)</li>
+<li>申请一个域名，我用的阿里的</li>
+<li>因为拨号上网IP不会固定，所以需要路由器的DDNS通过域名绑定IP访问</li>
+<li>在路由器的虚拟服务器上面设置端口转发，可以转发被禁的80或者443端口</li>
+</ol>
+<p>编辑设置：vim &#x2F;etc&#x2F;network&#x2F;interfaces</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">source /etc/network/interfaces.d/*<br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment">#总的来说是用的enp2s0网口，也就是外接的千兆网卡，分配静态ip</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">The loopback network interface</span><br>auto lo<br>iface lo inet loopback<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">The primary network interface</span><br>allow-hotplug enp2s0<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment">#动态ip</span></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">iface enp3s0 inet dhcp</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">iface enp3s0 inet loopback</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment">#静态ip</span></span><br>iface enp2s0 inet static<br>address 192.168.1.107<br><span class="hljs-meta prompt_">#</span><span class="language-bash">address 192.168.101.111</span><br>netmask 255.255.255.0<br>gateway 192.168.1.1<br>auto enp2s0<br></code></pre></td></tr></table></figure>
+
+<h2 id="网络自动重连"><a href="#网络自动重连" class="headerlink" title="网络自动重连"></a>网络自动重连</h2><p>写了个脚本自动检测网络，断开则重连，下面是环境需要</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">pip install selenium<br>apt install chrome-driver<br>apt-get install -y libnss3-dev libgconf-2-4 xvfb<br></code></pre></td></tr></table></figure>
+
+<h2 id="磁盘相关命令"><a href="#磁盘相关命令" class="headerlink" title="磁盘相关命令"></a>磁盘相关命令</h2><ol>
+<li>磁盘分区 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">fdisk -l<br>//查看所有磁盘信息<br>fdisk  /dev/sdb<br>//对sdb磁盘进行分区<br></code></pre></td></tr></table></figure>
+ 若磁盘大于2T，需要parted命令分区  <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"> parted /dev/sdb  //分区磁盘sdb<br> mklabel gpt  //parted命令只能针对gpt格式的磁盘进行操作 <br> mkpart ext4 0% 1.5T//将0到1.5T划为一个分区<br>(parted) p //查看所有磁盘信息<br>mkfs -t ext4 /dev/sdb1   //格式化分区sdb1<br></code></pre></td></tr></table></figure></li>
+<li>查看当前已挂载磁盘<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">df -h<br></code></pre></td></tr></table></figure></li>
+<li>挂载磁盘<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">mount /dev/sdb1 /mnt/fodername1<br>//将磁盘sdb1挂载到相同的逻辑文件/data下，卸载则换为umount<br></code></pre></td></tr></table></figure></li>
+<li>开机自动挂载磁盘<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"> vim /etc/fstab<br> //打开fstab文件写入命令<br> UUID=b394c406-5c0e-4e16-9d80-a212c34a8d32 /mnt            ext4    defaults   0<br>/dev/sdb1                               /mnt/Film             ext4              defaults 0<br>/dev/sdb2                               /mnt/Material   		ext4            defaults 0<br><br> <br></code></pre></td></tr></table></figure></li>
+<li>磁盘通电时间等详细参数<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt-get install smartmontools<br>//下载磁盘测试工具<br>smartctl -A /dev/sdb<br>//测试sda磁盘<br></code></pre></td></tr></table></figure></li>
+<li>磁盘读写速度<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">hdparm -Tt /dev/sda<br>//sda换为测试的硬盘<br></code></pre></td></tr></table></figure></li>
+<li>磁盘清理查看<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt install ncdu<br>ncdu / --exclude /foldername<br> //可按照文件占用大小排序查看<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="虚拟环境"><a href="#虚拟环境" class="headerlink" title="虚拟环境"></a>虚拟环境</h1><h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">curl -fsSL https://get.docker.com -o get-docker.sh<br>sh get-docker.sh<br></code></pre></td></tr></table></figure>
+<h4 id="conda"><a href="#conda" class="headerlink" title="conda"></a>conda</h4><p>比起virtualenv，conda最大优点是可以自动安装指定新版本python，不用本地环境</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget -4 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">第二步安装</span><br>sh Miniconda3-py39_4.9.2-Linux-x86_64.sh -b -p /root/miniconda3<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">第三步配置conda镜像</span><br><br>export PATH=/root/miniconda3/bin:$PATH<br><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-built_in">alias</span> ohmyzsh=<span class="hljs-string">&quot;mate ~/.oh-my-zsh&quot;</span></span><br><br>vim ~/.zshrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># 添加下面的内容</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">&gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">!! Contents within this block are managed by <span class="hljs-string">&#x27;conda init&#x27;</span> !!</span><br>__conda_setup=&quot;$(&#x27;/root/miniconda3/bin/conda&#x27; &#x27;shell.zsh&#x27; &#x27;hook&#x27; 2&gt; /dev/null)&quot;<br>if [ $? -eq 0 ]; then<br>    eval &quot;$__conda_setup&quot;<br>else<br>    if [ -f &quot;/root/miniconda3/etc/profile.d/conda.sh&quot; ]; then<br>        . &quot;/root/miniconda3/etc/profile.d/conda.sh&quot;<br>    else<br>        export PATH=&quot;/root/miniconda3/bin:$PATH&quot;<br>    fi<br>fi<br>unset __conda_setup<br><span class="hljs-meta prompt_"># </span><span class="language-bash">&lt;&lt;&lt; <span class="hljs-string">conda initialize &lt;&lt;&lt;</span></span><br><br>source ~/.zshrc<br><br>conda create -n py39 python=3.9<br>conda activate py39<br></code></pre></td></tr></table></figure>
+<h4 id="Jupyter-lab"><a href="#Jupyter-lab" class="headerlink" title="Jupyter lab"></a>Jupyter lab</h4><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">conda install jupyterlab<br><span class="hljs-meta prompt_">#</span><span class="language-bash">创建密码</span><br>jupyter lab password<br><span class="hljs-meta prompt_">#</span><span class="language-bash">生成配置文件</span><br>jupyter lab --generate-config<br><span class="hljs-meta prompt_">#</span><span class="language-bash">编辑文件</span><br>vim /root/.jupyter/jupyter_lab_config.py<br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment">#修改下面的</span></span><br>c.ServerApp.root_dir = &#x27;&#x27;                  # 设置默认工作目录<br>c.ServerApp.ip = &#x27;*&#x27;                     # 允许访问此服务器的 IP，星号表示任意 IP<br>c.ServerApp.password = &#x27;****************&#x27; # 之前生成的密码 hash 字串在/root/.jupyter/jupyter_server_config.json, 粘贴进去<br>c.ServerApp.open_browser = False         # 运行时不打开本机浏览器<br>c.ServerApp.port = 8888                  # 使用的端口，随意设置，但是要记得你设定的这个端口<br>c.ServerApp.enable_mathjax = True        # 启用 MathJax<br>c.ServerApp.allow_remote_access = True   # 允许远程访问<br>c.ServerApp.allow_root = True            # 允许root权限<br></code></pre></td></tr></table></figure>
+<h2 id="Jellyfin安装配置"><a href="#Jellyfin安装配置" class="headerlink" title="Jellyfin安装配置"></a>Jellyfin安装配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker pull nyanmisaka/jellyfin<br><br>docker run -d -p 8096:8096 -v /jellyfin/config:/config -v /mnt/AllMedia:/media -v /mnt/Other:/Film3 -v /mnt/Film:/Film2 --restart=always nyanmisaka/jellyfin<br></code></pre></td></tr></table></figure>
+<ol>
+<li>-p 后面是jellyfin服务的端口号，安装时可以指定，这里使用默认的8096；</li>
+<li>-v 后面是指定的配置路径，比如 &#x2F;mnt&#x2F;film 就是我原来的影音物理路径，&#x2F;media就是jellyfin的映射路径</li>
+<li>可以通过http:&#x2F;&#x2F;本地ip:8096 来访问jellyfin服务了,后期也可以转发端口在外网用域名访问</li>
+</ol>
+<h2 id="Samba安装配置"><a href="#Samba安装配置" class="headerlink" title="Samba安装配置"></a>Samba安装配置</h2><p>Debian终端</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt install samba<br><br>nano /etc/samba/smb.conf<br><br>//最后加上<br>[share]<br>comment = Provides Filesystem For Anyone<br>path = /share<br>browsable = yes<br>create mask = 0777<br>directory mask = 0777<br>read only = no<br>writable = yes<br>guest ok = yes<br>public = yes<br>forceuser=root<br>forcegroup=root<br><br>//创建共享目录并设置权限<br>mkdir /share<br>chmod -R 0777 /share<br>//客户端<br>apt install smbclient<br>//重启服务<br>systemctl restart smbd.service &amp;&amp; systemctl restart nmbd.service<br></code></pre></td></tr></table></figure>
+<p>Windows终端</p>
+<p>打开我的电脑，地址栏输入 \192.168.<em><strong>.</strong></em> （NAS所在局域网IP）会看到几个文件名</p>
+<ul>
+<li>注意，window上面映射地址不是挂载地址，而必须与上面文件累的path路径名称（&#x2F;share）完全一致，包括大小写，不然会提示拼写错误</li>
+<li>iPad也可用nPlayer的SMB配置访问这个地址</li>
+</ul>
+<h2 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h2><p>Samba配置太繁琐了，现在也不用Windows</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt-get install nfs-kernel-server <br>apt-get install nfs-common   #MAC客户端自带，可不用安装<br><br>vim /etc/exports<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加 *代表所有ip访问</span><br>/mnt *(rw,fsid=0,sync,no_root_squash,no_subtree_check,insecure)<br><br>/mnt/Other *(rw,sync,no_root_squash,no_subtree_check,insecure)<br>/mnt/AllMedia *(rw,sync,no_subtree_check,no_root_squash,insecure)<br>systemctl restart nfs-kernel-service#重启nfs服务<br><span class="hljs-meta prompt_">#</span><span class="language-bash">Mac挂载命令</span><br>mount -t nfs -o nolocks 192.168.101.111:/mnt /Users/gawaintan/NAS<br><br></code></pre></td></tr></table></figure>
+<p>注意：*代表所有ip都允许访问，&#x2F;mnt作为父级目录fsid&#x3D;0只能出现一次，no_root_squash授予root权限，谨慎使用，insecure为了我避免客户端permission denied</p>
+<h2 id="网口"><a href="#网口" class="headerlink" title="网口"></a>网口</h2><p>我买了块千兆网卡，但是装机插另一个网口了，导致开机默认不启动<br>所以需要设置一下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim /etc/network/interfaces<br><br>auto enp2s0   #设置网卡自启动<br>iface wlan0 inet static    #设置网卡使用静态IP<br>address 192.168.101.111<br>netmask 255.255.255.0<br>gateway 192.168.101.1<br></code></pre></td></tr></table></figure>
+
+<h2 id="安装配置aria2"><a href="#安装配置aria2" class="headerlink" title="安装配置aria2"></a>安装配置aria2</h2><p>…不怎么用了</p>
+<h2 id="mysql安装配置"><a href="#mysql安装配置" class="headerlink" title="mysql安装配置"></a>mysql安装配置</h2><p>在Debian的默认存储库中不可用，MariaDB是Debian 10中的默认数据库系统，我将介绍如何安装mysql8</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget http://repo.mysql.com/mysql-apt-config_0.8.13-1_all.deb <br><span class="hljs-meta prompt_">#</span><span class="language-bash">下载完成后，以具有<span class="hljs-built_in">sudo</span>权限的用户身份安装发行包：</span><br>apt install ./mysql-apt-config_0.8.13-1_all.deb<br><span class="hljs-meta prompt_">#</span><span class="language-bash">选择MySQL Server &amp; Cluster(当前选择：mysql-8.0)确定安装</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">通过运行以下命令更新包列表并安装MySQL服务器包：</span><br>sudo apt update<br>sudo apt install mysql-server<br></code></pre></td></tr></table></figure>
+<p>等待安装，完成后用 systemctl status mysql检验安装是否成功<br>运行mysql_secure_installation设置密码，按照喜好选择Y<br>mysql -u root -p输入设置，密码登陆</p>
+<h2 id="软路由流量分发"><a href="#软路由流量分发" class="headerlink" title="软路由流量分发"></a>软路由流量分发</h2><h1 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h1><h2 id="局域网网速测试"><a href="#局域网网速测试" class="headerlink" title="局域网网速测试"></a>局域网网速测试</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">Linux端</span><br>apt-get install iperf3<br>iperf3 -s#将linux作为服务器端<br><span class="hljs-meta prompt_">#</span><span class="language-bash">windows端,官网下载iperf3，cmd命令到该目录下</span><br>Iperf3 -c 192.168.101.119<br><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="网络端口查看"><a href="#网络端口查看" class="headerlink" title="网络端口查看"></a>网络端口查看</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt-get install net-tools #新的系统可能不带该命令，也无法通过install ifconfig下载，只能用该命令<br><br>ethtool enp2s0#查看网口信息<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="screen命令的使用"><a href="#screen命令的使用" class="headerlink" title="screen命令的使用"></a>screen命令的使用</h2><p>方便切换进程，可以在一个进程未完成的时候将其挂起</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">screen<br>screen -ls#展示所有进程<br>screen -d id#detach该进程，可用切换远程终端访问<br>screen -r id #进入该进程<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="定时自动关机"><a href="#定时自动关机" class="headerlink" title="定时自动关机"></a>定时自动关机</h2><p>因为寝室0:30停电，然后设置了主办来电自动开机</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim /etc/crontab<br><span class="hljs-meta prompt_">#</span><span class="language-bash">最后添加一行代表0:22自动关机</span><br>22  0    * * *   root    /sbin/halt<br><br></code></pre></td></tr></table></figure>
+<h2 id="开机启动管理工具"><a href="#开机启动管理工具" class="headerlink" title="开机启动管理工具"></a>开机启动管理工具</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt-get install sysv-rc-conf<br>sysv-rc-conf --level 345 mysql on #mysql可换其他服务<br><span class="hljs-meta prompt_">sysv-rc-conf#</span><span class="language-bash">可查看选择启动权限</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://ptpimg.me/83u06a.jpg" alt="请添加图片描述"></p>
+<h2 id="小工具集合"><a href="#小工具集合" class="headerlink" title="小工具集合"></a>小工具集合</h2><ol>
+<li>htop用于观察系统占用资源情况</li>
+<li>ncdu &#x2F;目录 可将该目录下所有文件从大到小排序</li>
+</ol>
+<h2 id="Alist"><a href="#Alist" class="headerlink" title="Alist"></a>Alist</h2><p><a href="https://alist.nn.ci/zh/guide/install/script.html">https://alist.nn.ci/zh/guide/install/script.html</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><br>curl -fsSL &quot;https://alist.nn.ci/v3.sh&quot; | bash -s install<br></code></pre></td></tr></table></figure>
+
+
+]]></content>
+  </entry>
+  <entry>
     <title>Mac使用指南指令备忘录</title>
-    <url>/2021/12/07/m1/</url>
+    <url>/2021/03/07/m1/</url>
     <content><![CDATA[<p>@[TOC](m1 Mac使用指南指令备忘录 )<br>M1用到现在也小半年了，踩了些坑，也有一些使用心得，这里主要提供思路方法，具体方法可以自行搜索了解</p>
 <h1 id="硬件外设"><a href="#硬件外设" class="headerlink" title="硬件外设"></a>硬件外设</h1><p>首先是用的Macbook air丐版8+256</p>
 <ol>
@@ -140,44 +286,27 @@
 <li>拓展坞，飞利浦的五合一Type-c+Hdim1.4+3*USB3.0基本满足需求。</li>
 <li>Ipad air3随航当拓展屏很好用</li>
 </ol>
-<h2 id="外接显示器HiDpi"><a href="#外接显示器HiDpi" class="headerlink" title="外接显示器HiDpi"></a>外接显示器HiDpi</h2><p>强制开启Hidpi<br>有条件上4k显示器的当然最好，接上显示器就会出现调节界面，主要针对非4K屏幕<br>hidpi是macos优化显示效果的一种技术，需要硬件达到视网膜屏幕标准，具体技术可以自行了解，主要问题是非4k比如我现在用的带鱼屏1080*2560会出现字体发虚的情况<br>参考国外一个大神软件虚拟显示器的方法<br><a href="https://github.com/waydabber/BetterDummy">BetterDummy</a><br>主要方法是通过软件虚拟一个支持hidpi的显示器，再把这个显示器投到自己的上面。带鱼屏的话注意选21.5:9，21.3:9是没Hidpi的。<br>系统需要更新到Monetery<br><img src="https://pixhost.icu/avaxhome/c2/6b/0087596bc2.png" alt="BetterDummy"></p>
+<h2 id="外接显示器HiDpi"><a href="#外接显示器HiDpi" class="headerlink" title="外接显示器HiDpi"></a>外接显示器HiDpi</h2><p>强制开启Hidpi<br>有条件上4k显示器的当然最好，接上显示器就会出现调节界面，主要针对非4K屏幕<br>hidpi是macos优化显示效果的一种技术，需要硬件达到视网膜屏幕标准，具体技术可以自行了解，主要问题是非4k比如我现在用的带鱼屏1080*2560会出现字体发虚的情况<br>参考国外一个大神软件虚拟显示器的方法<br><a href="https://github.com/waydabber/BetterDummy">BetterDummy</a><br>主要方法是通过软件虚拟一个支持hidpi的显示器，再把这个显示器投到自己的上面。带鱼屏的话注意选21.5:9，21.3:9是没Hidpi的。<br>系统需要更新到Monetery<br><img src="https://ptpimg.me/789b29.png" alt="在这里插入图片描述"></p>
 <h1 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h1><p>homebrew是Mac上一个软件管理工具，可以理解为开源Appstore，直接brew install即可安装指定软件，最好安装前先用Brew search查询是否存在对应版本</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs C">export HOMEBREW_BREW_GIT_REMOTE=<span class="hljs-string">&quot;...&quot;</span>  <span class="hljs-meta"># put your Git mirror of Homebrew/brew here</span><br>export HOMEBREW_CORE_GIT_REMOTE=<span class="hljs-string">&quot;...&quot;</span>  <span class="hljs-meta"># put your Git mirror of Homebrew/homebrew-core here</span><br>/bin/bash -c <span class="hljs-string">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;</span><br></code></pre></td></tr></table></figure>
+
 <h1 id="必备网站"><a href="#必备网站" class="headerlink" title="必备网站"></a>必备网站</h1><ol>
-<li><p><a href="https://isapplesiliconready.com/">Is apple Silicon ready？</a>对应软件官方是否已经适配m1平台<br><img src="https://pixhost.icu/avaxhome/c3/6b/0087596bc3.png" alt="软件适配"></p>
-</li>
-<li><p><a href="https://www.macwk.com/">MacWk</a>一个免费的破解软件下载网站</p>
-</li>
-<li><p><a href="https://www.applegamingwiki.com/wiki/Home">m1游戏适配情况</a>介绍游戏在不同环境下运行情况，点进去有详细测评<br><img src="https://pixhost.icu/avaxhome/c4/6b/0087596bc4.png" alt="m1"></p>
-</li>
+<li><a href="https://isapplesiliconready.com/">Is apple Silicon ready？</a>对应软件官方是否已经适配m1平台<br><img src="https://ptpimg.me/145r82.png" alt="软件适配"></li>
+<li><a href="https://www.macwk.com/">MacWk</a>一个免费的破解软件下载网站</li>
+<li><a href="https://www.applegamingwiki.com/wiki/Home">m1游戏适配情况</a>介绍游戏在不同环境下运行情况，点进去有详细测评<br><img src="https://ptpimg.me/2tyf73.png" alt="m1"></li>
 </ol>
 <h1 id="软件推荐"><a href="#软件推荐" class="headerlink" title="软件推荐"></a>软件推荐</h1><h2 id="Parallels-Desktop"><a href="#Parallels-Desktop" class="headerlink" title="Parallels Desktop"></a>Parallels Desktop</h2><h2 id="Silicon"><a href="#Silicon" class="headerlink" title="Silicon"></a>Silicon</h2><h2 id="Bob"><a href="#Bob" class="headerlink" title="Bob"></a>Bob</h2><h2 id="IINA"><a href="#IINA" class="headerlink" title="IINA"></a>IINA</h2><h2 id="iterm2远程"><a href="#iterm2远程" class="headerlink" title="iterm2远程"></a>iterm2远程</h2><p>Iterm2比Mac自带terminal更好用，装机必备软件之一<br>cmd+O调出profile 保存帐号-&gt;cmd+option+F 调出password manage保存密码</p>
-<h1 id="mysql和redis启动"><a href="#mysql和redis启动" class="headerlink" title="mysql和redis启动"></a>mysql和redis启动</h1><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">brew service start mysql<br>redis-server<br></code></pre></td></tr></table></figure>
+<h1 id="mysql和redis启动"><a href="#mysql和redis启动" class="headerlink" title="mysql和redis启动"></a>mysql和redis启动</h1><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">brew service start mysql<br><br>redis-server<br></code></pre></td></tr></table></figure>
+
+
+
 <h1 id="OhMyZsh设置"><a href="#OhMyZsh设置" class="headerlink" title="OhMyZsh设置"></a>OhMyZsh设置</h1><p>可以在Mac和Debian本地分别设置<br><a href="https://blog.51cto.com/u_15127596/4297531">参考细节</a><br>推荐插件 extract、 zsh-syntax-highlighting、autojump、zsh-autosuggestions</p>
-<h1 id="磁盘读写查询"><a href="#磁盘读写查询" class="headerlink" title="磁盘读写查询"></a>磁盘读写查询</h1><figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs C">smartctl 盘查看读写次数<br></code></pre></td></tr></table></figure>
-<p>这个磁盘过度读写的问题最好是使用原生软件<br><img src="https://pixhost.icu/avaxhome/c5/6b/0087596bc5.png" alt="2021-11-22"></p>
+<h1 id="磁盘读写查询"><a href="#磁盘读写查询" class="headerlink" title="磁盘读写查询"></a>磁盘读写查询</h1><figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs C">smartctl 盘查看读写次数<br><br></code></pre></td></tr></table></figure>
+<p>这个磁盘过度读写的问题最好是使用原生软件<br><img src="https://ptpimg.me/e63381.png" alt="2021-11-22"></p>
 <h1 id="tensorfow安装配置"><a href="#tensorfow安装配置" class="headerlink" title="tensorfow安装配置"></a>tensorfow安装配置</h1><h2 id="python环境"><a href="#python环境" class="headerlink" title="python环境"></a>python环境</h2><p>电脑自带python但是3.9有点高，可以自己选择对应版本<br>点击下载<a href="https://github.com/conda-forge/miniforge/#download">miniforge</a><br>安装命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">bash Miniforge3-MacOSX-arm64.sh<br>nano ~/.bash_profile<br>export PATH=&quot;/Users/Cyberbolt/miniforge3/bin:$PATH&quot; <br>source $HOME/.bash_profile<br></code></pre></td></tr></table></figure>
-<h2 id="在虚拟环境安装-TensorFlow"><a href="#在虚拟环境安装-TensorFlow" class="headerlink" title="在虚拟环境安装 TensorFlow"></a>在虚拟环境安装 TensorFlow</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">conda create -n py39 python=3.9<br>conda activate py39<br>conda install -c apple tensorflow-deps<br>python -m pip install tensorflow-macos<br>python -m pip install tensorflow-metal<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">bash Miniforge3-MacOSX-arm64.sh<br><br>nano ~/.bash_profile<br>export PATH=&quot;/Users/Cyberbolt/miniforge3/bin:$PATH&quot; <br><br>source $HOME/.bash_profile<br></code></pre></td></tr></table></figure>
+<h2 id="在虚拟环境安装-TensorFlow"><a href="#在虚拟环境安装-TensorFlow" class="headerlink" title="在虚拟环境安装 TensorFlow"></a>在虚拟环境安装 TensorFlow</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">conda create -n py39 python=3.9<br>conda activate py39<br><br>conda install -c apple tensorflow-deps<br>python -m pip install tensorflow-macos<br>python -m pip install tensorflow-metal<br></code></pre></td></tr></table></figure>
 <h1 id="未完待补充"><a href="#未完待补充" class="headerlink" title="未完待补充"></a>未完待补充</h1>]]></content>
-  </entry>
-  <entry>
-    <title>Gawain&#39;s Blog</title>
-    <url>/2024/07/26/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>重装系统</title>
@@ -189,7 +318,7 @@
 <li><p><strong>最关键的还是利用系统的保命文件———Backup.wim重刷系统</strong><br>一个通过Dism++文件创建的镜像文件，尽量将此文件放于非系统盘，有此文件基本可以不用借助任何外部工具无限重刷回原系统。</p>
 </li>
 </ol>
-<p>上面两者都需要通过高级重启进入一个纯命令行的Dos界面，在此可以几乎不受权限限制对文件<strong>删除复制</strong>等操作<br><strong>进入 <em>系统设置 -&gt; 升级&amp;安全 -&gt; 恢复 -&gt; 高级重启 -&gt; 立刻重启</em> 来重启电脑到恢复模式；</strong><br><img src="https://img-blog.csdnimg.cn/20191022130842551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>后面就是选择 <em><strong>疑难解答-&gt;高级-&gt;命令提示符</strong></em>（现在不便具体演示，网上有很多相关教程）</p>
+<p>上面两者都需要通过高级重启进入一个纯命令行的Dos界面，在此可以几乎不受权限限制对文件<strong>删除复制</strong>等操作<br><strong>进入 <em>系统设置 -&gt; 升级&amp;安全 -&gt; 恢复 -&gt; 高级重启 -&gt; 立刻重启</em> 来重启电脑到恢复模式；</strong><br><img src="https://ptpimg.me/edeyq3.png" alt="在这里插入图片描述"><br>后面就是选择 <em><strong>疑难解答-&gt;高级-&gt;命令提示符</strong></em>（现在不便具体演示，网上有很多相关教程）</p>
 <p><strong>注意</strong>：在Dos环境下盘符名称可能和平时不一样(我的OS就变成F盘了)，首先就是平时被隐藏的X盘，其他最好先通过 <strong>diskpart</strong>命令进入管理磁盘工具，通过<strong>list volume</strong>查看所有盘符信息，<strong>exit</strong>退出。同时利用<strong>cd 对应硬盘</strong> 进入后再用<strong>dir</strong>命令确认文件是否正确。</p>
 <h2 id="C盘Users迁移其他盘"><a href="#C盘Users迁移其他盘" class="headerlink" title="C盘Users迁移其他盘"></a>C盘Users迁移其他盘</h2><p>有几种方法可用，原则就是要先保证在非现用户使用环境下进行，为了避免各种权限要求，我是直接开机进入Dos命令行：</p>
 <ol>
@@ -201,7 +330,7 @@
 <h2 id="备份以及还原系统"><a href="#备份以及还原系统" class="headerlink" title="备份以及还原系统"></a>备份以及还原系统</h2><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4><p>有几种方式，我用的dism++ 备份，也可采用命令行.</p>
 <ol>
 <li>命令行：<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">  <span class="hljs-comment">//初始备份（例如：把 C 分区的系统备份到 D 分区的 1文件夹中，备份文件名为Backup.wim）：</span><br>    Dism /Capture-Image /ImageFile:D:\<span class="hljs-number">1</span>\Backup.wim /CaptureDir:C:\ /Name:Backup<span class="hljs-number">-1</span> /Description:<span class="hljs-number">0000</span><span class="hljs-number">-00</span><span class="hljs-number">-00</span><br><span class="hljs-comment">// 命令解释：</span><br><span class="hljs-comment">//    /Capture-Image - 指定捕获映像。</span><br><span class="hljs-comment">//    /ImageFile: - 指定映像文件路径。                </span><br><span class="hljs-comment">//    /CaptureDir: - 指定捕获目录。</span><br><span class="hljs-comment">//    /Name: - 指定名称。此项不能省略。</span><br><span class="hljs-comment">//    /Description: - 指定描述。描述是为了说明这次备份的具体情况，我们这里用了时间。此项可省略。</span><br></code></pre></td></tr></table></figure></li>
-<li>利用软件dism++<br><strong>选择恢复-&gt;系统备份</strong><br><img src="https://img-blog.csdnimg.cn/20191022142147367.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择保存的硬盘并输入保存的名字：<br><img src="https://img-blog.csdnimg.cn/20191022142851436.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhd2FpblRreQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>等待完成即可。<br><strong>注</strong>：最好备份前清理C盘，保证电脑最好状态，这也是个人用电脑的好习惯。</li>
+<li>利用软件dism++<br><strong>选择恢复-&gt;系统备份</strong><br><img src="https://ptpimg.me/36404v.png" alt="在这里插入图片描述"><br>选择保存的硬盘并输入保存的名字：<br><img src="https://ptpimg.me/28h841.png" alt="在这里插入图片描述"><br>等待完成即可。<br><strong>注</strong>：最好备份前清理C盘，保证电脑最好状态，这也是个人用电脑的好习惯。</li>
 </ol>
 <h2 id="系统还原"><a href="#系统还原" class="headerlink" title="系统还原"></a>系统还原</h2><p>具体参考以下<br> <a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-update/%E7%94%A8-dism/a3ea0d10-036c-41ff-8bb9-350c2bda525b">用 DISM 命令备份与还原 Windows 系统</a>.<br>关键指令：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//系统还原（例如：把 D:\Backup.wim 中备份还原到 C分区）：</span><br>    Dism /Apply-Image /ImageFile:D:\Backup.wim/Index:<span class="hljs-number">1</span> /ApplyDir:C:\<br> <span class="hljs-comment">//   命令解释：</span><br> <span class="hljs-comment">//   /Apply-Image - 指定应用映像。</span><br> <span class="hljs-comment">//   /ApplyDir: - 指定应用目录。</span><br> <span class="hljs-comment">//  /Index: - 指定索引。此项不能省略。 </span><br></code></pre></td></tr></table></figure>
@@ -211,6 +340,1128 @@
 <p>格式化完成再按上述命令完成还原，几乎不会有问题，一般等待十几分钟，完成后就可以关闭命令窗口重启电脑，过会就会看见熟悉输入密码页面了。</p>
 <p>到此一个完整还原周期完成，平时尽量养成将数据置于非系统盘之下的习惯，这样除了减小C盘容量压力，也可使重装系统带来的影响最小，某种程度保证自己电脑使用稳定性。</p>
 <p> 第一次文档记录，为以后系统崩溃提供解决办法，也是向大家分享折腾了两天的错误经验，虽然都是可以google到的方法，但收集信息排错需要时间精力。<strong>格式化C区-&gt;dos还原系统</strong>是个人使用最快捷方便的恢复操作，<br>若有错误或纰漏多多指正，还有，小白谨慎使用以上方法，我不能保证错误操作对系统不会造成损失。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>机器学习-文本处理之电影评论多分类情感分析</title>
+    <url>/2022/03/07/motionanalys/</url>
+    <content><![CDATA[<h1 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h1><p>文本处理是许多ML应用程序中最常见的任务之一。以下是此类应用的一些示例</p>
+<ul>
+<li>语言翻译：将句子从一种语言翻译成另一种语言</li>
+<li>情绪分析：从文本语料库中确定对任何主题或产品等的情绪是积极的、消极的还是中性的</li>
+<li>垃圾邮件过滤：检测未经请求和不需要的电子邮件&#x2F;消息。</li>
+</ul>
+<p>这些应用程序处理大量文本以执行分类或翻译，并且涉及大量后端工作。将文本转换为算法可以消化的内容是一个复杂的过程。在本文中，我们将讨论文本处理中涉及的步骤。</p>
+<h1 id="二、数据预处理"><a href="#二、数据预处理" class="headerlink" title="二、数据预处理"></a>二、数据预处理</h1><ul>
+<li>分词——将句子转化为词语</li>
+<li>去除多余的标点符号</li>
+<li>去除停用词——高频出现的“的、了”之类的词，他们对语义分析没帮助</li>
+<li>词干提取——通过删除不必要的字符（通常是后缀），将单词缩减为词根。</li>
+<li>词形还原——通过确定词性并利用语言的详细数据库来消除屈折变化的另一种方法。</li>
+</ul>
+<p>我们可以使用python进行许多文本预处理操作。</p>
+<p>NLTK（Natural Language Toolkit），自然语言处理工具包，在NLP（自然语言处理）领域中，最常使用的一个Python库。自带语料库，词性分类库。自带分类，分词功能。 </p>
+<p><strong>分词（Tokenize）</strong>：word_tokenize生成一个词的列表</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> nltk<br>sentence=<span class="hljs-string">&quot;I Love China !&quot;</span><br>tokens=nltk.word_tokenize(sentence)<br>tokens<br></code></pre></td></tr></table></figure>
+<p>[‘I’, ‘Love’, ‘China’, ‘!’]<br><strong>中文分词–jieba</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> jieba<br><span class="hljs-meta">&gt;&gt;&gt; </span>seg_list=jieba.cut(<span class="hljs-string">&quot;我正在学习机器学习&quot;</span>,cut_all=<span class="hljs-literal">True</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;全模式：&quot;</span>,<span class="hljs-string">&quot;/&quot;</span>.join(seg_list))<br>全模式： 我/正在/学习/学习机/机器/学习<br><span class="hljs-meta">&gt;&gt;&gt; </span>seg_list=jieba.cut(<span class="hljs-string">&quot;我正在学习机器学习&quot;</span>,cut_all=<span class="hljs-literal">False</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;精确模式：&quot;</span>,<span class="hljs-string">&quot;/&quot;</span>.join(seg_list))<br>精确模式： 我/正在/学习/机器/学习<br></code></pre></td></tr></table></figure>
+
+<h1 id="三、特征提取"><a href="#三、特征提取" class="headerlink" title="三、特征提取"></a>三、特征提取</h1><p>在文本处理中，文本中的单词表示离散的、分类的特征。我们如何以算法可以使用的方式对这些数据进行编码？从文本数据到实值向量的映射称为特征提取。用数字表示文本的最简单的技术之一是<strong>Bag of Words</strong>。</p>
+<h2 id="Bag-of-Words"><a href="#Bag-of-Words" class="headerlink" title="Bag of Words"></a>Bag of Words</h2><p>我们在文本语料库中列出一些独特的单词，称为词汇表。然后我们可以将每个句子或文档表示为一个向量，每个单词表示为1表示现在，0表示不在词汇表中。另一种表示法是计算每个单词在文档中出现的次数。最流行的方法是使用术语频率逆文档频率（<strong>TF-IDF</strong>）技术。</p>
+<ul>
+<li><strong>Term Frequency (TF)</strong>&#x3D;（术语t出现在•文档中的次数）&#x2F;（文档中的术语数量）</li>
+<li><strong>Inverse Document Frequency (IDF)</strong>&#x3D;log(N&#x2F;n)，其中，N是文档数量，n是术语t出现在文档中的数量。稀有词的IDF较高，而频繁词的IDF可能较低。因此具有突出显示不同单词的效果。</li>
+<li>我们计算一个项的<strong>TF-IDF</strong>值为&#x3D;TF*IDF</li>
+</ul>
+<p><img src="https://ptpimg.me/4ix0bu.png"></p>
+<pre><code class="hljs">TF(&#39;beautiful&#39;,Document1) = 2/10, IDF(&#39;beautiful&#39;)=log(2/2) = 0
+TF(‘day’,Document1) = 5/10,  IDF(‘day’)=log(2/1) = 0.30
+TF-IDF(‘beautiful’, Document1) = (2/10)*0 = 0
+TF-IDF(‘day’, Document1) = (5/10)*0.30 = 0.15
+</code></pre>
+<p>正如您在Document1中看到的，TF-IDF方法严重惩罚了“beautiful”一词，但对“day”赋予了更大的权重。这是由于IDF部分，它为不同的单词赋予了更多的权重。换句话说，从整个语料库的上下文来看，“day”是Document1的一个重要词。Python scikit学习库为文本数据挖掘提供了有效的工具，并提供了计算给定文本语料库的文本词汇表TF-IDF的函数。</p>
+<p>使用BOW的一个主要缺点是它放弃了词序，从而忽略了上下文，进而忽略了文档中单词的含义。对于自然语言处理（NLP），保持单词的上下文是至关重要的。为了解决这个问题，我们使用另一种称为单词嵌入的方法。</p>
+<h2 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h2><p>它是文本的一种表示形式，其中具有相同含义的单词具有相似的表示形式。换句话说，它表示坐标系中的单词，在坐标系中，基于关系语料库的相关单词被放在更近的位置。</p>
+<h4 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h4><p>Word2vec将大量文本作为输入，并生成一个向量空间，每个唯一的单词在该空间中分配一个对应的向量。词向量定位在向量空间中，使得在语料库中共享公共上下文的词在该空间中彼此非常接近。Word2Vec非常擅长捕捉意义，并在诸如计算a到b的类比问题以及c到？的类比问题等任务中演示它？。例如，男人对女人就像叔叔对女人一样？（a）使用基于余弦距离的简单矢量偏移方法。例如，这里有三个单词对的向量偏移量来说明性别关系：<br><img src="https://ptpimg.me/i136y0.png" alt="性别关系的向量偏移量"></p>
+<p>这种向量组合也让我们回答“国王-男人+女人&#x3D;？”提问并得出结果“女王”！当你认为所有这些知识仅仅来自于在上下文中查看大量单词，而没有提供关于它们的语义的其他信息时，所有这些都是非常值得注意的。</p>
+<h4 id="Glove"><a href="#Glove" class="headerlink" title="Glove"></a>Glove</h4><p>单词表示的全局向量（GloVe）算法是word2vec方法的扩展，用于有效学习单词向量。glove使用整个文本语料库中的统计信息构建一个显式的单词上下文或单词共现矩阵。结果是一个学习模型，可能会导致更好的单词嵌入。</p>
+<p><img src="https://ptpimg.me/0nux0t.png" alt="在这里插入图片描述"></p>
+<pre><code class="hljs">Target words: ice, steam
+Probe words: solid, gas, water, fashion
+</code></pre>
+<p>让P(k | w)是单词k出现在单词W的上下文中的概率W.考虑一个与ice有密切关系的词，而不是与steam有关的词，例如solid。P(solid | ice)相对较高，P(solid | steam)相对较低。因此，P(solid | ice)&#x2F; P(solid | steam)的比率将很大。如果我们用一个词，比如气体，它与steam有关，但与ice无关，那么P(gas | ice) &#x2F; P(gas | steam) 的比值就会变小。对于一个既与ice有关又与water有关的词，例如water，我们预计其比率接近1。</p>
+<p>单词嵌入将每个单词编码成一个向量，该向量捕获文本语料库中单词之间的某种关系和相似性。这意味着即使是大小写、拼写、标点符号等单词的变体也会自动学习。反过来，这意味着可能不再需要上述一些文本清理步骤。</p>
+<h1 id="四、电影评论情感分析实例"><a href="#四、电影评论情感分析实例" class="headerlink" title="四、电影评论情感分析实例"></a>四、电影评论情感分析实例</h1><p>根据问题空间和可用数据的不同，有多种方法为各种基于文本的应用程序构建ML模型。<br>用于垃圾邮件过滤的经典ML方法，如“朴素贝叶斯”或“支持向量机”，已被广泛使用。深度学习技术对于自然语言处理问题（如情感分析和语言翻译）有更好的效果。深度学习模型的训练速度非常慢，并且可以看出，对于简单的文本分类问题，经典的ML方法也能以更快的训练时间给出类似的结果。<br>让我们使用目前讨论的技术在Kaggle提供的烂番茄电影评论数据集上构建一个情感分析器。</p>
+<h2 id="电影评论情感分析"><a href="#电影评论情感分析" class="headerlink" title="电影评论情感分析"></a>电影评论情感分析</h2><p><img src="https://ptpimg.me/1blyr8.png"></p>
+<p>对于电影评论情绪分析，我们将使用Kaggle提供的烂番茄电影评论数据集。在这里，我们根据电影评论的情绪，以五个值为尺度给短语贴上标签：消极的，有些消极的，中性的，有些积极的，积极的。数据集由选项卡分隔的文件组成，其中包含来自数据集的短语ID。每个短语都有一个短语。每个句子都有一个句子ID。重复的短语（如短&#x2F;常用词）仅在数据中包含一次。情绪标签包括：</p>
+<ul>
+<li>0 - <em>negative</em></li>
+<li>1 - <em>somewhat negative</em></li>
+<li>2 - <em>neutral</em></li>
+<li>3 - <em>somewhat positive</em></li>
+<li>4 - <em>positive</em></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns<br>%matplotlib inline<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="1-初始化数据"><a href="#1-初始化数据" class="headerlink" title="1. 初始化数据"></a><a id='1'>1. 初始化数据</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">df_train = pd.read_csv(<span class="hljs-string">&quot;/Users/gawaintan/workSpace/movie-review-sentiment-analysis-kernels-only/train.tsv&quot;</span>, sep=<span class="hljs-string">&#x27;\t&#x27;</span>)<br>df_train.head()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PhraseId</th>
+      <th>SentenceId</th>
+      <th>Phrase</th>
+      <th>Sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>A series</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>A</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1</td>
+      <td>series</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">df_test = pd.read_csv(<span class="hljs-string">&quot;/Users/gawaintan/workSpace/movie-review-sentiment-analysis-kernels-only/test.tsv&quot;</span>, sep=<span class="hljs-string">&#x27;\t&#x27;</span>)<br>df_test.head()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PhraseId</th>
+      <th>SentenceId</th>
+      <th>Phrase</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>156061</td>
+      <td>8545</td>
+      <td>An intermittently pleasing but mostly routine ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>156062</td>
+      <td>8545</td>
+      <td>An intermittently pleasing but mostly routine ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>156063</td>
+      <td>8545</td>
+      <td>An</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>156064</td>
+      <td>8545</td>
+      <td>intermittently pleasing but mostly routine effort</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>156065</td>
+      <td>8545</td>
+      <td>intermittently pleasing but mostly routine</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="1-1-每个情绪类别中的评论分布"><a href="#1-1-每个情绪类别中的评论分布" class="headerlink" title="1.1 每个情绪类别中的评论分布"></a><a id='1.1'>1.1 每个情绪类别中的评论分布</a></h2><p>在这里，训练数据集包含了电影评论中占主导地位的中性短语，然后是有些积极的，然后是有些消极的。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">df_train.Sentiment.value_counts()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">2    79582
+3    32927
+1    27273
+4     9206
+0     7072
+Name: Sentiment, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">df_train.info()<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 156060 entries, 0 to 156059
+Data columns (total 4 columns):
+ #   Column      Non-Null Count   Dtype 
+---  ------      --------------   ----- 
+ 0   PhraseId    156060 non-null  int64 
+ 1   SentenceId  156060 non-null  int64 
+ 2   Phrase      156060 non-null  object
+ 3   Sentiment   156060 non-null  int64 
+dtypes: int64(3), object(1)
+memory usage: 4.8+ MB
+</code></pre>
+<h2 id="1-2-删除不重要的列"><a href="#1-2-删除不重要的列" class="headerlink" title="1.2 删除不重要的列"></a><a id='1.2'>1.2 删除不重要的列</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">df_train_1 = df_train.drop([<span class="hljs-string">&#x27;PhraseId&#x27;</span>,<span class="hljs-string">&#x27;SentenceId&#x27;</span>],axis=<span class="hljs-number">1</span>)<br>df_train_1.head()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Phrase</th>
+      <th>Sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A series</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>series</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>Let’s check the phrase length of each of the movie reviews.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">df_train_1[<span class="hljs-string">&#x27;phrase_len&#x27;</span>] = [<span class="hljs-built_in">len</span>(t) <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> df_train_1.Phrase]<br>df_train_1.head(<span class="hljs-number">4</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Phrase</th>
+      <th>Sentiment</th>
+      <th>phrase_len</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>1</td>
+      <td>188</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>2</td>
+      <td>77</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A series</td>
+      <td>2</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="1-3-各情感类别下评论时长的总体分布"><a href="#1-3-各情感类别下评论时长的总体分布" class="headerlink" title="1.3 各情感类别下评论时长的总体分布"></a><a id='1.3'>1.3 各情感类别下评论时长的总体分布</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">fig,ax = plt.subplots(figsize=(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>))<br>plt.boxplot(df_train_1.phrase_len)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/72e054ceb9fb8ebddc1a279dcefa8606.png"></p>
+<p>从上面的箱线图中，有些评论的长度超过 100 个字符。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">df_train_1[df_train_1.phrase_len &gt; <span class="hljs-number">100</span>].head()<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Phrase</th>
+      <th>Sentiment</th>
+      <th>phrase_len</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A series of escapades demonstrating the adage ...</td>
+      <td>1</td>
+      <td>188</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>is also good for the gander , some of which oc...</td>
+      <td>2</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>is also good for the gander , some of which oc...</td>
+      <td>2</td>
+      <td>108</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>A positively thrilling combination of ethnogra...</td>
+      <td>3</td>
+      <td>152</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>A positively thrilling combination of ethnogra...</td>
+      <td>4</td>
+      <td>150</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">df_train_1[df_train_1.phrase_len &gt; <span class="hljs-number">100</span>].loc[<span class="hljs-number">0</span>].Phrase<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">&#39;A series of escapades demonstrating the adage that what is good for the goose is also good for the gander , some of which occasionally amuses but none of which amounts to much of a story .&#39;
+</code></pre>
+<h2 id="1-4-创建负面和正面电影评论的词云"><a href="#1-4-创建负面和正面电影评论的词云" class="headerlink" title="1.4 创建负面和正面电影评论的词云"></a><a id='1.4'>1.4 创建负面和正面电影评论的词云</a></h2><h3 id="Word-Cloud"><a href="#Word-Cloud" class="headerlink" title="Word Cloud"></a>Word Cloud</h3><p>wordcloud 是文本文件集合中常用词的图形表示。这张图片中每个词的高度是该词在整个文本中出现频率的指标。在进行文本分析时，此类图表非常有用。</p>
+<h2 id="1-4-1-筛选出正面和负面的影评"><a href="#1-4-1-筛选出正面和负面的影评" class="headerlink" title="1.4.1 筛选出正面和负面的影评"></a><a id='1.4.1'>1.4.1 筛选出正面和负面的影评</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">neg_phrases = df_train_1[df_train_1.Sentiment == <span class="hljs-number">0</span>]<br>neg_words = []<br><span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> neg_phrases.Phrase:<br>    neg_words.append(t)<br>neg_words[:<span class="hljs-number">4</span>]<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">[&#39;would have a hard time sitting through this one&#39;,
+ &#39;have a hard time sitting through this one&#39;,
+ &#39;Aggressive self-glorification and a manipulative whitewash&#39;,
+ &#39;self-glorification and a manipulative whitewash&#39;]
+</code></pre>
+<p>**pandas.Series.str.cat ** : 使用给定的分隔符连接系列&#x2F;索引中的字符串。这里我们给一个空格作为分隔符，因此，它将连接每个索引中由空格分隔的所有字符串。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">neg_text = pd.Series(neg_words).<span class="hljs-built_in">str</span>.cat(sep=<span class="hljs-string">&#x27; &#x27;</span>)<br>neg_text[:<span class="hljs-number">100</span>]<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">&#39;would have a hard time sitting through this one have a hard time sitting through this one Aggressive&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> neg_phrases.Phrase[:<span class="hljs-number">300</span>]:<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;good&#x27;</span> <span class="hljs-keyword">in</span> t:<br>        <span class="hljs-built_in">print</span>(t)<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">&#39;s not a particularly good film
+covers huge , heavy topics in a bland , surfacey way that does n&#39;t offer any insight into why , for instance , good things happen to bad people .
+huge , heavy topics in a bland , surfacey way that does n&#39;t offer any insight into why , for instance , good things happen to bad people
+a bland , surfacey way that does n&#39;t offer any insight into why , for instance , good things happen to bad people
+</code></pre>
+<p>所以，我们可以很清楚地看到，即使文本包含“好”这样的词，也是一种负面情绪，因为它表明这部电影不是一部好电影。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">pos_phrases = df_train_1[df_train_1.Sentiment == <span class="hljs-number">4</span>] <span class="hljs-comment">## 4 is positive sentiment</span><br>pos_string = []<br><span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> pos_phrases.Phrase:<br>    pos_string.append(t)<br>pos_text = pd.Series(pos_string).<span class="hljs-built_in">str</span>.cat(sep=<span class="hljs-string">&#x27; &#x27;</span>)<br>pos_text[:<span class="hljs-number">100</span>]<br>    <br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">&#39;This quiet , introspective and entertaining independent is worth seeking . quiet , introspective and&#39;
+</code></pre>
+<h2 id="1-4-2-负面分类影评的词云"><a href="#1-4-2-负面分类影评的词云" class="headerlink" title="1.4.2 负面分类影评的词云"></a><a id='1.4.2'>1.4.2 负面分类影评的词云</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> wordcloud <span class="hljs-keyword">import</span> WordCloud<br>wordcloud = WordCloud(width=<span class="hljs-number">1600</span>, height=<span class="hljs-number">800</span>, max_font_size=<span class="hljs-number">200</span>).generate(neg_text)<br>plt.figure(figsize=(<span class="hljs-number">12</span>,<span class="hljs-number">10</span>))<br>plt.imshow(wordcloud, interpolation=<span class="hljs-string">&#x27;bilinear&#x27;</span>)<br>plt.axis(<span class="hljs-string">&quot;off&quot;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://ptpimg.me/wm153z.png" alt="在这里插入图片描述"></p>
+<p>一些大的词可以解释得相当中性，例如“film”、“moive”等。我们可以看到一些较小的词在负面电影评论中是有意义的，例如“bad movie”、“dull” 、“boring”等。</p>
+<p>然而，在对这部电影的负面分类情绪中，也有一些像“好”这样的词。让我们更深入地了解这些单词&#x2F;文本：</p>
+<h2 id="1-4-3-正分类影评的词云"><a href="#1-4-3-正分类影评的词云" class="headerlink" title="1.4.3 正分类影评的词云"></a><a id='1.4.3'>1.4.3 正分类影评的词云</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">wordcloud = WordCloud(width=<span class="hljs-number">1600</span>, height=<span class="hljs-number">800</span>, max_font_size=<span class="hljs-number">200</span>).generate(pos_text)<br>plt.figure(figsize=(<span class="hljs-number">12</span>,<span class="hljs-number">10</span>))<br>plt.imshow(wordcloud, interpolation=<span class="hljs-string">&#x27;bilinear&#x27;</span>)<br>plt.axis(<span class="hljs-string">&#x27;off&#x27;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://ptpimg.me/mqvx0x.png" alt="在这里插入图片描述"></p>
+<p>我再次看到一些大尺寸的中性词，“movie”，“film”，但像“good”，“nest”，“fascinating”这样的正面词也很突出。</p>
+<h2 id="1-5-所有5个情感类别的总词频"><a href="#1-5-所有5个情感类别的总词频" class="headerlink" title="1.5 所有5个情感类别的总词频"></a><a id='1.5'>1.5 所有5个情感类别的总词频</a></h2><p>我们需要 Term Frequency 数据来查看电影评论中使用了哪些词以及使用了多少次。让我们继续使用 CountVectorizer 来计算词频：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_extraction.text <span class="hljs-keyword">import</span> CountVectorizer<br>cvector = CountVectorizer(min_df = <span class="hljs-number">0.0</span>, max_df = <span class="hljs-number">1.0</span>, ngram_range=(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>))<br>cvector.fit(df_train_1.Phrase)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">CountVectorizer(min_df=0.0, ngram_range=(1, 2))
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">len</span>(cvector.get_feature_names())<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">94644
+</code></pre>
+<p>看起来 count vectorizer 已经从语料库中提取了 94644 个单词。可以使用以下代码块获取每个类的词频。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">All_matrix=[]<br>All_words=[]<br>All_labels=[<span class="hljs-string">&#x27;negative&#x27;</span>,<span class="hljs-string">&#x27;some-negative&#x27;</span>,<span class="hljs-string">&#x27;neutral&#x27;</span>,<span class="hljs-string">&#x27;some-positive&#x27;</span>,<span class="hljs-string">&#x27;positive&#x27;</span>]<br>neg_matrix = cvector.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">0</span>].Phrase)<br>term_freq_df= pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>([(word, neg_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvector.vocabulary_.items()], key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;negative&#x27;</span>])<br>term_freq_df=term_freq_df.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">5</span>):<br>    All_matrix.append(cvector.transform(df_train_1[df_train_1.Sentiment == i].Phrase))<br>    All_words.append(All_matrix[i-<span class="hljs-number">1</span>].<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>))<br>    aa=pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>([(word,All_words[i-<span class="hljs-number">1</span>][<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvector.vocabulary_.items()], key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,All_labels[i]])<br>    <br>    term_freq_df=term_freq_df.join(aa.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>),how=<span class="hljs-string">&#x27;left&#x27;</span>,lsuffix=<span class="hljs-string">&#x27;_A&#x27;</span>)<br><br>    <br><br>term_freq_df[<span class="hljs-string">&#x27;total&#x27;</span>] = term_freq_df[<span class="hljs-string">&#x27;negative&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;some-negative&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;neutral&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;some-positive&#x27;</span>] +  term_freq_df[<span class="hljs-string">&#x27;positive&#x27;</span>] <br>term_freq_df.sort_values(by=<span class="hljs-string">&#x27;total&#x27;</span>, ascending=<span class="hljs-literal">False</span>).head(<span class="hljs-number">10</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>negative</th>
+      <th>some-negative</th>
+      <th>neutral</th>
+      <th>some-positive</th>
+      <th>positive</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <th>Terms</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>the</th>
+      <td>3462</td>
+      <td>10885</td>
+      <td>20619</td>
+      <td>12459</td>
+      <td>4208</td>
+      <td>51633</td>
+    </tr>
+    <tr>
+      <th>of</th>
+      <td>2277</td>
+      <td>6660</td>
+      <td>12287</td>
+      <td>8405</td>
+      <td>3073</td>
+      <td>32702</td>
+    </tr>
+    <tr>
+      <th>and</th>
+      <td>2549</td>
+      <td>6204</td>
+      <td>10241</td>
+      <td>9180</td>
+      <td>4003</td>
+      <td>32177</td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td>1916</td>
+      <td>5571</td>
+      <td>8295</td>
+      <td>5411</td>
+      <td>1568</td>
+      <td>22761</td>
+    </tr>
+    <tr>
+      <th>in</th>
+      <td>1038</td>
+      <td>2965</td>
+      <td>5562</td>
+      <td>3365</td>
+      <td>1067</td>
+      <td>13997</td>
+    </tr>
+    <tr>
+      <th>is</th>
+      <td>1372</td>
+      <td>3362</td>
+      <td>3703</td>
+      <td>3489</td>
+      <td>1550</td>
+      <td>13476</td>
+    </tr>
+    <tr>
+      <th>that</th>
+      <td>1139</td>
+      <td>2982</td>
+      <td>3677</td>
+      <td>3280</td>
+      <td>1260</td>
+      <td>12338</td>
+    </tr>
+    <tr>
+      <th>it</th>
+      <td>1086</td>
+      <td>3067</td>
+      <td>3791</td>
+      <td>2927</td>
+      <td>863</td>
+      <td>11734</td>
+    </tr>
+    <tr>
+      <th>as</th>
+      <td>757</td>
+      <td>2184</td>
+      <td>2941</td>
+      <td>2037</td>
+      <td>732</td>
+      <td>8651</td>
+    </tr>
+    <tr>
+      <th>with</th>
+      <td>452</td>
+      <td>1533</td>
+      <td>2471</td>
+      <td>2365</td>
+      <td>929</td>
+      <td>7750</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>我们可以清楚地看到，像“the”、“in”、“it”等词的频率要高得多，它们对影评的情绪没有任何意义。另一方面，诸如“悲观可笑”之类的词它们在文档中的出现频率非常低，但似乎与电影的情绪有很大关系。</p>
+<h2 id="1-6-电影评论分词展示"><a href="#1-6-电影评论分词展示" class="headerlink" title="1.6 电影评论分词展示"></a><a id='1.6'>1.6 电影评论分词展示</a></h2><p>Next, let’s explore about how different the tokens in two different classes(positive, negative).</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_extraction.text <span class="hljs-keyword">import</span> CountVectorizer<br>cvec = CountVectorizer(stop_words=<span class="hljs-string">&#x27;english&#x27;</span>,max_features=<span class="hljs-number">10000</span>)<br>cvec.fit(df_train_1.Phrase)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">CountVectorizer(max_features=10000, stop_words=&#39;english&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">neg_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">0</span>].Phrase)<br>som_neg_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">1</span>].Phrase)<br>neu_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">2</span>].Phrase)<br>som_pos_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">3</span>].Phrase)<br>pos_matrix = cvec.transform(df_train_1[df_train_1.Sentiment == <span class="hljs-number">4</span>].Phrase)<br><br>neg_words = neg_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>neg_words_freq = [(word, neg_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>neg_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(neg_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;negative&#x27;</span>])<br><br>neg_tf_df = neg_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br><br>som_neg_words = som_neg_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>som_neg_words_freq = [(word, som_neg_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>som_neg_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(som_neg_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;some-negative&#x27;</span>])<br>som_neg_tf_df = som_neg_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br>neu_words = neu_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>neu_words_freq = [(word, neu_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>neu_words_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(neu_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;neutral&#x27;</span>])<br>neu_words_tf_df = neu_words_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br>som_pos_words = som_pos_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>som_pos_words_freq = [(word, som_pos_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>som_pos_words_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(som_pos_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;some-positive&#x27;</span>])<br>som_pos_words_tf_df = som_pos_words_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br>pos_words = pos_matrix.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>)<br>pos_words_freq = [(word, pos_words[<span class="hljs-number">0</span>, idx]) <span class="hljs-keyword">for</span> word, idx <span class="hljs-keyword">in</span> cvec.vocabulary_.items()]<br>pos_words_tf = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">sorted</span>(pos_words_freq, key = <span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)),columns=[<span class="hljs-string">&#x27;Terms&#x27;</span>,<span class="hljs-string">&#x27;positive&#x27;</span>])<br>pos_words_tf_df = pos_words_tf.set_index(<span class="hljs-string">&#x27;Terms&#x27;</span>)<br><br>term_freq_df = pd.concat([neg_tf_df,som_neg_tf_df,neu_words_tf_df,som_pos_words_tf_df,pos_words_tf_df],axis=<span class="hljs-number">1</span>)<br><br>term_freq_df[<span class="hljs-string">&#x27;total&#x27;</span>] = term_freq_df[<span class="hljs-string">&#x27;negative&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;some-negative&#x27;</span>] \<br>                                 + term_freq_df[<span class="hljs-string">&#x27;neutral&#x27;</span>] + term_freq_df[<span class="hljs-string">&#x27;some-positive&#x27;</span>] \<br>                                 +  term_freq_df[<span class="hljs-string">&#x27;positive&#x27;</span>] <br>        <br>term_freq_df.sort_values(by=<span class="hljs-string">&#x27;total&#x27;</span>, ascending=<span class="hljs-literal">False</span>).head(<span class="hljs-number">15</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>negative</th>
+      <th>some-negative</th>
+      <th>neutral</th>
+      <th>some-positive</th>
+      <th>positive</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <th>Terms</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>film</th>
+      <td>480</td>
+      <td>1281</td>
+      <td>2175</td>
+      <td>1848</td>
+      <td>949</td>
+      <td>6733</td>
+    </tr>
+    <tr>
+      <th>movie</th>
+      <td>793</td>
+      <td>1463</td>
+      <td>2054</td>
+      <td>1344</td>
+      <td>587</td>
+      <td>6241</td>
+    </tr>
+    <tr>
+      <th>like</th>
+      <td>332</td>
+      <td>942</td>
+      <td>1167</td>
+      <td>599</td>
+      <td>150</td>
+      <td>3190</td>
+    </tr>
+    <tr>
+      <th>story</th>
+      <td>153</td>
+      <td>532</td>
+      <td>954</td>
+      <td>664</td>
+      <td>236</td>
+      <td>2539</td>
+    </tr>
+    <tr>
+      <th>rrb</th>
+      <td>131</td>
+      <td>498</td>
+      <td>1112</td>
+      <td>551</td>
+      <td>146</td>
+      <td>2438</td>
+    </tr>
+    <tr>
+      <th>good</th>
+      <td>100</td>
+      <td>334</td>
+      <td>519</td>
+      <td>974</td>
+      <td>334</td>
+      <td>2261</td>
+    </tr>
+    <tr>
+      <th>lrb</th>
+      <td>119</td>
+      <td>452</td>
+      <td>878</td>
+      <td>512</td>
+      <td>137</td>
+      <td>2098</td>
+    </tr>
+    <tr>
+      <th>time</th>
+      <td>153</td>
+      <td>420</td>
+      <td>752</td>
+      <td>464</td>
+      <td>130</td>
+      <td>1919</td>
+    </tr>
+    <tr>
+      <th>characters</th>
+      <td>167</td>
+      <td>455</td>
+      <td>614</td>
+      <td>497</td>
+      <td>149</td>
+      <td>1882</td>
+    </tr>
+    <tr>
+      <th>comedy</th>
+      <td>174</td>
+      <td>341</td>
+      <td>578</td>
+      <td>475</td>
+      <td>245</td>
+      <td>1813</td>
+    </tr>
+    <tr>
+      <th>just</th>
+      <td>216</td>
+      <td>598</td>
+      <td>550</td>
+      <td>282</td>
+      <td>82</td>
+      <td>1728</td>
+    </tr>
+    <tr>
+      <th>life</th>
+      <td>77</td>
+      <td>200</td>
+      <td>729</td>
+      <td>544</td>
+      <td>168</td>
+      <td>1718</td>
+    </tr>
+    <tr>
+      <th>does</th>
+      <td>135</td>
+      <td>566</td>
+      <td>519</td>
+      <td>375</td>
+      <td>79</td>
+      <td>1674</td>
+    </tr>
+    <tr>
+      <th>little</th>
+      <td>109</td>
+      <td>492</td>
+      <td>580</td>
+      <td>339</td>
+      <td>85</td>
+      <td>1605</td>
+    </tr>
+    <tr>
+      <th>funny</th>
+      <td>73</td>
+      <td>257</td>
+      <td>267</td>
+      <td>639</td>
+      <td>347</td>
+      <td>1583</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="1-6-1-负面影评中最常用的50个词"><a href="#1-6-1-负面影评中最常用的50个词" class="headerlink" title="1.6.1 负面影评中最常用的50个词"></a><a id='1.6.1'>1.6.1 负面影评中最常用的50个词</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">y_pos = np.arange(<span class="hljs-number">50</span>)<br>plt.figure(figsize=(<span class="hljs-number">12</span>,<span class="hljs-number">10</span>))<br>plt.bar(y_pos, term_freq_df.sort_values(by=<span class="hljs-string">&#x27;negative&#x27;</span>, ascending=<span class="hljs-literal">False</span>)[<span class="hljs-string">&#x27;negative&#x27;</span>][:<span class="hljs-number">50</span>], align=<span class="hljs-string">&#x27;center&#x27;</span>, alpha=<span class="hljs-number">0.5</span>)<br>plt.xticks(y_pos, term_freq_df.sort_values(by=<span class="hljs-string">&#x27;negative&#x27;</span>, ascending=<span class="hljs-literal">False</span>)[<span class="hljs-string">&#x27;negative&#x27;</span>][:<span class="hljs-number">50</span>].index,rotation=<span class="hljs-string">&#x27;vertical&#x27;</span>)<br>plt.ylabel(<span class="hljs-string">&#x27;Frequency&#x27;</span>)<br>plt.xlabel(<span class="hljs-string">&#x27;Top 50 negative tokens&#x27;</span>)<br>plt.title(<span class="hljs-string">&#x27;Top 50 tokens in negative movie reviews&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">Text(0.5, 1.0, &#39;Top 50 tokens in negative movie reviews&#39;)
+</code></pre>
+<p><img src="https://ptpimg.me/yw0h81.png" alt="在这里插入图片描述"></p>
+<p>我们可以看到一些负面词，如“坏”、“最差”、“沉闷”是一些高频词。但是，存在有像“电影”、“电影”、“分钟”这样的中性词支配频率图。</p>
+<p>我们再看一下条形图上的前 50 个正面标记</p>
+<h2 id="1-6-2-正面影评中最常用的50个词"><a href="#1-6-2-正面影评中最常用的50个词" class="headerlink" title="1.6.2 正面影评中最常用的50个词"></a><a id='1.6.2'>1.6.2 正面影评中最常用的50个词</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">y_pos = np.arange(<span class="hljs-number">50</span>)<br>plt.figure(figsize=(<span class="hljs-number">12</span>,<span class="hljs-number">10</span>))<br>plt.bar(y_pos, term_freq_df.sort_values(by=<span class="hljs-string">&#x27;positive&#x27;</span>, ascending=<span class="hljs-literal">False</span>)[<span class="hljs-string">&#x27;positive&#x27;</span>][:<span class="hljs-number">50</span>], align=<span class="hljs-string">&#x27;center&#x27;</span>, alpha=<span class="hljs-number">0.5</span>)<br>plt.xticks(y_pos, term_freq_df.sort_values(by=<span class="hljs-string">&#x27;positive&#x27;</span>, ascending=<span class="hljs-literal">False</span>)[<span class="hljs-string">&#x27;positive&#x27;</span>][:<span class="hljs-number">50</span>].index,rotation=<span class="hljs-string">&#x27;vertical&#x27;</span>)<br>plt.ylabel(<span class="hljs-string">&#x27;Frequency&#x27;</span>)<br>plt.xlabel(<span class="hljs-string">&#x27;Top 50 positive tokens&#x27;</span>)<br>plt.title(<span class="hljs-string">&#x27;Top 50 tokens in positive movie reviews&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">Text(0.5, 1.0, &#39;Top 50 tokens in positive movie reviews&#39;)
+</code></pre>
+<p><img src="https://ptpimg.me/e5x807.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-HLxcm1VK-1640793547488)(sentiment-analysis-countvectorizer-tf-idf_files/sentiment-analysis-countvectorizer-tf-idf_51_1.png)]"></p>
+<p>Once again, there are some neutral words like “film”, “movie”, are quite high up in the rank.</p>
+<h2 id="2-传统的监督机器学习模型"><a href="#2-传统的监督机器学习模型" class="headerlink" title="2. 传统的监督机器学习模型"></a><a id='2'>2. 传统的监督机器学习模型</a></h2><h2 id="2-1-特征工程"><a href="#2-1-特征工程" class="headerlink" title="2.1 特征工程"></a><a id='2.1'>2.1 特征工程</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">phrase = np.array(df_train_1[<span class="hljs-string">&#x27;Pﬁhrase&#x27;</span>])<br>sentiments = np.array(df_train_1[<span class="hljs-string">&#x27;Sentiment&#x27;</span>])<br><span class="hljs-comment"># build train and test datasets</span><br><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split    <br>phrase_train, phrase_test, sentiments_train, sentiments_test = train_test_split(phrase, sentiments, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">4</span>)<br></code></pre></td></tr></table></figure>
+
+<p>Next, we will try to see how different are the tokens in 4 different classes(positive,some positive,neutral, some negative, negative). </p>
+<h2 id="2-2-CountVectorizer-TF-IDF-的实现"><a href="#2-2-CountVectorizer-TF-IDF-的实现" class="headerlink" title="2.2 CountVectorizer &amp; TF-IDF 的实现"></a><a id='2.2'>2.2 CountVectorizer &amp; TF-IDF 的实现</h2><h2 id="2-2-1-CountVectorizer"><a href="#2-2-1-CountVectorizer" class="headerlink" title="2.2.1 CountVectorizer"></a><a id='2.2.1'>2.2.1 CountVectorizer</a></h2><p>众所周知，所有机器学习算法都擅长数字；我们必须在不丢失大量信息的情况下将文本数据提取或转换为数字。进行这种转换的一种方法是词袋 (BOW)，它为每个词提供一个数字，但效率非常低。因此，一种方法是通过CountVectorizer：它计算文档中的单词数，即将文本文档集合转换为文档中每个单词出现次数的矩阵。 </p>
+<p>例如：如果我们有如下 3 个文本文档的集合，那么 CountVectorizer 会将其转换为文档中每个单词出现的单独计数，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">cv1 = CountVectorizer()<br>x_traincv = cv1.fit_transform([<span class="hljs-string">&quot;Hi How are you How are you doing&quot;</span>,<span class="hljs-string">&quot;Hi what&#x27;s up&quot;</span>,<span class="hljs-string">&quot;Wow that&#x27;s awesome&quot;</span>])<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">x_traincv_df = pd.DataFrame(x_traincv.toarray(),columns=<span class="hljs-built_in">list</span>(cv1.get_feature_names()))<br>x_traincv_df<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">/Users/gawaintan/miniforge3/lib/python3.9/site-packages/sklearn/utils/deprecation.py:87: FutureWarning: Function get_feature_names is deprecated; get_feature_names is deprecated in 1.0 and will be removed in 1.2. Please use get_feature_names_out instead.
+  warnings.warn(msg, category=FutureWarning)
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code class="hljs">.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>are</th>
+      <th>awesome</th>
+      <th>doing</th>
+      <th>hi</th>
+      <th>how</th>
+      <th>that</th>
+      <th>up</th>
+      <th>what</th>
+      <th>wow</th>
+      <th>you</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>现在，在 CountVectorizer 的情况下，我们只是在计算文档中的单词数量，很多时候，“are”、“you”、“hi”等单词的数量非常大，这将支配我们的机器学习算法的结果。</p>
+<h2 id="2-2-2-TF-IDF-与-CountVectorizer-有何不同？"><a href="#2-2-2-TF-IDF-与-CountVectorizer-有何不同？" class="headerlink" title="2.2.2 TF-IDF 与 CountVectorizer 有何不同？"></a><a id='2.2.2'>2.2.2 TF-IDF 与 CountVectorizer 有何不同？</a></h2><p>因此，TF-IDF（代表Term-Frequency-Inverse-Document Frequency）降低了几乎所有文档中出现的常见词的权重，并更加重视出现在文档子集中的词。TF-IDF 的工作原理是通过分配较低的权重来惩罚这些常用词，同时重视特定文档中的一些稀有词。</p>
+<h2 id="2-2-3-CountVectorizer参数设置"><a href="#2-2-3-CountVectorizer参数设置" class="headerlink" title="2.2.3 CountVectorizer参数设置"></a><a id='2.2.3'>2.2.3 CountVectorizer参数设置</a></h2><p>对于 CountVectorizer 这一次，停用词不会有太大帮助，因为相同的高频词，例如“the”、“to”，在两个类中的出现频率相同。如果这些停用词支配两个类，我将无法获得有意义的结果。因此，我决定删除停用词，并且还将使用 countvectorizer 将 max_features 限制为 10,000。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_extraction.text <span class="hljs-keyword">import</span> CountVectorizer, TfidfVectorizer<br><br><span class="hljs-comment">## Build Bag-Of-Words on train phrases</span><br>cv = CountVectorizer(stop_words=<span class="hljs-string">&#x27;english&#x27;</span>,max_features=<span class="hljs-number">10000</span>)<br>cv_train_features = cv.fit_transform(phrase_train)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># build TFIDF features on train reviews</span><br>tv = TfidfVectorizer(min_df=<span class="hljs-number">0.0</span>, max_df=<span class="hljs-number">1.0</span>, ngram_range=(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>),<br>                     sublinear_tf=<span class="hljs-literal">True</span>)<br>tv_train_features = tv.fit_transform(phrase_train)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># transform test reviews into features</span><br>cv_test_features = cv.transform(phrase_test)<br>tv_test_features = tv.transform(phrase_test)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;BOW model:&gt; Train features shape:&#x27;</span>, cv_train_features.shape, <span class="hljs-string">&#x27; Test features shape:&#x27;</span>, cv_test_features.shape)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;TFIDF model:&gt; Train features shape:&#x27;</span>, tv_train_features.shape, <span class="hljs-string">&#x27; Test features shape:&#x27;</span>, tv_test_features.shape)<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">BOW model:&gt; Train features shape: (124848, 10000)  Test features shape: (31212, 10000)
+TFIDF model:&gt; Train features shape: (124848, 93697)  Test features shape: (31212, 93697)
+</code></pre>
+<h2 id="2-3-模型训练、预测和性能评估"><a href="#2-3-模型训练、预测和性能评估" class="headerlink" title="2.3 模型训练、预测和性能评估"></a><a id='2.3'>2.3 模型训练、预测和性能评估</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment">####Evaluation metrics</span><br><br><br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> LabelEncoder<br><span class="hljs-keyword">from</span> sklearn.base <span class="hljs-keyword">import</span> clone<br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> label_binarize<br><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> interp<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> roc_curve, auc <br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_metrics</span>(<span class="hljs-params">true_labels, predicted_labels</span>):<br>    <br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Accuracy:&#x27;</span>, np.<span class="hljs-built_in">round</span>(<br>                        metrics.accuracy_score(true_labels, <br>                                               predicted_labels),<br>                        <span class="hljs-number">4</span>))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Precision:&#x27;</span>, np.<span class="hljs-built_in">round</span>(<br>                        metrics.precision_score(true_labels, <br>                                               predicted_labels,<br>                                               average=<span class="hljs-string">&#x27;weighted&#x27;</span>),<br>                        <span class="hljs-number">4</span>))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Recall:&#x27;</span>, np.<span class="hljs-built_in">round</span>(<br>                        metrics.recall_score(true_labels, <br>                                               predicted_labels,<br>                                               average=<span class="hljs-string">&#x27;weighted&#x27;</span>),<br>                        <span class="hljs-number">4</span>))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;F1 Score:&#x27;</span>, np.<span class="hljs-built_in">round</span>(<br>                        metrics.f1_score(true_labels, <br>                                               predicted_labels,<br>                                               average=<span class="hljs-string">&#x27;weighted&#x27;</span>),<br>                        <span class="hljs-number">4</span>))<br>                        <br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">train_predict_model</span>(<span class="hljs-params">classifier, </span><br><span class="hljs-params">                        train_features, train_labels, </span><br><span class="hljs-params">                        test_features, test_labels</span>):<br>    <span class="hljs-comment"># build model    </span><br>    classifier.fit(train_features, train_labels)<br>    <span class="hljs-comment"># predict using model</span><br>    predictions = classifier.predict(test_features) <br>    <span class="hljs-keyword">return</span> predictions    <br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">display_confusion_matrix</span>(<span class="hljs-params">true_labels, predicted_labels, classes=[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]</span>):<br>    <br>    total_classes = <span class="hljs-built_in">len</span>(classes)<br>    level_labels = [total_classes*[<span class="hljs-number">0</span>], <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(total_classes))]<br><br>    cm = metrics.confusion_matrix(y_true=true_labels, y_pred=predicted_labels, <br>                                  labels=classes)<br>    cm_frame = pd.DataFrame(data=cm, <br>                            columns=pd.MultiIndex(levels=[[<span class="hljs-string">&#x27;Predicted:&#x27;</span>], classes], <br>                                                  codes=level_labels), <br>                            index=pd.MultiIndex(levels=[[<span class="hljs-string">&#x27;Actual:&#x27;</span>], classes], <br>                                                codes=level_labels)) <br>    <span class="hljs-built_in">print</span>(cm_frame) <br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">display_classification_report</span>(<span class="hljs-params">true_labels, predicted_labels, classes=[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]</span>):<br><br>    report = metrics.classification_report(y_true=true_labels, <br>                                           y_pred=predicted_labels, <br>                                           labels=classes) <br>    <span class="hljs-built_in">print</span>(report)<br>    <br>    <br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">display_model_performance_metrics</span>(<span class="hljs-params">true_labels, predicted_labels, classes=[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Model Performance metrics:&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;-&#x27;</span>*<span class="hljs-number">30</span>)<br>    get_metrics(true_labels=true_labels, predicted_labels=predicted_labels)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\nModel Classification report:&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;-&#x27;</span>*<span class="hljs-number">30</span>)<br>    display_classification_report(true_labels=true_labels, predicted_labels=predicted_labels, <br>                                  classes=classes)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\nPrediction Confusion Matrix:&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;-&#x27;</span>*<span class="hljs-number">30</span>)<br>    display_confusion_matrix(true_labels=true_labels, predicted_labels=predicted_labels, <br>                             classes=classes)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_model_decision_surface</span>(<span class="hljs-params">clf, train_features, train_labels,</span><br><span class="hljs-params">                                plot_step=<span class="hljs-number">0.02</span>, cmap=plt.cm.RdYlBu,</span><br><span class="hljs-params">                                markers=<span class="hljs-literal">None</span>, alphas=<span class="hljs-literal">None</span>, colors=<span class="hljs-literal">None</span></span>):<br>    <br>    <span class="hljs-keyword">if</span> train_features.shape[<span class="hljs-number">1</span>] != <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;X_train should have exactly 2 columnns!&quot;</span>)<br>    <br>    x_min, x_max = train_features[:, <span class="hljs-number">0</span>].<span class="hljs-built_in">min</span>() - plot_step, train_features[:, <span class="hljs-number">0</span>].<span class="hljs-built_in">max</span>() + plot_step<br>    y_min, y_max = train_features[:, <span class="hljs-number">1</span>].<span class="hljs-built_in">min</span>() - plot_step, train_features[:, <span class="hljs-number">1</span>].<span class="hljs-built_in">max</span>() + plot_step<br>    xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),<br>                         np.arange(y_min, y_max, plot_step))<br><br>    clf_est = clone(clf)<br>    clf_est.fit(train_features,train_labels)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(clf_est, <span class="hljs-string">&#x27;predict_proba&#x27;</span>):<br>        Z = clf_est.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:,<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">else</span>:<br>        Z = clf_est.predict(np.c_[xx.ravel(), yy.ravel()])    <br>    Z = Z.reshape(xx.shape)<br>    cs = plt.contourf(xx, yy, Z, cmap=cmap)<br>    <br>    le = LabelEncoder()<br>    y_enc = le.fit_transform(train_labels)<br>    n_classes = <span class="hljs-built_in">len</span>(le.classes_)<br>    plot_colors = <span class="hljs-string">&#x27;&#x27;</span>.join(colors) <span class="hljs-keyword">if</span> colors <span class="hljs-keyword">else</span> [<span class="hljs-literal">None</span>] * n_classes<br>    label_names = le.classes_<br>    markers = markers <span class="hljs-keyword">if</span> markers <span class="hljs-keyword">else</span> [<span class="hljs-literal">None</span>] * n_classes<br>    alphas = alphas <span class="hljs-keyword">if</span> alphas <span class="hljs-keyword">else</span> [<span class="hljs-literal">None</span>] * n_classes<br>    <span class="hljs-keyword">for</span> i, color <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(<span class="hljs-built_in">range</span>(n_classes), plot_colors):<br>        idx = np.where(y_enc == i)<br>        plt.scatter(train_features[idx, <span class="hljs-number">0</span>], train_features[idx, <span class="hljs-number">1</span>], c=color,<br>                    label=label_names[i], cmap=cmap, edgecolors=<span class="hljs-string">&#x27;black&#x27;</span>, <br>                    marker=markers[i], alpha=alphas[i])<br>    plt.legend()<br>    plt.show()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_model_roc_curve</span>(<span class="hljs-params">clf, features, true_labels, label_encoder=<span class="hljs-literal">None</span>, class_names=<span class="hljs-literal">None</span></span>):<br>    <br>    <span class="hljs-comment">## Compute ROC curve and ROC area for each class</span><br>    fpr = <span class="hljs-built_in">dict</span>()<br>    tpr = <span class="hljs-built_in">dict</span>()<br>    roc_auc = <span class="hljs-built_in">dict</span>()<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;classes_&#x27;</span>):<br>        class_labels = clf.classes_<br>    <span class="hljs-keyword">elif</span> label_encoder:<br>        class_labels = label_encoder.classes_<br>    <span class="hljs-keyword">elif</span> class_names:<br>        class_labels = class_names<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Unable to derive prediction classes, please specify class_names!&#x27;</span>)<br>    n_classes = <span class="hljs-built_in">len</span>(class_labels)<br>    y_test = label_binarize(true_labels, classes=class_labels)<br>    <span class="hljs-keyword">if</span> n_classes == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;predict_proba&#x27;</span>):<br>            prob = clf.predict_proba(features)<br>            y_score = prob[:, prob.shape[<span class="hljs-number">1</span>]-<span class="hljs-number">1</span>] <br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;decision_function&#x27;</span>):<br>            prob = clf.decision_function(features)<br>            y_score = prob[:, prob.shape[<span class="hljs-number">1</span>]-<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> AttributeError(<span class="hljs-string">&quot;Estimator doesn&#x27;t have a probability or confidence scoring system!&quot;</span>)<br>        <br>        fpr, tpr, _ = roc_curve(y_test, y_score)      <br>        roc_auc = auc(fpr, tpr)<br>        plt.plot(fpr, tpr, label=<span class="hljs-string">&#x27;ROC curve (area = &#123;0:0.2f&#125;)&#x27;</span><br>                                 <span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-built_in">format</span>(roc_auc),<br>                 linewidth=<span class="hljs-number">2.5</span>)<br>        <br>    <span class="hljs-keyword">elif</span> n_classes &gt; <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;predict_proba&#x27;</span>):<br>            y_score = clf.predict_proba(features)<br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">hasattr</span>(clf, <span class="hljs-string">&#x27;decision_function&#x27;</span>):<br>            y_score = clf.decision_function(features)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> AttributeError(<span class="hljs-string">&quot;Estimator doesn&#x27;t have a probability or confidence scoring system!&quot;</span>)<br><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n_classes):<br>            fpr[i], tpr[i], _ = roc_curve(y_test[:, i], y_score[:, i])<br>            roc_auc[i] = auc(fpr[i], tpr[i])<br><br>        <span class="hljs-comment">## Compute micro-average ROC curve and ROC area</span><br>        fpr[<span class="hljs-string">&quot;micro&quot;</span>], tpr[<span class="hljs-string">&quot;micro&quot;</span>], _ = roc_curve(y_test.ravel(), y_score.ravel())<br>        roc_auc[<span class="hljs-string">&quot;micro&quot;</span>] = auc(fpr[<span class="hljs-string">&quot;micro&quot;</span>], tpr[<span class="hljs-string">&quot;micro&quot;</span>])<br><br>        <span class="hljs-comment">## Compute macro-average ROC curve and ROC area</span><br>        <span class="hljs-comment"># First aggregate all false positive rates</span><br>        all_fpr = np.unique(np.concatenate([fpr[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n_classes)]))<br>        <span class="hljs-comment"># Then interpolate all ROC curves at this points</span><br>        mean_tpr = np.zeros_like(all_fpr)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n_classes):<br>            mean_tpr += interp(all_fpr, fpr[i], tpr[i])<br>        <span class="hljs-comment"># Finally average it and compute AUC</span><br>        mean_tpr /= n_classes<br>        fpr[<span class="hljs-string">&quot;macro&quot;</span>] = all_fpr<br>        tpr[<span class="hljs-string">&quot;macro&quot;</span>] = mean_tpr<br>        roc_auc[<span class="hljs-string">&quot;macro&quot;</span>] = auc(fpr[<span class="hljs-string">&quot;macro&quot;</span>], tpr[<span class="hljs-string">&quot;macro&quot;</span>])<br><br>        <span class="hljs-comment">## Plot ROC curves</span><br>        plt.figure(figsize=(<span class="hljs-number">6</span>, <span class="hljs-number">4</span>))<br>        plt.plot(fpr[<span class="hljs-string">&quot;micro&quot;</span>], tpr[<span class="hljs-string">&quot;micro&quot;</span>],<br>                 label=<span class="hljs-string">&#x27;micro-average ROC curve (area = &#123;0:0.2f&#125;)&#x27;</span><br>                       <span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-built_in">format</span>(roc_auc[<span class="hljs-string">&quot;micro&quot;</span>]), linewidth=<span class="hljs-number">3</span>)<br><br>        plt.plot(fpr[<span class="hljs-string">&quot;macro&quot;</span>], tpr[<span class="hljs-string">&quot;macro&quot;</span>],<br>                 label=<span class="hljs-string">&#x27;macro-average ROC curve (area = &#123;0:0.2f&#125;)&#x27;</span><br>                       <span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-built_in">format</span>(roc_auc[<span class="hljs-string">&quot;macro&quot;</span>]), linewidth=<span class="hljs-number">3</span>)<br><br>        <span class="hljs-keyword">for</span> i, label <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(class_labels):<br>            plt.plot(fpr[i], tpr[i], label=<span class="hljs-string">&#x27;ROC curve of class &#123;0&#125; (area = &#123;1:0.2f&#125;)&#x27;</span><br>                                           <span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-built_in">format</span>(label, roc_auc[i]), <br>                     linewidth=<span class="hljs-number">2</span>, linestyle=<span class="hljs-string">&#x27;:&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&#x27;Number of classes should be atleast 2 or more&#x27;</span>)<br>        <br>    plt.plot([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], <span class="hljs-string">&#x27;k--&#x27;</span>)<br>    plt.xlim([<span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>])<br>    plt.ylim([<span class="hljs-number">0.0</span>, <span class="hljs-number">1.05</span>])<br>    plt.xlabel(<span class="hljs-string">&#x27;False Positive Rate&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;True Positive Rate&#x27;</span>)<br>    plt.title(<span class="hljs-string">&#x27;Receiver Operating Characteristic (ROC) Curve&#x27;</span>)<br>    plt.legend(loc=<span class="hljs-string">&quot;lower right&quot;</span>)<br>    plt.show()<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> SGDClassifier, LogisticRegression<br><br>lr = LogisticRegression(penalty=<span class="hljs-string">&#x27;l2&#x27;</span>, max_iter=<span class="hljs-number">100</span>, C=<span class="hljs-number">1</span>)<br>sgd = SGDClassifier(loss=<span class="hljs-string">&#x27;hinge&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-3-1-CountVectorizer-上的逻辑回归模型"><a href="#2-3-1-CountVectorizer-上的逻辑回归模型" class="headerlink" title="2.3.1 CountVectorizer 上的逻辑回归模型"></a><a id='2.3.1'>2.3.1 CountVectorizer 上的逻辑回归模型</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Logistic Regression model on BOW features</span><br>lr_bow_predictions = train_predict_model(classifier=lr, <br>                                             train_features=cv_train_features, train_labels=sentiments_train,<br>                                             test_features=cv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=lr_bow_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br>                                    <br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.6369
+Precision: 0.6177
+Recall: 0.6369
+F1 Score: 0.6132
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.55      0.28      0.37      1426
+           1       0.53      0.36      0.43      5428
+           2       0.68      0.87      0.77     15995
+           3       0.57      0.45      0.50      6603
+           4       0.56      0.34      0.42      1760
+
+    accuracy                           0.64     31212
+   macro avg       0.58      0.46      0.50     31212
+weighted avg       0.62      0.64      0.61     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                        
+                   0     1      2     3    4
+Actual: 0        393   626    349    53    5
+        1        251  1967   2936   255   19
+        2         57   862  13982  1031   63
+        3         15   236   3023  2941  388
+        4          1    23    253   888  595
+</code></pre>
+<h2 id="2-3-2-基于-TF-IDF-特征的逻辑回归模型"><a href="#2-3-2-基于-TF-IDF-特征的逻辑回归模型" class="headerlink" title="2.3.2 基于 TF-IDF 特征的逻辑回归模型"></a><a id='2.3.2'>2.3.2 基于 TF-IDF 特征的逻辑回归模型</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Logistic Regression model on TF-IDF features</span><br>lr_tfidf_predictions = train_predict_model(classifier=lr, <br>                                               train_features=tv_train_features, train_labels=sentiments_train,<br>                                               test_features=tv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=lr_tfidf_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.6455
+Precision: 0.6314
+Recall: 0.6455
+F1 Score: 0.6189
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.60      0.22      0.32      1426
+           1       0.56      0.38      0.45      5428
+           2       0.67      0.89      0.77     15995
+           3       0.60      0.47      0.53      6603
+           4       0.60      0.29      0.39      1760
+
+    accuracy                           0.65     31212
+   macro avg       0.61      0.45      0.49     31212
+weighted avg       0.63      0.65      0.62     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                        
+                   0     1      2     3    4
+Actual: 0        312   681    408    22    3
+        1        177  2051   3066   125    9
+        2         29   793  14193   944   36
+        3          2   109   3115  3088  289
+        4          0     9    281   966  504
+</code></pre>
+<h2 id="2-3-3-基于Countvectorizer的SGD模型"><a href="#2-3-3-基于Countvectorizer的SGD模型" class="headerlink" title="2.3.3 基于Countvectorizer的SGD模型"></a><a id='2.3.3'>2.3.3 基于Countvectorizer的SGD模型</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># SGD model on Countvectorizer</span><br>sgd_bow_predictions = train_predict_model(classifier=sgd, <br>                                             train_features=cv_train_features, train_labels=sentiments_train,<br>                                             test_features=cv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=sgd_bow_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.5988
+Precision: 0.5776
+Recall: 0.5988
+F1 Score: 0.5455
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.52      0.23      0.32      1426
+           1       0.54      0.19      0.28      5428
+           2       0.62      0.93      0.74     15995
+           3       0.54      0.30      0.38      6603
+           4       0.52      0.29      0.37      1760
+
+    accuracy                           0.60     31212
+   macro avg       0.55      0.39      0.42     31212
+weighted avg       0.58      0.60      0.55     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                        
+                   0     1      2     3    4
+Actual: 0        332   392    646    49    7
+        1        234  1025   3909   230   30
+        2         56   371  14874   637   57
+        3         18   106   4156  1956  367
+        4          4    15    502   735  504
+</code></pre>
+<h2 id="2-3-4-基于TF-IDF的SGD模型"><a href="#2-3-4-基于TF-IDF的SGD模型" class="headerlink" title="2.3.4 基于TF-IDF的SGD模型"></a><a id='2.3.4'>2.3.4 基于TF-IDF的SGD模型</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># SGD model on TF-IDF</span><br>sgd_tfidf_predictions = train_predict_model(classifier=sgd, <br>                                                train_features=tv_train_features, train_labels=sentiments_train,<br>                                                test_features=tv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=sgd_tfidf_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.5594
+Precision: 0.5543
+Recall: 0.5594
+F1 Score: 0.4666
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.60      0.11      0.18      1426
+           1       0.52      0.09      0.16      5428
+           2       0.56      0.97      0.71     15995
+           3       0.55      0.16      0.25      6603
+           4       0.59      0.15      0.24      1760
+
+    accuracy                           0.56     31212
+   macro avg       0.56      0.30      0.31     31212
+weighted avg       0.55      0.56      0.47     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                       
+                   0    1      2     3    4
+Actual: 0        152  241   1020    13    0
+        1         83  512   4759    67    7
+        2         17  193  15447   315   23
+        3          2   38   5328  1085  150
+        4          0    2    993   502  263
+</code></pre>
+<h2 id="2-3-5-基于TF-IDF的随机森林模型"><a href="#2-3-5-基于TF-IDF的随机森林模型" class="headerlink" title="2.3.5 基于TF-IDF的随机森林模型"></a><a id='2.3.5'>2.3.5 基于TF-IDF的随机森林模型</a></h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.ensemble <span class="hljs-keyword">import</span> RandomForestClassifier<br>rfc = RandomForestClassifier(n_jobs=-<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># RandomForest model on TF-IDF</span><br>rfc_tfidf_predictions = train_predict_model(classifier=rfc, <br>                                                train_features=tv_train_features, train_labels=sentiments_train,<br>                                                test_features=tv_test_features, test_labels=sentiments_test)<br>display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=rfc_tfidf_predictions,<br>                                      classes=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>])<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">Model Performance metrics:
+------------------------------
+Accuracy: 0.6423
+Precision: 0.6267
+Recall: 0.6423
+F1 Score: 0.6274
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           0       0.47      0.36      0.41      1426
+           1       0.56      0.42      0.48      5428
+           2       0.70      0.84      0.76     15995
+           3       0.58      0.46      0.51      6603
+           4       0.50      0.40      0.45      1760
+
+    accuracy                           0.64     31212
+   macro avg       0.56      0.50      0.52     31212
+weighted avg       0.63      0.64      0.63     31212
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:                        
+                   0     1      2     3    4
+Actual: 0        520   605    283    17    1
+        1        465  2281   2539   133   10
+        2        101  1094  13479  1258   63
+        3          8   115   2793  3057  630
+        4          2     6    217   825  710
+</code></pre>
+<p><strong>基于TF-IDF的逻辑回归模型优于其他机器学习算法</strong>. </p>
 ]]></content>
   </entry>
 </search>
