@@ -1,0 +1,1156 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Gawain">
+  <meta name="keywords" content="Share">
+  
+    <meta name="description" content="斯坦福汽车分类这是一个使用斯坦福汽车数据集进行汽车分类的深度学习项目。我将使用迁移学习在ImageNet上预训练的深度网络，并对数据集进行微调，为了减少训练时间我把数据集。 数据来源：https:&#x2F;&#x2F;ai.stanford.edu&#x2F;~jkrause&#x2F;cars&#x2F;car_dataset.html 1. 数据描述斯坦福汽车数据集包含 195 类汽车的 16,185 张图像。数据被分成 8,144 张训练">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gawain&#39;s notes">
+<meta property="og:url" content="https://www.gawaint.me/2024/07/30/StanfordCars/index.html">
+<meta property="og:site_name" content="Gawain&#39;s notes">
+<meta property="og:description" content="斯坦福汽车分类这是一个使用斯坦福汽车数据集进行汽车分类的深度学习项目。我将使用迁移学习在ImageNet上预训练的深度网络，并对数据集进行微调，为了减少训练时间我把数据集。 数据来源：https:&#x2F;&#x2F;ai.stanford.edu&#x2F;~jkrause&#x2F;cars&#x2F;car_dataset.html 1. 数据描述斯坦福汽车数据集包含 195 类汽车的 16,185 张图像。数据被分成 8,144 张训练">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ptpimg.me/qqpd2g.png">
+<meta property="og:image" content="https://ptpimg.me/5672w0.png">
+<meta property="og:image" content="https://ptpimg.me/qloo1w.png">
+<meta property="og:image" content="https://ptpimg.me/2jj563.png">
+<meta property="og:image" content="https://ptpimg.me/qqpd2g.png">
+<meta property="og:image" content="https://ptpimg.me/5672w0.png">
+<meta property="og:image" content="https://ptpimg.me/qloo1w.png">
+<meta property="og:image" content="https://ptpimg.me/2jj563.png">
+<meta property="article:published_time" content="2024-07-30T11:51:18.151Z">
+<meta property="article:modified_time" content="2024-07-30T11:53:07.985Z">
+<meta property="article:author" content="Gawain">
+<meta property="article:tag" content="Share">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ptpimg.me/qqpd2g.png">
+  
+  
+  
+  <title>Gawain&#39;s notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"www.gawaint.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"FeJdeqy6cDDAySGfsLP8g1bl-MdYXbMMI","app_key":"Hj6SxzGjyvHq8tHLJTqtcyHZ","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-30 19:51" pubdate>
+          2024年7月30日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="斯坦福汽车分类"><a href="#斯坦福汽车分类" class="headerlink" title="斯坦福汽车分类"></a>斯坦福汽车分类</h1><p>这是一个使用斯坦福汽车数据集进行汽车分类的深度学习项目。我将使用迁移学习在ImageNet上预训练的深度网络，并对数据集进行微调，为了减少训练时间我把数据集。</p>
+<p>数据来源：<a target="_blank" rel="noopener" href="https://ai.stanford.edu/~jkrause/cars/car_dataset.html">https://ai.stanford.edu/~jkrause/cars/car_dataset.html</a></p>
+<h1 id="1-数据描述"><a href="#1-数据描述" class="headerlink" title="1. 数据描述"></a>1. 数据描述</h1><p>斯坦福汽车数据集包含 195 类汽车的 16,185 张图像。数据被分成 8,144 张训练图像和 8,041 张测试图像，每个类也被分成大约 50-50。类通常处于品牌、型号和年份级别，例如。2012 款特斯拉 Model S 或 2012 款宝马 M3 轿跑车。平均而言，训练集中每个类别有 41.5 张图像，测试集中有 40.5 张图像。</p>
+<h1 id="2-设置环境并加载数据"><a href="#2-设置环境并加载数据" class="headerlink" title="2. 设置环境并加载数据"></a>2. 设置环境并加载数据</h1><h2 id="2-1-下载读取数据"><a href="#2-1-下载读取数据" class="headerlink" title="2.1 下载读取数据"></a>2.1 下载读取数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#提取类别名：</span><br><span class="hljs-keyword">import</span> scipy.io<br> <br>data = scipy.io.loadmat(<span class="hljs-string">&#x27;data/cars_annos.mat&#x27;</span>)<br>class_names = data[<span class="hljs-string">&#x27;class_names&#x27;</span>]<br>f_class = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;./label_map.txt&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>)<br> <br>num = <span class="hljs-number">1</span><br><span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(class_names.shape[<span class="hljs-number">1</span>]):<br>    class_name = <span class="hljs-built_in">str</span>(class_names[<span class="hljs-number">0</span>,j][<span class="hljs-number">0</span>]).replace(<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-string">&#x27;_&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(num,class_name)<br>    f_class.write( <span class="hljs-built_in">str</span>(num) + <span class="hljs-string">&#x27; &#x27;</span> + class_name + <span class="hljs-string">&#x27;\n&#x27;</span>)<br>    num = num + <span class="hljs-number">1</span><br>f_class.close()<br><br><br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">1 AM_General_Hummer_SUV_2000
+2 Acura_RL_Sedan_2012
+3 Acura_TL_Sedan_2012
+4 Acura_TL_Type-S_2008
+5 Acura_TSX_Sedan_2012
+6 Acura_Integra_Type_R_2001
+7 Acura_ZDX_Hatchback_2012
+8 Aston_Martin_V8_Vantage_Convertible_2012
+9 Aston_Martin_V8_Vantage_Coupe_2012
+10 Aston_Martin_Virage_Convertible_2012
+11 Aston_Martin_Virage_Coupe_2012
+12 Audi_RS_4_Convertible_2008
+13 Audi_A5_Coupe_2012
+14 Audi_TTS_Coupe_2012
+15 Audi_R8_Coupe_2012
+16 Audi_V8_Sedan_1994
+17 Audi_100_Sedan_1994
+18 Audi_100_Wagon_1994
+19 Audi_TT_Hatchback_2011
+20 Audi_S6_Sedan_2011
+21 Audi_S5_Convertible_2012
+22 Audi_S5_Coupe_2012
+23 Audi_S4_Sedan_2012
+24 Audi_S4_Sedan_2007
+25 Audi_TT_RS_Coupe_2012
+26 BMW_ActiveHybrid_5_Sedan_2012
+27 BMW_1_Series_Convertible_2012
+28 BMW_1_Series_Coupe_2012
+29 BMW_3_Series_Sedan_2012
+30 BMW_3_Series_Wagon_2012
+31 BMW_6_Series_Convertible_2007
+32 BMW_X5_SUV_2007
+33 BMW_X6_SUV_2012
+34 BMW_M3_Coupe_2012
+35 BMW_M5_Sedan_2010
+36 BMW_M6_Convertible_2010
+37 BMW_X3_SUV_2012
+38 BMW_Z4_Convertible_2012
+39 Bentley_Continental_Supersports_Conv._Convertible_2012
+40 Bentley_Arnage_Sedan_2009
+41 Bentley_Mulsanne_Sedan_2011
+42 Bentley_Continental_GT_Coupe_2012
+43 Bentley_Continental_GT_Coupe_2007
+44 Bentley_Continental_Flying_Spur_Sedan_2007
+45 Bugatti_Veyron_16.4_Convertible_2009
+46 Bugatti_Veyron_16.4_Coupe_2009
+47 Buick_Regal_GS_2012
+48 Buick_Rainier_SUV_2007
+49 Buick_Verano_Sedan_2012
+50 Buick_Enclave_SUV_2012
+51 Cadillac_CTS-V_Sedan_2012
+52 Cadillac_SRX_SUV_2012
+53 Cadillac_Escalade_EXT_Crew_Cab_2007
+54 Chevrolet_Silverado_1500_Hybrid_Crew_Cab_2012
+55 Chevrolet_Corvette_Convertible_2012
+56 Chevrolet_Corvette_ZR1_2012
+57 Chevrolet_Corvette_Ron_Fellows_Edition_Z06_2007
+58 Chevrolet_Traverse_SUV_2012
+59 Chevrolet_Camaro_Convertible_2012
+60 Chevrolet_HHR_SS_2010
+61 Chevrolet_Impala_Sedan_2007
+62 Chevrolet_Tahoe_Hybrid_SUV_2012
+63 Chevrolet_Sonic_Sedan_2012
+64 Chevrolet_Express_Cargo_Van_2007
+65 Chevrolet_Avalanche_Crew_Cab_2012
+66 Chevrolet_Cobalt_SS_2010
+67 Chevrolet_Malibu_Hybrid_Sedan_2010
+68 Chevrolet_TrailBlazer_SS_2009
+69 Chevrolet_Silverado_2500HD_Regular_Cab_2012
+70 Chevrolet_Silverado_1500_Classic_Extended_Cab_2007
+71 Chevrolet_Express_Van_2007
+72 Chevrolet_Monte_Carlo_Coupe_2007
+73 Chevrolet_Malibu_Sedan_2007
+74 Chevrolet_Silverado_1500_Extended_Cab_2012
+75 Chevrolet_Silverado_1500_Regular_Cab_2012
+76 Chrysler_Aspen_SUV_2009
+77 Chrysler_Sebring_Convertible_2010
+78 Chrysler_Town_and_Country_Minivan_2012
+79 Chrysler_300_SRT-8_2010
+80 Chrysler_Crossfire_Convertible_2008
+81 Chrysler_PT_Cruiser_Convertible_2008
+82 Daewoo_Nubira_Wagon_2002
+83 Dodge_Caliber_Wagon_2012
+84 Dodge_Caliber_Wagon_2007
+85 Dodge_Caravan_Minivan_1997
+86 Dodge_Ram_Pickup_3500_Crew_Cab_2010
+87 Dodge_Ram_Pickup_3500_Quad_Cab_2009
+88 Dodge_Sprinter_Cargo_Van_2009
+89 Dodge_Journey_SUV_2012
+90 Dodge_Dakota_Crew_Cab_2010
+91 Dodge_Dakota_Club_Cab_2007
+92 Dodge_Magnum_Wagon_2008
+93 Dodge_Challenger_SRT8_2011
+94 Dodge_Durango_SUV_2012
+95 Dodge_Durango_SUV_2007
+96 Dodge_Charger_Sedan_2012
+97 Dodge_Charger_SRT-8_2009
+98 Eagle_Talon_Hatchback_1998
+99 FIAT_500_Abarth_2012
+100 FIAT_500_Convertible_2012
+101 Ferrari_FF_Coupe_2012
+102 Ferrari_California_Convertible_2012
+103 Ferrari_458_Italia_Convertible_2012
+104 Ferrari_458_Italia_Coupe_2012
+105 Fisker_Karma_Sedan_2012
+106 Ford_F-450_Super_Duty_Crew_Cab_2012
+107 Ford_Mustang_Convertible_2007
+108 Ford_Freestar_Minivan_2007
+109 Ford_Expedition_EL_SUV_2009
+110 Ford_Edge_SUV_2012
+111 Ford_Ranger_SuperCab_2011
+112 Ford_GT_Coupe_2006
+113 Ford_F-150_Regular_Cab_2012
+114 Ford_F-150_Regular_Cab_2007
+115 Ford_Focus_Sedan_2007
+116 Ford_E-Series_Wagon_Van_2012
+117 Ford_Fiesta_Sedan_2012
+118 GMC_Terrain_SUV_2012
+119 GMC_Savana_Van_2012
+120 GMC_Yukon_Hybrid_SUV_2012
+121 GMC_Acadia_SUV_2012
+122 GMC_Canyon_Extended_Cab_2012
+123 Geo_Metro_Convertible_1993
+124 HUMMER_H3T_Crew_Cab_2010
+125 HUMMER_H2_SUT_Crew_Cab_2009
+126 Honda_Odyssey_Minivan_2012
+127 Honda_Odyssey_Minivan_2007
+128 Honda_Accord_Coupe_2012
+129 Honda_Accord_Sedan_2012
+130 Hyundai_Veloster_Hatchback_2012
+131 Hyundai_Santa_Fe_SUV_2012
+132 Hyundai_Tucson_SUV_2012
+133 Hyundai_Veracruz_SUV_2012
+134 Hyundai_Sonata_Hybrid_Sedan_2012
+135 Hyundai_Elantra_Sedan_2007
+136 Hyundai_Accent_Sedan_2012
+137 Hyundai_Genesis_Sedan_2012
+138 Hyundai_Sonata_Sedan_2012
+139 Hyundai_Elantra_Touring_Hatchback_2012
+140 Hyundai_Azera_Sedan_2012
+141 Infiniti_G_Coupe_IPL_2012
+142 Infiniti_QX56_SUV_2011
+143 Isuzu_Ascender_SUV_2008
+144 Jaguar_XK_XKR_2012
+145 Jeep_Patriot_SUV_2012
+146 Jeep_Wrangler_SUV_2012
+147 Jeep_Liberty_SUV_2012
+148 Jeep_Grand_Cherokee_SUV_2012
+149 Jeep_Compass_SUV_2012
+150 Lamborghini_Reventon_Coupe_2008
+151 Lamborghini_Aventador_Coupe_2012
+152 Lamborghini_Gallardo_LP_570-4_Superleggera_2012
+153 Lamborghini_Diablo_Coupe_2001
+154 Land_Rover_Range_Rover_SUV_2012
+155 Land_Rover_LR2_SUV_2012
+156 Lincoln_Town_Car_Sedan_2011
+157 MINI_Cooper_Roadster_Convertible_2012
+158 Maybach_Landaulet_Convertible_2012
+159 Mazda_Tribute_SUV_2011
+160 McLaren_MP4-12C_Coupe_2012
+161 Mercedes-Benz_300-Class_Convertible_1993
+162 Mercedes-Benz_C-Class_Sedan_2012
+163 Mercedes-Benz_SL-Class_Coupe_2009
+164 Mercedes-Benz_E-Class_Sedan_2012
+165 Mercedes-Benz_S-Class_Sedan_2012
+166 Mercedes-Benz_Sprinter_Van_2012
+167 Mitsubishi_Lancer_Sedan_2012
+168 Nissan_Leaf_Hatchback_2012
+169 Nissan_NV_Passenger_Van_2012
+170 Nissan_Juke_Hatchback_2012
+171 Nissan_240SX_Coupe_1998
+172 Plymouth_Neon_Coupe_1999
+173 Porsche_Panamera_Sedan_2012
+174 Ram_C/V_Cargo_Van_Minivan_2012
+175 Rolls-Royce_Phantom_Drophead_Coupe_Convertible_2012
+176 Rolls-Royce_Ghost_Sedan_2012
+177 Rolls-Royce_Phantom_Sedan_2012
+178 Scion_xD_Hatchback_2012
+179 Spyker_C8_Convertible_2009
+180 Spyker_C8_Coupe_2009
+181 Suzuki_Aerio_Sedan_2007
+182 Suzuki_Kizashi_Sedan_2012
+183 Suzuki_SX4_Hatchback_2012
+184 Suzuki_SX4_Sedan_2012
+185 Tesla_Model_S_Sedan_2012
+186 Toyota_Sequoia_SUV_2012
+187 Toyota_Camry_Sedan_2012
+188 Toyota_Corolla_Sedan_2012
+189 Toyota_4Runner_SUV_2012
+190 Volkswagen_Golf_Hatchback_2012
+191 Volkswagen_Golf_Hatchback_1991
+192 Volkswagen_Beetle_Hatchback_2012
+193 Volvo_C30_Hatchback_2012
+194 Volvo_240_Sedan_1993
+195 Volvo_XC90_SUV_2007
+196 smart_fortwo_Convertible_2012
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#提取 序号, 图片名, 类别, 属于测试集还是训练集(0,1表示)</span><br><span class="hljs-keyword">import</span> scipy.io<br> <br>data = scipy.io.loadmat(<span class="hljs-string">&#x27;data/cars_annos.mat&#x27;</span>)<br>annotations = data[<span class="hljs-string">&#x27;annotations&#x27;</span>]<br>f_train = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data/mat2txt.txt&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>)<br><br>num = <span class="hljs-number">1</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(annotations.shape[<span class="hljs-number">1</span>]):<br>    name = <span class="hljs-built_in">str</span>(annotations[<span class="hljs-number">0</span>,i][<span class="hljs-number">0</span>])[<span class="hljs-number">2</span>:-<span class="hljs-number">2</span>]<br>    test  = <span class="hljs-built_in">int</span>(annotations[<span class="hljs-number">0</span>,i][<span class="hljs-number">6</span>])<br>    clas = <span class="hljs-built_in">int</span>(annotations[<span class="hljs-number">0</span>,i][<span class="hljs-number">5</span>])<br><br>    name = <span class="hljs-built_in">str</span>(name)<br>    clas = <span class="hljs-built_in">str</span>(clas)<br>    test = <span class="hljs-built_in">str</span>(test)<br>    f_train.write(<span class="hljs-built_in">str</span>(num) + <span class="hljs-string">&#x27; &#x27;</span> + name + <span class="hljs-string">&#x27; &#x27;</span> + clas + <span class="hljs-string">&#x27; &#x27;</span> + test+<span class="hljs-string">&#x27;\n&#x27;</span>)<br>    num = num + <span class="hljs-number">1</span><br> <br>f_train.close()<br><br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#按分类重写文件夹</span><br><span class="hljs-comment"># coding=utf-8</span><br><span class="hljs-keyword">import</span> shutil<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> scipy.io <span class="hljs-keyword">as</span> scio<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">cub2dang</span>():<br>    <span class="hljs-keyword">if</span> sys.getdefaultencoding() != <span class="hljs-string">&#x27;utf-8&#x27;</span>:<br>        reload(sys)<br>        sys.setdefaultencoding(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>    data = scio.loadmat(<span class="hljs-string">&#x27;data/cars_annos.mat&#x27;</span>)<br>   <br>    newPath_train = <span class="hljs-string">&quot;data/train&quot;</span><br>    newPath_test = <span class="hljs-string">&quot;data/test&quot;</span><br>    images = data[<span class="hljs-string">&#x27;annotations&#x27;</span>][<span class="hljs-number">0</span>]<br>    classes = data[<span class="hljs-string">&#x27;class_names&#x27;</span>][<span class="hljs-number">0</span>]<br>    num_images = images.size<br>    <span class="hljs-built_in">print</span>(num_images)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">int</span>(num_images/<span class="hljs-number">2</span>)):<br>        <br>        image_path = os.path.join(<span class="hljs-string">&#x27;data/&#x27;</span>,images[i][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>])<br>        <br>        file_name = images[i][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]  <span class="hljs-comment"># 文件名</span><br>        file_name = file_name.split(<span class="hljs-string">&#x27;/&#x27;</span>)[<span class="hljs-number">1</span>].encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>        classid = images[i][<span class="hljs-number">5</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]  <span class="hljs-comment"># 类别</span><br>        <span class="hljs-comment"># classid=np.array2string(classid)</span><br>        classid = classid.astype(np.int32)<br>        <span class="hljs-built_in">id</span> = classes[classid-<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]<br>        file_name_new = os.path.join(<span class="hljs-built_in">id</span>, file_name.decode())<br><br>        istest = images[i][<span class="hljs-number">6</span>][<span class="hljs-number">0</span>]  <span class="hljs-comment"># train/test</span><br>        <span class="hljs-keyword">if</span> istest:<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(os.path.join(newPath_test, <span class="hljs-built_in">id</span>)):<br>                os.makedirs(os.path.join(newPath_test, <span class="hljs-built_in">id</span>))<br>            shutil.copy(image_path, os.path.join(newPath_test, file_name_new))<br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data/car_test.txt&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                f.write(<span class="hljs-string">&#x27;&#123;&#125; &#123;&#125;\n&#x27;</span>.<span class="hljs-built_in">format</span>(file_name_new, classid))<br><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> istest:<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(os.path.join(newPath_train, <span class="hljs-built_in">id</span>)):<br>                os.makedirs(os.path.join(newPath_train, <span class="hljs-built_in">id</span>))<br>            shutil.copy(image_path, os.path.join(newPath_train, file_name_new))<br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data/car_train.txt&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                f.write(<span class="hljs-string">&#x27;&#123;&#125; &#123;&#125;\n&#x27;</span>.<span class="hljs-built_in">format</span>(file_name_new, classid))<br>    <span class="hljs-built_in">print</span>(i)<br>cub2dang()<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">16185
+8091
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment">#!python -m pip install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cpu                                                                                                    ✔  14:46:26</span><br><span class="hljs-comment">#!pip install torchvision==0.14.0</span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-2-导入包"><a href="#2-2-导入包" class="headerlink" title="2.2 导入包"></a>2.2 导入包</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn<br><span class="hljs-keyword">import</span> torch.optim <span class="hljs-keyword">as</span> optim<br><span class="hljs-keyword">import</span> torchvision<br><span class="hljs-keyword">import</span> torchvision.models <span class="hljs-keyword">as</span> models<br><span class="hljs-keyword">import</span> torchvision.transforms <span class="hljs-keyword">as</span> transforms<br><br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> tqdm<br><span class="hljs-keyword">import</span> PIL.Image <span class="hljs-keyword">as</span> Image<br><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> display<br><br><span class="hljs-comment">#print(torch.backends.mps.is_built())</span><br>device = torch.device(<span class="hljs-string">&quot;mps&quot;</span>)<br><span class="hljs-built_in">print</span>(device)<br><br><span class="hljs-comment">#print(torch.cuda.get_device_name(device))</span><br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">mps
+</code></pre>
+<h1 id="3-建模"><a href="#3-建模" class="headerlink" title="3. 建模"></a>3. 建模</h1><h2 id="3-1-加载数据"><a href="#3-1-加载数据" class="headerlink" title="3.1 加载数据"></a>3.1 加载数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python">dataset_dir = <span class="hljs-string">&quot;data/&quot;</span><br><br><br>width, height = <span class="hljs-number">224</span>, <span class="hljs-number">224</span><br>train_tfms = transforms.Compose([transforms.Resize((width, height)),<br>                                 torchvision.transforms.AutoAugment(),<br>                                 transforms.RandomHorizontalFlip(),<br>                                 transforms.RandomRotation(<span class="hljs-number">15</span>),<br>                                 transforms.ToTensor(),<br>                                 transforms.Normalize([<span class="hljs-number">0.485</span>, <span class="hljs-number">0.456</span>, <span class="hljs-number">0.406</span>], [<span class="hljs-number">0.229</span>, <span class="hljs-number">0.224</span>, <span class="hljs-number">0.225</span>])])<br>test_tfms = transforms.Compose([transforms.Resize((width, height)),<br>                                transforms.ToTensor(),<br>                                transforms.Normalize([<span class="hljs-number">0.485</span>, <span class="hljs-number">0.456</span>, <span class="hljs-number">0.406</span>], [<span class="hljs-number">0.229</span>, <span class="hljs-number">0.224</span>, <span class="hljs-number">0.225</span>])])<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># create datasets</span><br>dataset = torchvision.datasets.ImageFolder(root = dataset_dir + <span class="hljs-string">&quot;train&quot;</span>, transform = train_tfms)<br>trainloader = torch.utils.data.DataLoader(dataset, batch_size = <span class="hljs-number">32</span>, shuffle = <span class="hljs-literal">True</span>, num_workers = <span class="hljs-number">2</span>)<br><br>dataset2 = torchvision.datasets.ImageFolder(root = dataset_dir + <span class="hljs-string">&quot;test&quot;</span>, transform = test_tfms)<br>testloader = torch.utils.data.DataLoader(dataset2, batch_size = <span class="hljs-number">32</span>, shuffle = <span class="hljs-literal">False</span>, num_workers = <span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-2-定义训练模型函数"><a href="#3-2-定义训练模型函数" class="headerlink" title="3.2 定义训练模型函数"></a>3.2 定义训练模型函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">train_model</span>(<span class="hljs-params">model, criterion, optimizer, scheduler, n_epochs=<span class="hljs-number">5</span></span>):<br>    <br>  losses = []<br>  accuracies = []<br>  test_accuracies = []<br><br>  <span class="hljs-comment"># 将模型初始化设为训练模式</span><br>  model.train()<br>  <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> tqdm.tqdm(<span class="hljs-built_in">range</span>(n_epochs)):<br>    since = time.time()<br>    running_loss = <span class="hljs-number">0.0</span><br>    running_correct = <span class="hljs-number">0.0</span><br>    <span class="hljs-keyword">for</span> i, data <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(trainloader, <span class="hljs-number">0</span>):<br><br>      <span class="hljs-comment"># 获取输入并将其分配给mps</span><br>      inputs, labels = data<br>      inputs = inputs.to(device)<br>      labels = labels.to(device)<br>      optimizer.zero_grad()<br>            <br>      <span class="hljs-comment"># forward + backward + optimize</span><br>      outputs = model(inputs)<br>      _, predicted = torch.<span class="hljs-built_in">max</span>(outputs.data, <span class="hljs-number">1</span>)<br>      loss = criterion(outputs, labels)<br>      loss.backward()<br>      optimizer.step()<br>            <br>      <span class="hljs-comment"># 计算loss/acc </span><br>      running_loss += loss.item()<br>      running_correct += (labels == predicted).<span class="hljs-built_in">sum</span>().item()<br><br>    epoch_duration = time.time() - since<br>    epoch_loss = running_loss / <span class="hljs-built_in">len</span>(trainloader)<br>    epoch_acc = <span class="hljs-number">100</span> / <span class="hljs-number">32</span> * running_correct / <span class="hljs-built_in">len</span>(trainloader)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Epoch %s, duration: %d s, loss: %.4f, acc: %.4f&quot;</span> % (epoch + <span class="hljs-number">1</span>, epoch_duration, epoch_loss, epoch_acc))<br>        <br>    losses.append(epoch_loss)<br>    accuracies.append(epoch_acc)<br>        <br>    <span class="hljs-comment"># 将模式转化为评估模式使用test数据集</span><br>    model.<span class="hljs-built_in">eval</span>()<br>    test_acc = eval_model(model)<br>    test_accuracies.append(test_acc)<br>        <br>    <span class="hljs-comment"># 在验证后将模式改回训练</span><br>    model.train()<br>    scheduler.step(test_acc)<br>    <br>    since = time.time()<br>  <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Finished Training&#x27;</span>)<br>  <span class="hljs-keyword">return</span> model, losses, accuracies, test_accuracies<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-3-定义模型评价函数"><a href="#3-3-定义模型评价函数" class="headerlink" title="3.3 定义模型评价函数"></a>3.3 定义模型评价函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">eval_model</span>(<span class="hljs-params">model</span>):<br>  correct = <span class="hljs-number">0.0</span><br>  total = <span class="hljs-number">0.0</span><br>  <span class="hljs-keyword">with</span> torch.no_grad():<br>    <span class="hljs-keyword">for</span> i, data <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(testloader, <span class="hljs-number">0</span>):<br>      images, labels = data<br>      images = images.to(device)<br>      labels = labels.to(device)<br>      outputs = model_ft(images)<br>      _, predicted = torch.<span class="hljs-built_in">max</span>(outputs.data, <span class="hljs-number">1</span>)<br><br>      total += labels.size(<span class="hljs-number">0</span>)<br>      correct += (predicted == labels).<span class="hljs-built_in">sum</span>().item()<br><br>  test_acc = <span class="hljs-number">100.0</span> * correct / total<br>  <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Accuracy of the network on the test images: %d %%&#x27;</span> % (test_acc))<br>  <span class="hljs-keyword">return</span> test_acc<br></code></pre></td></tr></table></figure>
+
+<h1 id="4-使用-ResNet34-实现¶"><a href="#4-使用-ResNet34-实现¶" class="headerlink" title="4. 使用 ResNet34 实现¶"></a>4. 使用 ResNet34 实现¶</h1><h2 id="4-1-定义模型参数"><a href="#4-1-定义模型参数" class="headerlink" title="4.1 定义模型参数"></a>4.1 定义模型参数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#ResNet34:</span><br>NUM_CAR_CLASSES = <span class="hljs-number">98</span><br><br>model_ft = models.resnet34(weights = <span class="hljs-literal">True</span>)<br><br>num_ftrs = model_ft.fc.in_features<br>model_ft.fc = nn.Linear(num_ftrs, NUM_CAR_CLASSES)<br>model_ft = model_ft.to(device)<br><br>criterion = nn.CrossEntropyLoss()<br><br>optimizer = optim.SGD(model_ft.parameters(), lr = <span class="hljs-number">0.01</span>, momentum = <span class="hljs-number">0.9</span>)<br><br>lrscheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode = <span class="hljs-string">&#x27;max&#x27;</span>, patience = <span class="hljs-number">3</span>, threshold = <span class="hljs-number">0.9</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">/Users/gawaintan/miniforge3/envs/FastAi/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for &#39;weights&#39; are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet34_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet34_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+</code></pre>
+<h2 id="4-2-训练"><a href="#4-2-训练" class="headerlink" title="4.2 训练"></a>4.2 训练</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># ResNet:</span><br>model_ft_res, training_losses_res, training_accs_res, test_accs_res = train_model(model_ft, criterion, optimizer, lrscheduler, n_epochs=<span class="hljs-number">12</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">  0%|                                                                                                                                                                                                                  | 0/12 [00:00&lt;?, ?it/s]
+
+Epoch 1, duration: 109 s, loss: 4.1009, acc: 9.3994
+
+
+  8%|████████████████▊                                                                                                                                                                                        | 1/12 [02:34&lt;28:22, 154.73s/it]
+
+Accuracy of the network on the test images: 24 %
+Epoch 2, duration: 113 s, loss: 2.3972, acc: 34.3994
+
+
+ 17%|█████████████████████████████████▌                                                                                                                                                                       | 2/12 [05:15&lt;26:25, 158.51s/it]
+
+Accuracy of the network on the test images: 34 %
+Epoch 3, duration: 117 s, loss: 1.7940, acc: 48.6328
+
+
+ 25%|██████████████████████████████████████████████████▎                                                                                                                                                      | 3/12 [07:58&lt;24:03, 160.39s/it]
+
+Accuracy of the network on the test images: 35 %
+Epoch 4, duration: 114 s, loss: 1.4076, acc: 58.3984
+
+
+ 33%|███████████████████████████████████████████████████████████████████                                                                                                                                      | 4/12 [10:36&lt;21:16, 159.59s/it]
+
+Accuracy of the network on the test images: 48 %
+Epoch 5, duration: 119 s, loss: 1.1524, acc: 64.6973
+
+
+ 42%|███████████████████████████████████████████████████████████████████████████████████▊                                                                                                                     | 5/12 [13:22&lt;18:52, 161.84s/it]
+
+Accuracy of the network on the test images: 48 %
+Epoch 6, duration: 119 s, loss: 0.9919, acc: 69.3848
+
+
+ 50%|████████████████████████████████████████████████████████████████████████████████████████████████████▌                                                                                                    | 6/12 [16:06&lt;16:14, 162.44s/it]
+
+Accuracy of the network on the test images: 61 %
+Epoch 7, duration: 122 s, loss: 0.8873, acc: 72.2656
+
+
+ 58%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎                                                                                   | 7/12 [18:54&lt;13:41, 164.33s/it]
+
+Accuracy of the network on the test images: 61 %
+Epoch 8, duration: 123 s, loss: 0.7274, acc: 77.3193
+
+
+ 67%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████                                                                   | 8/12 [21:42&lt;11:01, 165.34s/it]
+
+Accuracy of the network on the test images: 64 %
+Epoch 9, duration: 127 s, loss: 0.4055, acc: 87.5000
+
+
+ 75%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                                  | 9/12 [24:30&lt;08:19, 166.45s/it]
+
+Accuracy of the network on the test images: 80 %
+Epoch 10, duration: 127 s, loss: 0.2865, acc: 91.0400
+
+
+ 83%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                                 | 10/12 [27:22&lt;05:35, 167.97s/it]
+
+Accuracy of the network on the test images: 81 %
+Epoch 11, duration: 131 s, loss: 0.2480, acc: 92.3828
+
+
+ 92%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎                | 11/12 [30:20&lt;02:51, 171.06s/it]
+
+Accuracy of the network on the test images: 82 %
+Epoch 12, duration: 139 s, loss: 0.2195, acc: 93.5547
+
+
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [33:26&lt;00:00, 167.24s/it]
+
+Accuracy of the network on the test images: 82 %
+Finished Training
+</code></pre>
+<p>该模型在12个epoch训练后训练准确度到了94%，测试准确度到了82%。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 画统计图</span><br>f, axarr = plt.subplots(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>, figsize = (<span class="hljs-number">12</span>, <span class="hljs-number">8</span>))<br>axarr[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>].plot(training_losses_res)<br>axarr[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>].set_title(<span class="hljs-string">&quot;Training loss&quot;</span>)<br>axarr[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>].plot(training_accs_res)<br>axarr[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>].set_title(<span class="hljs-string">&quot;Training acc&quot;</span>)<br>axarr[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>].plot(test_accs_res)<br>axarr[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>].set_title(<span class="hljs-string">&quot;Test acc&quot;</span>)<br><br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">Text(0.5, 1.0, &#39;Test acc&#39;)
+</code></pre>
+<p><img src="https://ptpimg.me/qqpd2g.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><br>)</p>
+<h2 id="4-3-在单张图片上评估模型"><a href="#4-3-在单张图片上评估模型" class="headerlink" title="4.3 在单张图片上评估模型"></a>4.3 在单张图片上评估模型</h2><p>这个是按实际场景预测</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 关联文件和它的类名</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">find_classes</span>(<span class="hljs-params"><span class="hljs-built_in">dir</span></span>):<br>    classes = os.listdir(<span class="hljs-built_in">dir</span>)<br>    classes.sort()<br>    class_to_idx = &#123;classes[i]: i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(classes))&#125;<br>    <span class="hljs-keyword">return</span> classes, class_to_idx<br>classes, c_to_idx = find_classes(dataset_dir + <span class="hljs-string">&quot;train&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 定义函数读取图片</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">single_img_eval</span>(<span class="hljs-params">model_ft, imgdir</span>):<br><br>  <span class="hljs-comment"># 把模式切换到评估</span><br>  model_ft.<span class="hljs-built_in">eval</span>()<br><br>  <span class="hljs-comment"># transforms输入的图片</span><br>  loader = transforms.Compose([transforms.Resize((<span class="hljs-number">400</span>, <span class="hljs-number">400</span>)),<br>                                  transforms.ToTensor(),<br>                                  transforms.Normalize((<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>), (<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>))])<br>  image = Image.<span class="hljs-built_in">open</span>(dataset_dir + imgdir)<br>  image = loader(image).<span class="hljs-built_in">float</span>()<br>  <span class="hljs-comment">#这里会默认cpu，若是cuda或者mps一定要加to(device)</span><br>  image = torch.autograd.Variable(image, requires_grad=<span class="hljs-literal">True</span>).to(device) <br>  <br>  image = image.unsqueeze(<span class="hljs-number">0</span>)<br>  <span class="hljs-comment">#image = image.mps()</span><br>  output = model_ft(image)<br>  conf, predicted = torch.<span class="hljs-built_in">max</span>(output.data, <span class="hljs-number">1</span>)<br><br>  display(Image.<span class="hljs-built_in">open</span>(dataset_dir + imgdir))<br>  <span class="hljs-built_in">print</span>(classes[predicted.item()], <span class="hljs-string">&quot;confidence: &quot;</span>, conf.item())<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">single_img_eval(model_ft_res, <span class="hljs-string">&quot;test/Chevrolet Traverse SUV 2012/004695.jpg&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://ptpimg.me/5672w0.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<pre><code class="hljs">Buick Verano Sedan 2012 confidence:  5.017297267913818
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">single_img_eval(model_ft_res, <span class="hljs-string">&quot;test/FIAT 500 Abarth 2012/008089.jpg&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://ptpimg.me/qloo1w.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<pre><code class="hljs">FIAT 500 Abarth 2012 confidence:  11.281584739685059
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">single_img_eval(model_ft_res, <span class="hljs-string">&quot;test/Aston Martin V8 Vantage Convertible 2012/000623.jpg&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://ptpimg.me/2jj563.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<pre><code class="hljs">Aston Martin V8 Vantage Convertible 2012 confidence:  9.173359870910645
+</code></pre>
+<p>我们从 ResNet34 采用的网络已成功对三辆汽车中的两辆进行了高置信度分类。对于第一辆车，该网络未能区分Chevrolet和Buick两类车。</p>
+<h2 id="4-4-保存模型以备将来使用"><a href="#4-4-保存模型以备将来使用" class="headerlink" title="4.4 保存模型以备将来使用"></a>4.4 保存模型以备将来使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.save(model_ft_res.state_dict(), <span class="hljs-string">&#x27;car_model_resnet.pth&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h1 id="5-使用-GoogLeNet-实现"><a href="#5-使用-GoogLeNet-实现" class="headerlink" title="5. 使用 GoogLeNet 实现"></a>5. 使用 GoogLeNet 实现</h1><h2 id="5-1-定义模型参数"><a href="#5-1-定义模型参数" class="headerlink" title="5.1 定义模型参数"></a>5.1 定义模型参数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># GoogLeNet:</span><br>NUM_CAR_CLASSES = <span class="hljs-number">98</span><br><br>model_ft = models.googlenet(weights = <span class="hljs-literal">True</span>)<br><br>num_ftrs = model_ft.fc.in_features<br>model_ft.fc = nn.Linear(num_ftrs, NUM_CAR_CLASSES)<br>model_ft = model_ft.to(device)<br><br>optimizer = optim.SGD(model_ft.parameters(), lr = <span class="hljs-number">0.01</span>, momentum = <span class="hljs-number">0.9</span>)<br><br>lrscheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode = <span class="hljs-string">&#x27;max&#x27;</span>, patience = <span class="hljs-number">3</span>, threshold = <span class="hljs-number">0.9</span>)<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="5-2-训练"><a href="#5-2-训练" class="headerlink" title="5.2 训练"></a>5.2 训练</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># GoogLeNet:</span><br>model_ft_google, training_losses_google, training_accs_google, test_accs_google = train_model(model_ft, criterion, optimizer, lrscheduler, n_epochs=<span class="hljs-number">12</span>)<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">  0%|                                                                                                                                                                                                                  | 0/12 [00:00&lt;?, ?it/s]
+
+Epoch 1, duration: 168 s, loss: 3.0864, acc: 23.5596
+
+
+  8%|████████████████▊                                                                                                                                                                                        | 1/12 [03:22&lt;37:07, 202.47s/it]
+
+Accuracy of the network on the test images: 39 %
+Epoch 2, duration: 164 s, loss: 2.0752, acc: 43.7256
+
+
+ 17%|█████████████████████████████████▌                                                                                                                                                                       | 2/12 [07:01&lt;35:22, 212.23s/it]
+
+Accuracy of the network on the test images: 51 %
+Epoch 3, duration: 164 s, loss: 1.5181, acc: 56.3721
+
+
+ 25%|██████████████████████████████████████████████████▎                                                                                                                                                      | 3/12 [10:22&lt;31:03, 207.08s/it]
+
+Accuracy of the network on the test images: 62 %
+Epoch 4, duration: 182 s, loss: 1.1773, acc: 65.8691
+
+
+ 33%|███████████████████████████████████████████████████████████████████                                                                                                                                      | 4/12 [14:01&lt;28:15, 211.89s/it]
+
+Accuracy of the network on the test images: 66 %
+Epoch 5, duration: 130 s, loss: 0.9473, acc: 71.5088
+
+
+ 42%|███████████████████████████████████████████████████████████████████████████████████▊                                                                                                                     | 5/12 [16:49&lt;22:52, 196.12s/it]
+
+Accuracy of the network on the test images: 69 %
+Epoch 6, duration: 106 s, loss: 0.6231, acc: 82.9834
+
+
+ 50%|████████████████████████████████████████████████████████████████████████████████████████████████████▌                                                                                                    | 6/12 [19:15&lt;17:54, 179.04s/it]
+
+Accuracy of the network on the test images: 79 %
+Epoch 7, duration: 135 s, loss: 0.5321, acc: 86.5234
+
+
+ 58%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎                                                                                   | 7/12 [22:10&lt;14:47, 177.47s/it]
+
+Accuracy of the network on the test images: 80 %
+Epoch 8, duration: 137 s, loss: 0.4982, acc: 86.7920
+
+
+ 67%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████                                                                   | 8/12 [25:08&lt;11:50, 177.72s/it]
+
+Accuracy of the network on the test images: 81 %
+Epoch 9, duration: 147 s, loss: 0.4649, acc: 88.9404
+
+
+ 75%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                                  | 9/12 [28:16&lt;09:03, 181.11s/it]
+
+Accuracy of the network on the test images: 81 %
+Epoch 10, duration: 154 s, loss: 0.4419, acc: 89.3799
+
+
+ 83%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                                 | 10/12 [31:34&lt;06:12, 186.29s/it]
+
+Accuracy of the network on the test images: 81 %
+Epoch 11, duration: 172 s, loss: 0.4061, acc: 89.9170
+
+
+ 92%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎                | 11/12 [35:12&lt;03:15, 195.96s/it]
+
+Accuracy of the network on the test images: 81 %
+Epoch 12, duration: 156 s, loss: 0.4121, acc: 89.9170
+
+
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [38:28&lt;00:00, 192.34s/it]
+
+Accuracy of the network on the test images: 81 %
+Finished Training
+</code></pre>
+<p>同样，我们观察到网络在epoch12 达到其峰值性能（90% 的训练准确率和 81% 的测试准确率）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># plot the stats</span><br><br>f, axarr = plt.subplots(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>, figsize = (<span class="hljs-number">12</span>, <span class="hljs-number">8</span>))<br>axarr[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>].plot(training_losses_google)<br>axarr[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>].set_title(<span class="hljs-string">&quot;Training loss&quot;</span>)<br>axarr[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>].plot(training_accs_google)<br>axarr[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>].set_title(<span class="hljs-string">&quot;Training acc&quot;</span>)<br>axarr[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>].plot(test_accs_google)<br>axarr[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>].set_title(<span class="hljs-string">&quot;Test acc&quot;</span>)<br><br></code></pre></td></tr></table></figure>
+
+
+
+
+<pre><code class="hljs">Text(0.5, 1.0, &#39;Test acc&#39;)
+</code></pre>
+<p><img src="https://ptpimg.me/qqpd2g.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="5-3-在单幅图像上评估模型"><a href="#5-3-在单幅图像上评估模型" class="headerlink" title="5.3 在单幅图像上评估模型"></a>5.3 在单幅图像上评估模型</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">single_img_eval(model_ft_google, <span class="hljs-string">&quot;test/Chevrolet Traverse SUV 2012/004695.jpg&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://ptpimg.me/5672w0.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<pre><code class="hljs">Chevrolet Impala Sedan 2007 confidence:  4.615828037261963
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">single_img_eval(model_ft_google, <span class="hljs-string">&quot;test/FIAT 500 Abarth 2012/008089.jpg&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://ptpimg.me/qloo1w.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<pre><code class="hljs">FIAT 500 Abarth 2012 confidence:  6.266000747680664
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">single_img_eval(model_ft_google,  <span class="hljs-string">&quot;test/Aston Martin V8 Vantage Convertible 2012/000623.jpg&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://ptpimg.me/2jj563.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<pre><code class="hljs">Aston Martin V8 Vantage Convertible 2012 confidence:  6.059011459350586
+</code></pre>
+<p>对比ResNet34该网络识别出后两个，第一个也是识别错了，但是更接近一些，只是confidence低一些。</p>
+<h2 id="5-4-保存模型以备后用"><a href="#5-4-保存模型以备后用" class="headerlink" title="5.4 保存模型以备后用"></a>5.4 保存模型以备后用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.save(model_ft_google.state_dict(), <span class="hljs-string">&#x27;car_model_googlenet.pth&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h1 id="6-结论"><a href="#6-结论" class="headerlink" title="6. 结论"></a>6. 结论</h1><p>在这个项目中，我们在预训练的最先进的 ResNet34 和 GoogLeNet 网络上实施了“现成的”迁移学习技术。我们通过用未经训练的层替换它们的最后一个完全连接层来采用这些网络，然后冻结更深的层并使用我们的数据训练最后一层：斯坦福汽车数据，使用随机梯度下降。我们使用自适应学习率来优化训练过程。我们还对训练数据进行了扩充以避免过度拟合。</p>
+<p>我们的结果不错，采用的两种网络都具有高性能：来自 ResNet34 的网络具有 93% 的训练准确率和 85% 的测试准确率；来自 GoogLeNet 的网络具有 90% 的训练准确率和 84% 的测试准确率。</p>
+<p>最后，我们还使用单个图像来模拟真实生产场景来评估模型，并且模型表现良好。</p>
+<h1 id="7-未来优化"><a href="#7-未来优化" class="headerlink" title="7. 未来优化"></a>7. 未来优化</h1><p>迁移学习的下一步将是在预训练网络中更深入：可能训练更多的新层，或者微调一些更深的层。也许这可以将性能提升到更高的水平并解决敞篷车与轿跑车的问题。</p>
+<p>此外，我们希望将迁移学习用于图像分类以外的任务，也许是一些自然语言处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>https://www.gawaint.me/2024/07/30/StanfordCars/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Gawain</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/26/hello-world/" title="Gawain&#39;s Blog">
+                        <span class="hidden-mobile">Gawain&#39;s Blog</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Gawain12/comment-utterances');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量
+        <span id="leancloud-site-pv"></span>
+        次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
