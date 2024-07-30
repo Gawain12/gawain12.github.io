@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.gawaint.me/2024/07/30/StanfordCars/</loc>
+    <loc>https://www.gawaint.me/2022/09/02/motionanalys/</loc>
     
     <lastmod>2024-07-30</lastmod>
     
@@ -11,9 +11,36 @@
   </url>
   
   <url>
-    <loc>https://www.gawaint.me/2023/03/07/GAT's%20Toturial/</loc>
+    <loc>https://www.gawaint.me/2021/08/22/DeepLearningTextCNN/</loc>
     
-    <lastmod>2024-07-27</lastmod>
+    <lastmod>2024-07-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.gawaint.me/2021/05/11/m1/</loc>
+    
+    <lastmod>2024-07-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.gawaint.me/2023/11/01/GAT's%20Toturial/</loc>
+    
+    <lastmod>2024-07-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.gawaint.me/2022/11/07/StanfordCars/</loc>
+    
+    <lastmod>2024-07-30</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -21,33 +48,6 @@
   
   <url>
     <loc>https://www.gawaint.me/2020/03/07/localnas/</loc>
-    
-    <lastmod>2024-07-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.gawaint.me/2022/03/07/motionanalys/</loc>
-    
-    <lastmod>2024-07-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.gawaint.me/2021/03/07/m1/</loc>
-    
-    <lastmod>2024-07-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.gawaint.me/2021/03/07/DeepLearningTextCNN/</loc>
     
     <lastmod>2024-07-27</lastmod>
     
