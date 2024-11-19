@@ -22,7 +22,7 @@
     <meta name="description" content="GAT教程本文来自对作者gordicaleksa的notebook代码pytorch-GAT的翻译。感谢作者本文的想法是让非研究人员也能更轻松地理解图注意力网络（以及通用的GNN）！ 在本文中，您将获得以下问题的答案： ✅ GAT 到底是什么？✅ 如何加载和可视化Cora引文网络？✅ 我们如何训练GAT（Cora分类示例）？✅ 如何可视化不同GAT的属性？ 完成本课程后，您将对图神经网络有更好的理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GAT教程">
-<meta property="og:url" content="https://www.gawaint.me/2023/11/01/GAT's%20Toturial/index.html">
+<meta property="og:url" content="https://gawain12.github.io/2023/11/01/GAT's%20Toturial/index.html">
 <meta property="og:site_name" content="Gawain&#39;s notes">
 <meta property="og:description" content="GAT教程本文来自对作者gordicaleksa的notebook代码pytorch-GAT的翻译。感谢作者本文的想法是让非研究人员也能更轻松地理解图注意力网络（以及通用的GNN）！ 在本文中，您将获得以下问题的答案： ✅ GAT 到底是什么？✅ 如何加载和可视化Cora引文网络？✅ 我们如何训练GAT（Cora分类示例）？✅ 如何可视化不同GAT的属性？ 完成本课程后，您将对图神经网络有更好的理">
 <meta property="og:locale" content="zh_CN">
@@ -85,7 +85,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"www.gawaint.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"FeJdeqy6cDDAySGfsLP8g1bl-MdYXbMMI","app_key":"Hj6SxzGjyvHq8tHLJTqtcyHZ","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"gawain12.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"FeJdeqy6cDDAySGfsLP8g1bl-MdYXbMMI","app_key":"Hj6SxzGjyvHq8tHLJTqtcyHZ","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -590,7 +590,7 @@ Max attention weight = 0.012915871106088161 and min = 0.012394174002110958
   <div class="license-box my-3">
     <div class="license-title">
       <div>GAT教程</div>
-      <div>https://www.gawaint.me/2023/11/01/GAT&#39;s Toturial/</div>
+      <div>https://gawain12.github.io/2023/11/01/GAT&#39;s Toturial/</div>
     </div>
     <div class="license-meta">
       

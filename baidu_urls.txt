@@ -1,8 +1,8 @@
-https://www.gawaint.me/2024/11/20/PT%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/
-https://www.gawaint.me/2023/11/01/GAT's%20Toturial/
-https://www.gawaint.me/2022/11/07/StanfordCars/
-https://www.gawaint.me/2022/09/02/motionanalys/
-https://www.gawaint.me/2021/08/22/DeepLearningTextCNN/
-https://www.gawaint.me/2021/05/11/m1/
-https://www.gawaint.me/2020/03/07/localnas/
-https://www.gawaint.me/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/
+https://gawain12.github.io/2024/11/20/PT%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/
+https://gawain12.github.io/2023/11/01/GAT's%20Toturial/
+https://gawain12.github.io/2022/11/07/StanfordCars/
+https://gawain12.github.io/2022/09/02/motionanalys/
+https://gawain12.github.io/2021/08/22/DeepLearningTextCNN/
+https://gawain12.github.io/2021/05/11/m1/
+https://gawain12.github.io/2020/03/07/localnas/
+https://gawain12.github.io/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/

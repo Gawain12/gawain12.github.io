@@ -22,7 +22,7 @@
     <meta name="description" content="WIN10迁移C盘和崩溃还原系统总结这几天为了清理C盘一直动系统的文件，导致经常重启，其中主要还是迁移C盘Users数据到其他非系统盘操作不当导致开机系统加载不了用户信息，下面具体记录这两方面。  迁移资料的关键还是利用硬链接将物理地址位于其他盘的Users用户信息映射到C盘的逻辑名上。下面只简单记录一下命令。  最关键的还是利用系统的保命文件———Backup.wim重刷系统一个通过Dism++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重装系统">
-<meta property="og:url" content="https://www.gawaint.me/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:url" content="https://gawain12.github.io/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Gawain&#39;s notes">
 <meta property="og:description" content="WIN10迁移C盘和崩溃还原系统总结这几天为了清理C盘一直动系统的文件，导致经常重启，其中主要还是迁移C盘Users数据到其他非系统盘操作不当导致开机系统加载不了用户信息，下面具体记录这两方面。  迁移资料的关键还是利用硬链接将物理地址位于其他盘的Users用户信息映射到C盘的逻辑名上。下面只简单记录一下命令。  最关键的还是利用系统的保命文件———Backup.wim重刷系统一个通过Dism++">
 <meta property="og:locale" content="zh_CN">
@@ -76,7 +76,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"www.gawaint.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"FeJdeqy6cDDAySGfsLP8g1bl-MdYXbMMI","app_key":"Hj6SxzGjyvHq8tHLJTqtcyHZ","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"gawain12.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"FeJdeqy6cDDAySGfsLP8g1bl-MdYXbMMI","app_key":"Hj6SxzGjyvHq8tHLJTqtcyHZ","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -336,7 +336,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>重装系统</div>
-      <div>https://www.gawaint.me/2020/03/07/重装系统/</div>
+      <div>https://gawain12.github.io/2020/03/07/重装系统/</div>
     </div>
     <div class="license-meta">
       
