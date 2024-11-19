@@ -1161,40 +1161,6 @@ Finished Training
 <h1 id="未完待补充"><a href="#未完待补充" class="headerlink" title="未完待补充"></a>未完待补充</h1>]]></content>
   </entry>
   <entry>
-    <title>重装系统</title>
-    <url>/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h1 id="WIN10迁移C盘和崩溃还原系统总结"><a href="#WIN10迁移C盘和崩溃还原系统总结" class="headerlink" title="WIN10迁移C盘和崩溃还原系统总结"></a>WIN10迁移C盘和崩溃还原系统总结</h1><p>这几天为了清理C盘一直动系统的文件，导致经常重启，其中主要还是迁移C盘Users数据到其他非系统盘操作不当导致开机系统加载不了用户信息，下面具体记录这两方面。</p>
-<ol>
-<li><p>迁移资料的关键还是利用硬链接将物理地址位于其他盘的Users用户信息映射到C盘的逻辑名上。下面只简单记录一下命令。</p>
-</li>
-<li><p><strong>最关键的还是利用系统的保命文件———Backup.wim重刷系统</strong><br>一个通过Dism++文件创建的镜像文件，尽量将此文件放于非系统盘，有此文件基本可以不用借助任何外部工具无限重刷回原系统。</p>
-</li>
-</ol>
-<p>上面两者都需要通过高级重启进入一个纯命令行的Dos界面，在此可以几乎不受权限限制对文件<strong>删除复制</strong>等操作<br><strong>进入 <em>系统设置 -&gt; 升级&amp;安全 -&gt; 恢复 -&gt; 高级重启 -&gt; 立刻重启</em> 来重启电脑到恢复模式；</strong><br><img src="https://ptpimg.me/edeyq3.png" alt="在这里插入图片描述"><br>后面就是选择 <em><strong>疑难解答-&gt;高级-&gt;命令提示符</strong></em>（现在不便具体演示，网上有很多相关教程）</p>
-<p><strong>注意</strong>：在Dos环境下盘符名称可能和平时不一样(我的OS就变成F盘了)，首先就是平时被隐藏的X盘，其他最好先通过 <strong>diskpart</strong>命令进入管理磁盘工具，通过<strong>list volume</strong>查看所有盘符信息，<strong>exit</strong>退出。同时利用<strong>cd 对应硬盘</strong> 进入后再用<strong>dir</strong>命令确认文件是否正确。</p>
-<h2 id="C盘Users迁移其他盘"><a href="#C盘Users迁移其他盘" class="headerlink" title="C盘Users迁移其他盘"></a>C盘Users迁移其他盘</h2><p>有几种方法可用，原则就是要先保证在非现用户使用环境下进行，为了避免各种权限要求，我是直接开机进入Dos命令行：</p>
-<ol>
-<li>将Users复制与其他盘.<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">复制C:\Users下的所有文件到D:\Users <br><br><span class="hljs-comment">// 参数说明：此命令为Windows的“强制文件拷贝”命令。</span><br><span class="hljs-comment">//      /E 表示拷贝文件时包含子目录（包括空目录）</span><br><span class="hljs-comment">//      /COPYALL 表示拷贝所有文件信息</span><br><span class="hljs-comment">//      /XJ 表示不包括Junction points（默认是包括的）</span><br><span class="hljs-comment">//      /XD &quot;F:\Users\Administrator&quot; 表示不包括指定的目录,此处指定目录为：&quot;F:\Users\Administrator&quot;</span><br>robocopy <span class="hljs-string">&quot;F:\Users&quot;</span> <span class="hljs-string">&quot;D:\Users&quot;</span> /E /COPYALL /XJ /XD <span class="hljs-string">&quot;F:\Users\Administrator&quot;</span><br></code></pre></td></tr></table></figure></li>
-<li>删除用户文件<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//参数说明：此命令删除指定目录。</span><br><span class="hljs-comment">//      /S 删除指定目录及其中的所有文件,用于删除目录树。</span><br><span class="hljs-comment">//      /Q 安静模式,删除时不询问。 </span><br>rmdir  <span class="hljs-string">&quot;F:\Users&quot;</span> /S /Q　　<br></code></pre></td></tr></table></figure></li>
-<li>硬链接将C盘新Users链接到所备份的文件<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 参数说明：此命令创建符号连接。</span><br><span class="hljs-comment">//      /J 连接类型为目录连接</span><br>mklink  /J <span class="hljs-string">&quot;F:\Users&quot;</span> <span class="hljs-string">&quot;D:\Users&quot;</span><br></code></pre></td></tr></table></figure>
-期间可能复制一部分文件不成功，我看不太重要就强制继续，删除可能不干净，也可采用ren 命令将Users文件夹重命名，保证和硬链接不冲突即可，后面再处理，不用自己创建新的Users，mklink会自动生成，自己要创建可用<strong>md</strong>命令。</li>
-</ol>
-<h2 id="备份以及还原系统"><a href="#备份以及还原系统" class="headerlink" title="备份以及还原系统"></a>备份以及还原系统</h2><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4><p>有几种方式，我用的dism++ 备份，也可采用命令行.</p>
-<ol>
-<li>命令行：<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">  <span class="hljs-comment">//初始备份（例如：把 C 分区的系统备份到 D 分区的 1文件夹中，备份文件名为Backup.wim）：</span><br>    Dism /Capture-Image /ImageFile:D:\<span class="hljs-number">1</span>\Backup.wim /CaptureDir:C:\ /Name:Backup<span class="hljs-number">-1</span> /Description:<span class="hljs-number">0000</span><span class="hljs-number">-00</span><span class="hljs-number">-00</span><br><span class="hljs-comment">// 命令解释：</span><br><span class="hljs-comment">//    /Capture-Image - 指定捕获映像。</span><br><span class="hljs-comment">//    /ImageFile: - 指定映像文件路径。                </span><br><span class="hljs-comment">//    /CaptureDir: - 指定捕获目录。</span><br><span class="hljs-comment">//    /Name: - 指定名称。此项不能省略。</span><br><span class="hljs-comment">//    /Description: - 指定描述。描述是为了说明这次备份的具体情况，我们这里用了时间。此项可省略。</span><br></code></pre></td></tr></table></figure></li>
-<li>利用软件dism++<br><strong>选择恢复-&gt;系统备份</strong><br><img src="https://ptpimg.me/36404v.png" alt="在这里插入图片描述"><br>选择保存的硬盘并输入保存的名字：<br><img src="https://ptpimg.me/28h841.png" alt="在这里插入图片描述"><br>等待完成即可。<br><strong>注</strong>：最好备份前清理C盘，保证电脑最好状态，这也是个人用电脑的好习惯。</li>
-</ol>
-<h2 id="系统还原"><a href="#系统还原" class="headerlink" title="系统还原"></a>系统还原</h2><p>具体参考以下<br> <a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-update/%E7%94%A8-dism/a3ea0d10-036c-41ff-8bb9-350c2bda525b">用 DISM 命令备份与还原 Windows 系统</a>.<br>关键指令：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//系统还原（例如：把 D:\Backup.wim 中备份还原到 C分区）：</span><br>    Dism /Apply-Image /ImageFile:D:\Backup.wim/Index:<span class="hljs-number">1</span> /ApplyDir:C:\<br> <span class="hljs-comment">//   命令解释：</span><br> <span class="hljs-comment">//   /Apply-Image - 指定应用映像。</span><br> <span class="hljs-comment">//   /ApplyDir: - 指定应用目录。</span><br> <span class="hljs-comment">//  /Index: - 指定索引。此项不能省略。 </span><br></code></pre></td></tr></table></figure>
-<p><strong>因 Dism 安装 WIM 映像不会像 Ghost 那样格式化磁盘，个人就遇上第一次成功还原后，后面还原遇上无法访问的 错误5，所以先格式化系统盘是最稳妥的。</strong><br>格式化指令：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">format C:/q<br><span class="hljs-comment">//    /Q  执行快速格式化。</span><br></code></pre></td></tr></table></figure>
-<p>格式化需谨慎，尽量多<strong>dir</strong>命令查看确认分区是否正确，毕竟系统格式化了马上就还原，资料格式化就啥也没了。</p>
-<p>格式化完成再按上述命令完成还原，几乎不会有问题，一般等待十几分钟，完成后就可以关闭命令窗口重启电脑，过会就会看见熟悉输入密码页面了。</p>
-<p>到此一个完整还原周期完成，平时尽量养成将数据置于非系统盘之下的习惯，这样除了减小C盘容量压力，也可使重装系统带来的影响最小，某种程度保证自己电脑使用稳定性。</p>
-<p> 第一次文档记录，为以后系统崩溃提供解决办法，也是向大家分享折腾了两天的错误经验，虽然都是可以google到的方法，但收集信息排错需要时间精力。<strong>格式化C区-&gt;dos还原系统</strong>是个人使用最快捷方便的恢复操作，<br>若有错误或纰漏多多指正，还有，小白谨慎使用以上方法，我不能保证错误操作对系统不会造成损失。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>机器学习-文本处理之电影评论多分类情感分析</title>
     <url>/2022/09/02/motionanalys/</url>
     <content><![CDATA[<h1 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h1><p>文本处理是许多ML应用程序中最常见的任务之一。以下是此类应用的一些示例</p>
@@ -2314,6 +2280,40 @@ Actual: 0        520   605    283    17    1
         4          2     6    217   825  710
 </code></pre>
 <p><strong>基于TF-IDF的逻辑回归模型优于其他机器学习算法</strong>. </p>
+]]></content>
+  </entry>
+  <entry>
+    <title>重装系统</title>
+    <url>/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h1 id="WIN10迁移C盘和崩溃还原系统总结"><a href="#WIN10迁移C盘和崩溃还原系统总结" class="headerlink" title="WIN10迁移C盘和崩溃还原系统总结"></a>WIN10迁移C盘和崩溃还原系统总结</h1><p>这几天为了清理C盘一直动系统的文件，导致经常重启，其中主要还是迁移C盘Users数据到其他非系统盘操作不当导致开机系统加载不了用户信息，下面具体记录这两方面。</p>
+<ol>
+<li><p>迁移资料的关键还是利用硬链接将物理地址位于其他盘的Users用户信息映射到C盘的逻辑名上。下面只简单记录一下命令。</p>
+</li>
+<li><p><strong>最关键的还是利用系统的保命文件———Backup.wim重刷系统</strong><br>一个通过Dism++文件创建的镜像文件，尽量将此文件放于非系统盘，有此文件基本可以不用借助任何外部工具无限重刷回原系统。</p>
+</li>
+</ol>
+<p>上面两者都需要通过高级重启进入一个纯命令行的Dos界面，在此可以几乎不受权限限制对文件<strong>删除复制</strong>等操作<br><strong>进入 <em>系统设置 -&gt; 升级&amp;安全 -&gt; 恢复 -&gt; 高级重启 -&gt; 立刻重启</em> 来重启电脑到恢复模式；</strong><br><img src="https://ptpimg.me/edeyq3.png" alt="在这里插入图片描述"><br>后面就是选择 <em><strong>疑难解答-&gt;高级-&gt;命令提示符</strong></em>（现在不便具体演示，网上有很多相关教程）</p>
+<p><strong>注意</strong>：在Dos环境下盘符名称可能和平时不一样(我的OS就变成F盘了)，首先就是平时被隐藏的X盘，其他最好先通过 <strong>diskpart</strong>命令进入管理磁盘工具，通过<strong>list volume</strong>查看所有盘符信息，<strong>exit</strong>退出。同时利用<strong>cd 对应硬盘</strong> 进入后再用<strong>dir</strong>命令确认文件是否正确。</p>
+<h2 id="C盘Users迁移其他盘"><a href="#C盘Users迁移其他盘" class="headerlink" title="C盘Users迁移其他盘"></a>C盘Users迁移其他盘</h2><p>有几种方法可用，原则就是要先保证在非现用户使用环境下进行，为了避免各种权限要求，我是直接开机进入Dos命令行：</p>
+<ol>
+<li>将Users复制与其他盘.<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">复制C:\Users下的所有文件到D:\Users <br><br><span class="hljs-comment">// 参数说明：此命令为Windows的“强制文件拷贝”命令。</span><br><span class="hljs-comment">//      /E 表示拷贝文件时包含子目录（包括空目录）</span><br><span class="hljs-comment">//      /COPYALL 表示拷贝所有文件信息</span><br><span class="hljs-comment">//      /XJ 表示不包括Junction points（默认是包括的）</span><br><span class="hljs-comment">//      /XD &quot;F:\Users\Administrator&quot; 表示不包括指定的目录,此处指定目录为：&quot;F:\Users\Administrator&quot;</span><br>robocopy <span class="hljs-string">&quot;F:\Users&quot;</span> <span class="hljs-string">&quot;D:\Users&quot;</span> /E /COPYALL /XJ /XD <span class="hljs-string">&quot;F:\Users\Administrator&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li>删除用户文件<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//参数说明：此命令删除指定目录。</span><br><span class="hljs-comment">//      /S 删除指定目录及其中的所有文件,用于删除目录树。</span><br><span class="hljs-comment">//      /Q 安静模式,删除时不询问。 </span><br>rmdir  <span class="hljs-string">&quot;F:\Users&quot;</span> /S /Q　　<br></code></pre></td></tr></table></figure></li>
+<li>硬链接将C盘新Users链接到所备份的文件<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 参数说明：此命令创建符号连接。</span><br><span class="hljs-comment">//      /J 连接类型为目录连接</span><br>mklink  /J <span class="hljs-string">&quot;F:\Users&quot;</span> <span class="hljs-string">&quot;D:\Users&quot;</span><br></code></pre></td></tr></table></figure>
+期间可能复制一部分文件不成功，我看不太重要就强制继续，删除可能不干净，也可采用ren 命令将Users文件夹重命名，保证和硬链接不冲突即可，后面再处理，不用自己创建新的Users，mklink会自动生成，自己要创建可用<strong>md</strong>命令。</li>
+</ol>
+<h2 id="备份以及还原系统"><a href="#备份以及还原系统" class="headerlink" title="备份以及还原系统"></a>备份以及还原系统</h2><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4><p>有几种方式，我用的dism++ 备份，也可采用命令行.</p>
+<ol>
+<li>命令行：<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">  <span class="hljs-comment">//初始备份（例如：把 C 分区的系统备份到 D 分区的 1文件夹中，备份文件名为Backup.wim）：</span><br>    Dism /Capture-Image /ImageFile:D:\<span class="hljs-number">1</span>\Backup.wim /CaptureDir:C:\ /Name:Backup<span class="hljs-number">-1</span> /Description:<span class="hljs-number">0000</span><span class="hljs-number">-00</span><span class="hljs-number">-00</span><br><span class="hljs-comment">// 命令解释：</span><br><span class="hljs-comment">//    /Capture-Image - 指定捕获映像。</span><br><span class="hljs-comment">//    /ImageFile: - 指定映像文件路径。                </span><br><span class="hljs-comment">//    /CaptureDir: - 指定捕获目录。</span><br><span class="hljs-comment">//    /Name: - 指定名称。此项不能省略。</span><br><span class="hljs-comment">//    /Description: - 指定描述。描述是为了说明这次备份的具体情况，我们这里用了时间。此项可省略。</span><br></code></pre></td></tr></table></figure></li>
+<li>利用软件dism++<br><strong>选择恢复-&gt;系统备份</strong><br><img src="https://ptpimg.me/36404v.png" alt="在这里插入图片描述"><br>选择保存的硬盘并输入保存的名字：<br><img src="https://ptpimg.me/28h841.png" alt="在这里插入图片描述"><br>等待完成即可。<br><strong>注</strong>：最好备份前清理C盘，保证电脑最好状态，这也是个人用电脑的好习惯。</li>
+</ol>
+<h2 id="系统还原"><a href="#系统还原" class="headerlink" title="系统还原"></a>系统还原</h2><p>具体参考以下<br> <a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-update/%E7%94%A8-dism/a3ea0d10-036c-41ff-8bb9-350c2bda525b">用 DISM 命令备份与还原 Windows 系统</a>.<br>关键指令：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//系统还原（例如：把 D:\Backup.wim 中备份还原到 C分区）：</span><br>    Dism /Apply-Image /ImageFile:D:\Backup.wim/Index:<span class="hljs-number">1</span> /ApplyDir:C:\<br> <span class="hljs-comment">//   命令解释：</span><br> <span class="hljs-comment">//   /Apply-Image - 指定应用映像。</span><br> <span class="hljs-comment">//   /ApplyDir: - 指定应用目录。</span><br> <span class="hljs-comment">//  /Index: - 指定索引。此项不能省略。 </span><br></code></pre></td></tr></table></figure>
+<p><strong>因 Dism 安装 WIM 映像不会像 Ghost 那样格式化磁盘，个人就遇上第一次成功还原后，后面还原遇上无法访问的 错误5，所以先格式化系统盘是最稳妥的。</strong><br>格式化指令：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">format C:/q<br><span class="hljs-comment">//    /Q  执行快速格式化。</span><br></code></pre></td></tr></table></figure>
+<p>格式化需谨慎，尽量多<strong>dir</strong>命令查看确认分区是否正确，毕竟系统格式化了马上就还原，资料格式化就啥也没了。</p>
+<p>格式化完成再按上述命令完成还原，几乎不会有问题，一般等待十几分钟，完成后就可以关闭命令窗口重启电脑，过会就会看见熟悉输入密码页面了。</p>
+<p>到此一个完整还原周期完成，平时尽量养成将数据置于非系统盘之下的习惯，这样除了减小C盘容量压力，也可使重装系统带来的影响最小，某种程度保证自己电脑使用稳定性。</p>
+<p> 第一次文档记录，为以后系统崩溃提供解决办法，也是向大家分享折腾了两天的错误经验，虽然都是可以google到的方法，但收集信息排错需要时间精力。<strong>格式化C区-&gt;dos还原系统</strong>是个人使用最快捷方便的恢复操作，<br>若有错误或纰漏多多指正，还有，小白谨慎使用以上方法，我不能保证错误操作对系统不会造成损失。</p>
 ]]></content>
   </entry>
 </search>
