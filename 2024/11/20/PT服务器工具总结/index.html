@@ -1,0 +1,805 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Gawain">
+  <meta name="keywords" content="Share">
+  
+    <meta name="description" content="本文主要包括PT的各类辅种发种的shell命令，电影种的截图制种，音乐种的抓流、转码、发种频谱图等等。 服务器性能测试脚本其他脚本参考 1wget -qO- --no-check-certificate https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;oooldking&#x2F;script&#x2F;master&#x2F;superbench.sh | bash  两个大家常用的脚本，基本集成了多数需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gawain&#39;s notes">
+<meta property="og:url" content="https://www.gawaint.me/2024/11/20/PT%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Gawain&#39;s notes">
+<meta property="og:description" content="本文主要包括PT的各类辅种发种的shell命令，电影种的截图制种，音乐种的抓流、转码、发种频谱图等等。 服务器性能测试脚本其他脚本参考 1wget -qO- --no-check-certificate https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;oooldking&#x2F;script&#x2F;master&#x2F;superbench.sh | bash  两个大家常用的脚本，基本集成了多数需">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-19T17:17:01.772Z">
+<meta property="article:modified_time" content="2024-11-19T17:20:24.165Z">
+<meta property="article:author" content="Gawain">
+<meta property="article:tag" content="Share">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Gawain&#39;s notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"www.gawaint.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"FeJdeqy6cDDAySGfsLP8g1bl-MdYXbMMI","app_key":"Hj6SxzGjyvHq8tHLJTqtcyHZ","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-20 01:17" pubdate>
+          2024年11月20日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>本文主要包括PT的各类辅种发种的shell命令，电影种的截图制种，音乐种的抓流、转码、发种频谱图等等。</p>
+<h3 id="服务器性能测试脚本"><a href="#服务器性能测试脚本" class="headerlink" title="服务器性能测试脚本"></a>服务器性能测试脚本</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/117547388">其他脚本参考</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash<br></code></pre></td></tr></table></figure>
+
+<p>两个大家常用的脚本，基本集成了多数需要的发种工具，(有概率装不上其他软件比如wine)<br><a target="_blank" rel="noopener" href="https://github.com/Aniverse/inexistence">星大Inexistence</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">bash &lt;(wget --no-check-certificate -qO- https://github.com/Aniverse/inexistence/raw/master/inexistence.sh)<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://github.com/jerry048/Dedicated-Seedbox">Jerry048</a></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">bash &lt;(wget -qO- https://raw.githubusercontent.<span class="hljs-keyword">com</span>/jerry048/Dedicated-Seedbox/main/Install.<span class="hljs-keyword">sh</span>) <span class="hljs-symbol">&lt;username&gt;</span> <span class="hljs-symbol">&lt;password&gt;</span> &lt;Cache Size(uni<span class="hljs-variable">t:GiB</span>)&gt;<br># 格式类似，注意空格 name password <span class="hljs-number">16</span> GB<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="虚拟环境搭建"><a href="#虚拟环境搭建" class="headerlink" title="虚拟环境搭建"></a>虚拟环境搭建</h1><h4 id="Docker一键安装"><a href="#Docker一键安装" class="headerlink" title="Docker一键安装"></a>Docker一键安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">curl -fsSL https://get.docker.com -o get-docker.sh<br>sh get-docker.sh<br></code></pre></td></tr></table></figure>
+<h4 id="conda安装使用"><a href="#conda安装使用" class="headerlink" title="conda安装使用"></a>conda安装使用</h4><p>主要用于python的运行，比起virtualenv，conda最大优点是可以自动安装指定新版本python，不用本地环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget -4 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">第二步安装</span><br>sh Miniconda3-py39_4.9.2-Linux-x86_64.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">第三步配置conda镜像</span><br><br>export PATH=/root/miniconda3/bin:$PATH<br><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-built_in">alias</span> ohmyzsh=<span class="hljs-string">&quot;mate ~/.oh-my-zsh&quot;</span></span><br><br>vim ~/.zshrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># 添加下面的内容</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">&gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">!! Contents within this block are managed by <span class="hljs-string">&#x27;conda init&#x27;</span> !!</span><br>__conda_setup=&quot;$(&#x27;/root/miniconda3/bin/conda&#x27; &#x27;shell.zsh&#x27; &#x27;hook&#x27; 2&gt; /dev/null)&quot;<br>if [ $? -eq 0 ]; then<br>    eval &quot;$__conda_setup&quot;<br>else<br>    if [ -f &quot;/root/miniconda3/etc/profile.d/conda.sh&quot; ]; then<br>        . &quot;/root/miniconda3/etc/profile.d/conda.sh&quot;<br>    else<br>        export PATH=&quot;/root/miniconda3/bin:$PATH&quot;<br>    fi<br>fi<br>unset __conda_setup<br><span class="hljs-meta prompt_"># </span><span class="language-bash">&lt;&lt;&lt; <span class="hljs-string">conda initialize &lt;&lt;&lt;</span></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">添加完后激活</span></span><br>source ~/.zshrc<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">使用</span></span><br>conda create -n py39 python=3.9<br>conda activate py39<br></code></pre></td></tr></table></figure>
+
+<h1 id="下载器工具"><a href="#下载器工具" class="headerlink" title="下载器工具"></a>下载器工具</h1><h2 id="transmission"><a href="#transmission" class="headerlink" title="transmission"></a>transmission</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs shell">version: &quot;3.2&quot;<br><br>services:<br>  transmission:<br>    image: chisbread/transmission<br>    container_name: transmission<br>    environment:<br>      - PUID=0<br>      - PGID=0<br>      - TZ=Asia/Shanghai<br>      - USER= <br>      - PASS=<br>      - PEERPORT=10413<br>    volumes:<br>      - /tr/config:/config<br>      - /tr/downloads:/downloads<br>      - /tr/watch:/watch<br>      <br>    ports:<br>      - 9091:9091<br>      - 10413:10413<br>      - 10413:10413/udp<br>    restart: unless-stopped<br></code></pre></td></tr></table></figure>
+
+<p>配置好yml文件后需要下载docker-compose命令<br>在对应的目录输入docker-compose up<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/shangyexin/article/details/122085552?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2.pc_relevant_paycolumn_v3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2.pc_relevant_paycolumn_v3&utm_relevant_index=5">具体参考这篇文章</a></p>
+<h2 id="Usenet下载器sabnzbd"><a href="#Usenet下载器sabnzbd" class="headerlink" title="Usenet下载器sabnzbd"></a>Usenet下载器sabnzbd</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d \<br>  --name=sabnzbd \<br>  -p 8384:8080 \<br>  -e PUID=1000 \<br>  -e PGID=1000 \<br>  -v /home/你的用户名/sabnzbd/config:/config \<br>  -v /home/你的用户名/sabnzbd/downloads:/downloads \<br>  -v /home/你的用户名/sabnzbd/incomplete:/incomplete-downloads \<br>  --restart unless-stopped \<br>  linuxserver/sabnzbd<br></code></pre></td></tr></table></figure>
+<p>vim &#x2F;home&#x2F;你的用户名&#x2F;sabnzbd&#x2F;config&#x2F;sabnzbd.ini<br>把–inet_exposure从0修改到5才能正常访问</p>
+<ul>
+<li>记得替换路径！</li>
+</ul>
+<h1 id="助手工具"><a href="#助手工具" class="headerlink" title="助手工具"></a>助手工具</h1><h2 id="PPTP"><a href="#PPTP" class="headerlink" title="PPTP"></a>PPTP</h2><p>Chrome<br>Edge</p>
+<h2 id="Jackett"><a href="#Jackett" class="headerlink" title="Jackett"></a>Jackett</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker create --name=jackett \<br>--restart=always \<br>-v /root/jackett/config:/config \<br>-v /root/jackett/downloads:/downloads \<br>-e PGID=0 -e PUID=0 \<br>-p 9117:9117 \<br>linuxserver/jackett<br><br>docker start<br></code></pre></td></tr></table></figure>
+<h2 id="Prowlarr"><a href="#Prowlarr" class="headerlink" title="Prowlarr"></a>Prowlarr</h2><p>更推荐这个工具，还能支持Usenet的indexer，比上者维护更勤</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d \<br>--name=prowlarr \<br>-e PUID=1000 \<br>-e PGID=1000 \<br>-e TZ=Asia/Shanghai \<br>-p 9696:9696 \<br>-v /prowlarr/config:/config \<br>-v /本地下载目录:/downloads \<br>--restart unless-stopped \<br>linuxserver/prowlarr<br></code></pre></td></tr></table></figure>
+
+<h2 id="IYUU-plus"><a href="#IYUU-plus" class="headerlink" title="IYUU plus"></a>IYUU plus</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /root/plus -p<br>docker run -d  --name IYUUPlus  -v /root/plus:/IYUU/db -v /etc/qbit/config/qBittorrent/BT_backup:/qb -v /etc/transmission/config/torrents:/tr -p 8787:8787  --restart=always iyuucn/iyuuplus:latest<br></code></pre></td></tr></table></figure>
+<h2 id="seedcross"><a href="#seedcross" class="headerlink" title="seedcross"></a>seedcross</h2><p>辅种外站神器，不过还没成熟有辅错的可能，它的原理是用你下载器的种子通过jackett搜索匹配。<br><a target="_blank" rel="noopener" href="https://github.com/ccf-2012/seedcross">github链接</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d --name seedcross -v /somedir/in/host:/code/seedcross/db -p 8019:8019 ccf2012/seedcross:latest<br></code></pre></td></tr></table></figure>
+<p>打开8787端口<br>密码为空，第一次输入时你可以自由设置你的密码；以后密码与第一次相同才能登录</p>
+<h1 id="FileBrower"><a href="#FileBrower" class="headerlink" title="FileBrower"></a>FileBrower</h1><p>荒野无灯FBE的安装脚，作为网盘可直接做种截图，非常方便</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir -p ~/docker/fb/config ~/docker/fb/myfiles<br>docker run -d --name fb \<br>  --restart=unless-stopped \<br>  -e PUID=$UID \<br>  -e PGID=$GID \<br>  -e WEB_PORT=8082 \<br>  -e FB_AUTH_SERVER_ADDR=&quot;127.0.0.1&quot; \<br>  -p 8082:8082 \<br>  -v ~/docker/fb/config:/config \<br>  -v /:/myfiles \<br>  --mount type=tmpfs,destination=/tmp \<br>  80x86/filebrowser:2.9.4-amd64<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="做截图"><a href="#做截图" class="headerlink" title="做截图"></a>做截图</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ffmpeg -i [视频路径] -r 1 -vframes 4 -q:v 2 -f image2 image-%d.jpeg<br></code></pre></td></tr></table></figure>
+<h1 id="Rclone"><a href="#Rclone" class="headerlink" title="Rclone"></a>Rclone</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">安装最新版本rclone</span> <br>apt-get install p7zip-full<br>curl https://rclone.org/install.sh | sudo bash<br></code></pre></td></tr></table></figure>
+<p>盒子文件同步到云盘，主要是我盒子拉本地非常慢，所以用云盘做中转。<br>可以是Onedrive、Google drive<br>我这里说阿里云盘</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d \<br>--name=aliyundrive-webdav \<br>--restart=always \<br>-p 8080:8080 \<br>-v $PWD/docker/aliyundrive-webdav/:/etc/aliyundrive-webdav/ \<br> -e REFRESH_TOKEN=&#x27;your refreshToken&#x27; \<br> -e WEBDAV_AUTH_USER=admin \<br> -e WEBDAV_AUTH_PASSWORD=admin \<br> messense/aliyundrive-webdav<br>​<br></code></pre></td></tr></table></figure>
+<p>可以点开ip:8080访问，密码账号如上，需要注意的是，换成其他端口可能会服务不了，如果冲突的话先把另一个关了。</p>
+<h1 id="Clouddrive2的服务搭建"><a href="#Clouddrive2的服务搭建" class="headerlink" title="Clouddrive2的服务搭建"></a>Clouddrive2的服务搭建</h1><p>这个比rlone更方便，主要是用来挂载115的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://github.com/cloud-fs/cloud-fs.github.io/releases/download/v0.8.1/clouddrive-2-linux-x86_64-0.8.1.tgz<br>md /opt/clouddrive<br>tar zxvf clouddrive-2-linux-x86_64-0.8.1.tgz -C /opt/clouddrive<br><br>vim /etc/systemd/system/clouddrive.service<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入下面的内容，daemon reload</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">Description=clouddrive2<br>After=network.target<br><br>[Service]<br>Type=exec<br>Restart=on-failure<br>ExecStart=/opt/clouddrive/clouddrive<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
+<h4 id="Onedrive"><a href="#Onedrive" class="headerlink" title="Onedrive"></a>Onedrive</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">要在mac/win上先用rclone authorize &quot;onedrive&quot;跳转网页授权，返回token（注意要把整个json全复制下来）<br></code></pre></td></tr></table></figure>
+<p>同时挂载多个rclone的网盘</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs shell">curl https://rclone.org/install.sh | sudo bash<br><span class="hljs-meta prompt_">#</span><span class="language-bash">安装完成后，运行rclone连接webdav完成配置</span><br>rclone config<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">配置玩rclone后</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">前者上<span class="hljs-built_in">od</span>地址后者上本地地址，复制以下内容创建service</span><br>vim /etc/systemd/system/rclone@.service<br><span class="hljs-meta prompt_">#</span><span class="language-bash">粘贴以下内容</span><br>[Unit]<br>Description=Rclone mount %I drive<br>AssertPathIsDirectory=LocalFolder<br>After=network-online.target<br><br>[Service]<br>Type=simple<br>ExecStart=/usr/bin/rclone mount %i: /mnt/%i \<br>--config /root/.config/rclone/rclone.conf \<br>--copy-links \<br>--no-gzip-encoding \<br>--no-check-certificate \<br>--vfs-cache-mode full \<br>--umask 0000 \<br>--default-permissions \<br>--allow-non-empty \<br>--allow-other \<br>--attr-timeout 5m \<br>--vfs-cache-max-size 1G \<br>--buffer-size 500M \<br>--vfs-read-chunk-size 64M \<br>--vfs-read-chunk-size-limit 1G<br>ExecStop=/bin/fusermount -u LocalFolder<br>Restart=on-abort<br>User=root<br><br>[Install]<br>WantedBy=default.target<br></code></pre></td></tr></table></figure>
+<p>&#x2F;mnt改为想挂载的目标目录根目录。配置好后创建挂载目标子目录后可以自动挂载，注意名字要和rclone的remotes一致。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /mnt/od1<br>systemctl enable rclone@od1<br>systemctl start rclone@od1<br></code></pre></td></tr></table></figure>
+<p>最简单的方法 rclone config file 直接复制conf文件夹内的配置信息，粘贴到对应的服务器</p>
+<p><a target="_blank" rel="noopener" href="http://bbs.chinauos.com/zh/post/9207">配置教程参考</a>，需要注意最新版可能编号不一样，要自己选择webdav</p>
+<h1 id="IRC"><a href="#IRC" class="headerlink" title="IRC"></a>IRC</h1><p>挂在到nas上的thelounge客户端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget -P /root https://github.com/thelounge/thelounge/releases/download/v4.2.0/thelounge_4.2.0_all.deb<br>dpkg -i /root/thelounge_4.2.0_all.deb<br><span class="hljs-comment">#systemctl stop thelounge.service</span><br><span class="hljs-comment">#sed -i &#x27;s/9000,/11111,/g&#x27; /etc/thelounge/config.js</span><br><span class="hljs-comment"># 以上命令替换端口号，9000端口号挺常见容易产生冲突</span><br><span class="hljs-comment"># 比如 docker 的 portainer 镜像默认映射端口号就用的是 9000</span><br><span class="hljs-comment"># 该命令将 9000 端口号替换成 11111，这个可以自定义（1-65535 任选一个没重复的当端口号）</span><br><br>systemctl start thelounge.service<br>systemctl <span class="hljs-built_in">enable</span> thelounge.service<br>thelounge add 用户名#手动添加登陆的用户名<br><span class="hljs-comment">#配置的时候记得在命令里面加上以下三句命令</span><br>/msg NickServ RECOVER 昵称<br>/msg NickServ IDENTIFY 昵称 密码#避免被挤掉<br>/msg Vertigo ENTER 昵称 irc密码<br></code></pre></td></tr></table></figure>
+<p>如果提示node版本问题可能需要更新，nvm是个管理node的工具</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash<br>export NVM_DIR=&quot;$HOME/.nvm&quot;<br>[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm<br>[ -s &quot;$NVM_DIR/bash_completion&quot; ] &amp;&amp; \. &quot;$NVM_DIR/bash_completion&quot;  # This loads nvm bash_completion<br></code></pre></td></tr></table></figure>
+<h1 id="音乐相关"><a href="#音乐相关" class="headerlink" title="音乐相关"></a>音乐相关</h1><h3 id="Flac-to-mp3"><a href="#Flac-to-mp3" class="headerlink" title="Flac to mp3"></a>Flac to mp3</h3><p><a target="_blank" rel="noopener" href="http://robinbowes.github.io/flac2mp3/">Flac2Mp3</a>该工具会将你所有flac文件转为mp3，且按相同的名字文件结构保存。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/robinbowes/flac2mp3/tarball/master">下载链接download.tar.gz</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">tar zxvf flac2mp3-0.3.0.tar.gz<br>apt install flac<br>apt install lame<br><span class="hljs-meta prompt_">#</span><span class="language-bash">找到解压文件内的flac2mp3.pl文件，善用软连接,默认v2，自己修改为v0或320</span><br><br>ln -s 文件所在路径  f2m<br>./f2m --preset=V0 /path/to/lossless /path/to/lossy<br></code></pre></td></tr></table></figure>
+
+<h3 id="Flac-24bit-16bit"><a href="#Flac-24bit-16bit" class="headerlink" title="Flac 24bit-&gt;16bit"></a>Flac 24bit-&gt;16bit</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sox input.flac -G -b 16 output.flac rate -v -L 48000 dither<br><br>for flac in *.flac; do sox -S &quot;$&#123;flac&#125;&quot; -r 44100 -b 16 new/&quot;$&#123;flac&#125;&quot;; done<br></code></pre></td></tr></table></figure>
+<h3 id="一键上传图床脚本"><a href="#一键上传图床脚本" class="headerlink" title="一键上传图床脚本"></a>一键上传图床脚本</h3><p><a target="_blank" rel="noopener" href="https://github.com/theirix/ptpimg-uploader">https://github.com/theirix/ptpimg-uploader</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install ptpimg_uploader<br><br>export PTPIMG_API_KEY=&lt;your hex key&gt;<br><br>ptpimg_uploader ~/seed/mytorrent/folder.jpg<br></code></pre></td></tr></table></figure>
+
+<h3 id="频谱图"><a href="#频谱图" class="headerlink" title="频谱图"></a>频谱图</h3><ol>
+<li>sox 专辑路径名字&#x2F;*.flac -n spectrogram -o 专辑.png</li>
+<li>要是二级目录<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/zsh/bin</span><br>dir=/home/download/<br>filename=$1<br>cd &quot;$filename&quot;<br>ls -d */ | grep -o &#x27;[a-Z]*\ *[0-9]/&#x27; &gt;temp.log<br>sed -i &#x27;s/$/*flac/&#x27; temp.log<br>mapfile acmd &lt;temp.log<br>echo $&#123;acmd[@]&#125;<br>fdir=&#x27;&#x27;<br>if test -z &quot;$acmd&quot;<br>then<br>  echo &quot;No subfolder~&quot;<br>  sox *flac -n spectrogram -o $dir/spectrograms/&quot;$filename&quot;.png<br>else<br>  l=$&#123;#acmd[@]&#125;<br>  case &quot;$l&quot; in<br>          2)<br>             echo &quot;There 2 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; -n spectrogram -o $dir/spectrograms/&quot;$filename&quot;.png<br>            <br>             ;;<br>          *)<br>             echo &quot;There more than 3 discs, only take first 3&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; -n spectrogram -o $dir/spectrograms/&quot;$filename&quot;.png<br>             ;;<br>  esac<br></code></pre></td></tr></table></figure></li>
+<li>单碟版一键制谱并上传图床返回链接</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim sp-up.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">复制以下内容</span><br>n=$1<br>cd &quot;$n&quot;<br><br>sox *flac -n spectrogram -o ../spectrograms/&quot;$n&quot;.png<br>sp=$(ptpimg_uploader -k your-ptpimg-key --bbcode <br>spec=[hide=spectrogram]$sp[/hide]<br>echo &quot;PTPIMGurl: $spec&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">具体使用</span><br>sh sp-up.sh 专辑目录<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">git clone https://github.com/EwolBash/spsox.git<br>cd spsox<br>chmod +x spsox<br>cp spsox /usr/local/bin/<br>spsox<br>spsox -r /home/ewol/Music/music/&#x27;Chuck Prophet - Bobby Fuller Died For Your Sins (2017) [FLAC]&#x27;/<br>spsox -r /home/ewol/Music/music<br></code></pre></td></tr></table></figure>
+<h3 id="web抓流"><a href="#web抓流" class="headerlink" title="web抓流"></a>web抓流</h3><p><a target="_blank" rel="noopener" href="https://github.com/nathom/streamrip">https://github.com/nathom/streamrip</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">需要python&gt;3.8</span><br>pip3 install streamrip --upgrade<br><br>rip config --open<br><span class="hljs-meta prompt_">#</span><span class="language-bash">填上arl之类的信息</span><br><br>rip 专辑url<br></code></pre></td></tr></table></figure>
+<h3 id="压缩flac专辑到lv8"><a href="#压缩flac专辑到lv8" class="headerlink" title="压缩flac专辑到lv8"></a>压缩flac专辑到lv8</h3><p><a target="_blank" rel="noopener" href="https://xiph.org/flac/documentation_tools_flac.html">flac命令行文档</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">flac -8 专辑名字/* -f<br></code></pre></td></tr></table></figure>
+
+<h1 id="抓流制种频谱图集合"><a href="#抓流制种频谱图集合" class="headerlink" title="抓流制种频谱图集合"></a>抓流制种频谱图集合</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/zsh</span><br>l=($*)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">num=<span class="hljs-variable">$1</span></span><br>for num in $&#123;l[*]&#125;;do<br>        echo https://www.xxx.com/album/$num<br>        ripb=`rip url line https://www.deezer.com/album/$num`<br>        echo &quot;$ripb&quot;<br>        fullname=/home/download<br><br>        if [[ $ripb =~ &quot;Unable to stream&quot; ]] || [[ $ripb =~ &quot;already downloaded&quot; ]]<br>        then<br>                echo $num &quot;$ripb&quot;&gt;&gt;$fullname/fail.log#抓流失败或者重复跳过循环<br>                continue<br>        fi<br>        dirname=$(ls -At $fullname | sed -n &quot;1p&quot;)<br>        mktorrent -v -p -l 22 -o $fullname/torrents/&quot;$dirname&quot;.torrent $fullname/&quot;$dirname&quot;<br>        cd $fullname/&quot;$dirname&quot;<br><br>        ls -d */ | grep -o &#x27;[a-Z]*\ *[0-9]/&#x27; &gt;temp.log<br>        sed -i &#x27;s/$/*flac/&#x27; temp.log<br>        mapfile acmd &lt;temp.log<br><br>        fdir=&#x27;&#x27;<br>        if test -z &quot;$acmd&quot;<br>        then<br>        echo &quot;No subfolder~&quot;<br>         sox *flac -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>        else<br>         l=$&#123;#acmd[@]&#125;<br>         case &quot;$l&quot; in<br>          2)<br>             echo &quot;There 2 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>          3)<br>             echo &quot;There 3 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>          4)<br>             echo &quot;There 4 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             a4=`cat temp.log | sed -n &#x27;4p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; &quot;$a4&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>          *)<br>             echo &quot;There more than 5 discs, only take first 6&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             a4=`cat temp.log | sed -n &#x27;4p&#x27;`<br>             a5=`cat temp.log | sed -n &#x27;5p&#x27;`<br>             a6=`cat temp.log | sed -n &#x27;6p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; &quot;$a4&quot; &quot;$a5&quot; &quot;$a6&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>         esac<br>        fi<br>        #sox $fullname/&quot;$dirname&quot;/*flac -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>        sp=$(ptpimg_uploader --bbcode $fullname/spectrograms/&quot;$dirname&quot;.png)<br>        spec=[hide=spectrogram]$sp[/hide]<br>        echo &quot;$spec $dirname $num&quot; &gt;&gt;&quot;$fullname&quot;/torrents/PtpimgUrl.txt<br>        echo &quot;PTPIMGurl: $spec&quot;<br>        sleep $[($RANDOM % 10)+3]<br></code></pre></td></tr></table></figure>
+
+<h2 id="截图工具convert"><a href="#截图工具convert" class="headerlink" title="截图工具convert"></a>截图工具convert</h2><p>要apt install imagemagick</p>
+<h2 id="AutoBrr"><a href="#AutoBrr" class="headerlink" title="AutoBrr"></a>AutoBrr</h2><p><a target="_blank" rel="noopener" href="https://autobrr.com/configuration/irc">https://autobrr.com/configuration/irc</a><br>刷外站神器，主要是支持没有rss用irc推送的站，上面的官方文档已经相当详细，我这个是介绍下docker安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim docker-compose.yml<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入以下内容，替换映射地址</span><br>version: &quot;3.7&quot;<br><br>services:<br>  autobrr:<br>    container_name: autobrr<br>    image: ghcr.io/autobrr/autobrr:latest<br>    restart: unless-stopped<br>    #logging:<br>    #  driver: json-file<br>    #  options:<br>    #    max-file: $&#123;DOCKERLOGGING_MAXFILE&#125;<br>    #    max-size: $&#123;DOCKERLOGGING_MAXSIZE&#125;<br>    user: 1000:1000<br>    environment:<br>      - TZ=$&#123;TZ&#125;<br>    volumes:<br>      - $&#123;BASE_DOCKER_DATA_PATH&#125;/autobrr/config:/config<br>    ports:<br>      - 7474:7474<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker compose up -d<br></code></pre></td></tr></table></figure>
+<p>注意盒子上使用要找到config.toml文件，把127.0.0.1改成0.0.0.0</p>
+<p>通知可用tg的bot，怎么搞详细教程参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/whatday/article/details/113748634?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167496205316800192275150%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=167496205316800192275150&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-113748634-null-null.142%5Ev71%5Einsert_chatgpt,201%5Ev4%5Eadd_ask&utm_term=telegram%20bot&spm=1018.2226.3001.4187">这个教程</a>，简单一点就是先去搜索botFather创建一个bot，搞号命名描述获取token，再去getuseridbot查自己id(有概率搜不到)。点击链接测试返回值<a target="_blank" rel="noopener" href="https://api.telegram.org/bot%3Ctoken%3E/getUpdates">https://api.telegram.org/bot&lt;换自己token&gt;&#x2F;getUpdates</a><br>填的时候注意token直接复制整个‘数字:字符串’，chat_id是自己的id。</p>
+<ul>
+<li>注意：<br>添加客户端的时候deluge一个坑，他的名字密码要去&#x2F;docker&#x2F;appdata&#x2F;deluge&#x2F;auth找，username:password:level的形式，地址必须是纯数字ip，不是官方推荐的127.0.0.1或者localhost。qb地址是<a href="http://ip:端口">http://ip:端口</a></li>
+</ul>
+<h2 id="flexget"><a href="#flexget" class="headerlink" title="flexget"></a>flexget</h2><p>自动rss新种，可自定义规则，星大脚本直接装或者直接：pip install flexget</p>
+<p>配置文件config.yml</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs shell">templates:<br><span class="hljs-meta prompt_"># </span><span class="language-bash">剩余空间模板，当 path 对应的路径的剩余空间小于 space 规定的数值的时候停止 RSS 下载</span><br>  freespace:<br>    free_space:<br>      path: /home/gawain/deluge/download/<br>      space: 20240<br><span class="hljs-meta prompt_"># </span><span class="language-bash">qb 的模板，之后写 qb 就是指把种子推送到 qb 进行下载；下面 <span class="hljs-built_in">tr</span> de rt 也是如此</span><br>  qb:<br>    qbittorrent:<br>      path: /home/gawain/deluge/download/<br>      host: localhost<br>      port: 2017<br>      username: **** <br>      password: ****<br>  de:<br>    deluge:<br>      path: /home/gawain/deluge/TSBluray/rar<br>      host: localhost<br>      port: 58846<br>      username: ...<br>      password: ...<br>  size:<br>    content_size:<br>      min: 13000<br>      max: 46666<br>      strict: yes<br><br>tasks:<br>  Ts-Bluray:<br>    rss: https://www.torrentseeds.org/rss/****<br>    if:<br>      - &quot;&#x27;BLURAY&#x27; in title&quot;: accept<br>      #- &quot;&#x27;subs&#x27; in title&quot;: reject<br>    temperate: <br>      - de<br>      - freespace<br>      - size<br>    deluge:<br>      label: TSBluray<br><br>web_server:<br>  port: 6566<br>  web_ui: yes<br><br>schedules: no<br></code></pre></td></tr></table></figure>
+<p>然后测试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">不下载只测试获取情况</span><br>flexget --test <br><span class="hljs-meta prompt_">#</span><span class="language-bash">标记老的种子</span><br>flexget --learn<br><span class="hljs-meta prompt_">#</span><span class="language-bash">确定flexget安装目录</span><br>which flexget<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加cron</span><br>crontab -e<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加语句，后面替换上面获取的路径</span><br>*/3 * * * * /usr/local/bin/flexget execute<br></code></pre></td></tr></table></figure>
+<h1 id="差速器"><a href="#差速器" class="headerlink" title="差速器"></a>差速器</h1><p><a target="_blank" rel="noopener" href="https://leishi.io/blog/posts/2021-12/Differential/">大佬博客</a><br>只要提供给差速器一个需要发布的文件夹和豆瓣信息页面，差速器会自动帮你</p>
+<ol>
+<li>根据豆瓣链接获取PTGen信息</li>
+<li>根据资源载体获取MediaInfo&#x2F;BDInfo信息</li>
+<li>截取自定数量的无损截图，上传到指定的图床</li>
+<li>制作种子</li>
+<li>如果是本地环境，自动打开浏览器，然后自动填充所有的信息<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">Linux一键安装，其他平台和docker参考以上文章</span><br>curl -Lso- https://raw.githubusercontent.com/LeiShi1313/Differential/main/install.sh | bash<br><br>vim config.ini<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入以下内容</span><br>[DEFAULT]<br>; 是否制种<br>make_torrent = true<br><br>; 生成截图的数量<br>screenshot_count = 6<br>; 图床，差速器支持PTPIMG、自建imgurl、自建Chevereto（z4a、imgbb、猫柠的图床等）、SM.MS和BYR作为图床<br>image_hosting = CHEVERETO<br>; 自建Chevereto的地址<br>chevereto_hosting_url = https://XXX.com<br>; 自建Chevereto的用户名<br>chevereto_username = XXXX<br>; 自建Chevereto的密码<br>chevereto_password = YYYY<br><br>; 自动填充使用的脚本，这里使用树大的脚本<br>easy_upload = true<br>; 也可以使用明日大的脚本来进行自动填充<br>; auto_feed = true<br><br>; 使用差速器自带的短网址服务<br>use_short_url = true<br><br>; 差速器自带一个自建的PTGen，如果无法访问，可以提供自定义PTGen地址<br>;ptgen_url = https://XXXXX.com<br><br>[NexusPHP]<br>; 发种页面的链接<br>upload_url = https://XXXXX.com/upload.php<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">发布格式</span><br>dft ne -f [种子文件夹] -u [豆瓣链接]<br></code></pre></td></tr></table></figure>
+需要注意的是需要自己配置config，和视频文件同一文件夹，可能需要科学使用默认ptgen。</li>
+</ol>
+<h1 id="解压rar"><a href="#解压rar" class="headerlink" title="解压rar"></a>解压rar</h1><p>主要为了解压0day资源，只能手动安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget http://www.rarlab.com/rar/rarlinux-x64-5.0.0.tar.gz --no-check-certificate<br>tar xvf rarlinux-x64-5.0.0.tar.gz<br>cd rar<br>make install<br>ln -n unrar /usr/bin/unrar<br><span class="hljs-meta prompt_">#</span><span class="language-bash">使用方法</span><br>unrar e  ***.rar(or folder) target-path<br></code></pre></td></tr></table></figure>
+<h1 id="Remux"><a href="#Remux" class="headerlink" title="Remux"></a>Remux</h1><p>Remux必须有eac3to的解码日志，而eac3to又只支持windows，所以需要wine32</p>
+<h2 id="Wine"><a href="#Wine" class="headerlink" title="Wine"></a>Wine</h2><p> 可以星大脚本直接手动加参数装<br> Debian10安装Wine32有很多坑，wine是为了eac3to</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt-get install libgnutls30:i386 libldap-2.4-2:i386 libgpg-error0:i386 libxml2:i386 libasound2-plugins:i386 libsdl2-2.0-0:i386 libfreetype6:i386 libdbus-1-3:i386 libsqlite3-0:i386<br></code></pre></td></tr></table></figure>
+<h2 id="eac3to"><a href="#eac3to" class="headerlink" title="eac3to"></a>eac3to</h2><p><a target="_blank" rel="noopener" href="https://unixsheikh.com/tutorials/remuxing-iso-dvd-or-bluray-using-cat-and-ffmpeg-on-linux.html">https://unixsheikh.com/tutorials/remuxing-iso-dvd-or-bluray-using-cat-and-ffmpeg-on-linux.html</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">eac3to日志：</span><br>wget -O eac3to.zip https://www.videohelp.com/download/eac3to336.zip\?r\=LRXdxQfL<br>unzip eac3to.zip<br>wine eac3to/eac3to.exe `winepath -w /home/gawain/deluge/download/Songs.From.The.Second.Floor.2000.COMPLETE.BLURAY-iFPD/BDMV` &#x27;1)&#x27; 1:chapter.txt 2:h264.mkv 3:DTSMAENG.dtsma -progressnumbers -log=eac3to.txt<br><span class="hljs-meta prompt_">#</span><span class="language-bash">注意，这里有个非常诡异的问题，排查了很久，1）会选者不上，主要是因为路径的问题，要用winepath</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">1）ffmpeg</span><br>ffmpeg -i 00009.m2ts -map 0:0 -vcodec copy -map 0:1 -acodec copy -map 0:7 -scodec copy W.E.2011.1080p.BluRay.Remux.mkv<br><span class="hljs-meta prompt_">#</span><span class="language-bash">2）mkvermerge</span><br>mkvmerge -o W.E.2011.1080p.BluRay.Remux.mkv 00009.m2ts <br></code></pre></td></tr></table></figure>
+<p> i is the name of the input file.<br>-map is used to map each track to a specific command option.<br>0:0 is the first track, i.e. the video, which is then mapped to the -vcodec option, i.e. video codec option, which simply copies the video track into the new mkv container.<br>0:1 is the first audio track, i.e. the English audio, which is then mapped to the -acodec option, i.e. audio codec option, which simply copies the English audio track into the new mkv container.<br>0:9 is the first subtitle track, i.e. the English subtitle, which is then mapped to the -scodec option, i.e. subtitle codec option, which simply copies the English subtitle into the new mkv container.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt install mkvtoolnix<br>mkvmerge <br></code></pre></td></tr></table></figure>
+
+<h1 id="小工具集合"><a href="#小工具集合" class="headerlink" title="小工具集合"></a>小工具集合</h1><h3 id="mosh连接"><a href="#mosh连接" class="headerlink" title="mosh连接"></a>mosh连接</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">brew install mosh#mac 客户端<br><br>sudo apt-get install mosh<br>mosh-server new -c 256 -s -l LANG=en_US.UTF-8 -p 60000<br><br>mosh pi@pi42.local -p 6000<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="远程同步文件"><a href="#远程同步文件" class="headerlink" title="远程同步文件"></a>远程同步文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">rsync -avz --progress /root/client/   root@202.112.23.12:/home/work/      <br><span class="hljs-meta prompt_">#</span><span class="language-bash">将本机的/root/client/拷贝至远程的202.112.23.12:/home/work/目录，--progress可以查看拷贝的过程</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="docker查看映射目录"><a href="#docker查看映射目录" class="headerlink" title="docker查看映射目录"></a>docker查看映射目录</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker inspect 容器名称 | grep Mounts -A 20<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="批量获取前端种子下载链接"><a href="#批量获取前端种子下载链接" class="headerlink" title="批量获取前端种子下载链接"></a>批量获取前端种子下载链接</h2><p>主要是针对ptpp不支持的站点</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">clear</span>()<br><br><span class="hljs-keyword">var</span> trs = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&quot;form[action]&quot;</span>)<br><span class="hljs-keyword">var</span> pk =<span class="hljs-string">&quot;passkey&quot;</span><br><span class="hljs-keyword">var</span> dl =<span class="hljs-string">&#x27;&#x27;</span><br>href=<span class="hljs-string">&#x27;&#x27;</span><br>ct=<span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> tr <span class="hljs-keyword">of</span> trs)&#123;<br>    a=tr.<span class="hljs-property">action</span><br>    <span class="hljs-keyword">if</span> (a.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/zip/</span>))<br>    &#123;<br>       <span class="hljs-keyword">continue</span><br>    &#125;<br>    tid=a.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/id=(\d+)&amp;*sign=(\d+)/</span>)<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(tr)<br>    <span class="hljs-keyword">if</span>(tid)<br>       href=<span class="hljs-string">&quot;https://***./download.php?id=&quot;</span>+tid[<span class="hljs-number">1</span>]+<span class="hljs-string">&quot;&amp;passkey=&quot;</span>+pk+<span class="hljs-string">&quot;&amp;https=1&quot;</span><br>       dl=dl+href+<span class="hljs-string">&quot;\r\n&quot;</span><br>       ct=ct+<span class="hljs-number">1</span><br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(dl,ct)<br><span class="hljs-title function_">copy</span>(dl)<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="新服务器探针ServerStatus"><a href="#新服务器探针ServerStatus" class="headerlink" title="新服务器探针ServerStatus"></a>新服务器探针ServerStatus</h3><p><a target="_blank" rel="noopener" href="https://github.com/zdz/ServerStatus-Rust">https://github.com/zdz/ServerStatus-Rust</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">自动安装配置脚本</span><br>wget --no-check-certificate -qO status.sh &#x27;https://raw.githubusercontent.com/zdz/ServerStatus-Rust/master/scripts/status.sh&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">客户端</span><br>./status.sh -i -c http://name:password@ip:8080<br><span class="hljs-meta prompt_">#</span><span class="language-bash">服务器</span><br>./status.sh -i -s <br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>https://www.gawaint.me/2024/11/20/PT服务器工具总结/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Gawain</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/01/GAT&#39;s%20Toturial/" title="GAT教程">
+                        <span class="hidden-mobile">GAT教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Gawain12/comment-utterances');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量
+        <span id="leancloud-site-pv"></span>
+        次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
