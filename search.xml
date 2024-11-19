@@ -128,7 +128,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>重装系统</title>
+    <title>斯坦福汽车识别</title>
     <url>/2022/11/07/StanfordCars/</url>
     <content><![CDATA[<h1 id="斯坦福汽车分类"><a href="#斯坦福汽车分类" class="headerlink" title="斯坦福汽车分类"></a>斯坦福汽车分类</h1><p>这是一个使用斯坦福汽车数据集进行汽车分类的深度学习项目。我将使用迁移学习在ImageNet上预训练的深度网络，并对数据集进行微调，为了减少训练时间我把数据集。</p>
 <p>数据来源：<a href="https://ai.stanford.edu/~jkrause/cars/car_dataset.html">https://ai.stanford.edu/~jkrause/cars/car_dataset.html</a></p>
@@ -627,24 +627,6 @@ Finished Training
 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">bash Miniforge3-MacOSX-arm64.sh<br><br>nano ~/.bash_profile<br>export PATH=&quot;/Users/Cyberbolt/miniforge3/bin:$PATH&quot; <br><br>source $HOME/.bash_profile<br></code></pre></td></tr></table></figure>
 <h2 id="在虚拟环境安装-TensorFlow"><a href="#在虚拟环境安装-TensorFlow" class="headerlink" title="在虚拟环境安装 TensorFlow"></a>在虚拟环境安装 TensorFlow</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">conda create -n py39 python=3.9<br>conda activate py39<br><br>conda install -c apple tensorflow-deps<br>python -m pip install tensorflow-macos<br>python -m pip install tensorflow-metal<br></code></pre></td></tr></table></figure>
 <h1 id="未完待补充"><a href="#未完待补充" class="headerlink" title="未完待补充"></a>未完待补充</h1>]]></content>
-  </entry>
-  <entry>
-    <title>Gawain&#39;s Blog</title>
-    <url>/2024/07/26/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>2021基于Debian的All in One（NAS+软路由）配置教程</title>
