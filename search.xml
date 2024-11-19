@@ -129,7 +129,7 @@
   </entry>
   <entry>
     <title>PT服务器工具</title>
-    <url>/2021/05/11/PT%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/</url>
+    <url>/2022/05/11/PT%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>本文主要包括PT的各类辅种发种的shell命令，电影种的截图制种，音乐种的抓流、转码、发种频谱图等等。</p>
 <h3 id="服务器性能测试脚本"><a href="#服务器性能测试脚本" class="headerlink" title="服务器性能测试脚本"></a>服务器性能测试脚本</h3><p><a href="https://zhuanlan.zhihu.com/p/117547388">其他脚本参考</a></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash<br></code></pre></td></tr></table></figure>
