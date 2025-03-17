@@ -11,6 +11,42 @@
   </url>
   
   <url>
+    <loc>https://gawain12.github.io/2021/08/22/DeepLearningTextCNN/</loc>
+    
+    <lastmod>2025-03-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://gawain12.github.io/2022/11/07/StanfordCars/</loc>
+    
+    <lastmod>2025-03-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://gawain12.github.io/2023/11/01/GAT's%20Toturial/</loc>
+    
+    <lastmod>2025-03-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://gawain12.github.io/2022/09/02/motionanalys/</loc>
+    
+    <lastmod>2025-03-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://gawain12.github.io/remark/index.html</loc>
     
     <lastmod>2024-11-23</lastmod>
@@ -38,43 +74,7 @@
   </url>
   
   <url>
-    <loc>https://gawain12.github.io/2022/11/07/StanfordCars/</loc>
-    
-    <lastmod>2024-11-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://gawain12.github.io/2022/09/02/motionanalys/</loc>
-    
-    <lastmod>2024-07-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://gawain12.github.io/2021/08/22/DeepLearningTextCNN/</loc>
-    
-    <lastmod>2024-07-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://gawain12.github.io/2021/05/11/m1/</loc>
-    
-    <lastmod>2024-07-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://gawain12.github.io/2023/11/01/GAT's%20Toturial/</loc>
     
     <lastmod>2024-07-30</lastmod>
     
@@ -135,6 +135,34 @@
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>https://gawain12.github.io/tags/deeplearning/</loc>
+    <lastmod>2025-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gawain12.github.io/tags/llm-rag/</loc>
+    <lastmod>2025-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gawain12.github.io/tags/deeplearning-cv/</loc>
+    <lastmod>2025-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gawain12.github.io/tags/ml/</loc>
+    <lastmod>2025-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 
   
