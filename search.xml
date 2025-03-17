@@ -128,6 +128,399 @@
 ]]></content>
   </entry>
   <entry>
+    <title>PT服务器工具</title>
+    <url>/2022/05/11/PT%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>本文主要包括PT的各类辅种发种的shell命令，电影种的截图制种，音乐种的抓流、转码、发种频谱图等等。</p>
+<h3 id="服务器性能测试脚本"><a href="#服务器性能测试脚本" class="headerlink" title="服务器性能测试脚本"></a>服务器性能测试脚本</h3><p><a href="https://zhuanlan.zhihu.com/p/117547388">其他脚本参考</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash<br></code></pre></td></tr></table></figure>
+
+<p>两个大家常用的脚本，基本集成了多数需要的发种工具，(有概率装不上其他软件比如wine)<br><a href="https://github.com/Aniverse/inexistence">星大Inexistence</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">bash &lt;(wget --no-check-certificate -qO- https://github.com/Aniverse/inexistence/raw/master/inexistence.sh)<br></code></pre></td></tr></table></figure>
+<p><a href="https://github.com/jerry048/Dedicated-Seedbox">Jerry048</a></p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><code class="hljs vim">bash &lt;(wget -qO- https://raw.githubusercontent.<span class="hljs-keyword">com</span>/jerry048/Dedicated-Seedbox/main/Install.<span class="hljs-keyword">sh</span>) <span class="hljs-symbol">&lt;username&gt;</span> <span class="hljs-symbol">&lt;password&gt;</span> &lt;Cache Size(uni<span class="hljs-variable">t:GiB</span>)&gt;<br># 格式类似，注意空格 name password <span class="hljs-number">16</span> GB<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="虚拟环境搭建"><a href="#虚拟环境搭建" class="headerlink" title="虚拟环境搭建"></a>虚拟环境搭建</h1><h4 id="Docker一键安装"><a href="#Docker一键安装" class="headerlink" title="Docker一键安装"></a>Docker一键安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">curl -fsSL https://get.docker.com -o get-docker.sh<br>sh get-docker.sh<br></code></pre></td></tr></table></figure>
+<h4 id="conda安装使用"><a href="#conda安装使用" class="headerlink" title="conda安装使用"></a>conda安装使用</h4><p>主要用于python的运行，比起virtualenv，conda最大优点是可以自动安装指定新版本python，不用本地环境</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget -4 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">第二步安装</span><br>sh Miniconda3-py39_4.9.2-Linux-x86_64.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">第三步配置conda镜像</span><br><br>export PATH=/root/miniconda3/bin:$PATH<br><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-built_in">alias</span> ohmyzsh=<span class="hljs-string">&quot;mate ~/.oh-my-zsh&quot;</span></span><br><br>vim ~/.zshrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># 添加下面的内容</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">&gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">!! Contents within this block are managed by <span class="hljs-string">&#x27;conda init&#x27;</span> !!</span><br>__conda_setup=&quot;$(&#x27;/root/miniconda3/bin/conda&#x27; &#x27;shell.zsh&#x27; &#x27;hook&#x27; 2&gt; /dev/null)&quot;<br>if [ $? -eq 0 ]; then<br>    eval &quot;$__conda_setup&quot;<br>else<br>    if [ -f &quot;/root/miniconda3/etc/profile.d/conda.sh&quot; ]; then<br>        . &quot;/root/miniconda3/etc/profile.d/conda.sh&quot;<br>    else<br>        export PATH=&quot;/root/miniconda3/bin:$PATH&quot;<br>    fi<br>fi<br>unset __conda_setup<br><span class="hljs-meta prompt_"># </span><span class="language-bash">&lt;&lt;&lt; <span class="hljs-string">conda initialize &lt;&lt;&lt;</span></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">添加完后激活</span></span><br>source ~/.zshrc<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">使用</span></span><br>conda create -n py39 python=3.9<br>conda activate py39<br></code></pre></td></tr></table></figure>
+
+<h1 id="下载器工具"><a href="#下载器工具" class="headerlink" title="下载器工具"></a>下载器工具</h1><h2 id="transmission"><a href="#transmission" class="headerlink" title="transmission"></a>transmission</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">version: &quot;3.2&quot;<br><br>services:<br>  transmission:<br>    image: chisbread/transmission<br>    container_name: transmission<br>    environment:<br>      - PUID=0<br>      - PGID=0<br>      - TZ=Asia/Shanghai<br>      - USER= <br>      - PASS=<br>      - PEERPORT=10413<br>    volumes:<br>      - /tr/config:/config<br>      - /tr/downloads:/downloads<br>      - /tr/watch:/watch<br>      <br>    ports:<br>      - 9091:9091<br>      - 10413:10413<br>      - 10413:10413/udp<br>    restart: unless-stopped<br></code></pre></td></tr></table></figure>
+
+<p>配置好yml文件后需要下载docker-compose命令<br>在对应的目录输入docker-compose up<br><a href="https://blog.csdn.net/shangyexin/article/details/122085552?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2.pc_relevant_paycolumn_v3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2.pc_relevant_paycolumn_v3&utm_relevant_index=5">具体参考这篇文章</a></p>
+<h2 id="Usenet下载器sabnzbd"><a href="#Usenet下载器sabnzbd" class="headerlink" title="Usenet下载器sabnzbd"></a>Usenet下载器sabnzbd</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker run -d \<br>  --name=sabnzbd \<br>  -p 8384:8080 \<br>  -e PUID=1000 \<br>  -e PGID=1000 \<br>  -v /home/你的用户名/sabnzbd/config:/config \<br>  -v /home/你的用户名/sabnzbd/downloads:/downloads \<br>  -v /home/你的用户名/sabnzbd/incomplete:/incomplete-downloads \<br>  --restart unless-stopped \<br>  linuxserver/sabnzbd<br></code></pre></td></tr></table></figure>
+<p>vim &#x2F;home&#x2F;你的用户名&#x2F;sabnzbd&#x2F;config&#x2F;sabnzbd.ini<br>把–inet_exposure从0修改到5才能正常访问</p>
+<ul>
+<li>记得替换路径！</li>
+</ul>
+<h1 id="助手工具"><a href="#助手工具" class="headerlink" title="助手工具"></a>助手工具</h1><h2 id="PPTP"><a href="#PPTP" class="headerlink" title="PPTP"></a>PPTP</h2><p>Chrome<br>Edge</p>
+<h2 id="Jackett"><a href="#Jackett" class="headerlink" title="Jackett"></a>Jackett</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker create --name=jackett \<br>--restart=always \<br>-v /root/jackett/config:/config \<br>-v /root/jackett/downloads:/downloads \<br>-e PGID=0 -e PUID=0 \<br>-p 9117:9117 \<br>linuxserver/jackett<br><br>docker start<br></code></pre></td></tr></table></figure>
+<h2 id="Prowlarr"><a href="#Prowlarr" class="headerlink" title="Prowlarr"></a>Prowlarr</h2><p>更推荐这个工具，还能支持Usenet的indexer，比上者维护更勤</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker run -d \<br>--name=prowlarr \<br>-e PUID=1000 \<br>-e PGID=1000 \<br>-e TZ=Asia/Shanghai \<br>-p 9696:9696 \<br>-v /prowlarr/config:/config \<br>-v /本地下载目录:/downloads \<br>--restart unless-stopped \<br>linuxserver/prowlarr<br></code></pre></td></tr></table></figure>
+
+<h2 id="IYUU-plus"><a href="#IYUU-plus" class="headerlink" title="IYUU plus"></a>IYUU plus</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">mkdir /root/plus -p<br>docker run -d  --name IYUUPlus  -v /root/plus:/IYUU/db -v /etc/qbit/config/qBittorrent/BT_backup:/qb -v /etc/transmission/config/torrents:/tr -p 8787:8787  --restart=always iyuucn/iyuuplus:latest<br></code></pre></td></tr></table></figure>
+<h2 id="seedcross"><a href="#seedcross" class="headerlink" title="seedcross"></a>seedcross</h2><p>辅种外站神器，不过还没成熟有辅错的可能，它的原理是用你下载器的种子通过jackett搜索匹配。<br><a href="https://github.com/ccf-2012/seedcross">github链接</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker run -d --name seedcross -v /somedir/in/host:/code/seedcross/db -p 8019:8019 ccf2012/seedcross:latest<br></code></pre></td></tr></table></figure>
+<p>打开8787端口<br>密码为空，第一次输入时你可以自由设置你的密码；以后密码与第一次相同才能登录</p>
+<h1 id="FileBrower"><a href="#FileBrower" class="headerlink" title="FileBrower"></a>FileBrower</h1><p>荒野无灯FBE的安装脚，作为网盘可直接做种截图，非常方便</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">mkdir -p ~/docker/fb/config ~/docker/fb/myfiles<br>docker run -d --name fb \<br>  --restart=unless-stopped \<br>  -e PUID=$UID \<br>  -e PGID=$GID \<br>  -e WEB_PORT=8082 \<br>  -e FB_AUTH_SERVER_ADDR=&quot;127.0.0.1&quot; \<br>  -p 8082:8082 \<br>  -v ~/docker/fb/config:/config \<br>  -v /:/myfiles \<br>  --mount type=tmpfs,destination=/tmp \<br>  80x86/filebrowser:2.9.4-amd64<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="做截图"><a href="#做截图" class="headerlink" title="做截图"></a>做截图</h1><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ffmpeg -i [视频路径] -r 1 -vframes 4 -q:v 2 -f image2 image-%d.jpeg<br></code></pre></td></tr></table></figure>
+<h1 id="Rclone"><a href="#Rclone" class="headerlink" title="Rclone"></a>Rclone</h1><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">安装最新版本rclone</span> <br>apt-get install p7zip-full<br>curl https://rclone.org/install.sh | sudo bash<br></code></pre></td></tr></table></figure>
+<p>盒子文件同步到云盘，主要是我盒子拉本地非常慢，所以用云盘做中转。<br>可以是Onedrive、Google drive<br>我这里说阿里云盘</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker run -d \<br>--name=aliyundrive-webdav \<br>--restart=always \<br>-p 8080:8080 \<br>-v $PWD/docker/aliyundrive-webdav/:/etc/aliyundrive-webdav/ \<br> -e REFRESH_TOKEN=&#x27;your refreshToken&#x27; \<br> -e WEBDAV_AUTH_USER=admin \<br> -e WEBDAV_AUTH_PASSWORD=admin \<br> messense/aliyundrive-webdav<br>​<br></code></pre></td></tr></table></figure>
+<p>可以点开ip:8080访问，密码账号如上，需要注意的是，换成其他端口可能会服务不了，如果冲突的话先把另一个关了。</p>
+<h1 id="Clouddrive2的服务搭建"><a href="#Clouddrive2的服务搭建" class="headerlink" title="Clouddrive2的服务搭建"></a>Clouddrive2的服务搭建</h1><p>这个比rlone更方便，主要是用来挂载115的</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget https://github.com/cloud-fs/cloud-fs.github.io/releases/download/v0.8.1/clouddrive-2-linux-x86_64-0.8.1.tgz<br>md /opt/clouddrive<br>tar zxvf clouddrive-2-linux-x86_64-0.8.1.tgz -C /opt/clouddrive<br><br>vim /etc/systemd/system/clouddrive.service<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入下面的内容，daemon reload</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">Description=clouddrive2<br>After=network.target<br><br>[Service]<br>Type=exec<br>Restart=on-failure<br>ExecStart=/opt/clouddrive/clouddrive<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
+<h4 id="Onedrive"><a href="#Onedrive" class="headerlink" title="Onedrive"></a>Onedrive</h4><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">要在mac/win上先用rclone authorize &quot;onedrive&quot;跳转网页授权，返回token（注意要把整个json全复制下来）<br></code></pre></td></tr></table></figure>
+<p>同时挂载多个rclone的网盘</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">curl https://rclone.org/install.sh | sudo bash<br><span class="hljs-meta prompt_">#</span><span class="language-bash">安装完成后，运行rclone连接webdav完成配置</span><br>rclone config<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">配置玩rclone后</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">前者上<span class="hljs-built_in">od</span>地址后者上本地地址，复制以下内容创建service</span><br>vim /etc/systemd/system/rclone@.service<br><span class="hljs-meta prompt_">#</span><span class="language-bash">粘贴以下内容</span><br>[Unit]<br>Description=Rclone mount %I drive<br>AssertPathIsDirectory=LocalFolder<br>After=network-online.target<br><br>[Service]<br>Type=simple<br>ExecStart=/usr/bin/rclone mount %i: /mnt/%i \<br>--config /root/.config/rclone/rclone.conf \<br>--copy-links \<br>--no-gzip-encoding \<br>--no-check-certificate \<br>--vfs-cache-mode full \<br>--umask 0000 \<br>--default-permissions \<br>--allow-non-empty \<br>--allow-other \<br>--attr-timeout 5m \<br>--vfs-cache-max-size 1G \<br>--buffer-size 500M \<br>--vfs-read-chunk-size 64M \<br>--vfs-read-chunk-size-limit 1G<br>ExecStop=/bin/fusermount -u LocalFolder<br>Restart=on-abort<br>User=root<br><br>[Install]<br>WantedBy=default.target<br></code></pre></td></tr></table></figure>
+<p>&#x2F;mnt改为想挂载的目标目录根目录。配置好后创建挂载目标子目录后可以自动挂载，注意名字要和rclone的remotes一致。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">mkdir /mnt/od1<br>systemctl enable rclone@od1<br>systemctl start rclone@od1<br></code></pre></td></tr></table></figure>
+<p>最简单的方法 rclone config file 直接复制conf文件夹内的配置信息，粘贴到对应的服务器</p>
+<p><a href="http://bbs.chinauos.com/zh/post/9207">配置教程参考</a>，需要注意最新版可能编号不一样，要自己选择webdav</p>
+<h1 id="IRC"><a href="#IRC" class="headerlink" title="IRC"></a>IRC</h1><p>挂在到nas上的thelounge客户端</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">wget -P /root https://github.com/thelounge/thelounge/releases/download/v4.2.0/thelounge_4.2.0_all.deb<br>dpkg -i /root/thelounge_4.2.0_all.deb<br><span class="hljs-comment">#systemctl stop thelounge.service</span><br><span class="hljs-comment">#sed -i &#x27;s/9000,/11111,/g&#x27; /etc/thelounge/config.js</span><br><span class="hljs-comment"># 以上命令替换端口号，9000端口号挺常见容易产生冲突</span><br><span class="hljs-comment"># 比如 docker 的 portainer 镜像默认映射端口号就用的是 9000</span><br><span class="hljs-comment"># 该命令将 9000 端口号替换成 11111，这个可以自定义（1-65535 任选一个没重复的当端口号）</span><br><br>systemctl start thelounge.service<br>systemctl <span class="hljs-built_in">enable</span> thelounge.service<br>thelounge add 用户名#手动添加登陆的用户名<br><span class="hljs-comment">#配置的时候记得在命令里面加上以下三句命令</span><br>/msg NickServ RECOVER 昵称<br>/msg NickServ IDENTIFY 昵称 密码#避免被挤掉<br>/msg Vertigo ENTER 昵称 irc密码<br></code></pre></td></tr></table></figure>
+<p>如果提示node版本问题可能需要更新，nvm是个管理node的工具</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash<br>export NVM_DIR=&quot;$HOME/.nvm&quot;<br>[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm<br>[ -s &quot;$NVM_DIR/bash_completion&quot; ] &amp;&amp; \. &quot;$NVM_DIR/bash_completion&quot;  # This loads nvm bash_completion<br></code></pre></td></tr></table></figure>
+<h1 id="音乐相关"><a href="#音乐相关" class="headerlink" title="音乐相关"></a>音乐相关</h1><h3 id="Flac-to-mp3"><a href="#Flac-to-mp3" class="headerlink" title="Flac to mp3"></a>Flac to mp3</h3><p><a href="http://robinbowes.github.io/flac2mp3/">Flac2Mp3</a>该工具会将你所有flac文件转为mp3，且按相同的名字文件结构保存。</p>
+<p><a href="https://github.com/robinbowes/flac2mp3/tarball/master">下载链接download.tar.gz</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">tar zxvf flac2mp3-0.3.0.tar.gz<br>apt install flac<br>apt install lame<br><span class="hljs-meta prompt_">#</span><span class="language-bash">找到解压文件内的flac2mp3.pl文件，善用软连接,默认v2，自己修改为v0或320</span><br><br>ln -s 文件所在路径  f2m<br>./f2m --preset=V0 /path/to/lossless /path/to/lossy<br></code></pre></td></tr></table></figure>
+
+<h3 id="Flac-24bit-16bit"><a href="#Flac-24bit-16bit" class="headerlink" title="Flac 24bit-&gt;16bit"></a>Flac 24bit-&gt;16bit</h3><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">sox input.flac -G -b 16 output.flac rate -v -L 48000 dither<br><br>for flac in *.flac; do sox -S &quot;$&#123;flac&#125;&quot; -r 44100 -b 16 new/&quot;$&#123;flac&#125;&quot;; done<br></code></pre></td></tr></table></figure>
+<h3 id="一键上传图床脚本"><a href="#一键上传图床脚本" class="headerlink" title="一键上传图床脚本"></a>一键上传图床脚本</h3><p><a href="https://github.com/theirix/ptpimg-uploader">https://github.com/theirix/ptpimg-uploader</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">pip install ptpimg_uploader<br><br>export PTPIMG_API_KEY=&lt;your hex key&gt;<br><br>ptpimg_uploader ~/seed/mytorrent/folder.jpg<br></code></pre></td></tr></table></figure>
+
+<h3 id="频谱图"><a href="#频谱图" class="headerlink" title="频谱图"></a>频谱图</h3><ol>
+<li>sox 专辑路径名字&#x2F;*.flac -n spectrogram -o 专辑.png</li>
+<li>要是二级目录<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/zsh/bin</span><br>dir=/home/download/<br>filename=$1<br>cd &quot;$filename&quot;<br>ls -d */ | grep -o &#x27;[a-Z]*\ *[0-9]/&#x27; &gt;temp.log<br>sed -i &#x27;s/$/*flac/&#x27; temp.log<br>mapfile acmd &lt;temp.log<br>echo $&#123;acmd[@]&#125;<br>fdir=&#x27;&#x27;<br>if test -z &quot;$acmd&quot;<br>then<br>  echo &quot;No subfolder~&quot;<br>  sox *flac -n spectrogram -o $dir/spectrograms/&quot;$filename&quot;.png<br>else<br>  l=$&#123;#acmd[@]&#125;<br>  case &quot;$l&quot; in<br>          2)<br>             echo &quot;There 2 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; -n spectrogram -o $dir/spectrograms/&quot;$filename&quot;.png<br>            <br>             ;;<br>          *)<br>             echo &quot;There more than 3 discs, only take first 3&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; -n spectrogram -o $dir/spectrograms/&quot;$filename&quot;.png<br>             ;;<br>  esac<br></code></pre></td></tr></table></figure></li>
+<li>单碟版一键制谱并上传图床返回链接</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim sp-up.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">复制以下内容</span><br>n=$1<br>cd &quot;$n&quot;<br><br>sox *flac -n spectrogram -o ../spectrograms/&quot;$n&quot;.png<br>sp=$(ptpimg_uploader -k your-ptpimg-key --bbcode <br>spec=[hide=spectrogram]$sp[/hide]<br>echo &quot;PTPIMGurl: $spec&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">具体使用</span><br>sh sp-up.sh 专辑目录<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">git clone https://github.com/EwolBash/spsox.git<br>cd spsox<br>chmod +x spsox<br>cp spsox /usr/local/bin/<br>spsox<br>spsox -r /home/ewol/Music/music/&#x27;Chuck Prophet - Bobby Fuller Died For Your Sins (2017) [FLAC]&#x27;/<br>spsox -r /home/ewol/Music/music<br></code></pre></td></tr></table></figure>
+<h3 id="web抓流"><a href="#web抓流" class="headerlink" title="web抓流"></a>web抓流</h3><p><a href="https://github.com/nathom/streamrip">https://github.com/nathom/streamrip</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">需要python&gt;3.8</span><br>pip3 install streamrip --upgrade<br><br>rip config --open<br><span class="hljs-meta prompt_">#</span><span class="language-bash">填上arl之类的信息</span><br><br>rip 专辑url<br></code></pre></td></tr></table></figure>
+<h3 id="压缩flac专辑到lv8"><a href="#压缩flac专辑到lv8" class="headerlink" title="压缩flac专辑到lv8"></a>压缩flac专辑到lv8</h3><p><a href="https://xiph.org/flac/documentation_tools_flac.html">flac命令行文档</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">flac -8 专辑名字/* -f<br></code></pre></td></tr></table></figure>
+
+<h1 id="抓流制种频谱图集合"><a href="#抓流制种频谱图集合" class="headerlink" title="抓流制种频谱图集合"></a>抓流制种频谱图集合</h1><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/zsh</span><br>l=($*)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">num=<span class="hljs-variable">$1</span></span><br>for num in $&#123;l[*]&#125;;do<br>        echo https://www.xxx.com/album/$num<br>        ripb=`rip url line https://www.deezer.com/album/$num`<br>        echo &quot;$ripb&quot;<br>        fullname=/home/download<br><br>        if [[ $ripb =~ &quot;Unable to stream&quot; ]] || [[ $ripb =~ &quot;already downloaded&quot; ]]<br>        then<br>                echo $num &quot;$ripb&quot;&gt;&gt;$fullname/fail.log#抓流失败或者重复跳过循环<br>                continue<br>        fi<br>        dirname=$(ls -At $fullname | sed -n &quot;1p&quot;)<br>        mktorrent -v -p -l 22 -o $fullname/torrents/&quot;$dirname&quot;.torrent $fullname/&quot;$dirname&quot;<br>        cd $fullname/&quot;$dirname&quot;<br><br>        ls -d */ | grep -o &#x27;[a-Z]*\ *[0-9]/&#x27; &gt;temp.log<br>        sed -i &#x27;s/$/*flac/&#x27; temp.log<br>        mapfile acmd &lt;temp.log<br><br>        fdir=&#x27;&#x27;<br>        if test -z &quot;$acmd&quot;<br>        then<br>        echo &quot;No subfolder~&quot;<br>         sox *flac -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>        else<br>         l=$&#123;#acmd[@]&#125;<br>         case &quot;$l&quot; in<br>          2)<br>             echo &quot;There 2 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>          3)<br>             echo &quot;There 3 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>          4)<br>             echo &quot;There 4 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             a4=`cat temp.log | sed -n &#x27;4p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; &quot;$a4&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>          *)<br>             echo &quot;There more than 5 discs, only take first 6&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             a4=`cat temp.log | sed -n &#x27;4p&#x27;`<br>             a5=`cat temp.log | sed -n &#x27;5p&#x27;`<br>             a6=`cat temp.log | sed -n &#x27;6p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; &quot;$a4&quot; &quot;$a5&quot; &quot;$a6&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>         esac<br>        fi<br>        #sox $fullname/&quot;$dirname&quot;/*flac -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>        sp=$(ptpimg_uploader --bbcode $fullname/spectrograms/&quot;$dirname&quot;.png)<br>        spec=[hide=spectrogram]$sp[/hide]<br>        echo &quot;$spec $dirname $num&quot; &gt;&gt;&quot;$fullname&quot;/torrents/PtpimgUrl.txt<br>        echo &quot;PTPIMGurl: $spec&quot;<br>        sleep $[($RANDOM % 10)+3]<br></code></pre></td></tr></table></figure>
+
+<h2 id="截图工具convert"><a href="#截图工具convert" class="headerlink" title="截图工具convert"></a>截图工具convert</h2><p>要apt install imagemagick</p>
+<h2 id="AutoBrr"><a href="#AutoBrr" class="headerlink" title="AutoBrr"></a>AutoBrr</h2><p><a href="https://autobrr.com/configuration/irc">https://autobrr.com/configuration/irc</a><br>刷外站神器，主要是支持没有rss用irc推送的站，上面的官方文档已经相当详细，我这个是介绍下docker安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim docker-compose.yml<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入以下内容，替换映射地址</span><br>version: &quot;3.7&quot;<br><br>services:<br>  autobrr:<br>    container_name: autobrr<br>    image: ghcr.io/autobrr/autobrr:latest<br>    restart: unless-stopped<br>    #logging:<br>    #  driver: json-file<br>    #  options:<br>    #    max-file: $&#123;DOCKERLOGGING_MAXFILE&#125;<br>    #    max-size: $&#123;DOCKERLOGGING_MAXSIZE&#125;<br>    user: 1000:1000<br>    environment:<br>      - TZ=$&#123;TZ&#125;<br>    volumes:<br>      - $&#123;BASE_DOCKER_DATA_PATH&#125;/autobrr/config:/config<br>    ports:<br>      - 7474:7474<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker compose up -d<br></code></pre></td></tr></table></figure>
+<p>注意盒子上使用要找到config.toml文件，把127.0.0.1改成0.0.0.0</p>
+<p>通知可用tg的bot，怎么搞详细教程参考<a href="https://blog.csdn.net/whatday/article/details/113748634?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167496205316800192275150%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=167496205316800192275150&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-113748634-null-null.142%5Ev71%5Einsert_chatgpt,201%5Ev4%5Eadd_ask&utm_term=telegram%20bot&spm=1018.2226.3001.4187">这个教程</a>，简单一点就是先去搜索botFather创建一个bot，搞号命名描述获取token，再去getuseridbot查自己id(有概率搜不到)。点击链接测试返回值<a href="https://api.telegram.org/bot%3Ctoken%3E/getUpdates">https://api.telegram.org/bot&lt;换自己token&gt;&#x2F;getUpdates</a><br>填的时候注意token直接复制整个‘数字:字符串’，chat_id是自己的id。</p>
+<ul>
+<li>注意：<br>添加客户端的时候deluge一个坑，他的名字密码要去&#x2F;docker&#x2F;appdata&#x2F;deluge&#x2F;auth找，username:password:level的形式，地址必须是纯数字ip，不是官方推荐的127.0.0.1或者localhost。qb地址是<a href="http://ip:端口">http://ip:端口</a></li>
+</ul>
+<h2 id="flexget"><a href="#flexget" class="headerlink" title="flexget"></a>flexget</h2><p>自动rss新种，可自定义规则，星大脚本直接装或者直接：pip install flexget</p>
+<p>配置文件config.yml</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">templates:<br><span class="hljs-meta prompt_"># </span><span class="language-bash">剩余空间模板，当 path 对应的路径的剩余空间小于 space 规定的数值的时候停止 RSS 下载</span><br>  freespace:<br>    free_space:<br>      path: /home/gawain/deluge/download/<br>      space: 20240<br><span class="hljs-meta prompt_"># </span><span class="language-bash">qb 的模板，之后写 qb 就是指把种子推送到 qb 进行下载；下面 <span class="hljs-built_in">tr</span> de rt 也是如此</span><br>  qb:<br>    qbittorrent:<br>      path: /home/gawain/deluge/download/<br>      host: localhost<br>      port: 2017<br>      username: **** <br>      password: ****<br>  de:<br>    deluge:<br>      path: /home/gawain/deluge/TSBluray/rar<br>      host: localhost<br>      port: 58846<br>      username: ...<br>      password: ...<br>  size:<br>    content_size:<br>      min: 13000<br>      max: 46666<br>      strict: yes<br><br>tasks:<br>  Ts-Bluray:<br>    rss: https://www.torrentseeds.org/rss/****<br>    if:<br>      - &quot;&#x27;BLURAY&#x27; in title&quot;: accept<br>      #- &quot;&#x27;subs&#x27; in title&quot;: reject<br>    temperate: <br>      - de<br>      - freespace<br>      - size<br>    deluge:<br>      label: TSBluray<br><br>web_server:<br>  port: 6566<br>  web_ui: yes<br><br>schedules: no<br></code></pre></td></tr></table></figure>
+<p>然后测试：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">不下载只测试获取情况</span><br>flexget --test <br><span class="hljs-meta prompt_">#</span><span class="language-bash">标记老的种子</span><br>flexget --learn<br><span class="hljs-meta prompt_">#</span><span class="language-bash">确定flexget安装目录</span><br>which flexget<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加cron</span><br>crontab -e<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加语句，后面替换上面获取的路径</span><br>*/3 * * * * /usr/local/bin/flexget execute<br></code></pre></td></tr></table></figure>
+<h1 id="差速器"><a href="#差速器" class="headerlink" title="差速器"></a>差速器</h1><p><a href="https://leishi.io/blog/posts/2021-12/Differential/">大佬博客</a><br>只要提供给差速器一个需要发布的文件夹和豆瓣信息页面，差速器会自动帮你</p>
+<ol>
+<li>根据豆瓣链接获取PTGen信息</li>
+<li>根据资源载体获取MediaInfo&#x2F;BDInfo信息</li>
+<li>截取自定数量的无损截图，上传到指定的图床</li>
+<li>制作种子</li>
+<li>如果是本地环境，自动打开浏览器，然后自动填充所有的信息<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">Linux一键安装，其他平台和docker参考以上文章</span><br>curl -Lso- https://raw.githubusercontent.com/LeiShi1313/Differential/main/install.sh | bash<br><br>vim config.ini<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入以下内容</span><br>[DEFAULT]<br>; 是否制种<br>make_torrent = true<br><br>; 生成截图的数量<br>screenshot_count = 6<br>; 图床，差速器支持PTPIMG、自建imgurl、自建Chevereto（z4a、imgbb、猫柠的图床等）、SM.MS和BYR作为图床<br>image_hosting = CHEVERETO<br>; 自建Chevereto的地址<br>chevereto_hosting_url = https://XXX.com<br>; 自建Chevereto的用户名<br>chevereto_username = XXXX<br>; 自建Chevereto的密码<br>chevereto_password = YYYY<br><br>; 自动填充使用的脚本，这里使用树大的脚本<br>easy_upload = true<br>; 也可以使用明日大的脚本来进行自动填充<br>; auto_feed = true<br><br>; 使用差速器自带的短网址服务<br>use_short_url = true<br><br>; 差速器自带一个自建的PTGen，如果无法访问，可以提供自定义PTGen地址<br>;ptgen_url = https://XXXXX.com<br><br>[NexusPHP]<br>; 发种页面的链接<br>upload_url = https://XXXXX.com/upload.php<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">发布格式</span><br>dft ne -f [种子文件夹] -u [豆瓣链接]<br></code></pre></td></tr></table></figure>
+需要注意的是需要自己配置config，和视频文件同一文件夹，可能需要科学使用默认ptgen。</li>
+</ol>
+<h1 id="解压rar"><a href="#解压rar" class="headerlink" title="解压rar"></a>解压rar</h1><p>主要为了解压0day资源，只能手动安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget http://www.rarlab.com/rar/rarlinux-x64-5.0.0.tar.gz --no-check-certificate<br>tar xvf rarlinux-x64-5.0.0.tar.gz<br>cd rar<br>make install<br>ln -n unrar /usr/bin/unrar<br><span class="hljs-meta prompt_">#</span><span class="language-bash">使用方法</span><br>unrar e  ***.rar(or folder) target-path<br></code></pre></td></tr></table></figure>
+<h1 id="Remux"><a href="#Remux" class="headerlink" title="Remux"></a>Remux</h1><p>Remux必须有eac3to的解码日志，而eac3to又只支持windows，所以需要wine32</p>
+<h2 id="Wine"><a href="#Wine" class="headerlink" title="Wine"></a>Wine</h2><p> 可以星大脚本直接手动加参数装<br> Debian10安装Wine32有很多坑，wine是为了eac3to</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt-get install libgnutls30:i386 libldap-2.4-2:i386 libgpg-error0:i386 libxml2:i386 libasound2-plugins:i386 libsdl2-2.0-0:i386 libfreetype6:i386 libdbus-1-3:i386 libsqlite3-0:i386<br></code></pre></td></tr></table></figure>
+<h2 id="eac3to"><a href="#eac3to" class="headerlink" title="eac3to"></a>eac3to</h2><p><a href="https://unixsheikh.com/tutorials/remuxing-iso-dvd-or-bluray-using-cat-and-ffmpeg-on-linux.html">https://unixsheikh.com/tutorials/remuxing-iso-dvd-or-bluray-using-cat-and-ffmpeg-on-linux.html</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">eac3to日志：</span><br>wget -O eac3to.zip https://www.videohelp.com/download/eac3to336.zip\?r\=LRXdxQfL<br>unzip eac3to.zip<br>wine eac3to/eac3to.exe `winepath -w /home/gawain/deluge/download/Songs.From.The.Second.Floor.2000.COMPLETE.BLURAY-iFPD/BDMV` &#x27;1)&#x27; 1:chapter.txt 2:h264.mkv 3:DTSMAENG.dtsma -progressnumbers -log=eac3to.txt<br><span class="hljs-meta prompt_">#</span><span class="language-bash">注意，这里有个非常诡异的问题，排查了很久，1）会选者不上，主要是因为路径的问题，要用winepath</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">1）ffmpeg</span><br>ffmpeg -i 00009.m2ts -map 0:0 -vcodec copy -map 0:1 -acodec copy -map 0:7 -scodec copy W.E.2011.1080p.BluRay.Remux.mkv<br><span class="hljs-meta prompt_">#</span><span class="language-bash">2）mkvermerge</span><br>mkvmerge -o W.E.2011.1080p.BluRay.Remux.mkv 00009.m2ts <br></code></pre></td></tr></table></figure>
+<p> i is the name of the input file.<br>-map is used to map each track to a specific command option.<br>0:0 is the first track, i.e. the video, which is then mapped to the -vcodec option, i.e. video codec option, which simply copies the video track into the new mkv container.<br>0:1 is the first audio track, i.e. the English audio, which is then mapped to the -acodec option, i.e. audio codec option, which simply copies the English audio track into the new mkv container.<br>0:9 is the first subtitle track, i.e. the English subtitle, which is then mapped to the -scodec option, i.e. subtitle codec option, which simply copies the English subtitle into the new mkv container.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt install mkvtoolnix<br>mkvmerge <br></code></pre></td></tr></table></figure>
+
+<h1 id="小工具集合"><a href="#小工具集合" class="headerlink" title="小工具集合"></a>小工具集合</h1><h3 id="mosh连接"><a href="#mosh连接" class="headerlink" title="mosh连接"></a>mosh连接</h3><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">brew install mosh#mac 客户端<br><br>sudo apt-get install mosh<br>mosh-server new -c 256 -s -l LANG=en_US.UTF-8 -p 60000<br><br>mosh pi@pi42.local -p 6000<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="远程同步文件"><a href="#远程同步文件" class="headerlink" title="远程同步文件"></a>远程同步文件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">rsync -avz --progress /root/client/   root@202.112.23.12:/home/work/      <br><span class="hljs-meta prompt_">#</span><span class="language-bash">将本机的/root/client/拷贝至远程的202.112.23.12:/home/work/目录，--progress可以查看拷贝的过程</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="docker查看映射目录"><a href="#docker查看映射目录" class="headerlink" title="docker查看映射目录"></a>docker查看映射目录</h4><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker inspect 容器名称 | grep Mounts -A 20<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="批量获取前端种子下载链接"><a href="#批量获取前端种子下载链接" class="headerlink" title="批量获取前端种子下载链接"></a>批量获取前端种子下载链接</h2><p>主要是针对ptpp不支持的站点</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">clear</span>()<br><br><span class="hljs-keyword">var</span> trs = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&quot;form[action]&quot;</span>)<br><span class="hljs-keyword">var</span> pk =<span class="hljs-string">&quot;passkey&quot;</span><br><span class="hljs-keyword">var</span> dl =<span class="hljs-string">&#x27;&#x27;</span><br>href=<span class="hljs-string">&#x27;&#x27;</span><br>ct=<span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> tr <span class="hljs-keyword">of</span> trs)&#123;<br>    a=tr.<span class="hljs-property">action</span><br>    <span class="hljs-keyword">if</span> (a.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/zip/</span>))<br>    &#123;<br>       <span class="hljs-keyword">continue</span><br>    &#125;<br>    tid=a.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/id=(\d+)&amp;*sign=(\d+)/</span>)<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(tr)<br>    <span class="hljs-keyword">if</span>(tid)<br>       href=<span class="hljs-string">&quot;https://***./download.php?id=&quot;</span>+tid[<span class="hljs-number">1</span>]+<span class="hljs-string">&quot;&amp;passkey=&quot;</span>+pk+<span class="hljs-string">&quot;&amp;https=1&quot;</span><br>       dl=dl+href+<span class="hljs-string">&quot;\r\n&quot;</span><br>       ct=ct+<span class="hljs-number">1</span><br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(dl,ct)<br><span class="hljs-title function_">copy</span>(dl)<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="新服务器探针ServerStatus"><a href="#新服务器探针ServerStatus" class="headerlink" title="新服务器探针ServerStatus"></a>新服务器探针ServerStatus</h3><p><a href="https://github.com/zdz/ServerStatus-Rust">https://github.com/zdz/ServerStatus-Rust</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">自动安装配置脚本</span><br>wget --no-check-certificate -qO status.sh &#x27;https://raw.githubusercontent.com/zdz/ServerStatus-Rust/master/scripts/status.sh&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">客户端</span><br>./status.sh -i -c http://name:password@ip:8080<br><span class="hljs-meta prompt_">#</span><span class="language-bash">服务器</span><br>./status.sh -i -s <br></code></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>RAG 技术概要</title>
+    <url>/2024/09/11/Rag/</url>
+    <content><![CDATA[<h1 id="RAG-技术概要：从入门到进阶，打造你的智能知识引擎"><a href="#RAG-技术概要：从入门到进阶，打造你的智能知识引擎" class="headerlink" title="RAG 技术概要：从入门到进阶，打造你的智能知识引擎"></a>RAG 技术概要：从入门到进阶，打造你的智能知识引擎</h1><p><strong>引言</strong></p>
+<p>你是否曾幻想过拥有一个无所不知的 AI 助手，它不仅能像搜索引擎一样快速找到信息，还能像人类专家一样理解并解答你的复杂问题？检索增强生成 (Retrieval-Augmented Generation, RAG) 技术，正是实现这一梦想的关键一步。</p>
+<p>RAG 技术巧妙地结合了大型语言模型 (LLM) 的强大生成能力和外部知识库的海量信息，让 AI 助手在回答问题时，不再只是“鹦鹉学舌”般地复述训练数据，而是能够<strong>像一个研究者一样，先查阅资料，再组织答案</strong>。这不仅显著提升了 LLM 在知识密集型任务中的表现，更让 AI 生成的内容<strong>更准确、更可靠，并且能够根据最新的知识动态更新</strong>。</p>
+<p>本文将带你深入了解 RAG 技术的方方面面，从基本原理到核心组件，再到最新的研究进展和实际应用挑战，让你全面掌握 RAG 技术，打造属于你自己的智能知识引擎。</p>
+<p><strong>一、RAG 的工作原理：像 AI 一样“先检索，后生成”</strong></p>
+<p>想象一下，你要回答一个复杂的问题，比如“最新的新冠疫苗有哪些副作用，针对老年人群体有什么特殊注意事项？” 你会怎么做？</p>
+<ol>
+<li><strong>检索信息</strong>：你可能会先打开搜索引擎，输入关键词，查找权威的医学网站、新闻报道、研究论文等相关资料。</li>
+<li><strong>理解和整合</strong>：阅读检索到的资料，理解疫苗的副作用和老年人群体的特殊性，提取关键信息。</li>
+<li><strong>组织答案</strong>：根据问题，结合你理解的信息，用清晰易懂的语言组织成最终的答案。</li>
+</ol>
+<p>RAG 的工作流程与此类似，它让 LLM 在生成答案之前，先进行“信息检索”这一步，从而获得更可靠的知识来源。</p>
+<p><strong>1.1 RAG 核心思想：公式背后的直观理解</strong></p>
+<p>虽然技术文章中常常会出现公式，但 RAG 的核心思想其实非常直观。我们可以用一个简单的公式来表示 RAG 的目标：</p>
+<p><strong>目标： 生成最佳答案 (y)  &#x3D;  检索相关知识 (z)  +  利用 LLM 的生成能力 (M)</strong></p>
+<p>更具体地说，RAG 模型的目标是，在给定一个问题 (q) 的情况下，找到最相关的知识 (z)，并利用大型语言模型 (M) 将这些知识融入到答案 (y) 中。</p>
+<p><strong>1.2 RAG 的关键组件：打造智能知识引擎的基石</strong></p>
+<p>一个完整的 RAG 系统就像一个精密的机器，由以下几个关键组件协同工作：</p>
+<ol>
+<li><p><strong>嵌入模型 (Embedding Model)：文本的“数字化”专家</strong></p>
+<ul>
+<li><p><strong>作用</strong>： 嵌入模型就像一位“翻译专家”，它能将我们输入的文字 (问题和知识库里的文档) 转换成计算机更容易理解的“数字向量”。 这种向量可以捕捉文本的语义信息，也就是说，意思相近的文字，转换成的向量在“空间”中会更接近。</p>
+</li>
+<li><p><strong>通俗解释</strong>： 想象一下，你想比较两篇文章是否相似。嵌入模型就像把每篇文章都变成一个“指纹”，相似的文章指纹也更接近。这样，计算机就可以通过比较“指纹”来判断文章的相似度。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>向量存储 (Vector Store)：知识的“图书馆”</strong></p>
+<ul>
+<li><p><strong>作用</strong>： 向量存储就像一个专门存放 “数字指纹”（向量）的“图书馆”。它高效地存储着知识库中所有文档的向量表示，并支持快速查找与用户问题 “指纹” 最相似的 “图书”（文档向量）。</p>
+</li>
+<li><p><strong>通俗解释</strong>： 当你问一个问题时，向量存储能迅速在这个“图书馆”里找到最相关的 “图书”（文档），提供给 LLM 作为参考资料。常用的 “图书馆” 管理系统有 Faiss、Annoy、ScaNN 等，它们各有特点，就像不同类型的图书馆，有的擅长快速查找，有的擅长处理大规模数据。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>向量存储检索器 (Vector Store Retriever)：高效的“图书管理员”</strong></p>
+<ul>
+<li><p><strong>作用</strong>： 检索器就像 “图书馆” 里专业的 “图书管理员”，它的任务是根据用户提出的问题 (也转换成向量 “指纹”)，在向量存储这个 “图书馆” 中快速检索，找到最相关的 <em>k</em> 个文档向量。这里的 <em>k</em>  值就像你希望 “图书管理员” 给你推荐多少本相关的书。</p>
+</li>
+<li><p><strong>通俗解释</strong>：  “图书管理员” 使用高效的检索算法，比如 “近似最近邻搜索”（ANN），就像在图书馆里使用智能索引系统，快速定位到你需要的 “图书”，而不是一本本地翻阅。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>大型语言模型 (LLM)：知识的“整合者”和“答案生成器”</strong></p>
+<ul>
+<li><p><strong>作用</strong>： LLM 是 RAG 系统的 “大脑”，它接收用户的问题和检索器找到的相关文档，然后像人类一样，理解问题和背景知识，最终生成流畅、自然的答案。</p>
+</li>
+<li><p><strong>通俗解释</strong>： LLM 就像一位知识渊博的专家，它不仅能理解你的问题，还能结合 “图书管理员” 提供的参考资料，组织语言，给出高质量的解答。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>查询改写 (Query Rewrite) (可选)：优化提问技巧的“助手”</strong></p>
+<ul>
+<li><p><strong>作用</strong>：  有时候，我们提出的问题可能不够精确，或者过于复杂，不利于检索到最佳的答案。 “查询改写” 组件就像一个 “提问技巧助手”，它可以帮助我们优化问题，使其更适合知识库的检索。</p>
+</li>
+<li><p><strong>通俗解释</strong>：  例如，当你的问题比较复杂时，“查询改写” 可以将大问题拆分成几个小问题，或者将问题改写成更简洁、更关键词化的形式，从而提高检索的准确率。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>1.3 RAG 工作流程图解：一图胜千言</strong></p>
+<p>为了更清晰地展示 RAG 的工作流程，我们用一张图来概括：</p>
+<pre><code class=" mermaid">graph LR
+    A[用户问题 (Query)] --&gt; B(嵌入模型 Embedding Model：将问题转化为“指纹”);
+    B --&gt; C&#123;向量存储 Vector Store：“知识图书馆”，存储文档“指纹”&#125;;
+    C --&gt; D[向量存储检索器 Retriever：“图书管理员”，检索相关“图书”];
+    D --&gt; E[检索到的文档 (Retrieved Documents)：相关知识“图书”];
+    A --&gt; F(LLM：“知识专家”，负责理解问题和生成答案);
+    E --&gt; F;
+    F --&gt; G[生成答案 (Generated Answer)：最终答案];
+    style B fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#ccf,stroke:#333,stroke-width:2px
+    style D fill:#fcf,stroke:#333,stroke-width:2px
+    style F fill:#cff,stroke:#333,stroke-width:2px
+</code></pre>
+
+<p><strong>二、RAG 的核心技术点：精雕细琢，打造卓越性能</strong></p>
+<p>RAG 系统的性能优劣，很大程度上取决于各个组件的技术细节。下面我们深入探讨 RAG 的几个关键技术点：</p>
+<p><strong>2.1 文本切分 (Text Splitting)：知识颗粒度的艺术</strong></p>
+<ul>
+<li><p><strong>为什么需要文本切分？</strong>  知识库中的文档通常很长，如果直接将整篇文档放入向量库，可能会导致：</p>
+<ul>
+<li><strong>检索效率降低</strong>： 长文档包含的信息过多，与用户问题的相关性可能不高，影响检索精度。</li>
+<li><strong>LLM 处理限制</strong>： LLM 的输入长度有限制，过长的文本会超出处理能力。</li>
+</ul>
+</li>
+<li><p><strong>文本切分的策略：</strong>  文本切分就像把一篇长文章分成若干个段落，方便检索和理解。常见的切分策略包括：</p>
+<ul>
+<li><p>**固定长度分割 (Fixed-size Chunking)**： 简单粗暴，按照固定的字符数或 token 数将文本切分成块。 就像把一根绳子剪成等长的几段。</p>
+</li>
+<li><p>**句子分割 (Sentence Splitting)**： 按照句子的边界切分文本，更符合语义的完整性。 就像把文章按照句子分成小块，每个小块意思更完整。</p>
+</li>
+<li><p>**段落分割 (Paragraph Splitting)**： 按照段落的边界切分，适用于结构化的文档。 就像把文章按照自然段分块，更符合文章的结构。</p>
+</li>
+<li><p>**递归分割 (Recursive Splitting)**：  更智能的切分方式，它会尝试按照不同的层级结构 (如标题、段落、句子) 递归地切分文本，尽可能保留文本的结构信息和语义连贯性。 就像先按章节分，再按段落分，再按句子分，更有层次感。</p>
+</li>
+<li><p>**特殊标记分割 (Special Token Splitting)**：  对于 Markdown、LaTeX 等格式的文档，可以利用其结构化标记 (如标题、代码块、列表等) 进行分割，更好地保留文档的原有结构。 就像针对 Markdown 文档的特殊分割方法，能识别标题、列表等结构。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Chunk Size 和 Chunk Overlap：平衡语义完整性和上下文连贯性</strong></p>
+<ul>
+<li><p>**Chunk Size (文本块大小)**：  文本块的大小直接影响到检索的粒度和 LLM 的输入长度。</p>
+<ul>
+<li><strong>太小</strong>： 可能导致语义信息不完整，检索到的文本片段缺乏上下文，LLM 难以理解。</li>
+<li><strong>太大</strong>： 可能包含过多无关信息，降低检索精度，超出 LLM 的输入长度限制。</li>
+</ul>
+</li>
+<li><p>**Chunk Overlap (文本块重叠)**：  为了保持文本块之间的上下文连贯性，可以设置一定的重叠区域。 就像滑动窗口一样，相邻的文本块之间有一部分内容是重复的，保证上下文的衔接。</p>
+</li>
+<li><p><strong>选择合适的切分策略：</strong>  需要根据知识库文档的类型、LLM 的输入长度限制、以及任务的具体需求来选择合适的切分策略，并调整 Chunk Size 和 Chunk Overlap 参数。 Langchain 等工具提供了丰富的文本分割器，方便我们进行选择和定制。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.2 嵌入模型 (Embedding Model)：选择合适的“语义指纹”</strong></p>
+<ul>
+<li><p><strong>好的嵌入模型：RAG 成功的关键</strong>：  嵌入模型的好坏，直接决定了 RAG 系统能否检索到真正相关的知识。一个优秀的嵌入模型应该能够：</p>
+<ul>
+<li><strong>准确捕捉文本的语义信息</strong>： 相似的文本应该有相似的向量表示。</li>
+<li><strong>区分不同文本的语义差异</strong>： 不相似的文本应该有明显的向量差异。</li>
+<li>**支持多种语言 (Multilingual)**： 能够处理不同语言的文本。</li>
+<li><strong>高效的向量计算</strong>：  能够快速地将文本转换为向量表示。</li>
+</ul>
+</li>
+<li><p><strong>主流的嵌入模型：各有所长，按需选择</strong>  目前有很多优秀的开源嵌入模型，例如：</p>
+<ul>
+<li>**BGE (BAAI General Embedding)**： 智源研究院出品，通用性强，中英文表现出色，在多个评测榜单上名列前茅。 就像一位 “全能选手”，各种任务都能胜任。</li>
+<li>**GTE (General Text Embeddings)**： 阿里巴巴达摩院出品，针对多领域语料训练，适用场景广泛，性能优异。 就像一位 “经验丰富的老将”，见过各种场面，应对自如。</li>
+<li>**E5 (EmbEddings from bidirEctional Encoder rEpresentations)**： intfloat 团队出品，采用创新训练方法，注重高质量文本表示，效果突出。 就像一位 “技术流专家”，在算法和模型设计上有独到之处。</li>
+<li><strong>Jina Embeddings</strong>： Jina AI 出品，基于大规模数据集训练，推理速度快，多个大小版本可选。 就像一位 “效率专家”，追求速度和性能的平衡。</li>
+<li><strong>Instructor</strong>： 香港大学 NLP 实验室出品，支持指令微调，可以根据任务指导生成特定任务的 Embedding。 就像一位 “定制化大师”，可以根据你的需求量身打造。</li>
+<li><strong>XLM-Roberta</strong>： Facebook AI 出品，多语言支持，跨语言任务表现出色。 就像一位 “语言通”，精通多国语言，擅长跨文化交流。</li>
+<li><strong>text-embedding-ada-002</strong>:  OpenAI 的 embedding 模型，性能强大，Hugging Face 社区也提供了兼容版本。 就像一位 “明星选手”，出自名门，备受瞩目。</li>
+</ul>
+</li>
+<li><p><strong>增强 Embedding 质量：更上一层楼的技巧</strong>  除了选择合适的模型，还可以通过一些技巧来进一步提升 Embedding 的质量：</p>
+<ul>
+<li>**微调 (Fine-tuning)**：  使用特定领域的数据对预训练的 Embedding 模型进行微调，使其更适应特定任务和数据分布。 就像针对特定考试进行强化训练，提高应试能力。</li>
+<li>**数据增强 (Data Augmentation)**：  通过同义词替换、回译等方法，增加训练数据的多样性，提升模型的泛化能力。 就像多做练习题，见多识广，提高解题能力。</li>
+<li>**对比学习 (Contrastive Learning)**：  通过构建正负样本对，让模型学习区分相似和不相似的文本，提高语义表示的区分度。 就像通过 “找不同” 的游戏，提高辨别能力。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.3 向量存储与检索：高效查找“知识宝藏”</strong></p>
+<ul>
+<li><p><strong>向量存储 (Vector Store)：知识的 “仓库”</strong>  选择合适的向量存储，直接影响到 RAG 系统的检索效率和扩展性。 常用的向量数据库包括：</p>
+<ul>
+<li>**Faiss (Facebook AI Similarity Search)**： Facebook AI 开源的向量相似性搜索库，速度快，支持多种索引类型，适合大规模向量检索。 就像一个 “高效仓库”，查找速度快，存储容量大。</li>
+<li>**Annoy (Approximate Nearest Neighbors Oh Yeah)**： Spotify 开源的近似最近邻搜索库，简单易用，性能良好，适合中小型应用。 就像一个 “便捷仓库”，使用简单，性能可靠。</li>
+<li>**ScaNN (Scalable Nearest Neighbors)**： Google 开源的可扩展最近邻搜索库，针对大规模数据集优化，性能强大。 就像一个 “超级仓库”，专为海量数据设计，性能卓越。</li>
+<li><strong>Milvus</strong>：  开源的向量数据库，功能完善，支持分布式部署、多种索引类型、以及数据管理功能，适合构建复杂的 RAG 系统。 就像一个 “智能仓库”，功能齐全，管理方便。</li>
+<li><strong>Chroma</strong>：  开源的嵌入式向量数据库，轻量级，易于集成，适合快速原型开发和小型应用。 就像一个 “迷你仓库”，轻巧灵活，方便快捷。</li>
+</ul>
+</li>
+<li><p><strong>检索算法 (Retrieval Algorithm)： “寻宝的指南针”</strong>  检索算法决定了如何在向量存储中快速找到最相关的文档。 常见的检索算法包括：</p>
+<ul>
+<li><p>**暴力搜索 (Brute-Force Search)**：  最简单直接的方法，计算查询向量与所有文档向量的距离，返回距离最近的 <em>k</em> 个文档。 就像 “地毯式搜索”，遍历所有可能的目标，保证找到最精确的结果，但效率较低。</p>
+</li>
+<li><p>**近似最近邻搜索 (Approximate Nearest Neighbor Search, ANN)**：  通过构建索引结构 (如倒排索引、局部敏感哈希、乘积量化等) 来加速搜索，牺牲一定的精度换取速度。 就像 “捷径搜索”，通过预先建立好的索引，快速找到近似的结果，效率高，但可能牺牲一定的精度。</p>
+</li>
+<li><p>**混合搜索 (Hybrid Search)**：  结合多种检索方法，例如先使用向量检索，再使用关键词检索进行过滤，或者结合多种 ANN 算法，提高检索的准确率和召回率。 就像 “组合拳”，结合多种搜索策略，扬长避短，提高整体效果。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.4 查询改写 (Query Rewriting)：让提问更精准</strong></p>
+<ul>
+<li><p><strong>为什么需要查询改写？</strong>  用户提出的问题，有时候可能存在以下问题：</p>
+<ul>
+<li><strong>表达不够清晰</strong>：  问题描述模糊，关键词不明确。</li>
+<li><strong>过于复杂</strong>：  一个问题包含多个子问题，难以一次性检索到位。</li>
+<li><strong>不符合检索系统的 “口味”</strong>：  例如，用户习惯自然语言提问，但检索系统更擅长关键词匹配。</li>
+</ul>
+</li>
+<li><p><strong>查询改写的技巧：优化提问，提升检索效果</strong>  常见的查询改写技巧包括：</p>
+<ul>
+<li>**关键词扩展 (Keyword Expansion)**：  为问题添加更多相关的关键词，扩大检索范围，提高召回率。 例如，将 “感冒药” 改写为 “感冒药  发烧  咳嗽  流鼻涕”。</li>
+<li>**问题分解 (Question Decomposition)**：  将复杂问题分解成多个简单的子问题，分别进行检索，提高检索精度。 例如，将 “新冠疫苗的副作用和老年人注意事项” 分解为 “新冠疫苗副作用” 和 “老年人接种新冠疫苗注意事项”。</li>
+<li>**意图识别 (Intent Recognition)**：  识别用户问题的意图，根据意图调整查询策略。 例如，如果用户询问 “北京天气”，意图可能是获取 “北京今天的天气预报”，而不是关于 “北京天气历史数据” 的信息。</li>
+<li>**同义词替换 (Synonym Replacement)**：  使用同义词替换问题中的关键词，避免因用词不当而错过相关文档。 例如，将 “人工智能” 替换为 “AI” 或 “机器学习”。</li>
+<li>**问题改写为更适合检索的风格 (Query Reformulation)**：  例如，将自然语言问题改写为更简洁的关键词搜索形式，或者将问题改写为更结构化的查询语句。</li>
+</ul>
+</li>
+</ul>
+<p><strong>三、RAG 的评测：衡量智能水平的标尺</strong></p>
+<p>如何评价一个 RAG 系统的好坏？我们需要一套科学的评测指标，从不同维度衡量 RAG 系统的性能。</p>
+<p><strong>3.1 检索质量评测： “找得准” 吗？</strong>  检索质量是 RAG 的基础，如果检索不到相关的知识，后续的生成就无从谈起。 常见的检索质量评测指标包括：</p>
+<ul>
+<li><p>**Recall@k (召回率@k)**：  检索到的前 <em>k</em> 个文档中，包含相关文档的比例。 例如，Recall@10 &#x3D; 0.8 表示，检索结果的前 10 个文档中，有 8 个是相关的。 Recall@k 越高，说明检索系统 “找得全”。</p>
+</li>
+<li><p>**MRR (Mean Reciprocal Rank，平均倒数排名)**：  衡量检索结果排序质量的指标。 对于每个问题，找到第一个相关文档的排名 (Rank)，MRR 就是所有问题第一个相关文档排名的倒数的平均值。 MRR 越高，说明检索系统 “排得准”，相关文档排在更靠前的位置。</p>
+</li>
+<li><p>**NDCG (Normalized Discounted Cumulative Gain，归一化折损累积增益)**：  更精细的排序质量指标，它不仅考虑相关文档的排名，还考虑相关文档的相关性程度。 NDCG 越高，说明检索系统 “排得好”，不仅相关文档排在前面，而且更相关的文档排在更前面。</p>
+</li>
+</ul>
+<p><strong>3.2 生成质量评测： “说得好” 吗？</strong>  生成质量是 RAG 的最终目标，我们需要评价生成的答案是否准确、流畅、有用。 常见的生成质量评测指标包括：</p>
+<ul>
+<li><p>**Faithfulness (忠实度)**：  生成的答案是否与检索到的文档一致，是否捏造事实 (幻觉)。 Faithfulness 越高，说明 RAG 系统 “说实话”，不乱编。</p>
+</li>
+<li><p>**Relevance (相关性)**：  生成的答案是否与用户提出的问题相关，是否回答了问题。 Relevance 越高，说明 RAG 系统 “答对题”，没有跑题。</p>
+</li>
+<li><p>**Harmfulness (无害性)**：  生成的答案是否包含有害信息，例如歧视、偏见、攻击性言论等。 Harmfulness 越低，说明 RAG 系统 “三观正”，不会输出有害内容。</p>
+</li>
+</ul>
+<p><strong>3.3 端到端评测：综合能力大考</strong>  除了单独评测检索和生成质量，还需要进行端到端的评测，综合评价 RAG 系统的整体性能。  一些 RAG 评测框架应运而生：</p>
+<ul>
+<li><p>**RAGAS (RAG Assessment)**：  一个流行的 RAG 评估框架，提供多个指标，从忠实度、答案相关性、上下文相关性等多个维度评估 RAG 系统的性能。 RAGAS 就像一个 “综合评分系统”，从多个角度评价 RAG 的表现。</p>
+</li>
+<li><p>**ARES (Adversarial Retrieval Evaluation System)**：  另一个 RAG 评估框架，侧重于评估 RAG 系统的鲁棒性和稳定性，通过对抗性的方式，发现 RAG 系统的薄弱环节。 ARES 就像一个 “压力测试工具”，检验 RAG 系统在各种复杂情况下的表现。</p>
+</li>
+</ul>
+<p><strong>四、RAG 的最新进展与挑战：探索智能的边界</strong></p>
+<p>RAG 技术仍在快速发展中，研究人员不断探索新的方法，提升 RAG 系统的性能和应用范围。</p>
+<p><strong>4.1 最新进展：RAG 技术 “进化”  之路</strong></p>
+<ul>
+<li><p>**多跳 RAG (Multi-Hop RAG)**：  应对复杂问题，需要多次检索，逐步获取所需的全部信息，像 “剥洋葱” 一样，一层层深入挖掘。 例如，回答 “A 公司的 CEO 的配偶是谁，配偶的国籍是什么？”，需要先检索 A 公司的 CEO 是谁，再检索 CEO 的配偶是谁，最后检索配偶的国籍。</p>
+</li>
+<li><p>**细粒度 RAG (Fine-Grained RAG)**：  将检索单元从文档级别细化到句子级别甚至短语级别，提高检索精度，更精准地定位到问题的答案。  就像用 “显微镜” 观察知识，更精细地提取信息。</p>
+</li>
+<li><p>**自适应 RAG (Adaptive RAG)**：  根据问题的类型和难度，动态调整检索策略，更智能地选择合适的检索方法和参数。 就像 “智能驾驶”，根据路况自动调整驾驶模式。</p>
+</li>
+<li><p>**跨模态 RAG (Cross-Modal RAG)**：  打破文本的限制，支持从图像、视频、音频等多种模态的知识库中检索信息，扩展 RAG 的应用场景。 就像 “多语种翻译”，不仅能理解文字，还能理解图像、声音等多种信息。</p>
+</li>
+<li><p>**端到端训练 (End-to-End Training)**：  将检索器和生成器联合训练，优化整个 RAG 系统的性能，实现 “1+1 &gt; 2” 的效果。 就像 “团队合作”，检索和生成两个模块协同工作，共同提升整体性能。</p>
+</li>
+<li><p>**RAG 与微调的结合 (RAG + Fine-tuning)**：  利用 RAG 检索到的高质量数据，对 LLM 进行微调，进一步提升 LLM 的知识水平和生成能力。 就像 “名师辅导”，利用 RAG 找到的优质学习资料，帮助 LLM 提升能力。</p>
+</li>
+</ul>
+<p><strong>4.2 挑战：RAG 技术 “攻坚克难”  之路</strong></p>
+<p>RAG 技术虽然取得了显著进展，但仍然面临着一些挑战：</p>
+<ul>
+<li><p>**中间丢失问题 (Lost in the Middle)**：  LLM 在处理长文本输入时，更容易关注开头和结尾部分的信息，而忽略中间部分的信息，导致 RAG 系统无法充分利用检索到的上下文。  就像 “注意力分散”，LLM 在阅读长篇文章时，容易忽略中间段落的内容。</p>
+</li>
+<li><p>**幻觉问题 (Hallucination)**：  即使使用了 RAG，LLM 仍然可能生成与检索到的文档不一致的信息，出现 “一本正经地胡说八道” 的情况。  就像 “记忆偏差”，LLM 有时候会 “脑补” 一些不存在的事实。</p>
+</li>
+<li><p><strong>检索效率与效果的平衡</strong>：  提高检索精度往往会牺牲检索效率，如何在保证检索效果的同时，提高检索速度，是一个需要持续优化的方向。 就像 “鱼与熊掌不可兼得”，需要在检索的准确性和速度之间找到平衡点。</p>
+</li>
+<li><p><strong>知识库的构建与维护</strong>：  构建高质量、动态更新的知识库，需要投入大量的人力物力，如何高效地构建和维护知识库，是一个实际应用中需要考虑的问题。 就像 “建图书馆”，需要收集大量的书籍，并定期更新。</p>
+</li>
+<li><p><strong>多语言与跨语言支持</strong>：  如何处理不同语言的知识库，以及实现跨语言的检索和生成，仍然是一个具有挑战性的问题。 就像 “跨语言交流”，需要克服语言障碍，实现不同语言之间的信息互通。</p>
+</li>
+<li><p>**可解释性 (Explainability)**：  如何解释 RAG 模型的决策过程，让人们了解 RAG 系统为什么给出这样的答案，提高模型的可信度，是一个重要的研究方向。 就像 “黑盒变白盒”，让人们了解 AI 的思考过程，增加信任感。</p>
+</li>
+<li><p>**长上下文处理 (Long Context Handling)**： 如何高效地处理长上下文，以及是否需要进行多轮检索和上下文压缩，以应对越来越长的用户问题和知识库文档。 就像 “阅读理解马拉松”，如何处理越来越长的阅读材料，并从中提取关键信息。</p>
+</li>
+</ul>
+<p><strong>五、总结：RAG，通往更智能 AI 的桥梁</strong></p>
+<p>RAG 技术是当前 LLM 领域最受关注的技术之一，它为 LLM 注入了 “检索” 的能力，使其在知识密集型任务中表现更出色，应用前景广阔。 尽管 RAG 技术仍然面临一些挑战，但随着研究的深入和技术的进步，我们有理由相信，RAG 将成为通往更智能、更可靠的 AI 的重要桥梁。</p>
+<p>掌握 RAG 技术，就如同掌握了一把开启智能知识引擎大门的钥匙。  无论是构建智能客服、知识问答系统、还是内容创作工具，RAG 都将为你提供强大的技术支撑，助你打造更智能、更强大的 AI 应用。</p>
+<p><strong>参考文献</strong></p>
+<ul>
+<li><a href="https://arxiv.org/abs/2202.01110">A Survey on Retrieval-Augmented Text Generation</a></li>
+<li><a href="https://arxiv.org/abs/2311.05876">Trends in Integration of Knowledge and Large Language Models: A Survey and Taxonomy of Methods, Benchmarks, and Applications</a></li>
+<li><a href="https://arxiv.org/abs/2307.03172">Lost in the Middle: How Language Models Use Long Contexts</a></li>
+<li><a href="https://arxiv.org/abs/2309.15217">RAGAS: Automated Evaluation of Retrieval Augmented Generation</a></li>
+<li><a href="https://huggingface.co/BAAI/bge-large-en">BGE: BAAI General Embedding</a></li>
+<li><a href="https://huggingface.co/thenlper/gte-large">GTE: General Text Embeddings</a></li>
+<li><a href="https://huggingface.co/intfloat/e5-large-v2">E5: EmbEddings from bidirEctional Encoder rEpresentations</a></li>
+<li><a href="https://jina.ai/news/jina-embeddings-v2-8192-tokens-for-text-and-code-are-here/">Jina Embeddings</a></li>
+<li><a href="https://huggingface.co/Xenova/text-embedding-ada-002">text-embedding-ada-002</a></li>
+</ul>
+<p>希望这次的扩展版本能够更详细、更通俗地介绍 RAG 技术，让你对 RAG 有更深入的理解！</p>
+]]></content>
+  </entry>
+  <entry>
     <title>GAT教程</title>
     <url>/2023/11/01/GAT&#39;s%20Toturial/</url>
     <content><![CDATA[<h1 id="GAT教程"><a href="#GAT教程" class="headerlink" title="GAT教程"></a>GAT教程</h1><h3 id="本文来自对作者gordicaleksa的notebook代码pytorch-GAT的翻译。感谢作者"><a href="#本文来自对作者gordicaleksa的notebook代码pytorch-GAT的翻译。感谢作者" class="headerlink" title="本文来自对作者gordicaleksa的notebook代码pytorch-GAT的翻译。感谢作者"></a><strong>本文来自对作者gordicaleksa的notebook代码<a href="https://github.com/gordicaleksa/pytorch-GAT">pytorch-GAT</a>的翻译。感谢作者</strong></h3><p>本文的想法是让非研究人员也能更轻松地理解图注意力网络（以及通用的GNN）！</p>
@@ -405,131 +798,6 @@ Max attention weight = 0.012915871106088161 and min = 0.012394174002110958
 <p>唷！！！完成了！如果你一直陪我到这里，恭喜你！（成就已解锁 - GAT大师😍）</p>
 <p>建议花点时间分析一下这篇博客。这不是一个玩具项目，作者花了大约 3 周的时间才完成，所以不要指望在 30 分钟内理解所有内容，除非您真的熟悉这里提到的大多数概念。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>PT服务器工具</title>
-    <url>/2022/05/11/PT%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>本文主要包括PT的各类辅种发种的shell命令，电影种的截图制种，音乐种的抓流、转码、发种频谱图等等。</p>
-<h3 id="服务器性能测试脚本"><a href="#服务器性能测试脚本" class="headerlink" title="服务器性能测试脚本"></a>服务器性能测试脚本</h3><p><a href="https://zhuanlan.zhihu.com/p/117547388">其他脚本参考</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash<br></code></pre></td></tr></table></figure>
-
-<p>两个大家常用的脚本，基本集成了多数需要的发种工具，(有概率装不上其他软件比如wine)<br><a href="https://github.com/Aniverse/inexistence">星大Inexistence</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">bash &lt;(wget --no-check-certificate -qO- https://github.com/Aniverse/inexistence/raw/master/inexistence.sh)<br></code></pre></td></tr></table></figure>
-<p><a href="https://github.com/jerry048/Dedicated-Seedbox">Jerry048</a></p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><code class="hljs vim">bash &lt;(wget -qO- https://raw.githubusercontent.<span class="hljs-keyword">com</span>/jerry048/Dedicated-Seedbox/main/Install.<span class="hljs-keyword">sh</span>) <span class="hljs-symbol">&lt;username&gt;</span> <span class="hljs-symbol">&lt;password&gt;</span> &lt;Cache Size(uni<span class="hljs-variable">t:GiB</span>)&gt;<br># 格式类似，注意空格 name password <span class="hljs-number">16</span> GB<br></code></pre></td></tr></table></figure>
-
-
-<h1 id="虚拟环境搭建"><a href="#虚拟环境搭建" class="headerlink" title="虚拟环境搭建"></a>虚拟环境搭建</h1><h4 id="Docker一键安装"><a href="#Docker一键安装" class="headerlink" title="Docker一键安装"></a>Docker一键安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">curl -fsSL https://get.docker.com -o get-docker.sh<br>sh get-docker.sh<br></code></pre></td></tr></table></figure>
-<h4 id="conda安装使用"><a href="#conda安装使用" class="headerlink" title="conda安装使用"></a>conda安装使用</h4><p>主要用于python的运行，比起virtualenv，conda最大优点是可以自动安装指定新版本python，不用本地环境</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget -4 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">第二步安装</span><br>sh Miniconda3-py39_4.9.2-Linux-x86_64.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">第三步配置conda镜像</span><br><br>export PATH=/root/miniconda3/bin:$PATH<br><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-built_in">alias</span> ohmyzsh=<span class="hljs-string">&quot;mate ~/.oh-my-zsh&quot;</span></span><br><br>vim ~/.zshrc<br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># 添加下面的内容</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">&gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">!! Contents within this block are managed by <span class="hljs-string">&#x27;conda init&#x27;</span> !!</span><br>__conda_setup=&quot;$(&#x27;/root/miniconda3/bin/conda&#x27; &#x27;shell.zsh&#x27; &#x27;hook&#x27; 2&gt; /dev/null)&quot;<br>if [ $? -eq 0 ]; then<br>    eval &quot;$__conda_setup&quot;<br>else<br>    if [ -f &quot;/root/miniconda3/etc/profile.d/conda.sh&quot; ]; then<br>        . &quot;/root/miniconda3/etc/profile.d/conda.sh&quot;<br>    else<br>        export PATH=&quot;/root/miniconda3/bin:$PATH&quot;<br>    fi<br>fi<br>unset __conda_setup<br><span class="hljs-meta prompt_"># </span><span class="language-bash">&lt;&lt;&lt; <span class="hljs-string">conda initialize &lt;&lt;&lt;</span></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">添加完后激活</span></span><br>source ~/.zshrc<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">使用</span></span><br>conda create -n py39 python=3.9<br>conda activate py39<br></code></pre></td></tr></table></figure>
-
-<h1 id="下载器工具"><a href="#下载器工具" class="headerlink" title="下载器工具"></a>下载器工具</h1><h2 id="transmission"><a href="#transmission" class="headerlink" title="transmission"></a>transmission</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">version: &quot;3.2&quot;<br><br>services:<br>  transmission:<br>    image: chisbread/transmission<br>    container_name: transmission<br>    environment:<br>      - PUID=0<br>      - PGID=0<br>      - TZ=Asia/Shanghai<br>      - USER= <br>      - PASS=<br>      - PEERPORT=10413<br>    volumes:<br>      - /tr/config:/config<br>      - /tr/downloads:/downloads<br>      - /tr/watch:/watch<br>      <br>    ports:<br>      - 9091:9091<br>      - 10413:10413<br>      - 10413:10413/udp<br>    restart: unless-stopped<br></code></pre></td></tr></table></figure>
-
-<p>配置好yml文件后需要下载docker-compose命令<br>在对应的目录输入docker-compose up<br><a href="https://blog.csdn.net/shangyexin/article/details/122085552?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2.pc_relevant_paycolumn_v3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-2.pc_relevant_paycolumn_v3&utm_relevant_index=5">具体参考这篇文章</a></p>
-<h2 id="Usenet下载器sabnzbd"><a href="#Usenet下载器sabnzbd" class="headerlink" title="Usenet下载器sabnzbd"></a>Usenet下载器sabnzbd</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker run -d \<br>  --name=sabnzbd \<br>  -p 8384:8080 \<br>  -e PUID=1000 \<br>  -e PGID=1000 \<br>  -v /home/你的用户名/sabnzbd/config:/config \<br>  -v /home/你的用户名/sabnzbd/downloads:/downloads \<br>  -v /home/你的用户名/sabnzbd/incomplete:/incomplete-downloads \<br>  --restart unless-stopped \<br>  linuxserver/sabnzbd<br></code></pre></td></tr></table></figure>
-<p>vim &#x2F;home&#x2F;你的用户名&#x2F;sabnzbd&#x2F;config&#x2F;sabnzbd.ini<br>把–inet_exposure从0修改到5才能正常访问</p>
-<ul>
-<li>记得替换路径！</li>
-</ul>
-<h1 id="助手工具"><a href="#助手工具" class="headerlink" title="助手工具"></a>助手工具</h1><h2 id="PPTP"><a href="#PPTP" class="headerlink" title="PPTP"></a>PPTP</h2><p>Chrome<br>Edge</p>
-<h2 id="Jackett"><a href="#Jackett" class="headerlink" title="Jackett"></a>Jackett</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker create --name=jackett \<br>--restart=always \<br>-v /root/jackett/config:/config \<br>-v /root/jackett/downloads:/downloads \<br>-e PGID=0 -e PUID=0 \<br>-p 9117:9117 \<br>linuxserver/jackett<br><br>docker start<br></code></pre></td></tr></table></figure>
-<h2 id="Prowlarr"><a href="#Prowlarr" class="headerlink" title="Prowlarr"></a>Prowlarr</h2><p>更推荐这个工具，还能支持Usenet的indexer，比上者维护更勤</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker run -d \<br>--name=prowlarr \<br>-e PUID=1000 \<br>-e PGID=1000 \<br>-e TZ=Asia/Shanghai \<br>-p 9696:9696 \<br>-v /prowlarr/config:/config \<br>-v /本地下载目录:/downloads \<br>--restart unless-stopped \<br>linuxserver/prowlarr<br></code></pre></td></tr></table></figure>
-
-<h2 id="IYUU-plus"><a href="#IYUU-plus" class="headerlink" title="IYUU plus"></a>IYUU plus</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">mkdir /root/plus -p<br>docker run -d  --name IYUUPlus  -v /root/plus:/IYUU/db -v /etc/qbit/config/qBittorrent/BT_backup:/qb -v /etc/transmission/config/torrents:/tr -p 8787:8787  --restart=always iyuucn/iyuuplus:latest<br></code></pre></td></tr></table></figure>
-<h2 id="seedcross"><a href="#seedcross" class="headerlink" title="seedcross"></a>seedcross</h2><p>辅种外站神器，不过还没成熟有辅错的可能，它的原理是用你下载器的种子通过jackett搜索匹配。<br><a href="https://github.com/ccf-2012/seedcross">github链接</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker run -d --name seedcross -v /somedir/in/host:/code/seedcross/db -p 8019:8019 ccf2012/seedcross:latest<br></code></pre></td></tr></table></figure>
-<p>打开8787端口<br>密码为空，第一次输入时你可以自由设置你的密码；以后密码与第一次相同才能登录</p>
-<h1 id="FileBrower"><a href="#FileBrower" class="headerlink" title="FileBrower"></a>FileBrower</h1><p>荒野无灯FBE的安装脚，作为网盘可直接做种截图，非常方便</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">mkdir -p ~/docker/fb/config ~/docker/fb/myfiles<br>docker run -d --name fb \<br>  --restart=unless-stopped \<br>  -e PUID=$UID \<br>  -e PGID=$GID \<br>  -e WEB_PORT=8082 \<br>  -e FB_AUTH_SERVER_ADDR=&quot;127.0.0.1&quot; \<br>  -p 8082:8082 \<br>  -v ~/docker/fb/config:/config \<br>  -v /:/myfiles \<br>  --mount type=tmpfs,destination=/tmp \<br>  80x86/filebrowser:2.9.4-amd64<br></code></pre></td></tr></table></figure>
-
-
-<h1 id="做截图"><a href="#做截图" class="headerlink" title="做截图"></a>做截图</h1><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">ffmpeg -i [视频路径] -r 1 -vframes 4 -q:v 2 -f image2 image-%d.jpeg<br></code></pre></td></tr></table></figure>
-<h1 id="Rclone"><a href="#Rclone" class="headerlink" title="Rclone"></a>Rclone</h1><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">安装最新版本rclone</span> <br>apt-get install p7zip-full<br>curl https://rclone.org/install.sh | sudo bash<br></code></pre></td></tr></table></figure>
-<p>盒子文件同步到云盘，主要是我盒子拉本地非常慢，所以用云盘做中转。<br>可以是Onedrive、Google drive<br>我这里说阿里云盘</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker run -d \<br>--name=aliyundrive-webdav \<br>--restart=always \<br>-p 8080:8080 \<br>-v $PWD/docker/aliyundrive-webdav/:/etc/aliyundrive-webdav/ \<br> -e REFRESH_TOKEN=&#x27;your refreshToken&#x27; \<br> -e WEBDAV_AUTH_USER=admin \<br> -e WEBDAV_AUTH_PASSWORD=admin \<br> messense/aliyundrive-webdav<br>​<br></code></pre></td></tr></table></figure>
-<p>可以点开ip:8080访问，密码账号如上，需要注意的是，换成其他端口可能会服务不了，如果冲突的话先把另一个关了。</p>
-<h1 id="Clouddrive2的服务搭建"><a href="#Clouddrive2的服务搭建" class="headerlink" title="Clouddrive2的服务搭建"></a>Clouddrive2的服务搭建</h1><p>这个比rlone更方便，主要是用来挂载115的</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget https://github.com/cloud-fs/cloud-fs.github.io/releases/download/v0.8.1/clouddrive-2-linux-x86_64-0.8.1.tgz<br>md /opt/clouddrive<br>tar zxvf clouddrive-2-linux-x86_64-0.8.1.tgz -C /opt/clouddrive<br><br>vim /etc/systemd/system/clouddrive.service<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入下面的内容，daemon reload</span><br><br></code></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">Description=clouddrive2<br>After=network.target<br><br>[Service]<br>Type=exec<br>Restart=on-failure<br>ExecStart=/opt/clouddrive/clouddrive<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
-<h4 id="Onedrive"><a href="#Onedrive" class="headerlink" title="Onedrive"></a>Onedrive</h4><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">要在mac/win上先用rclone authorize &quot;onedrive&quot;跳转网页授权，返回token（注意要把整个json全复制下来）<br></code></pre></td></tr></table></figure>
-<p>同时挂载多个rclone的网盘</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">curl https://rclone.org/install.sh | sudo bash<br><span class="hljs-meta prompt_">#</span><span class="language-bash">安装完成后，运行rclone连接webdav完成配置</span><br>rclone config<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">配置玩rclone后</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">前者上<span class="hljs-built_in">od</span>地址后者上本地地址，复制以下内容创建service</span><br>vim /etc/systemd/system/rclone@.service<br><span class="hljs-meta prompt_">#</span><span class="language-bash">粘贴以下内容</span><br>[Unit]<br>Description=Rclone mount %I drive<br>AssertPathIsDirectory=LocalFolder<br>After=network-online.target<br><br>[Service]<br>Type=simple<br>ExecStart=/usr/bin/rclone mount %i: /mnt/%i \<br>--config /root/.config/rclone/rclone.conf \<br>--copy-links \<br>--no-gzip-encoding \<br>--no-check-certificate \<br>--vfs-cache-mode full \<br>--umask 0000 \<br>--default-permissions \<br>--allow-non-empty \<br>--allow-other \<br>--attr-timeout 5m \<br>--vfs-cache-max-size 1G \<br>--buffer-size 500M \<br>--vfs-read-chunk-size 64M \<br>--vfs-read-chunk-size-limit 1G<br>ExecStop=/bin/fusermount -u LocalFolder<br>Restart=on-abort<br>User=root<br><br>[Install]<br>WantedBy=default.target<br></code></pre></td></tr></table></figure>
-<p>&#x2F;mnt改为想挂载的目标目录根目录。配置好后创建挂载目标子目录后可以自动挂载，注意名字要和rclone的remotes一致。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">mkdir /mnt/od1<br>systemctl enable rclone@od1<br>systemctl start rclone@od1<br></code></pre></td></tr></table></figure>
-<p>最简单的方法 rclone config file 直接复制conf文件夹内的配置信息，粘贴到对应的服务器</p>
-<p><a href="http://bbs.chinauos.com/zh/post/9207">配置教程参考</a>，需要注意最新版可能编号不一样，要自己选择webdav</p>
-<h1 id="IRC"><a href="#IRC" class="headerlink" title="IRC"></a>IRC</h1><p>挂在到nas上的thelounge客户端</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">wget -P /root https://github.com/thelounge/thelounge/releases/download/v4.2.0/thelounge_4.2.0_all.deb<br>dpkg -i /root/thelounge_4.2.0_all.deb<br><span class="hljs-comment">#systemctl stop thelounge.service</span><br><span class="hljs-comment">#sed -i &#x27;s/9000,/11111,/g&#x27; /etc/thelounge/config.js</span><br><span class="hljs-comment"># 以上命令替换端口号，9000端口号挺常见容易产生冲突</span><br><span class="hljs-comment"># 比如 docker 的 portainer 镜像默认映射端口号就用的是 9000</span><br><span class="hljs-comment"># 该命令将 9000 端口号替换成 11111，这个可以自定义（1-65535 任选一个没重复的当端口号）</span><br><br>systemctl start thelounge.service<br>systemctl <span class="hljs-built_in">enable</span> thelounge.service<br>thelounge add 用户名#手动添加登陆的用户名<br><span class="hljs-comment">#配置的时候记得在命令里面加上以下三句命令</span><br>/msg NickServ RECOVER 昵称<br>/msg NickServ IDENTIFY 昵称 密码#避免被挤掉<br>/msg Vertigo ENTER 昵称 irc密码<br></code></pre></td></tr></table></figure>
-<p>如果提示node版本问题可能需要更新，nvm是个管理node的工具</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash<br>export NVM_DIR=&quot;$HOME/.nvm&quot;<br>[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm<br>[ -s &quot;$NVM_DIR/bash_completion&quot; ] &amp;&amp; \. &quot;$NVM_DIR/bash_completion&quot;  # This loads nvm bash_completion<br></code></pre></td></tr></table></figure>
-<h1 id="音乐相关"><a href="#音乐相关" class="headerlink" title="音乐相关"></a>音乐相关</h1><h3 id="Flac-to-mp3"><a href="#Flac-to-mp3" class="headerlink" title="Flac to mp3"></a>Flac to mp3</h3><p><a href="http://robinbowes.github.io/flac2mp3/">Flac2Mp3</a>该工具会将你所有flac文件转为mp3，且按相同的名字文件结构保存。</p>
-<p><a href="https://github.com/robinbowes/flac2mp3/tarball/master">下载链接download.tar.gz</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">tar zxvf flac2mp3-0.3.0.tar.gz<br>apt install flac<br>apt install lame<br><span class="hljs-meta prompt_">#</span><span class="language-bash">找到解压文件内的flac2mp3.pl文件，善用软连接,默认v2，自己修改为v0或320</span><br><br>ln -s 文件所在路径  f2m<br>./f2m --preset=V0 /path/to/lossless /path/to/lossy<br></code></pre></td></tr></table></figure>
-
-<h3 id="Flac-24bit-16bit"><a href="#Flac-24bit-16bit" class="headerlink" title="Flac 24bit-&gt;16bit"></a>Flac 24bit-&gt;16bit</h3><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">sox input.flac -G -b 16 output.flac rate -v -L 48000 dither<br><br>for flac in *.flac; do sox -S &quot;$&#123;flac&#125;&quot; -r 44100 -b 16 new/&quot;$&#123;flac&#125;&quot;; done<br></code></pre></td></tr></table></figure>
-<h3 id="一键上传图床脚本"><a href="#一键上传图床脚本" class="headerlink" title="一键上传图床脚本"></a>一键上传图床脚本</h3><p><a href="https://github.com/theirix/ptpimg-uploader">https://github.com/theirix/ptpimg-uploader</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">pip install ptpimg_uploader<br><br>export PTPIMG_API_KEY=&lt;your hex key&gt;<br><br>ptpimg_uploader ~/seed/mytorrent/folder.jpg<br></code></pre></td></tr></table></figure>
-
-<h3 id="频谱图"><a href="#频谱图" class="headerlink" title="频谱图"></a>频谱图</h3><ol>
-<li>sox 专辑路径名字&#x2F;*.flac -n spectrogram -o 专辑.png</li>
-<li>要是二级目录<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/zsh/bin</span><br>dir=/home/download/<br>filename=$1<br>cd &quot;$filename&quot;<br>ls -d */ | grep -o &#x27;[a-Z]*\ *[0-9]/&#x27; &gt;temp.log<br>sed -i &#x27;s/$/*flac/&#x27; temp.log<br>mapfile acmd &lt;temp.log<br>echo $&#123;acmd[@]&#125;<br>fdir=&#x27;&#x27;<br>if test -z &quot;$acmd&quot;<br>then<br>  echo &quot;No subfolder~&quot;<br>  sox *flac -n spectrogram -o $dir/spectrograms/&quot;$filename&quot;.png<br>else<br>  l=$&#123;#acmd[@]&#125;<br>  case &quot;$l&quot; in<br>          2)<br>             echo &quot;There 2 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; -n spectrogram -o $dir/spectrograms/&quot;$filename&quot;.png<br>            <br>             ;;<br>          *)<br>             echo &quot;There more than 3 discs, only take first 3&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; -n spectrogram -o $dir/spectrograms/&quot;$filename&quot;.png<br>             ;;<br>  esac<br></code></pre></td></tr></table></figure></li>
-<li>单碟版一键制谱并上传图床返回链接</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim sp-up.sh<br><span class="hljs-meta prompt_">#</span><span class="language-bash">复制以下内容</span><br>n=$1<br>cd &quot;$n&quot;<br><br>sox *flac -n spectrogram -o ../spectrograms/&quot;$n&quot;.png<br>sp=$(ptpimg_uploader -k your-ptpimg-key --bbcode <br>spec=[hide=spectrogram]$sp[/hide]<br>echo &quot;PTPIMGurl: $spec&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">具体使用</span><br>sh sp-up.sh 专辑目录<br><br></code></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">git clone https://github.com/EwolBash/spsox.git<br>cd spsox<br>chmod +x spsox<br>cp spsox /usr/local/bin/<br>spsox<br>spsox -r /home/ewol/Music/music/&#x27;Chuck Prophet - Bobby Fuller Died For Your Sins (2017) [FLAC]&#x27;/<br>spsox -r /home/ewol/Music/music<br></code></pre></td></tr></table></figure>
-<h3 id="web抓流"><a href="#web抓流" class="headerlink" title="web抓流"></a>web抓流</h3><p><a href="https://github.com/nathom/streamrip">https://github.com/nathom/streamrip</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">需要python&gt;3.8</span><br>pip3 install streamrip --upgrade<br><br>rip config --open<br><span class="hljs-meta prompt_">#</span><span class="language-bash">填上arl之类的信息</span><br><br>rip 专辑url<br></code></pre></td></tr></table></figure>
-<h3 id="压缩flac专辑到lv8"><a href="#压缩flac专辑到lv8" class="headerlink" title="压缩flac专辑到lv8"></a>压缩flac专辑到lv8</h3><p><a href="https://xiph.org/flac/documentation_tools_flac.html">flac命令行文档</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">flac -8 专辑名字/* -f<br></code></pre></td></tr></table></figure>
-
-<h1 id="抓流制种频谱图集合"><a href="#抓流制种频谱图集合" class="headerlink" title="抓流制种频谱图集合"></a>抓流制种频谱图集合</h1><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/zsh</span><br>l=($*)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">num=<span class="hljs-variable">$1</span></span><br>for num in $&#123;l[*]&#125;;do<br>        echo https://www.xxx.com/album/$num<br>        ripb=`rip url line https://www.deezer.com/album/$num`<br>        echo &quot;$ripb&quot;<br>        fullname=/home/download<br><br>        if [[ $ripb =~ &quot;Unable to stream&quot; ]] || [[ $ripb =~ &quot;already downloaded&quot; ]]<br>        then<br>                echo $num &quot;$ripb&quot;&gt;&gt;$fullname/fail.log#抓流失败或者重复跳过循环<br>                continue<br>        fi<br>        dirname=$(ls -At $fullname | sed -n &quot;1p&quot;)<br>        mktorrent -v -p -l 22 -o $fullname/torrents/&quot;$dirname&quot;.torrent $fullname/&quot;$dirname&quot;<br>        cd $fullname/&quot;$dirname&quot;<br><br>        ls -d */ | grep -o &#x27;[a-Z]*\ *[0-9]/&#x27; &gt;temp.log<br>        sed -i &#x27;s/$/*flac/&#x27; temp.log<br>        mapfile acmd &lt;temp.log<br><br>        fdir=&#x27;&#x27;<br>        if test -z &quot;$acmd&quot;<br>        then<br>        echo &quot;No subfolder~&quot;<br>         sox *flac -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>        else<br>         l=$&#123;#acmd[@]&#125;<br>         case &quot;$l&quot; in<br>          2)<br>             echo &quot;There 2 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>          3)<br>             echo &quot;There 3 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>          4)<br>             echo &quot;There 4 discs&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             a4=`cat temp.log | sed -n &#x27;4p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; &quot;$a4&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>          *)<br>             echo &quot;There more than 5 discs, only take first 6&quot;<br>             a1=`cat temp.log | sed -n &#x27;1p&#x27;`<br>             a2=`cat temp.log | sed -n &#x27;2p&#x27;`<br>             a3=`cat temp.log | sed -n &#x27;3p&#x27;`<br>             a4=`cat temp.log | sed -n &#x27;4p&#x27;`<br>             a5=`cat temp.log | sed -n &#x27;5p&#x27;`<br>             a6=`cat temp.log | sed -n &#x27;6p&#x27;`<br>             sox &quot;$a1&quot; &quot;$a2&quot; &quot;$a3&quot; &quot;$a4&quot; &quot;$a5&quot; &quot;$a6&quot; -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>             ;;<br>         esac<br>        fi<br>        #sox $fullname/&quot;$dirname&quot;/*flac -n spectrogram -o $fullname/spectrograms/&quot;$dirname&quot;.png<br>        sp=$(ptpimg_uploader --bbcode $fullname/spectrograms/&quot;$dirname&quot;.png)<br>        spec=[hide=spectrogram]$sp[/hide]<br>        echo &quot;$spec $dirname $num&quot; &gt;&gt;&quot;$fullname&quot;/torrents/PtpimgUrl.txt<br>        echo &quot;PTPIMGurl: $spec&quot;<br>        sleep $[($RANDOM % 10)+3]<br></code></pre></td></tr></table></figure>
-
-<h2 id="截图工具convert"><a href="#截图工具convert" class="headerlink" title="截图工具convert"></a>截图工具convert</h2><p>要apt install imagemagick</p>
-<h2 id="AutoBrr"><a href="#AutoBrr" class="headerlink" title="AutoBrr"></a>AutoBrr</h2><p><a href="https://autobrr.com/configuration/irc">https://autobrr.com/configuration/irc</a><br>刷外站神器，主要是支持没有rss用irc推送的站，上面的官方文档已经相当详细，我这个是介绍下docker安装</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">vim docker-compose.yml<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入以下内容，替换映射地址</span><br>version: &quot;3.7&quot;<br><br>services:<br>  autobrr:<br>    container_name: autobrr<br>    image: ghcr.io/autobrr/autobrr:latest<br>    restart: unless-stopped<br>    #logging:<br>    #  driver: json-file<br>    #  options:<br>    #    max-file: $&#123;DOCKERLOGGING_MAXFILE&#125;<br>    #    max-size: $&#123;DOCKERLOGGING_MAXSIZE&#125;<br>    user: 1000:1000<br>    environment:<br>      - TZ=$&#123;TZ&#125;<br>    volumes:<br>      - $&#123;BASE_DOCKER_DATA_PATH&#125;/autobrr/config:/config<br>    ports:<br>      - 7474:7474<br></code></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker compose up -d<br></code></pre></td></tr></table></figure>
-<p>注意盒子上使用要找到config.toml文件，把127.0.0.1改成0.0.0.0</p>
-<p>通知可用tg的bot，怎么搞详细教程参考<a href="https://blog.csdn.net/whatday/article/details/113748634?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167496205316800192275150%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=167496205316800192275150&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-113748634-null-null.142%5Ev71%5Einsert_chatgpt,201%5Ev4%5Eadd_ask&utm_term=telegram%20bot&spm=1018.2226.3001.4187">这个教程</a>，简单一点就是先去搜索botFather创建一个bot，搞号命名描述获取token，再去getuseridbot查自己id(有概率搜不到)。点击链接测试返回值<a href="https://api.telegram.org/bot%3Ctoken%3E/getUpdates">https://api.telegram.org/bot&lt;换自己token&gt;&#x2F;getUpdates</a><br>填的时候注意token直接复制整个‘数字:字符串’，chat_id是自己的id。</p>
-<ul>
-<li>注意：<br>添加客户端的时候deluge一个坑，他的名字密码要去&#x2F;docker&#x2F;appdata&#x2F;deluge&#x2F;auth找，username:password:level的形式，地址必须是纯数字ip，不是官方推荐的127.0.0.1或者localhost。qb地址是<a href="http://ip:端口">http://ip:端口</a></li>
-</ul>
-<h2 id="flexget"><a href="#flexget" class="headerlink" title="flexget"></a>flexget</h2><p>自动rss新种，可自定义规则，星大脚本直接装或者直接：pip install flexget</p>
-<p>配置文件config.yml</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">templates:<br><span class="hljs-meta prompt_"># </span><span class="language-bash">剩余空间模板，当 path 对应的路径的剩余空间小于 space 规定的数值的时候停止 RSS 下载</span><br>  freespace:<br>    free_space:<br>      path: /home/gawain/deluge/download/<br>      space: 20240<br><span class="hljs-meta prompt_"># </span><span class="language-bash">qb 的模板，之后写 qb 就是指把种子推送到 qb 进行下载；下面 <span class="hljs-built_in">tr</span> de rt 也是如此</span><br>  qb:<br>    qbittorrent:<br>      path: /home/gawain/deluge/download/<br>      host: localhost<br>      port: 2017<br>      username: **** <br>      password: ****<br>  de:<br>    deluge:<br>      path: /home/gawain/deluge/TSBluray/rar<br>      host: localhost<br>      port: 58846<br>      username: ...<br>      password: ...<br>  size:<br>    content_size:<br>      min: 13000<br>      max: 46666<br>      strict: yes<br><br>tasks:<br>  Ts-Bluray:<br>    rss: https://www.torrentseeds.org/rss/****<br>    if:<br>      - &quot;&#x27;BLURAY&#x27; in title&quot;: accept<br>      #- &quot;&#x27;subs&#x27; in title&quot;: reject<br>    temperate: <br>      - de<br>      - freespace<br>      - size<br>    deluge:<br>      label: TSBluray<br><br>web_server:<br>  port: 6566<br>  web_ui: yes<br><br>schedules: no<br></code></pre></td></tr></table></figure>
-<p>然后测试：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">不下载只测试获取情况</span><br>flexget --test <br><span class="hljs-meta prompt_">#</span><span class="language-bash">标记老的种子</span><br>flexget --learn<br><span class="hljs-meta prompt_">#</span><span class="language-bash">确定flexget安装目录</span><br>which flexget<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加cron</span><br>crontab -e<br><span class="hljs-meta prompt_">#</span><span class="language-bash">添加语句，后面替换上面获取的路径</span><br>*/3 * * * * /usr/local/bin/flexget execute<br></code></pre></td></tr></table></figure>
-<h1 id="差速器"><a href="#差速器" class="headerlink" title="差速器"></a>差速器</h1><p><a href="https://leishi.io/blog/posts/2021-12/Differential/">大佬博客</a><br>只要提供给差速器一个需要发布的文件夹和豆瓣信息页面，差速器会自动帮你</p>
-<ol>
-<li>根据豆瓣链接获取PTGen信息</li>
-<li>根据资源载体获取MediaInfo&#x2F;BDInfo信息</li>
-<li>截取自定数量的无损截图，上传到指定的图床</li>
-<li>制作种子</li>
-<li>如果是本地环境，自动打开浏览器，然后自动填充所有的信息<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">Linux一键安装，其他平台和docker参考以上文章</span><br>curl -Lso- https://raw.githubusercontent.com/LeiShi1313/Differential/main/install.sh | bash<br><br>vim config.ini<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入以下内容</span><br>[DEFAULT]<br>; 是否制种<br>make_torrent = true<br><br>; 生成截图的数量<br>screenshot_count = 6<br>; 图床，差速器支持PTPIMG、自建imgurl、自建Chevereto（z4a、imgbb、猫柠的图床等）、SM.MS和BYR作为图床<br>image_hosting = CHEVERETO<br>; 自建Chevereto的地址<br>chevereto_hosting_url = https://XXX.com<br>; 自建Chevereto的用户名<br>chevereto_username = XXXX<br>; 自建Chevereto的密码<br>chevereto_password = YYYY<br><br>; 自动填充使用的脚本，这里使用树大的脚本<br>easy_upload = true<br>; 也可以使用明日大的脚本来进行自动填充<br>; auto_feed = true<br><br>; 使用差速器自带的短网址服务<br>use_short_url = true<br><br>; 差速器自带一个自建的PTGen，如果无法访问，可以提供自定义PTGen地址<br>;ptgen_url = https://XXXXX.com<br><br>[NexusPHP]<br>; 发种页面的链接<br>upload_url = https://XXXXX.com/upload.php<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">发布格式</span><br>dft ne -f [种子文件夹] -u [豆瓣链接]<br></code></pre></td></tr></table></figure>
-需要注意的是需要自己配置config，和视频文件同一文件夹，可能需要科学使用默认ptgen。</li>
-</ol>
-<h1 id="解压rar"><a href="#解压rar" class="headerlink" title="解压rar"></a>解压rar</h1><p>主要为了解压0day资源，只能手动安装</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">wget http://www.rarlab.com/rar/rarlinux-x64-5.0.0.tar.gz --no-check-certificate<br>tar xvf rarlinux-x64-5.0.0.tar.gz<br>cd rar<br>make install<br>ln -n unrar /usr/bin/unrar<br><span class="hljs-meta prompt_">#</span><span class="language-bash">使用方法</span><br>unrar e  ***.rar(or folder) target-path<br></code></pre></td></tr></table></figure>
-<h1 id="Remux"><a href="#Remux" class="headerlink" title="Remux"></a>Remux</h1><p>Remux必须有eac3to的解码日志，而eac3to又只支持windows，所以需要wine32</p>
-<h2 id="Wine"><a href="#Wine" class="headerlink" title="Wine"></a>Wine</h2><p> 可以星大脚本直接手动加参数装<br> Debian10安装Wine32有很多坑，wine是为了eac3to</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt-get install libgnutls30:i386 libldap-2.4-2:i386 libgpg-error0:i386 libxml2:i386 libasound2-plugins:i386 libsdl2-2.0-0:i386 libfreetype6:i386 libdbus-1-3:i386 libsqlite3-0:i386<br></code></pre></td></tr></table></figure>
-<h2 id="eac3to"><a href="#eac3to" class="headerlink" title="eac3to"></a>eac3to</h2><p><a href="https://unixsheikh.com/tutorials/remuxing-iso-dvd-or-bluray-using-cat-and-ffmpeg-on-linux.html">https://unixsheikh.com/tutorials/remuxing-iso-dvd-or-bluray-using-cat-and-ffmpeg-on-linux.html</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">eac3to日志：</span><br>wget -O eac3to.zip https://www.videohelp.com/download/eac3to336.zip\?r\=LRXdxQfL<br>unzip eac3to.zip<br>wine eac3to/eac3to.exe `winepath -w /home/gawain/deluge/download/Songs.From.The.Second.Floor.2000.COMPLETE.BLURAY-iFPD/BDMV` &#x27;1)&#x27; 1:chapter.txt 2:h264.mkv 3:DTSMAENG.dtsma -progressnumbers -log=eac3to.txt<br><span class="hljs-meta prompt_">#</span><span class="language-bash">注意，这里有个非常诡异的问题，排查了很久，1）会选者不上，主要是因为路径的问题，要用winepath</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">1）ffmpeg</span><br>ffmpeg -i 00009.m2ts -map 0:0 -vcodec copy -map 0:1 -acodec copy -map 0:7 -scodec copy W.E.2011.1080p.BluRay.Remux.mkv<br><span class="hljs-meta prompt_">#</span><span class="language-bash">2）mkvermerge</span><br>mkvmerge -o W.E.2011.1080p.BluRay.Remux.mkv 00009.m2ts <br></code></pre></td></tr></table></figure>
-<p> i is the name of the input file.<br>-map is used to map each track to a specific command option.<br>0:0 is the first track, i.e. the video, which is then mapped to the -vcodec option, i.e. video codec option, which simply copies the video track into the new mkv container.<br>0:1 is the first audio track, i.e. the English audio, which is then mapped to the -acodec option, i.e. audio codec option, which simply copies the English audio track into the new mkv container.<br>0:9 is the first subtitle track, i.e. the English subtitle, which is then mapped to the -scodec option, i.e. subtitle codec option, which simply copies the English subtitle into the new mkv container.</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">apt install mkvtoolnix<br>mkvmerge <br></code></pre></td></tr></table></figure>
-
-<h1 id="小工具集合"><a href="#小工具集合" class="headerlink" title="小工具集合"></a>小工具集合</h1><h3 id="mosh连接"><a href="#mosh连接" class="headerlink" title="mosh连接"></a>mosh连接</h3><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">brew install mosh#mac 客户端<br><br>sudo apt-get install mosh<br>mosh-server new -c 256 -s -l LANG=en_US.UTF-8 -p 60000<br><br>mosh pi@pi42.local -p 6000<br></code></pre></td></tr></table></figure>
-
-
-<h3 id="远程同步文件"><a href="#远程同步文件" class="headerlink" title="远程同步文件"></a>远程同步文件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">rsync -avz --progress /root/client/   root@202.112.23.12:/home/work/      <br><span class="hljs-meta prompt_">#</span><span class="language-bash">将本机的/root/client/拷贝至远程的202.112.23.12:/home/work/目录，--progress可以查看拷贝的过程</span><br></code></pre></td></tr></table></figure>
-
-<h4 id="docker查看映射目录"><a href="#docker查看映射目录" class="headerlink" title="docker查看映射目录"></a>docker查看映射目录</h4><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">docker inspect 容器名称 | grep Mounts -A 20<br><br></code></pre></td></tr></table></figure>
-
-<h2 id="批量获取前端种子下载链接"><a href="#批量获取前端种子下载链接" class="headerlink" title="批量获取前端种子下载链接"></a>批量获取前端种子下载链接</h2><p>主要是针对ptpp不支持的站点</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">clear</span>()<br><br><span class="hljs-keyword">var</span> trs = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&quot;form[action]&quot;</span>)<br><span class="hljs-keyword">var</span> pk =<span class="hljs-string">&quot;passkey&quot;</span><br><span class="hljs-keyword">var</span> dl =<span class="hljs-string">&#x27;&#x27;</span><br>href=<span class="hljs-string">&#x27;&#x27;</span><br>ct=<span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> tr <span class="hljs-keyword">of</span> trs)&#123;<br>    a=tr.<span class="hljs-property">action</span><br>    <span class="hljs-keyword">if</span> (a.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/zip/</span>))<br>    &#123;<br>       <span class="hljs-keyword">continue</span><br>    &#125;<br>    tid=a.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/id=(\d+)&amp;*sign=(\d+)/</span>)<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(tr)<br>    <span class="hljs-keyword">if</span>(tid)<br>       href=<span class="hljs-string">&quot;https://***./download.php?id=&quot;</span>+tid[<span class="hljs-number">1</span>]+<span class="hljs-string">&quot;&amp;passkey=&quot;</span>+pk+<span class="hljs-string">&quot;&amp;https=1&quot;</span><br>       dl=dl+href+<span class="hljs-string">&quot;\r\n&quot;</span><br>       ct=ct+<span class="hljs-number">1</span><br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(dl,ct)<br><span class="hljs-title function_">copy</span>(dl)<br><br></code></pre></td></tr></table></figure>
-
-<h3 id="新服务器探针ServerStatus"><a href="#新服务器探针ServerStatus" class="headerlink" title="新服务器探针ServerStatus"></a>新服务器探针ServerStatus</h3><p><a href="https://github.com/zdz/ServerStatus-Rust">https://github.com/zdz/ServerStatus-Rust</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">自动安装配置脚本</span><br>wget --no-check-certificate -qO status.sh &#x27;https://raw.githubusercontent.com/zdz/ServerStatus-Rust/master/scripts/status.sh&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">客户端</span><br>./status.sh -i -c http://name:password@ip:8080<br><span class="hljs-meta prompt_">#</span><span class="language-bash">服务器</span><br>./status.sh -i -s <br></code></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>斯坦福汽车识别</title>
@@ -1159,6 +1427,40 @@ Finished Training
 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">bash Miniforge3-MacOSX-arm64.sh<br><br>nano ~/.bash_profile<br>export PATH=&quot;/Users/Cyberbolt/miniforge3/bin:$PATH&quot; <br><br>source $HOME/.bash_profile<br></code></pre></td></tr></table></figure>
 <h2 id="在虚拟环境安装-TensorFlow"><a href="#在虚拟环境安装-TensorFlow" class="headerlink" title="在虚拟环境安装 TensorFlow"></a>在虚拟环境安装 TensorFlow</h2><figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">conda create -n py39 python=3.9<br>conda activate py39<br><br>conda install -c apple tensorflow-deps<br>python -m pip install tensorflow-macos<br>python -m pip install tensorflow-metal<br></code></pre></td></tr></table></figure>
 <h1 id="未完待补充"><a href="#未完待补充" class="headerlink" title="未完待补充"></a>未完待补充</h1>]]></content>
+  </entry>
+  <entry>
+    <title>重装系统</title>
+    <url>/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h1 id="WIN10迁移C盘和崩溃还原系统总结"><a href="#WIN10迁移C盘和崩溃还原系统总结" class="headerlink" title="WIN10迁移C盘和崩溃还原系统总结"></a>WIN10迁移C盘和崩溃还原系统总结</h1><p>这几天为了清理C盘一直动系统的文件，导致经常重启，其中主要还是迁移C盘Users数据到其他非系统盘操作不当导致开机系统加载不了用户信息，下面具体记录这两方面。</p>
+<ol>
+<li><p>迁移资料的关键还是利用硬链接将物理地址位于其他盘的Users用户信息映射到C盘的逻辑名上。下面只简单记录一下命令。</p>
+</li>
+<li><p><strong>最关键的还是利用系统的保命文件———Backup.wim重刷系统</strong><br>一个通过Dism++文件创建的镜像文件，尽量将此文件放于非系统盘，有此文件基本可以不用借助任何外部工具无限重刷回原系统。</p>
+</li>
+</ol>
+<p>上面两者都需要通过高级重启进入一个纯命令行的Dos界面，在此可以几乎不受权限限制对文件<strong>删除复制</strong>等操作<br><strong>进入 <em>系统设置 -&gt; 升级&amp;安全 -&gt; 恢复 -&gt; 高级重启 -&gt; 立刻重启</em> 来重启电脑到恢复模式；</strong><br><img src="https://ptpimg.me/edeyq3.png" alt="在这里插入图片描述"><br>后面就是选择 <em><strong>疑难解答-&gt;高级-&gt;命令提示符</strong></em>（现在不便具体演示，网上有很多相关教程）</p>
+<p><strong>注意</strong>：在Dos环境下盘符名称可能和平时不一样(我的OS就变成F盘了)，首先就是平时被隐藏的X盘，其他最好先通过 <strong>diskpart</strong>命令进入管理磁盘工具，通过<strong>list volume</strong>查看所有盘符信息，<strong>exit</strong>退出。同时利用<strong>cd 对应硬盘</strong> 进入后再用<strong>dir</strong>命令确认文件是否正确。</p>
+<h2 id="C盘Users迁移其他盘"><a href="#C盘Users迁移其他盘" class="headerlink" title="C盘Users迁移其他盘"></a>C盘Users迁移其他盘</h2><p>有几种方法可用，原则就是要先保证在非现用户使用环境下进行，为了避免各种权限要求，我是直接开机进入Dos命令行：</p>
+<ol>
+<li>将Users复制与其他盘.<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">复制C:\Users下的所有文件到D:\Users <br><br><span class="hljs-comment">// 参数说明：此命令为Windows的“强制文件拷贝”命令。</span><br><span class="hljs-comment">//      /E 表示拷贝文件时包含子目录（包括空目录）</span><br><span class="hljs-comment">//      /COPYALL 表示拷贝所有文件信息</span><br><span class="hljs-comment">//      /XJ 表示不包括Junction points（默认是包括的）</span><br><span class="hljs-comment">//      /XD &quot;F:\Users\Administrator&quot; 表示不包括指定的目录,此处指定目录为：&quot;F:\Users\Administrator&quot;</span><br>robocopy <span class="hljs-string">&quot;F:\Users&quot;</span> <span class="hljs-string">&quot;D:\Users&quot;</span> /E /COPYALL /XJ /XD <span class="hljs-string">&quot;F:\Users\Administrator&quot;</span><br></code></pre></td></tr></table></figure></li>
+<li>删除用户文件<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//参数说明：此命令删除指定目录。</span><br><span class="hljs-comment">//      /S 删除指定目录及其中的所有文件,用于删除目录树。</span><br><span class="hljs-comment">//      /Q 安静模式,删除时不询问。 </span><br>rmdir  <span class="hljs-string">&quot;F:\Users&quot;</span> /S /Q　　<br></code></pre></td></tr></table></figure></li>
+<li>硬链接将C盘新Users链接到所备份的文件<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 参数说明：此命令创建符号连接。</span><br><span class="hljs-comment">//      /J 连接类型为目录连接</span><br>mklink  /J <span class="hljs-string">&quot;F:\Users&quot;</span> <span class="hljs-string">&quot;D:\Users&quot;</span><br></code></pre></td></tr></table></figure>
+期间可能复制一部分文件不成功，我看不太重要就强制继续，删除可能不干净，也可采用ren 命令将Users文件夹重命名，保证和硬链接不冲突即可，后面再处理，不用自己创建新的Users，mklink会自动生成，自己要创建可用<strong>md</strong>命令。</li>
+</ol>
+<h2 id="备份以及还原系统"><a href="#备份以及还原系统" class="headerlink" title="备份以及还原系统"></a>备份以及还原系统</h2><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4><p>有几种方式，我用的dism++ 备份，也可采用命令行.</p>
+<ol>
+<li>命令行：<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">  <span class="hljs-comment">//初始备份（例如：把 C 分区的系统备份到 D 分区的 1文件夹中，备份文件名为Backup.wim）：</span><br>    Dism /Capture-Image /ImageFile:D:\<span class="hljs-number">1</span>\Backup.wim /CaptureDir:C:\ /Name:Backup<span class="hljs-number">-1</span> /Description:<span class="hljs-number">0000</span><span class="hljs-number">-00</span><span class="hljs-number">-00</span><br><span class="hljs-comment">// 命令解释：</span><br><span class="hljs-comment">//    /Capture-Image - 指定捕获映像。</span><br><span class="hljs-comment">//    /ImageFile: - 指定映像文件路径。                </span><br><span class="hljs-comment">//    /CaptureDir: - 指定捕获目录。</span><br><span class="hljs-comment">//    /Name: - 指定名称。此项不能省略。</span><br><span class="hljs-comment">//    /Description: - 指定描述。描述是为了说明这次备份的具体情况，我们这里用了时间。此项可省略。</span><br></code></pre></td></tr></table></figure></li>
+<li>利用软件dism++<br><strong>选择恢复-&gt;系统备份</strong><br><img src="https://ptpimg.me/36404v.png" alt="在这里插入图片描述"><br>选择保存的硬盘并输入保存的名字：<br><img src="https://ptpimg.me/28h841.png" alt="在这里插入图片描述"><br>等待完成即可。<br><strong>注</strong>：最好备份前清理C盘，保证电脑最好状态，这也是个人用电脑的好习惯。</li>
+</ol>
+<h2 id="系统还原"><a href="#系统还原" class="headerlink" title="系统还原"></a>系统还原</h2><p>具体参考以下<br> <a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-update/%E7%94%A8-dism/a3ea0d10-036c-41ff-8bb9-350c2bda525b">用 DISM 命令备份与还原 Windows 系统</a>.<br>关键指令：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//系统还原（例如：把 D:\Backup.wim 中备份还原到 C分区）：</span><br>    Dism /Apply-Image /ImageFile:D:\Backup.wim/Index:<span class="hljs-number">1</span> /ApplyDir:C:\<br> <span class="hljs-comment">//   命令解释：</span><br> <span class="hljs-comment">//   /Apply-Image - 指定应用映像。</span><br> <span class="hljs-comment">//   /ApplyDir: - 指定应用目录。</span><br> <span class="hljs-comment">//  /Index: - 指定索引。此项不能省略。 </span><br></code></pre></td></tr></table></figure>
+<p><strong>因 Dism 安装 WIM 映像不会像 Ghost 那样格式化磁盘，个人就遇上第一次成功还原后，后面还原遇上无法访问的 错误5，所以先格式化系统盘是最稳妥的。</strong><br>格式化指令：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">format C:/q<br><span class="hljs-comment">//    /Q  执行快速格式化。</span><br></code></pre></td></tr></table></figure>
+<p>格式化需谨慎，尽量多<strong>dir</strong>命令查看确认分区是否正确，毕竟系统格式化了马上就还原，资料格式化就啥也没了。</p>
+<p>格式化完成再按上述命令完成还原，几乎不会有问题，一般等待十几分钟，完成后就可以关闭命令窗口重启电脑，过会就会看见熟悉输入密码页面了。</p>
+<p>到此一个完整还原周期完成，平时尽量养成将数据置于非系统盘之下的习惯，这样除了减小C盘容量压力，也可使重装系统带来的影响最小，某种程度保证自己电脑使用稳定性。</p>
+<p> 第一次文档记录，为以后系统崩溃提供解决办法，也是向大家分享折腾了两天的错误经验，虽然都是可以google到的方法，但收集信息排错需要时间精力。<strong>格式化C区-&gt;dos还原系统</strong>是个人使用最快捷方便的恢复操作，<br>若有错误或纰漏多多指正，还有，小白谨慎使用以上方法，我不能保证错误操作对系统不会造成损失。</p>
+]]></content>
   </entry>
   <entry>
     <title>机器学习-文本处理之电影评论多分类情感分析</title>
@@ -2280,40 +2582,6 @@ Actual: 0        520   605    283    17    1
         4          2     6    217   825  710
 </code></pre>
 <p><strong>基于TF-IDF的逻辑回归模型优于其他机器学习算法</strong>. </p>
-]]></content>
-  </entry>
-  <entry>
-    <title>重装系统</title>
-    <url>/2020/03/07/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h1 id="WIN10迁移C盘和崩溃还原系统总结"><a href="#WIN10迁移C盘和崩溃还原系统总结" class="headerlink" title="WIN10迁移C盘和崩溃还原系统总结"></a>WIN10迁移C盘和崩溃还原系统总结</h1><p>这几天为了清理C盘一直动系统的文件，导致经常重启，其中主要还是迁移C盘Users数据到其他非系统盘操作不当导致开机系统加载不了用户信息，下面具体记录这两方面。</p>
-<ol>
-<li><p>迁移资料的关键还是利用硬链接将物理地址位于其他盘的Users用户信息映射到C盘的逻辑名上。下面只简单记录一下命令。</p>
-</li>
-<li><p><strong>最关键的还是利用系统的保命文件———Backup.wim重刷系统</strong><br>一个通过Dism++文件创建的镜像文件，尽量将此文件放于非系统盘，有此文件基本可以不用借助任何外部工具无限重刷回原系统。</p>
-</li>
-</ol>
-<p>上面两者都需要通过高级重启进入一个纯命令行的Dos界面，在此可以几乎不受权限限制对文件<strong>删除复制</strong>等操作<br><strong>进入 <em>系统设置 -&gt; 升级&amp;安全 -&gt; 恢复 -&gt; 高级重启 -&gt; 立刻重启</em> 来重启电脑到恢复模式；</strong><br><img src="https://ptpimg.me/edeyq3.png" alt="在这里插入图片描述"><br>后面就是选择 <em><strong>疑难解答-&gt;高级-&gt;命令提示符</strong></em>（现在不便具体演示，网上有很多相关教程）</p>
-<p><strong>注意</strong>：在Dos环境下盘符名称可能和平时不一样(我的OS就变成F盘了)，首先就是平时被隐藏的X盘，其他最好先通过 <strong>diskpart</strong>命令进入管理磁盘工具，通过<strong>list volume</strong>查看所有盘符信息，<strong>exit</strong>退出。同时利用<strong>cd 对应硬盘</strong> 进入后再用<strong>dir</strong>命令确认文件是否正确。</p>
-<h2 id="C盘Users迁移其他盘"><a href="#C盘Users迁移其他盘" class="headerlink" title="C盘Users迁移其他盘"></a>C盘Users迁移其他盘</h2><p>有几种方法可用，原则就是要先保证在非现用户使用环境下进行，为了避免各种权限要求，我是直接开机进入Dos命令行：</p>
-<ol>
-<li>将Users复制与其他盘.<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">复制C:\Users下的所有文件到D:\Users <br><br><span class="hljs-comment">// 参数说明：此命令为Windows的“强制文件拷贝”命令。</span><br><span class="hljs-comment">//      /E 表示拷贝文件时包含子目录（包括空目录）</span><br><span class="hljs-comment">//      /COPYALL 表示拷贝所有文件信息</span><br><span class="hljs-comment">//      /XJ 表示不包括Junction points（默认是包括的）</span><br><span class="hljs-comment">//      /XD &quot;F:\Users\Administrator&quot; 表示不包括指定的目录,此处指定目录为：&quot;F:\Users\Administrator&quot;</span><br>robocopy <span class="hljs-string">&quot;F:\Users&quot;</span> <span class="hljs-string">&quot;D:\Users&quot;</span> /E /COPYALL /XJ /XD <span class="hljs-string">&quot;F:\Users\Administrator&quot;</span><br></code></pre></td></tr></table></figure></li>
-<li>删除用户文件<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//参数说明：此命令删除指定目录。</span><br><span class="hljs-comment">//      /S 删除指定目录及其中的所有文件,用于删除目录树。</span><br><span class="hljs-comment">//      /Q 安静模式,删除时不询问。 </span><br>rmdir  <span class="hljs-string">&quot;F:\Users&quot;</span> /S /Q　　<br></code></pre></td></tr></table></figure></li>
-<li>硬链接将C盘新Users链接到所备份的文件<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 参数说明：此命令创建符号连接。</span><br><span class="hljs-comment">//      /J 连接类型为目录连接</span><br>mklink  /J <span class="hljs-string">&quot;F:\Users&quot;</span> <span class="hljs-string">&quot;D:\Users&quot;</span><br></code></pre></td></tr></table></figure>
-期间可能复制一部分文件不成功，我看不太重要就强制继续，删除可能不干净，也可采用ren 命令将Users文件夹重命名，保证和硬链接不冲突即可，后面再处理，不用自己创建新的Users，mklink会自动生成，自己要创建可用<strong>md</strong>命令。</li>
-</ol>
-<h2 id="备份以及还原系统"><a href="#备份以及还原系统" class="headerlink" title="备份以及还原系统"></a>备份以及还原系统</h2><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4><p>有几种方式，我用的dism++ 备份，也可采用命令行.</p>
-<ol>
-<li>命令行：<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">  <span class="hljs-comment">//初始备份（例如：把 C 分区的系统备份到 D 分区的 1文件夹中，备份文件名为Backup.wim）：</span><br>    Dism /Capture-Image /ImageFile:D:\<span class="hljs-number">1</span>\Backup.wim /CaptureDir:C:\ /Name:Backup<span class="hljs-number">-1</span> /Description:<span class="hljs-number">0000</span><span class="hljs-number">-00</span><span class="hljs-number">-00</span><br><span class="hljs-comment">// 命令解释：</span><br><span class="hljs-comment">//    /Capture-Image - 指定捕获映像。</span><br><span class="hljs-comment">//    /ImageFile: - 指定映像文件路径。                </span><br><span class="hljs-comment">//    /CaptureDir: - 指定捕获目录。</span><br><span class="hljs-comment">//    /Name: - 指定名称。此项不能省略。</span><br><span class="hljs-comment">//    /Description: - 指定描述。描述是为了说明这次备份的具体情况，我们这里用了时间。此项可省略。</span><br></code></pre></td></tr></table></figure></li>
-<li>利用软件dism++<br><strong>选择恢复-&gt;系统备份</strong><br><img src="https://ptpimg.me/36404v.png" alt="在这里插入图片描述"><br>选择保存的硬盘并输入保存的名字：<br><img src="https://ptpimg.me/28h841.png" alt="在这里插入图片描述"><br>等待完成即可。<br><strong>注</strong>：最好备份前清理C盘，保证电脑最好状态，这也是个人用电脑的好习惯。</li>
-</ol>
-<h2 id="系统还原"><a href="#系统还原" class="headerlink" title="系统还原"></a>系统还原</h2><p>具体参考以下<br> <a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-update/%E7%94%A8-dism/a3ea0d10-036c-41ff-8bb9-350c2bda525b">用 DISM 命令备份与还原 Windows 系统</a>.<br>关键指令：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//系统还原（例如：把 D:\Backup.wim 中备份还原到 C分区）：</span><br>    Dism /Apply-Image /ImageFile:D:\Backup.wim/Index:<span class="hljs-number">1</span> /ApplyDir:C:\<br> <span class="hljs-comment">//   命令解释：</span><br> <span class="hljs-comment">//   /Apply-Image - 指定应用映像。</span><br> <span class="hljs-comment">//   /ApplyDir: - 指定应用目录。</span><br> <span class="hljs-comment">//  /Index: - 指定索引。此项不能省略。 </span><br></code></pre></td></tr></table></figure>
-<p><strong>因 Dism 安装 WIM 映像不会像 Ghost 那样格式化磁盘，个人就遇上第一次成功还原后，后面还原遇上无法访问的 错误5，所以先格式化系统盘是最稳妥的。</strong><br>格式化指令：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c">format C:/q<br><span class="hljs-comment">//    /Q  执行快速格式化。</span><br></code></pre></td></tr></table></figure>
-<p>格式化需谨慎，尽量多<strong>dir</strong>命令查看确认分区是否正确，毕竟系统格式化了马上就还原，资料格式化就啥也没了。</p>
-<p>格式化完成再按上述命令完成还原，几乎不会有问题，一般等待十几分钟，完成后就可以关闭命令窗口重启电脑，过会就会看见熟悉输入密码页面了。</p>
-<p>到此一个完整还原周期完成，平时尽量养成将数据置于非系统盘之下的习惯，这样除了减小C盘容量压力，也可使重装系统带来的影响最小，某种程度保证自己电脑使用稳定性。</p>
-<p> 第一次文档记录，为以后系统崩溃提供解决办法，也是向大家分享折腾了两天的错误经验，虽然都是可以google到的方法，但收集信息排错需要时间精力。<strong>格式化C区-&gt;dos还原系统</strong>是个人使用最快捷方便的恢复操作，<br>若有错误或纰漏多多指正，还有，小白谨慎使用以上方法，我不能保证错误操作对系统不会造成损失。</p>
 ]]></content>
   </entry>
 </search>

@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gawain12.github.io/2024/09/11/Rag/</loc>
+    
+    <lastmod>2025-03-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://gawain12.github.io/remark/index.html</loc>
     
     <lastmod>2024-11-23</lastmod>
