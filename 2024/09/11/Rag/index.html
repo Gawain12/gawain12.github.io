@@ -22,12 +22,12 @@
     <meta name="description" content="RAG 技术概要：个人理解总结引言你是否曾幻想过拥有一个无所不知的 AI 助手，它不仅能像搜索引擎一样快速找到信息，还能像人类专家一样理解并解答你的复杂问题？检索增强生成 (Retrieval-Augmented Generation, RAG) 技术，正是实现这一梦想的关键一步。 RAG 技术巧妙地结合了大型语言模型 (LLM) 的强大生成能力和外部知识库的海量信息，让 AI 助手在回答问题时，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RAG 技术概要">
-<meta property="og:url" content="https://gawain12.github.io/2024/09/11/Rag/index.html">
+<meta property="og:url" content="https://gawyn.de/2024/09/11/Rag/index.html">
 <meta property="og:site_name" content="Gawain&#39;s notes">
 <meta property="og:description" content="RAG 技术概要：个人理解总结引言你是否曾幻想过拥有一个无所不知的 AI 助手，它不仅能像搜索引擎一样快速找到信息，还能像人类专家一样理解并解答你的复杂问题？检索增强生成 (Retrieval-Augmented Generation, RAG) 技术，正是实现这一梦想的关键一步。 RAG 技术巧妙地结合了大型语言模型 (LLM) 的强大生成能力和外部知识库的海量信息，让 AI 助手在回答问题时，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-10T17:29:04.000Z">
-<meta property="article:modified_time" content="2025-03-17T18:10:39.494Z">
+<meta property="article:modified_time" content="2025-03-17T18:10:46.227Z">
 <meta property="article:author" content="Gawain">
 <meta property="article:tag" content="llm, rag">
 <meta name="twitter:card" content="summary_large_image">
@@ -72,7 +72,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"gawain12.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"FeJdeqy6cDDAySGfsLP8g1bl-MdYXbMMI","app_key":"Hj6SxzGjyvHq8tHLJTqtcyHZ","server_url":"https://fejdeqy6.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"gawyn.de","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"FeJdeqy6cDDAySGfsLP8g1bl-MdYXbMMI","app_key":"Hj6SxzGjyvHq8tHLJTqtcyHZ","server_url":"https://fejdeqy6.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -392,7 +392,7 @@
     
 </code></pre>
 
-<h3 id="二、RAG-的核心技术点：精雕细琢，打造卓越性能"><a href="#二、RAG-的核心技术点：精雕细琢，打造卓越性能" class="headerlink" title="二、RAG 的核心技术点：精雕细琢，打造卓越性能**"></a>二、RAG 的核心技术点：精雕细琢，打造卓越性能**</h3><p>RAG 系统的性能优劣，很大程度上取决于各个组件的技术细节。下面我们深入探讨 RAG 的几个关键技术点：</p>
+<h3 id="二、RAG-的核心技术点：精雕细琢，打造卓越性能"><a href="#二、RAG-的核心技术点：精雕细琢，打造卓越性能" class="headerlink" title="二、RAG 的核心技术点：精雕细琢，打造卓越性能"></a>二、RAG 的核心技术点：精雕细琢，打造卓越性能</h3><p>RAG 系统的性能优劣，很大程度上取决于各个组件的技术细节。下面我们深入探讨 RAG 的几个关键技术点：</p>
 <h4 id="2-1-文本切分-Text-Splitting-：知识颗粒度的艺术"><a href="#2-1-文本切分-Text-Splitting-：知识颗粒度的艺术" class="headerlink" title="2.1 文本切分 (Text Splitting)：知识颗粒度的艺术"></a>2.1 文本切分 (Text Splitting)：知识颗粒度的艺术</h4><ul>
 <li><p><strong>为什么需要文本切分？</strong>  知识库中的文档通常很长，如果直接将整篇文档放入向量库，可能会导致：</p>
 <ul>
@@ -609,7 +609,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>RAG 技术概要</div>
-      <div>https://gawain12.github.io/2024/09/11/Rag/</div>
+      <div>https://gawyn.de/2024/09/11/Rag/</div>
     </div>
     <div class="license-meta">
       
@@ -652,6 +652,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/08/05/resume.en/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
